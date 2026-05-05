@@ -10,6 +10,10 @@ function App() {
   return (
     <div className="bg-[#1F160B] min-h-screen text-[#F6E5C0] font-sans selection:bg-[#F4D35E] selection:text-[#1F160B]">
       <Navbar />
+      
+      {/* Fixed Rotating Image */}
+      <img src="/OIP.jpg" alt="Rotating Art" className="fixed top-[90px] left-6 w-24 h-24 rounded-full object-cover z-40 animate-[spin_10s_linear_infinite] shadow-[0_0_15px_rgba(212,175,55,0.4)] border-2 border-[#D4AF37]/50" />
+
       <Hero />
       <MapSection />
       <JournalSection />
