@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The Painted Muse — Where India Creates</title>
+<meta name="description" content="India's premier multi-art platform. Discover Madhubani, Warli, Tanjore, Pattachitra and more. Connect with 2,400+ artists across 28 states." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="#" class="logo">
+      <span class="logo-icon" style="background: transparent; border: none; color: var(--saffron); width: auto;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg></span>
+      <div>
+        <div class="logo-text">The Painted <span style="background: var(--gold-line); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Muse</span></div>
+        <div class="logo-sub">Where India Creates</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#explore">Explore Art</a>
+      <a href="#about">About</a>
+      <a href="#stories">Stories</a>
+      <a href="#retreats">Retreats <span class="new-badge">New</span></a>
+      <a href="#artists">Be an Artist</a>
+    </div>
+    <div class="nav-right">
+      <button class="icon-btn" aria-label="Search"><i data-lucide="search" width="18"></i></button>
+      <a href="#" class="btn btn-ghost" style="padding:10px 18px;font-size:14px">Sign In</a>
+      <a href="#" class="btn btn-primary" style="padding:10px 18px;font-size:14px">Book an Artist <span>→</span></a>
+      <button class="icon-btn hamburger" id="hamburger" aria-label="Menu"><i data-lucide="menu" width="22"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="icon-btn close" id="closeMobile"><i data-lucide="x" width="28"></i></button>
+  <a href="#explore">Explore Art</a>
+  <a href="#about">About</a>
+  <a href="#stories">Stories</a>
+  <a href="#retreats">Retreats</a>
+  <a href="#artists">Be an Artist</a>
+  <a href="#" class="btn btn-primary">Book an Artist →</a>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <video class="hero-video" autoplay loop muted playsinline>
+    <source src="hero-bg.mp4" type="video/mp4">
+  </video>
+  <div class="hero-vignette"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-mark">The Painted Muse · Est. MMXXV</div>
+  <div class="container hero-grid">
+    <div class="reveal hero-copy">
+      <span class="eyebrow"><span class="dot-saff"></span> India's Art Universe · 28 States</span>
+      <h1>Where every<br>brushstroke<br><em>tells a story.</em></h1>
+      <p class="lead">A premium home for India's living art traditions — from Madhubani to Miniatures, Pattachitra to Pichwai. Discover artists, commission originals, and travel into the craft.</p>
+      <div class="cta-row">
+        <a href="#explore" class="btn btn-primary">Explore the Collection <span>→</span></a>
+        <a href="#artists" class="btn btn-ghost">Meet the Makers</a>
+      </div>
+      <div class="social-proof">
+        <div class="avatars"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="proof-text">
+          <strong>2,400+ Artists</strong>
+          <small>across 28 states · 15 living traditions</small>
+        </div>
+      </div>
+    </div>
+    <div class="reveal hero-side">
+      <div class="float-card">
+        <div class="card-tape">No. 014 / Featured</div>
+        <div class="art"></div>
+        <div class="meta">
+          <div>
+            <div class="name">Meera Devi</div>
+            <small>Madhubani · Mithila, Bihar</small>
+          </div>
+          <span class="pill pill-saffron">★ 4.9</span>
+        </div>
+        <div class="tags">
+          <span class="pill pill-outline">Folk · Original</span>
+          <span class="pill pill-outline">Natural Pigment</span>
+        </div>
+        <a href="#" class="mini-cta">View &amp; Commission →</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STATE EXPLORER -->
+<section id="explore">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">State Explorer</span>
+      <h2 class="serif">Art That Belongs to the Land</h2>
+      <p>Select a state and watch its living art tradition come alive.</p>
+    </div>
+    <div class="map-grid">
+      <div class="reveal">
+        <svg class="map-svg" viewBox="0 0 500 520" id="indiaMap" aria-label="India map">
+          <!-- Stylized abstract states; each path is clickable -->
+          <path data-state="jammu" d="M120,40 L210,30 L240,80 L180,110 L120,90 Z"/>
+          <path data-state="punjab" d="M120,90 L180,110 L170,160 L110,150 Z"/>
+          <path data-state="haryana" d="M170,160 L230,150 L235,200 L180,210 Z"/>
+          <path data-state="rajasthan" d="M60,160 L170,160 L180,210 L140,290 L50,260 Z"/>
+          <path data-state="up" d="M235,200 L340,180 L360,250 L260,270 L230,240 Z"/>
+          <path data-state="bihar" d="M340,180 L410,200 L400,250 L360,250 Z"/>
+          <path data-state="bengal" d="M400,250 L450,260 L440,330 L390,320 Z"/>
+          <path data-state="gujarat" d="M50,260 L140,290 L130,360 L60,350 Z"/>
+          <path data-state="mp" d="M140,290 L260,270 L280,350 L160,360 Z"/>
+          <path data-state="maharashtra" d="M130,360 L280,350 L290,430 L150,440 Z"/>
+          <path data-state="odisha" d="M280,350 L390,320 L380,400 L310,420 Z"/>
+          <path data-state="ap" d="M210,440 L290,430 L310,420 L320,490 L230,500 Z"/>
+          <path data-state="karnataka" d="M150,440 L210,440 L230,500 L170,510 L140,470 Z"/>
+          <path data-state="tn" d="M230,500 L320,490 L290,560 L240,560 Z" transform="translate(0,-40)"/>
+          <path data-state="kerala" d="M170,510 L210,500 L200,560 L160,560 Z" transform="translate(0,-30)"/>
+          <path data-state="sikkim" d="M380,180 L420,170 L420,200 L380,210 Z" transform="translate(0,-30)"/>
+        </svg>
+      </div>
+      <div class="reveal">
+        <div class="preview-card" id="previewCard">
+          <div class="preview-video"><span class="state-label" id="pvState">Rajasthan</span></div>
+          <div class="preview-body">
+            <span class="pill pill-saffron" id="pvPill">Rajasthan</span>
+            <h3 class="serif" id="pvForm">Miniature Painting</h3>
+            <p id="pvDesc">Intricate, jewel-toned scenes painted with squirrel-hair brushes — the courtly art of Rajasthan, perfected over six centuries.</p>
+            <a href="#" class="link" id="pvLink">Explore Rajasthan Artists →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="state-pills" id="statePills"></div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section style="background:var(--card)">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Art Forms</span>
+      <h2 class="serif">Every Art Form Has a Home Here</h2>
+      <p>From ancient temple murals to contemporary folk fusion.</p>
+    </div>
+  </div>
+  <div class="container reveal">
+    <div class="h-scroll" id="catScroll"></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Simple. Meaningful. Direct.</span>
+      <h2 class="serif">Your Journey to India's Art</h2>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <span class="num">— 01 / Discover</span>
+        <div class="ico">🔍</div>
+        <h3>Discover.</h3>
+        <p>Browse art forms by state, style, or artist. Filter by availability, medium, and price range — curated by hand, not by algorithm.</p>
+      </div>
+      <div class="step">
+        <span class="num">— 02 / Connect</span>
+        <div class="ico">🤝</div>
+        <h3>Connect.</h3>
+        <p>Message artists directly, view their portfolio, request custom pieces, or book a live workshop in their studio.</p>
+      </div>
+      <div class="step">
+        <span class="num">— 03 / Experience</span>
+        <div class="ico">🎨</div>
+        <h3>Experience.</h3>
+        <p>Own original Indian art, attend retreats, or commission your story told in a centuries-old tradition.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px" class="reveal">
+      <a href="#" class="btn btn-primary">Start Exploring →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ARTISTS -->
+<section id="about" style="background:var(--card)">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">The Makers</span>
+      <h2 class="serif">Meet the Makers</h2>
+      <p>Real artists. Real stories. Every piece handcrafted.</p>
+    </div>
+    <div class="artist-grid reveal" id="artistGrid"></div>
+    <div style="text-align:center;margin-top:40px" class="reveal">
+      <a href="#" class="btn btn-ghost">View All Artists →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section id="stories" class="stories">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">The Journal</span>
+      <h2 class="serif">Stories Woven in Color</h2>
+      <p>The people, the traditions, the unbroken threads.</p>
+    </div>
+    <div class="stories-grid">
+      <article class="story-feat reveal">
+        <div class="img"></div>
+        <div class="body">
+          <span class="pill pill-terracotta">Artist Story</span>
+          <h3 class="serif">The Last Pattachitra Master of Raghurajpur</h3>
+          <p>For 47 years, Bhaskar Mohapatra has painted the gods on palm leaves — and now, he's teaching his granddaughter the brushstrokes his father taught him.</p>
+          <small style="color:var(--muted)">8 min read</small><br><br>
+          <a href="#" class="link" style="color:var(--terracotta);font-weight:600">Read Story →</a>
+        </div>
+      </article>
+      <div class="stories-side">
+        <article class="story-mini reveal">
+          <div class="img"></div>
+          <div class="body">
+            <span class="pill pill-outline">Tradition</span>
+            <h4>Why Warli Tribes Paint with Rice Paste</h4>
+            <p>The 2,500-year-old ritual behind Maharashtra's white-on-earth paintings.</p>
+          </div>
+        </article>
+        <article class="story-mini reveal">
+          <div class="img"></div>
+          <div class="body">
+            <span class="pill pill-outline">Craft</span>
+            <h4>Inside a Tanjore Studio in Thanjavur</h4>
+            <p>Gold foil, gemstones, and three months per painting.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px" class="reveal">
+      <a href="#" class="btn btn-ghost">Browse All Stories →</a>
+    </div>
+  </div>
+</section>
+
+<!-- RETREATS -->
+<section id="retreats">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">✦ Immersive Experiences</span>
+      <h2 class="serif">Live the Art. Breathe the Culture.</h2>
+      <p>Week-long retreats across India — learn directly from master artists.</p>
+    </div>
+  </div>
+  <div class="container reveal">
+    <div class="h-scroll" id="retreatScroll"></div>
+    <div class="private-banner">
+      <div>
+        <h3 class="serif">Curate a Private Retreat</h3>
+        <p>For families, friends, or corporate teams — design your own immersive art journey.</p>
+      </div>
+      <a href="#" class="btn btn-light">Curate Now →</a>
+    </div>
+  </div>
+</section>
+
+<!-- BE AN ARTIST -->
+<section id="artists">
+  <div class="container reveal">
+    <div class="split">
+      <div class="split-side split-l">
+        <div class="ico">🎨</div>
+        <h3>Are You an Artist?</h3>
+        <p>Join India's largest art platform. Showcase your work, get discovered, take bookings, and share your story with the world.</p>
+        <a href="#" class="btn btn-light">Join as an Artist →</a>
+        <small>Free to join · No commission on first 3 bookings</small>
+      </div>
+      <div class="split-side split-r">
+        <div class="ico">👁️</div>
+        <h3>Love Art?</h3>
+        <p>Collect original pieces, commission custom work, attend retreats, and become part of India's living art community.</p>
+        <a href="#" class="btn btn-dark">Start Exploring →</a>
+        <small>2,400+ Artists · 15 Art Forms · 28 States</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Community</span>
+      <h2 class="serif">Voices from the Community</h2>
+    </div>
+  </div>
+  <div class="reveal" style="overflow:hidden">
+    <div class="marquee" id="marquee"></div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <span class="confetti c1"></span><span class="confetti c2"></span>
+  <span class="confetti c3"></span><span class="confetti c4"></span>
+  <div class="container inner reveal">
+    <h2 class="serif">Stay Close to the Art</h2>
+    <p>Monthly dispatches — new artists, retreats, stories, and drops.</p>
+    <form class="subscribe" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Subscribed'">
+      <input type="email" placeholder="✉  Your email address" required>
+      <button type="submit">Subscribe →</button>
+    </form>
+    <small>Join 18,000+ art lovers · No spam · Unsubscribe anytime</small>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="logo">
+          <span class="logo-icon" style="background: transparent; border: none; color: var(--saffron); width: auto;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg></span>
+          <div class="logo-text">The Painted <span style="background: var(--gold-line); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Muse</span></div>
+        </div>
+        <p>India's premier multi-art platform — celebrating the living traditions of every state.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><i data-lucide="instagram" width="16"></i></a>
+          <a href="#" aria-label="Pinterest"><i data-lucide="image" width="16"></i></a>
+          <a href="#" aria-label="YouTube"><i data-lucide="youtube" width="16"></i></a>
+        </div>
+      </div>
+      <div class="foot-col"><h5>Explore</h5><ul><li><a href="#">Art Forms</a></li><li><a href="#">Artists</a></li><li><a href="#">States</a></li><li><a href="#">Collections</a></li></ul></div>
+      <div class="foot-col"><h5>Company</h5><ul><li><a href="#">About Us</a></li><li><a href="#">Our Story</a></li><li><a href="#">Press</a></li><li><a href="#">Careers</a></li></ul></div>
+      <div class="foot-col"><h5>For Artists</h5><ul><li><a href="#">Join</a></li><li><a href="#">How It Works</a></li><li><a href="#">Pricing</a></li><li><a href="#">Resources</a></li></ul></div>
+      <div class="foot-col"><h5>Support</h5><ul><li><a href="#">FAQ</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+    </div>
+    <div class="foot-bot">
+      <div>© 2025 The Painted Muse · Made with ❤️ for Indian Art</div>
+      <div>Crafted in India 🇮🇳</div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
