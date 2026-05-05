@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Painted Muse | Midnight &amp; Gold Elegance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+    .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+    .underline-paintbrush {
+        position: relative;
+        display: inline-block
+    }
+    .underline-paintbrush::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: #D4AF37;
+        transition: width 0.5s ease-in-out;
+    }
+    .underline-paintbrush:hover::after {
+        width: 100%
+    }
+    .border-image-source-madhubani {
+        border-image-source: linear-gradient(90deg, #D4AF37 0%, #B5451B 50%, #D4AF37 100%);
+        border-image-slice: 1
+    }
+    .warli-border {
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        position: relative
+    }
+    .warli-border::before {
+        content: "";
+        position: absolute;
+        inset: 4px;
+        border: 1px solid rgba(212, 175, 55, 0.1);
+        pointer-events: none
+    }
+    .ink-grain {
+        background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCRrEuwmrE10cxB2Oae845GDrP3kU-WyjvkShm1EQbrQg1J8AWwsnfTOa_Yd43-yDsPK-k7jiLPfPtwwOdYsTOwnMBabRznvfeo8h3bqtwD5gH2q4U30MBCCjJNiRgFbchZDN5lhWytQEYI5xTmEfIbnzuDLCKKDPl8_NyfmuWMuR86PhGc-JnOKloK4F3ni1MSTH5prPAgGGKWuf8SBOUfiXyBj35iXGC3XCEi91OQTXGj39Posri3UHGrcYXiOqWISXFGxeYn7Z7y);
+        opacity: 0.03
+    }
+    @keyframes fade-in {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+        animation: fade-in 0.5s ease-out forwards;
+    }    
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(26, 18, 8, 0.5); 
+        border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #D4AF37; 
+        border-radius: 4px;
+    }
+    
+    @keyframes scroll-carousel {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    .carousel-track {
+        display: flex;
+        gap: 3rem;
+        width: max-content;
+        animation: scroll-carousel 45s linear infinite;
+    }
+    .carousel-track:hover {
+        animation-play-state: paused;
+    }
+    body {
+        min-height: max(884px, 100dvh);
+        overflow-x: hidden;
+    }
+</style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#1A1208",
+                      "surface-container-lowest": "#0D0804",
+              },
+              "fontFamily": {
+                      "label-sm": ["DM Sans"],
+                      "headline-lg": ["Playfair Display"],
+                      "display-xl": ["Playfair Display"],
+                      "headline-md": ["Playfair Display"],
+                      "body-md": ["DM Sans"],
+                      "body-lg": ["DM Sans"]
+              }
+            },
+          },
+        }
+</script>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-[#D4AF37]/30">
+
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0D0804] flex justify-between items-center px-6 py-4 border-b-[3px] border-image-source-madhubani">
+    <div class="flex items-center">
+        <span class="text-[#F5E6D3] font-serif italic font-bold tracking-tight text-xl">The Painted Muse</span>
+    </div>
+    <div class="hidden md:flex gap-10 font-serif text-sm tracking-widest uppercase">
+        <a class="text-[#D4AF37] border-b-2 border-[#D4AF37]" href="#">The Collection</a>
+        <a class="text-stone-400 hover:text-[#B5451B] transition-colors duration-500" href="#artisans">Artisans</a>
+        <a class="text-stone-400 hover:text-[#B5451B] transition-colors duration-500" href="#heritage">Our Heritage</a>
+        <a class="text-stone-400 hover:text-[#B5451B] transition-colors duration-500" href="#journal">The Muse Journal</a>
+    </div>
+    <div class="flex items-center gap-6">
+        <button class="text-[#D4AF37] font-serif text-sm tracking-widest uppercase hover:text-white transition-colors">
+            Login
+        </button>
+        <button class="font-serif text-sm tracking-widest uppercase bg-[#8B6914] text-white px-5 py-2 hover:bg-[#D4AF37] hover:text-[#0D0804] transition-colors shadow-[0_0_15px_rgba(139,105,20,0.3)]">
+            Book Artists
+        </button>
+    </div>
+</nav>
+
+<main class="relative">
+    <!-- Hero Section (Full-bleed Video Background like Loyal Daddy) -->
+    <section class="relative h-screen w-full overflow-hidden">
+        <!-- Full Background Video -->
+        <div class="absolute inset-0 z-0">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                <source src="https://videos.pexels.com/video-files/5001962/5001962-hd_1920_1080_30fps.mp4" type="video/mp4">
+            </video>
+            <!-- Dark gradient overlay: heavy on left for text readability, lighter on right to show video -->
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0D0804] via-[#0D0804]/80 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0D0804] via-transparent to-[#0D0804]/40"></div>
+        </div>
+
+        <!-- Overlaid Text Content (top-left, like Loyal Daddy) -->
+        <div class="relative z-10 h-full flex flex-col justify-center px-8 md:px-16 lg:px-24 max-w-3xl pt-[72px]">
+            <div class="mb-4">
+                <span class="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] opacity-80">Cultural Immersion through Curation</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl text-[#F5E6D3] mb-6 font-serif text-left leading-[1.05] tracking-tight">
+                Discover<br/>India<br/>Through<br/><span class="text-[#D4AF37] italic font-light">Art</span>
+            </h1>
+            <p class="font-sans text-stone-400 mb-10 max-w-md text-left leading-relaxed text-base">
+                Connecting artists, travelers, and art lovers through immersive cultural journeys that celebrate the living traditions of the subcontinent.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-start items-start">
+                <button class="bg-[#D4AF37] text-stone-950 px-8 py-4 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-white transition-all duration-500">
+                    Explore Artists
+                </button>
+                <button class="border border-stone-400 text-stone-300 px-8 py-4 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all duration-500">
+                    Discover Art Retreats
+                </button>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-60 z-20">
+                <span class="font-sans text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]">Scroll</span>
+                <div class="w-[1px] h-16 bg-gradient-to-b from-[#D4AF37] to-transparent"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Asymmetric Bento Grid Section -->
+    <section class="py-32 bg-[#0D0804]" id="heritage">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                <!-- Text Block -->
+                <div class="md:col-span-5 md:sticky md:top-32 mb-12 md:mb-0 pr-8">
+                    <h2 class="text-4xl md:text-5xl font-serif text-[#D4AF37] mb-8 leading-tight drop-shadow-sm">Masterpieces of the <span class="italic font-light">Ancient Earth</span></h2>
+                    <p class="font-sans text-lg text-stone-400 mb-10 max-w-md leading-relaxed">
+                        From the vibrant lines of Madhubani to the intricate geometry of Warli, every stroke is a testament to thousands of years of whispered history.
+                    </p>
+                    <a class="font-sans text-xs font-bold text-[#D4AF37] underline-paintbrush uppercase tracking-[0.2em]" href="#">View Heritage Guide</a>
+                </div>
+                <!-- Visual Grid -->
+                <div class="md:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Card 1 -->
+                    <div class="warli-border group overflow-hidden bg-stone-900 aspect-[4/5] shadow-2xl">
+                        <img alt="Madhubani Painting" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl6KoRE4304r6yaz87N6CPFxSjVl5ThVTQ_5DB05Qa4BBwZVVoDT7hB54h4PLSUkYodDRQ7AxFeANNz5KTigRfwP0MA5iv-58kfRpIII-E-ZsaXdtBYlaqF-pYkMKQ06LvGukSg5cr2KXcb0bnQukgApRkOwYwghIh52McxMf849lF8Eoqu9RI7CWCkGdxiHXPUpL0yFHgShcMU-FJquGOgKOVGC_sDdUQWHC55l5N2Y9P4CPiI4yqO4wx4nASNz5uKq4XZ2pcQcSy"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 class="text-2xl font-serif text-[#D4AF37]">Madhubani Flora</h3>
+                            <p class="text-stone-300 font-sans mt-2 text-sm tracking-wide">Mithila Tradition, 2024</p>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="warli-border group overflow-hidden bg-stone-900 aspect-[4/5] mt-0 md:mt-16 shadow-2xl">
+                        <img alt="Pattachitra Art" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvOxBoc17GD0pCjKedkupx2GGZulLfiliHG8jb7_zcMvxOuC5vqAGnoWSkTL_XqygikyeaGHBCzvO1MuL8u-x84ZsjbJwDF25uglIBbAYrcPnbXwb1mk3SBesZR5aPrZL96bC6YhB-jM9pIXZNXpWz2tqPgjR4zFHW2v1BV7WztE9Cx-ZmYqXvhDSzcp02r0IJasCHS2Po5O-z_6fl1C-x83JitCLZkbOxUgAz44xzL-rRwtRO-wN5Wampwrsj0LcAQ9_Fh1xoW9Io"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 class="text-2xl font-serif text-[#D4AF37]">Eternal Scroll</h3>
+                            <p class="text-stone-300 font-sans mt-2 text-sm tracking-wide">Raghurajpur Heritage</p>
+                        </div>
+                    </div>
+                    <!-- Card 3 (Wide) -->
+                    <div class="md:col-span-2 warli-border group overflow-hidden bg-stone-900 aspect-[16/9] shadow-2xl">
+                        <img alt="Indian Canvas" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJmf-j9GSQDGrt2wkFmgQF5vfJyxnbjMQi99nYqDH5_HAwlspkJL91E9URUs9nlpSW6nNrUfH4n3FDLEYTPCjN6oqg2pemQKnQ7v448CIatSkzKwmGq_PGtpHlAiZHoMxEjroxoV_iI0cr0iT1T_rc2ljq4T6TjiDwYbMvhXDNPA5N0baDmyvxWltRDEeN-pvPmmoW9cGNV26SSGzO707_BkhoEZ7QJRTOnigKiyvtfXpK2ddWiwwsSdjg7vVecanj1pj_r8MJvmpz"/>
+                        <div class="absolute inset-0 bg-stone-950/50 p-12 flex items-center justify-center transition-all duration-500 group-hover:bg-stone-950/70">
+                            <div class="text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 class="text-4xl md:text-5xl font-serif text-[#D4AF37] italic">The Artisan's Breath</h3>
+                                <p class="font-sans text-xs tracking-[0.3em] text-stone-300 mt-6 uppercase border border-[#D4AF37]/30 inline-block px-6 py-3 hover:bg-[#D4AF37]/10 cursor-pointer transition-colors">Discover the process</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- India's Living Canvas Map Section -->
+    <section class="py-32 bg-stone-950 overflow-hidden relative" id="living-map-section">
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
+            <img alt="Texture" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaiKo8wj7NSpxtbjBq7XxE9dPBnShaLKI1dStSaEbBlwQXnRpshK_O5rGw4rIsVUC863Pg1c7VLp-5Vcg3X8XQxxnabGYWBMw9mgoRq7eT20WaDdvQzQemUscrJyNITFfyWQMChozHWk9GuXbLKPVRKkPNk1duhuJiQm2o-aBl4Tnxuf-OoMXvZzH7FZt5YmJZIJ4QGgSoIKVkcWlkQuyE1oaUETWqFSoR8qvitHO4bF-U5s-GQ8uo432J2VHYY-muTnss4lPIhFP7"/>
+        </div>
+        
+        <div class="container mx-auto px-6 md:px-12 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-serif text-[#D4AF37] drop-shadow-md">The Living Map</h2>
+                <p class="font-sans text-lg text-stone-400 mt-4">Trace the lineage of art across the sub-continent.</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8 h-[800px] lg:h-[750px]">
+                <!-- Left: Map Container -->
+                <div class="lg:w-1/2 h-full border border-[#D4AF37]/20 rounded-xl overflow-hidden relative bg-[#0D0804] shadow-2xl group">
+                    <!-- Map Loader -->
+                    <div id="map-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-[#0D0804] z-30 transition-opacity duration-500">
+                        <div class="w-12 h-12 border-4 border-[#D4AF37]/20 border-t-[#D4AF37] rounded-full animate-spin mb-4"></div>
+                        <p class="text-[#D4AF37] font-sans text-xs tracking-widest uppercase animate-pulse">Loading Cartography</p>
+                    </div>
+
+                    <!-- Map SVG -->
+                    <svg id="india-map" class="w-full h-full bg-transparent"></svg>
+                    
+                    <!-- Map Controls -->
+                    <div class="absolute bottom-6 left-6 flex gap-2 z-20">
+                        <button id="zoom-in" class="w-12 h-12 bg-stone-900/80 backdrop-blur-sm border border-[#D4AF37]/30 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-stone-950 rounded-full flex items-center justify-center transition-all shadow-lg hover:scale-105">
+                            <span class="material-symbols-outlined">add</span>
+                        </button>
+                        <button id="zoom-out" class="w-12 h-12 bg-stone-900/80 backdrop-blur-sm border border-[#D4AF37]/30 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-stone-950 rounded-full flex items-center justify-center transition-all shadow-lg hover:scale-105">
+                            <span class="material-symbols-outlined">remove</span>
+                        </button>
+                        <button id="zoom-reset" class="w-12 h-12 bg-stone-900/80 backdrop-blur-sm border border-[#D4AF37]/30 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-stone-950 rounded-full flex items-center justify-center transition-all shadow-lg hover:scale-105 ml-2" title="Reset View">
+                            <span class="material-symbols-outlined">home</span>
+                        </button>
+                    </div>
+                    
+                    <div class="absolute top-6 right-6 z-20 pointer-events-none opacity-50 hidden md:block">
+                        <span class="font-sans text-[10px] tracking-[0.2em] text-[#D4AF37] uppercase bg-stone-900/80 px-3 py-1 rounded-full border border-[#D4AF37]/20">Interactive Topography</span>
+                    </div>
+                </div>
+                
+                <!-- Right: State Info Panel -->
+                <div id="state-info-container" class="lg:w-1/2 h-full border border-[#D4AF37]/20 bg-[#0D0804] rounded-xl overflow-hidden shadow-2xl relative">
+                    <div id="state-info" class="w-full h-full p-8 flex flex-col justify-center items-center text-center transition-opacity duration-300">
+                        <!-- Default State -->
+                        <div class="w-24 h-24 rounded-full border-2 border-dashed border-[#D4AF37]/30 flex items-center justify-center mb-8 animate-[spin_10s_linear_infinite]">
+                            <span class="material-symbols-outlined text-4xl text-[#D4AF37]/50 animate-pulse">touch_app</span>
+                        </div>
+                        <h3 class="text-3xl font-serif text-[#D4AF37] mb-4">Select a Region</h3>
+                        <p class="text-stone-400 font-sans max-w-md text-lg">Click on any state on the map to discover its unique living art traditions, techniques, and the master artisans who preserve them.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-full py-12 flex justify-center bg-stone-950">
+        <div class="w-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent"></div>
+    </div>
+
+    <!-- The Muse Journal (Auto-Scrolling Carousel) -->
+    <section class="py-24 bg-background overflow-hidden" id="journal">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div class="max-w-xl">
+                    <h2 class="text-5xl font-serif text-[#D4AF37] italic drop-shadow-sm">The Muse Journal</h2>
+                    <p class="font-sans text-lg text-stone-400 mt-4">Exploring the philosophy, technique, and preservation of indigenous art forms.</p>
+                </div>
+                <a class="font-sans text-xs font-bold text-[#D4AF37] hover:tracking-[0.2em] transition-all duration-500 uppercase border-b border-[#D4AF37] pb-2" href="#">Read All Entries</a>
+            </div>
+        </div>
+
+        <!-- Carousel -->
+        <div class="w-full relative mt-8">
+            <!-- Fade edges for smooth scrolling effect -->
+            <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
+
+            <div class="carousel-track px-8">
+                <!-- Group 1 (Originals) -->
+                <div class="w-[350px] flex-shrink-0 group cursor-pointer">
+                    <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
+                        <img alt="Journal" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpC93XLzd_GC9642lqLx9Bpl0rCu5r04INVyA-6yshirjYZ3h6IzZXWpLiNLbs6ImZFMGUU99YolyxPqZ-9chMNIKIP9NcnLvq1J7lp4onmzARRJJc70AuFHVqqt129FdcuhzEgVOXbZt_mxwipXczCBSjDD9LNkXnzEvHXwoDd4xPpWMeO6M6IdXcKsST4g4PK_FyRiu-DcqMeZG4NGn-I6YYIWpOFjsbKQnkittaYwPU5VMU0LeGhgxIx1v9sm4DDM_yhAgxE7Aj"/>
+                    </div>
+                    <span class="font-sans text-[10px] text-[#B5451B] uppercase tracking-[0.2em] font-bold">Philosophy</span>
+                    <h4 class="text-2xl font-serif text-[#D4AF37] mt-3 group-hover:italic transition-all">The Silence of the Brush</h4>
+                    <p class="text-stone-500 font-sans mt-3 line-clamp-2 leading-relaxed">Why Indian art values the space between strokes as much as the pigment itself.</p>
+                </div>
+
+                <div class="w-[350px] flex-shrink-0 group cursor-pointer">
+                    <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
+                        <img alt="Journal" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOSLMm-BtlP2ruZQbaOJ5RI-FaYP5Y1TTw7MoGfZLTBcbIe13KTbq9iFm3bnPEMpYEzo70mlVq5a_34abWMmNpmpGmK-e2mBfSZIiR9EOfKLdd_0YZON8W_Dq-dJmiFLMRJda2UlksIjeUt2Zyd6MEn5UPfCZuN0becBuHwQPd0GRizQlobvR7gewPRL2EX5nqy0HHwmJxd4PXci6u1fsmA-Kj-U7oq5pAPnwV4PHvRDL4vN_ONg_hUrai9bVmMfaWd6Qm-j3vKICJ"/>
+                    </div>
+                    <span class="font-sans text-[10px] text-[#B5451B] uppercase tracking-[0.2em] font-bold">Preservation</span>
+                    <h4 class="text-2xl font-serif text-[#D4AF37] mt-3 group-hover:italic transition-all">Gold &amp; Gesso</h4>
+                    <p class="text-stone-500 font-sans mt-3 line-clamp-2 leading-relaxed">The chemical secrets of 17th-century Tanjore paintings and their modern revival.</p>
+                </div>
+
+                <div class="w-[350px] flex-shrink-0 group cursor-pointer">
+                    <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
+                        <img alt="Journal" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApVUwTET8xppGzNhwEBQ-1JLqFS6UFST7qb4fNvrNO7FixIq0F8WYtqL23JQGN_NJ6nY8EWd-rGQwGc2rVocdCzy-UA-RRmeLcQ1QG7QAGybcAwqu9k2FBXBwrjqXaUhTn8kG9N-6DZCmQ9wYHf3vpsS26iagpKI55IP6emmylp-Cbo6qYvnEsvHGArPXbO1khZLUMpUDmK63g7ukkhg_wY4verIC6plcHLUHRMVZlff9n87AIAuz-ccdDY7uU5PWxJB2M2YcP47_P"/>
+                    </div>
+                    <span class="font-sans text-[10px] text-[#B5451B] uppercase tracking-[0.2em] font-bold">Archive</span>
+                    <h4 class="text-2xl font-serif text-[#D4AF37] mt-3 group-hover:italic transition-all">Digital Manuscripts</h4>
+                    <p class="text-stone-500 font-sans mt-3 line-clamp-2 leading-relaxed">How we are using high-resolution light mapping to preserve fading temple murals.</p>
+                </div>
+
+                <!-- Group 2 (More Paintings / Duplicates for infinite scroll effect) -->
+                <div class="w-[350px] flex-shrink-0 group cursor-pointer">
+                    <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
+                        <img alt="Journal" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl6KoRE4304r6yaz87N6CPFxSjVl5ThVTQ_5DB05Qa4BBwZVVoDT7hB54h4PLSUkYodDRQ7AxFeANNz5KTigRfwP0MA5iv-58kfRpIII-E-ZsaXdtBYlaqF-pYkMKQ06LvGukSg5cr2KXcb0bnQukgApRkOwYwghIh52McxMf849lF8Eoqu9RI7CWCkGdxiHXPUpL0yFHgShcMU-FJquGOgKOVGC_sDdUQWHC55l5N2Y9P4CPiI4yqO4wx4nASNz5uKq4XZ2pcQcSy"/>
+                    </div>
+                    <span class="font-sans text-[10px] text-[#B5451B] uppercase tracking-[0.2em] font-bold">Technique</span>
+                    <h4 class="text-2xl font-serif text-[#D4AF37] mt-3 group-hover:italic transition-all">The Madhubani Line</h4>
+                    <p class="text-stone-500 font-sans mt-3 line-clamp-2 leading-relaxed">Mastering the rhythmic, continuous linework that defines Bihar's most famous export.</p>
+                </div>
+
+                <div class="w-[350px] flex-shrink-0 group cursor-pointer">
+                    <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
+                        <img alt="Journal" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvOxBoc17GD0pCjKedkupx2GGZulLfiliHG8jb7_zcMvxOuC5vqAGnoWSkTL_XqygikyeaGHBCzvO1MuL8u-x84ZsjbJwDF25uglIBbAYrcPnbXwb1mk3SBesZR5aPrZL96bC6YhB-jM9pIXZNXpWz2tqPgjR4zFHW2v1BV7WztE9Cx-ZmYqXvhDSzcp02r0IJasCHS2Po5O-z_6fl1C-x83JitCLZkbOxUgAz44xzL-rRwtRO-wN5Wampwrsj0LcAQ9_Fh1xoW9Io"/>
+                    </div>
+                    <span class="font-sans text-[10px] text-[#B5451B] uppercase tracking-[0.2em] font-bold">Storytelling</span>
+                    <h4 class="text-2xl font-serif text-[#D4AF37] mt-3 group-hover:italic transition-all">Scrolls of Raghurajpur</h4>
+                    <p class="text-stone-500 font-sans mt-3 line-clamp-2 leading-relaxed">Unfurling the Pattachitra narratives that have survived for centuries on treated cloth.</p>
+                </div>
+                
+                <!-- Repeat Group 1 to complete the infinite scroll loop cleanly -->
+                <div class="w-[350px] flex-shrink-0 group cursor-pointer">
+                    <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
+                        <img alt="Journal" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpC93XLzd_GC9642lqLx9Bpl0rCu5r04INVyA-6yshirjYZ3h6IzZXWpLiNLbs6ImZFMGUU99YolyxPqZ-9chMNIKIP9NcnLvq1J7lp4onmzARRJJc70AuFHVqqt129FdcuhzEgVOXbZt_mxwipXczCBSjDD9LNkXnzEvHXwoDd4xPpWMeO6M6IdXcKsST4g4PK_FyRiu-DcqMeZG4NGn-I6YYIWpOFjsbKQnkittaYwPU5VMU0LeGhgxIx1v9sm4DDM_yhAgxE7Aj"/>
+                    </div>
+                    <span class="font-sans text-[10px] text-[#B5451B] uppercase tracking-[0.2em] font-bold">Philosophy</span>
+                    <h4 class="text-2xl font-serif text-[#D4AF37] mt-3 group-hover:italic transition-all">The Silence of the Brush</h4>
+                    <p class="text-stone-500 font-sans mt-3 line-clamp-2 leading-relaxed">Why Indian art values the space between strokes as much as the pigment itself.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 mt-20 flex justify-center z-20 relative">
+            <button class="bg-[#8B6914] text-white px-12 py-5 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#D4AF37] hover:text-stone-950 transition-all duration-500 shadow-2xl hover:-translate-y-1 hover:shadow-[#D4AF37]/20">
+                Book an Artist
+            </button>
+        </div>
+    </section>
+</main>
+
+<!-- Fixed Send a Message Button -->
+<a href="mailto:hello@thepaintedmuse.com" class="fixed bottom-6 right-6 z-50 bg-[#D4AF37] text-[#0D0804] px-6 py-3 font-sans text-xs font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white transition-all duration-300 flex items-center gap-2">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+    Send a Message
+</a>
+
+<!-- Footer -->
+<footer class="bg-[#0D0804] border-t border-[#D4AF37]/10 relative">
+    <div class="max-w-7xl mx-auto px-8 py-12">
+        <!-- Top Row -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+            <!-- Brand -->
+            <div class="md:col-span-1">
+                <h2 class="font-serif text-2xl font-bold italic text-[#D4AF37] mb-4">The Painted Muse</h2>
+                <p class="font-sans text-stone-500 text-sm leading-relaxed">Preserving India's artistic heritage through curation, education, and community.</p>
+            </div>
+            <!-- Quick Links -->
+            <div>
+                <h3 class="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37] mb-4">Explore</h3>
+                <ul class="space-y-2 font-sans text-sm text-stone-400">
+                    <li><a href="#" class="hover:text-[#D4AF37] transition-colors">The Collection</a></li>
+                    <li><a href="#artisans" class="hover:text-[#D4AF37] transition-colors">Artisans</a></li>
+                    <li><a href="#heritage" class="hover:text-[#D4AF37] transition-colors">Heritage Map</a></li>
+                    <li><a href="#journal" class="hover:text-[#D4AF37] transition-colors">Journal</a></li>
+                </ul>
+            </div>
+            <!-- Company -->
+            <div>
+                <h3 class="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37] mb-4">Company</h3>
+                <ul class="space-y-2 font-sans text-sm text-stone-400">
+                    <li><a href="#" class="hover:text-[#D4AF37] transition-colors">About Us</a></li>
+                    <li><a href="#" class="hover:text-[#D4AF37] transition-colors">Careers</a></li>
+                    <li><a href="#" class="hover:text-[#D4AF37] transition-colors">Press</a></li>
+                    <li><a href="#" class="hover:text-[#D4AF37] transition-colors">Contact</a></li>
+                </ul>
+            </div>
+            <!-- Newsletter -->
+            <div>
+                <h3 class="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37] mb-4">Stay Connected</h3>
+                <p class="font-sans text-stone-500 text-sm mb-4">Get updates on exhibitions & new artisans.</p>
+                <div class="flex border border-[#D4AF37]/30 overflow-hidden">
+                    <input class="bg-transparent px-4 py-2.5 w-full font-sans text-sm text-stone-300 placeholder:text-stone-600 outline-none" placeholder="Your email" type="email"/>
+                    <button class="bg-[#D4AF37] text-[#0D0804] px-4 font-sans text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors whitespace-nowrap">Join</button>
+                </div>
+            </div>
+        </div>
+        <!-- Bottom Bar -->
+        <div class="border-t border-[#D4AF37]/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="font-sans text-xs text-stone-600">&copy; 2026 The Painted Muse. All rights reserved.</p>
+            <div class="flex gap-6 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500">
+                <a href="#" class="hover:text-[#D4AF37] transition-colors">Privacy</a>
+                <a href="#" class="hover:text-[#D4AF37] transition-colors">Terms</a>
+                <a href="#" class="hover:text-[#D4AF37] transition-colors">Accessibility</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mapContainer = document.getElementById('india-map');
+    if(!mapContainer) return;
+
+    const width = mapContainer.clientWidth;
+    const height = mapContainer.clientHeight;
+
+    const svg = d3.select("#india-map");
+    const g = svg.append("g");
+
+    // Define projection for India
+    const projection = d3.geoMercator()
+        .center([82.8, 23.5]) // Center roughly on India
+        .scale(width * 1.5)
+        .translate([width / 2, height / 2]);
+
+    const path = d3.geoPath().projection(projection);
+
+    // Zoom behavior
+    const zoom = d3.zoom()
+        .scaleExtent([0.8, 10])
+        .on("zoom", (event) => {
+            g.attr("transform", event.transform);
+            g.selectAll("path").style("stroke-width", 1.5 / event.transform.k + "px");
+        });
+
+    svg.call(zoom);
+
+    // Controls
+    d3.select("#zoom-in").on("click", () => svg.transition().duration(500).call(zoom.scaleBy, 1.5));
+    d3.select("#zoom-out").on("click", () => svg.transition().duration(500).call(zoom.scaleBy, 0.75));
+    d3.select("#zoom-reset").on("click", () => {
+        svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+        resetStateSelection();
+    });
+
+    // Button interactions
+    document.querySelectorAll('button').forEach(btn => {
+        if(!btn.id && !btn.closest('.carousel-track')) {
+            btn.addEventListener('click', function() {
+                if(this.textContent.trim().toLowerCase() !== 'menu') {
+                    // Just a subtle effect for buttons without active hrefs
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => this.style.transform = '', 150);
+                }
+            });
+        }
+    });
+
+    // Mock data for multiple arts per state
+    const artData = {
+        "Andhra Pradesh": [
+            { name: "Kalamkari", desc: "Hand-painted or block-printed cotton textile, known for its earthy colors and mythological motifs.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDl6KoRE4304r6yaz87N6CPFxSjVl5ThVTQ_5DB05Qa4BBwZVVoDT7hB54h4PLSUkYodDRQ7AxFeANNz5KTigRfwP0MA5iv-58kfRpIII-E-ZsaXdtBYlaqF-pYkMKQ06LvGukSg5cr2KXcb0bnQukgApRkOwYwghIh52McxMf849lF8Eoqu9RI7CWCkGdxiHXPUpL0yFHgShcMU-FJquGOgKOVGC_sDdUQWHC55l5N2Y9P4CPiI4yqO4wx4nASNz5uKq4XZ2pcQcSy" }
+        ],
+        "Telangana": [
+            { name: "Cheriyal Scroll Painting", desc: "Stylized versions of Nakashi art, rich in local motifs and traditionally used by storytellers.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAvOxBoc17GD0pCjKedkupx2GGZulLfiliHG8jb7_zcMvxOuC5vqAGnoWSkTL_XqygikyeaGHBCzvO1MuL8u-x84ZsjbJwDF25uglIBbAYrcPnbXwb1mk3SBesZR5aPrZL96bC6YhB-jM9pIXZNXpWz2tqPgjR4zFHW2v1BV7WztE9Cx-ZmYqXvhDSzcp02r0IJasCHS2Po5O-z_6fl1C-x83JitCLZkbOxUgAz44xzL-rRwtRO-wN5Wampwrsj0LcAQ9_Fh1xoW9Io" }
+        ],
+        "Tamil Nadu": [
+            { name: "Tanjore Painting", desc: "A classical South Indian painting style, characterized by rich, flat, and vivid colors, simple iconic composition, and glittering gold foils overlaid on delicate but extensive gesso work.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCOSLMm-BtlP2ruZQbaOJ5RI-FaYP5Y1TTw7MoGfZLTBcbIe13KTbq9iFm3bnPEMpYEzo70mlVq5a_34abWMmNpmpGmK-e2mBfSZIiR9EOfKLdd_0YZON8W_Dq-dJmiFLMRJda2UlksIjeUt2Zyd6MEn5UPfCZuN0becBuHwQPd0GRizQlobvR7gewPRL2EX5nqy0HHwmJxd4PXci6u1fsmA-Kj-U7oq5pAPnwV4PHvRDL4vN_ONg_hUrai9bVmMfaWd6Qm-j3vKICJ" }
+        ],
+        "Karnataka": [
+            { name: "Mysore Painting", desc: "An important form of classical South Indian painting that uses muted colors and high attention to detail.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDJmf-j9GSQDGrt2wkFmgQF5vfJyxnbjMQi99nYqDH5_HAwlspkJL91E9URUs9nlpSW6nNrUfH4n3FDLEYTPCjN6oqg2pemQKnQ7v448CIatSkzKwmGq_PGtpHlAiZHoMxEjroxoV_iI0cr0iT1T_rc2ljq4T6TjiDwYbMvhXDNPA5N0baDmyvxWltRDEeN-pvPmmoW9cGNV26SSGzO707_BkhoEZ7QJRTOnigKiyvtfXpK2ddWiwwsSdjg7vVecanj1pj_r8MJvmpz" }
+        ],
+        "Kerala": [
+            { name: "Mural Painting", desc: "Frescoes depicting mythology and legends, drawn on the walls of temples and churches in South India.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDpC93XLzd_GC9642lqLx9Bpl0rCu5r04INVyA-6yshirjYZ3h6IzZXWpLiNLbs6ImZFMGUU99YolyxPqZ-9chMNIKIP9NcnLvq1J7lp4onmzARRJJc70AuFHVqqt129FdcuhzEgVOXbZt_mxwipXczCBSjDD9LNkXnzEvHXwoDd4xPpWMeO6M6IdXcKsST4g4PK_FyRiu-DcqMeZG4NGn-I6YYIWpOFjsbKQnkittaYwPU5VMU0LeGhgxIx1v9sm4DDM_yhAgxE7Aj" }
+        ],
+        "Maharashtra": [
+            { name: "Warli Painting", desc: "A tribal art form created by the Warli people from the North Sahyadri Range. It uses a set of basic geometric shapes.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDl6KoRE4304r6yaz87N6CPFxSjVl5ThVTQ_5DB05Qa4BBwZVVoDT7hB54h4PLSUkYodDRQ7AxFeANNz5KTigRfwP0MA5iv-58kfRpIII-E-ZsaXdtBYlaqF-pYkMKQ06LvGukSg5cr2KXcb0bnQukgApRkOwYwghIh52McxMf849lF8Eoqu9RI7CWCkGdxiHXPUpL0yFHgShcMU-FJquGOgKOVGC_sDdUQWHC55l5N2Y9P4CPiI4yqO4wx4nASNz5uKq4XZ2pcQcSy" }
+        ],
+        "Gujarat": [
+            { name: "Pithora Painting", desc: "Highly ritualistic paintings done on the walls by the Rathwa, Bhil, and Nayak tribes.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAvOxBoc17GD0pCjKedkupx2GGZulLfiliHG8jb7_zcMvxOuC5vqAGnoWSkTL_XqygikyeaGHBCzvO1MuL8u-x84ZsjbJwDF25uglIBbAYrcPnbXwb1mk3SBesZR5aPrZL96bC6YhB-jM9pIXZNXpWz2tqPgjR4zFHW2v1BV7WztE9Cx-ZmYqXvhDSzcp02r0IJasCHS2Po5O-z_6fl1C-x83JitCLZkbOxUgAz44xzL-rRwtRO-wN5Wampwrsj0LcAQ9_Fh1xoW9Io" }
+        ],
+        "Rajasthan": [
+            { name: "Phad Painting", desc: "A style religious scroll painting and folk painting.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCOSLMm-BtlP2ruZQbaOJ5RI-FaYP5Y1TTw7MoGfZLTBcbIe13KTbq9iFm3bnPEMpYEzo70mlVq5a_34abWMmNpmpGmK-e2mBfSZIiR9EOfKLdd_0YZON8W_Dq-dJmiFLMRJda2UlksIjeUt2Zyd6MEn5UPfCZuN0becBuHwQPd0GRizQlobvR7gewPRL2EX5nqy0HHwmJxd4PXci6u1fsmA-Kj-U7oq5pAPnwV4PHvRDL4vN_ONg_hUrai9bVmMfaWd6Qm-j3vKICJ" },
+            { name: "Miniature Painting", desc: "Intricate, colorful, and small-scale paintings that traditionally illustrated manuscripts. The Rajputs developed a distinct style characterized by bold lines.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDJmf-j9GSQDGrt2wkFmgQF5vfJyxnbjMQi99nYqDH5_HAwlspkJL91E9URUs9nlpSW6nNrUfH4n3FDLEYTPCjN6oqg2pemQKnQ7v448CIatSkzKwmGq_PGtpHlAiZHoMxEjroxoV_iI0cr0iT1T_rc2ljq4T6TjiDwYbMvhXDNPA5N0baDmyvxWltRDEeN-pvPmmoW9cGNV26SSGzO707_BkhoEZ7QJRTOnigKiyvtfXpK2ddWiwwsSdjg7vVecanj1pj_r8MJvmpz" }
+        ],
+        "Madhya Pradesh": [
+            { name: "Gond Painting", desc: "A form of painting from folk and tribal art that is practiced by one of the largest tribes in India.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDpC93XLzd_GC9642lqLx9Bpl0rCu5r04INVyA-6yshirjYZ3h6IzZXWpLiNLbs6ImZFMGUU99YolyxPqZ-9chMNIKIP9NcnLvq1J7lp4onmzARRJJc70AuFHVqqt129FdcuhzEgVOXbZt_mxwipXczCBSjDD9LNkXnzEvHXwoDd4xPpWMeO6M6IdXcKsST4g4PK_FyRiu-DcqMeZG4NGn-I6YYIWpOFjsbKQnkittaYwPU5VMU0LeGhgxIx1v9sm4DDM_yhAgxE7Aj" }
+        ],
+        "Chhattisgarh": [
+            { name: "Godna Art", desc: "Traditional tattoo art transformed into painting on textiles and paper.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDl6KoRE4304r6yaz87N6CPFxSjVl5ThVTQ_5DB05Qa4BBwZVVoDT7hB54h4PLSUkYodDRQ7AxFeANNz5KTigRfwP0MA5iv-58kfRpIII-E-ZsaXdtBYlaqF-pYkMKQ06LvGukSg5cr2KXcb0bnQukgApRkOwYwghIh52McxMf849lF8Eoqu9RI7CWCkGdxiHXPUpL0yFHgShcMU-FJquGOgKOVGC_sDdUQWHC55l5N2Y9P4CPiI4yqO4wx4nASNz5uKq4XZ2pcQcSy" }
+        ],
+        "Bihar": [
+            { name: "Madhubani (Mithila) Painting", desc: "Also known as Mithila art, this form relies on complex geometrical patterns.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAvOxBoc17GD0pCjKedkupx2GGZulLfiliHG8jb7_zcMvxOuC5vqAGnoWSkTL_XqygikyeaGHBCzvO1MuL8u-x84ZsjbJwDF25uglIBbAYrcPnbXwb1mk3SBesZR5aPrZL96bC6YhB-jM9pIXZNXpWz2tqPgjR4zFHW2v1BV7WztE9Cx-ZmYqXvhDSzcp02r0IJasCHS2Po5O-z_6fl1C-x83JitCLZkbOxUgAz44xzL-rRwtRO-wN5Wampwrsj0LcAQ9_Fh1xoW9Io" }
+        ],
+        "Jharkhand": [
+            { name: "Sohrai Painting", desc: "A matriarchal tradition of wall painting performed to celebrate the harvest.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCOSLMm-BtlP2ruZQbaOJ5RI-FaYP5Y1TTw7MoGfZLTBcbIe13KTbq9iFm3bnPEMpYEzo70mlVq5a_34abWMmNpmpGmK-e2mBfSZIiR9EOfKLdd_0YZON8W_Dq-dJmiFLMRJda2UlksIjeUt2Zyd6MEn5UPfCZuN0becBuHwQPd0GRizQlobvR7gewPRL2EX5nqy0HHwmJxd4PXci6u1fsmA-Kj-U7oq5pAPnwV4PHvRDL4vN_ONg_hUrai9bVmMfaWd6Qm-j3vKICJ" }
+        ],
+        "West Bengal": [
+            { name: "Kalighat Painting", desc: "Characterized by sweeping brush lines and bold colors, historically depicting gods and social life.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDJmf-j9GSQDGrt2wkFmgQF5vfJyxnbjMQi99nYqDH5_HAwlspkJL91E9URUs9nlpSW6nNrUfH4n3FDLEYTPCjN6oqg2pemQKnQ7v448CIatSkzKwmGq_PGtpHlAiZHoMxEjroxoV_iI0cr0iT1T_rc2ljq4T6TjiDwYbMvhXDNPA5N0baDmyvxWltRDEeN-pvPmmoW9cGNV26SSGzO707_BkhoEZ7QJRTOnigKiyvtfXpK2ddWiwwsSdjg7vVecanj1pj_r8MJvmpz" },
+            { name: "Pattachitra", desc: "Traditional scroll painting native to eastern India.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDpC93XLzd_GC9642lqLx9Bpl0rCu5r04INVyA-6yshirjYZ3h6IzZXWpLiNLbs6ImZFMGUU99YolyxPqZ-9chMNIKIP9NcnLvq1J7lp4onmzARRJJc70AuFHVqqt129FdcuhzEgVOXbZt_mxwipXczCBSjDD9LNkXnzEvHXwoDd4xPpWMeO6M6IdXcKsST4g4PK_FyRiu-DcqMeZG4NGn-I6YYIWpOFjsbKQnkittaYwPU5VMU0LeGhgxIx1v9sm4DDM_yhAgxE7Aj" }
+        ],
+        "Odisha": [
+            { name: "Pattachitra", desc: "Traditional cloth-based scroll painting known for intricate details and mythological narratives.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDl6KoRE4304r6yaz87N6CPFxSjVl5ThVTQ_5DB05Qa4BBwZVVoDT7hB54h4PLSUkYodDRQ7AxFeANNz5KTigRfwP0MA5iv-58kfRpIII-E-ZsaXdtBYlaqF-pYkMKQ06LvGukSg5cr2KXcb0bnQukgApRkOwYwghIh52McxMf849lF8Eoqu9RI7CWCkGdxiHXPUpL0yFHgShcMU-FJquGOgKOVGC_sDdUQWHC55l5N2Y9P4CPiI4yqO4wx4nASNz5uKq4XZ2pcQcSy" }
+        ],
+        "Uttar Pradesh": [
+            { name: "Sanjhi Art", desc: "The highly refined art of hand-cutting designs on paper.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAvOxBoc17GD0pCjKedkupx2GGZulLfiliHG8jb7_zcMvxOuC5vqAGnoWSkTL_XqygikyeaGHBCzvO1MuL8u-x84ZsjbJwDF25uglIBbAYrcPnbXwb1mk3SBesZR5aPrZL96bC6YhB-jM9pIXZNXpWz2tqPgjR4zFHW2v1BV7WztE9Cx-ZmYqXvhDSzcp02r0IJasCHS2Po5O-z_6fl1C-x83JitCLZkbOxUgAz44xzL-rRwtRO-wN5Wampwrsj0LcAQ9_Fh1xoW9Io" }
+        ],
+        "Uttarakhand": [
+            { name: "Aipan Art", desc: "Ritualistic folk art made on floors and walls, using rice paste on a red mud base.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCOSLMm-BtlP2ruZQbaOJ5RI-FaYP5Y1TTw7MoGfZLTBcbIe13KTbq9iFm3bnPEMpYEzo70mlVq5a_34abWMmNpmpGmK-e2mBfSZIiR9EOfKLdd_0YZON8W_Dq-dJmiFLMRJda2UlksIjeUt2Zyd6MEn5UPfCZuN0becBuHwQPd0GRizQlobvR7gewPRL2EX5nqy0HHwmJxd4PXci6u1fsmA-Kj-U7oq5pAPnwV4PHvRDL4vN_ONg_hUrai9bVmMfaWd6Qm-j3vKICJ" }
+        ],
+        "Himachal Pradesh": [
+            { name: "Kangra Painting", desc: "Pahari painting named after Kangra, known for its lyrical blending of form and color.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDJmf-j9GSQDGrt2wkFmgQF5vfJyxnbjMQi99nYqDH5_HAwlspkJL91E9URUs9nlpSW6nNrUfH4n3FDLEYTPCjN6oqg2pemQKnQ7v448CIatSkzKwmGq_PGtpHlAiZHoMxEjroxoV_iI0cr0iT1T_rc2ljq4T6TjiDwYbMvhXDNPA5N0baDmyvxWltRDEeN-pvPmmoW9cGNV26SSGzO707_BkhoEZ7QJRTOnigKiyvtfXpK2ddWiwwsSdjg7vVecanj1pj_r8MJvmpz" }
+        ],
+        "Jammu & Kashmir": [
+            { name: "Basohli Painting", desc: "A school of Pahari miniature painting characterized by vigorous use of primary colors.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDpC93XLzd_GC9642lqLx9Bpl0rCu5r04INVyA-6yshirjYZ3h6IzZXWpLiNLbs6ImZFMGUU99YolyxPqZ-9chMNIKIP9NcnLvq1J7lp4onmzARRJJc70AuFHVqqt129FdcuhzEgVOXbZt_mxwipXczCBSjDD9LNkXnzEvHXwoDd4xPpWMeO6M6IdXcKsST4g4PK_FyRiu-DcqMeZG4NGn-I6YYIWpOFjsbKQnkittaYwPU5VMU0LeGhgxIx1v9sm4DDM_yhAgxE7Aj" }
+        ],
+        "Punjab": [
+            { name: "Phulkari (Textile Art)", desc: "Folk embroidery of Punjab meaning flower work.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDl6KoRE4304r6yaz87N6CPFxSjVl5ThVTQ_5DB05Qa4BBwZVVoDT7hB54h4PLSUkYodDRQ7AxFeANNz5KTigRfwP0MA5iv-58kfRpIII-E-ZsaXdtBYlaqF-pYkMKQ06LvGukSg5cr2KXcb0bnQukgApRkOwYwghIh52McxMf849lF8Eoqu9RI7CWCkGdxiHXPUpL0yFHgShcMU-FJquGOgKOVGC_sDdUQWHC55l5N2Y9P4CPiI4yqO4wx4nASNz5uKq4XZ2pcQcSy" }
+        ],
+        "Haryana": [
+            { name: "Mandana Art", desc: "Wall and floor paintings done to protect home and hearth, welcome gods into the house.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAvOxBoc17GD0pCjKedkupx2GGZulLfiliHG8jb7_zcMvxOuC5vqAGnoWSkTL_XqygikyeaGHBCzvO1MuL8u-x84ZsjbJwDF25uglIBbAYrcPnbXwb1mk3SBesZR5aPrZL96bC6YhB-jM9pIXZNXpWz2tqPgjR4zFHW2v1BV7WztE9Cx-ZmYqXvhDSzcp02r0IJasCHS2Po5O-z_6fl1C-x83JitCLZkbOxUgAz44xzL-rRwtRO-wN5Wampwrsj0LcAQ9_Fh1xoW9Io" }
+        ],
+        "Assam": [
+            { name: "Assamese Scroll Painting", desc: "Folk art tradition, illustrating verses from Hindu epics.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCOSLMm-BtlP2ruZQbaOJ5RI-FaYP5Y1TTw7MoGfZLTBcbIe13KTbq9iFm3bnPEMpYEzo70mlVq5a_34abWMmNpmpGmK-e2mBfSZIiR9EOfKLdd_0YZON8W_Dq-dJmiFLMRJda2UlksIjeUt2Zyd6MEn5UPfCZuN0becBuHwQPd0GRizQlobvR7gewPRL2EX5nqy0HHwmJxd4PXci6u1fsmA-Kj-U7oq5pAPnwV4PHvRDL4vN_ONg_hUrai9bVmMfaWd6Qm-j3vKICJ" }
+        ],
+        "Arunachal Pradesh": [
+            { name: "Thangka Painting", desc: "Buddhist scroll paintings, usually depicting a Buddhist deity, scene, or mandala.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDJmf-j9GSQDGrt2wkFmgQF5vfJyxnbjMQi99nYqDH5_HAwlspkJL91E9URUs9nlpSW6nNrUfH4n3FDLEYTPCjN6oqg2pemQKnQ7v448CIatSkzKwmGq_PGtpHlAiZHoMxEjroxoV_iI0cr0iT1T_rc2ljq4T6TjiDwYbMvhXDNPA5N0baDmyvxWltRDEeN-pvPmmoW9cGNV26SSGzO707_BkhoEZ7QJRTOnigKiyvtfXpK2ddWiwwsSdjg7vVecanj1pj_r8MJvmpz" }
+        ],
+        "Sikkim": [
+            { name: "Thangka Painting", desc: "Intricate spiritual art used as a teaching tool and a centerpiece for meditation.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDpC93XLzd_GC9642lqLx9Bpl0rCu5r04INVyA-6yshirjYZ3h6IzZXWpLiNLbs6ImZFMGUU99YolyxPqZ-9chMNIKIP9NcnLvq1J7lp4onmzARRJJc70AuFHVqqt129FdcuhzEgVOXbZt_mxwipXczCBSjDD9LNkXnzEvHXwoDd4xPpWMeO6M6IdXcKsST4g4PK_FyRiu-DcqMeZG4NGn-I6YYIWpOFjsbKQnkittaYwPU5VMU0LeGhgxIx1v9sm4DDM_yhAgxE7Aj" }
+        ],
+        "Nagaland": [
+            { name: "Tribal Wall Art", desc: "Abstract geometric patterns reflecting animist beliefs and tribal folklore.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDl6KoRE4304r6yaz87N6CPFxSjVl5ThVTQ_5DB05Qa4BBwZVVoDT7hB54h4PLSUkYodDRQ7AxFeANNz5KTigRfwP0MA5iv-58kfRpIII-E-ZsaXdtBYlaqF-pYkMKQ06LvGukSg5cr2KXcb0bnQukgApRkOwYwghIh52McxMf849lF8Eoqu9RI7CWCkGdxiHXPUpL0yFHgShcMU-FJquGOgKOVGC_sDdUQWHC55l5N2Y9P4CPiI4yqO4wx4nASNz5uKq4XZ2pcQcSy" }
+        ],
+        "Manipur": [
+            { name: "Manipur Folk Painting", desc: "Paintings inspired by Vaishnavite traditions.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAvOxBoc17GD0pCjKedkupx2GGZulLfiliHG8jb7_zcMvxOuC5vqAGnoWSkTL_XqygikyeaGHBCzvO1MuL8u-x84ZsjbJwDF25uglIBbAYrcPnbXwb1mk3SBesZR5aPrZL96bC6YhB-jM9pIXZNXpWz2tqPgjR4zFHW2v1BV7WztE9Cx-ZmYqXvhDSzcp02r0IJasCHS2Po5O-z_6fl1C-x83JitCLZkbOxUgAz44xzL-rRwtRO-wN5Wampwrsj0LcAQ9_Fh1xoW9Io" }
+        ],
+        "Mizoram": [
+            { name: "Mizo Textile Art", desc: "Handloom weaves with intricate motifs representing tribal heritage.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCOSLMm-BtlP2ruZQbaOJ5RI-FaYP5Y1TTw7MoGfZLTBcbIe13KTbq9iFm3bnPEMpYEzo70mlVq5a_34abWMmNpmpGmK-e2mBfSZIiR9EOfKLdd_0YZON8W_Dq-dJmiFLMRJda2UlksIjeUt2Zyd6MEn5UPfCZuN0becBuHwQPd0GRizQlobvR7gewPRL2EX5nqy0HHwmJxd4PXci6u1fsmA-Kj-U7oq5pAPnwV4PHvRDL4vN_ONg_hUrai9bVmMfaWd6Qm-j3vKICJ" }
+        ],
+        "Meghalaya": [
+            { name: "Meghalaya Tribal Art", desc: "Carvings and paintings on bamboo and wood.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDJmf-j9GSQDGrt2wkFmgQF5vfJyxnbjMQi99nYqDH5_HAwlspkJL91E9URUs9nlpSW6nNrUfH4n3FDLEYTPCjN6oqg2pemQKnQ7v448CIatSkzKwmGq_PGtpHlAiZHoMxEjroxoV_iI0cr0iT1T_rc2ljq4T6TjiDwYbMvhXDNPA5N0baDmyvxWltRDEeN-pvPmmoW9cGNV26SSGzO707_BkhoEZ7QJRTOnigKiyvtfXpK2ddWiwwsSdjg7vVecanj1pj_r8MJvmpz" }
+        ],
+        "Tripura": [
+            { name: "Tripuri Folk Art", desc: "Bamboo crafts and paintings detailing rural life.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDpC93XLzd_GC9642lqLx9Bpl0rCu5r04INVyA-6yshirjYZ3h6IzZXWpLiNLbs6ImZFMGUU99YolyxPqZ-9chMNIKIP9NcnLvq1J7lp4onmzARRJJc70AuFHVqqt129FdcuhzEgVOXbZt_mxwipXczCBSjDD9LNkXnzEvHXwoDd4xPpWMeO6M6IdXcKsST4g4PK_FyRiu-DcqMeZG4NGn-I6YYIWpOFjsbKQnkittaYwPU5VMU0LeGhgxIx1v9sm4DDM_yhAgxE7Aj" }
+        ],
+        "Goa": [
+            { name: "Fresco Art", desc: "Colonial and pre-colonial murals found in chapels and ancestral homes.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDl6KoRE4304r6yaz87N6CPFxSjVl5ThVTQ_5DB05Qa4BBwZVVoDT7hB54h4PLSUkYodDRQ7AxFeANNz5KTigRfwP0MA5iv-58kfRpIII-E-ZsaXdtBYlaqF-pYkMKQ06LvGukSg5cr2KXcb0bnQukgApRkOwYwghIh52McxMf849lF8Eoqu9RI7CWCkGdxiHXPUpL0yFHgShcMU-FJquGOgKOVGC_sDdUQWHC55l5N2Y9P4CPiI4yqO4wx4nASNz5uKq4XZ2pcQcSy" }
+        ]
+    };
+
+    let activeState = null;
+
+    // Fetch GeoJSON - using a lightweight version for faster loading
+    d3.json("https://raw.githubusercontent.com/geohacker/india/master/state/india_state.geojson").then(function(topo) {
+        
+        // Hide loader
+        const loader = document.getElementById('map-loader');
+        if(loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        }
+
+        g.selectAll("path")
+            .data(topo.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+            .attr("class", "state-path")
+            .style("fill", "#1F160B")
+            .style("stroke", "#2C1E11") 
+            .style("stroke-width", "1.5px")
+            .style("cursor", "pointer")
+            .style("shape-rendering", "optimizeSpeed")
+            .style("transition", "all 0.3s")
+            .on("mouseover", function(event, d) {
+                if (this !== activeState) {
+                    d3.select(this).style("fill", "#362718");
+                }
+            })
+            .on("mouseout", function(event, d) {
+                if (this !== activeState) {
+                    d3.select(this).style("fill", "#1F160B");
+                }
+            })
+            .on("click", function(event, d) {
+                if (activeState) {
+                    d3.select(activeState).style("fill", "#1F160B").style("stroke", "#2C1E11");
+                }
+                
+                activeState = this;
+                d3.select(this).style("fill", "#B5451B").style("stroke", "#D4AF37");
+
+                // Zoom to bounding box
+                const bounds = path.bounds(d);
+                const dx = bounds[1][0] - bounds[0][0];
+                const dy = bounds[1][1] - bounds[0][1];
+                const x = (bounds[0][0] + bounds[1][0]) / 2;
+                const y = (bounds[0][1] + bounds[1][1]) / 2;
+                const scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height)));
+                const translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+                svg.transition().duration(750).call(
+                    zoom.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
+                );
+
+                updateStateInfo(d.properties.NAME_1);
+            });
+    }).catch(err => {
+        console.error("Error loading GeoJSON", err);
+        const loader = document.getElementById('map-loader');
+        if(loader) {
+            loader.innerHTML = '<p class="text-red-400 font-sans tracking-widest text-sm uppercase">Connection Error</p>';
+        }
+    });
+
+    function resetStateSelection() {
+        if (activeState) {
+            d3.select(activeState).style("fill", "#1F160B").style("stroke", "#2C1E11");
+            activeState = null;
+            document.getElementById("state-info").innerHTML = `
+                <div class="w-24 h-24 rounded-full border-2 border-dashed border-[#D4AF37]/30 flex items-center justify-center mb-8 animate-[spin_10s_linear_infinite]">
+                    <span class="material-symbols-outlined text-4xl text-[#D4AF37]/50 animate-pulse">touch_app</span>
+                </div>
+                <h3 class="text-3xl font-serif text-[#D4AF37] mb-4">Select a Region</h3>
+                <p class="text-stone-400 font-sans max-w-md text-lg">Click on any state on the map to discover its unique living art traditions, techniques, and the master artisans who preserve them.</p>
+            `;
+        }
+    }
+
+    function updateStateInfo(stateName) {
+        // Find art array or use default
+        let arts = artData[stateName] || [
+            {
+                name: "Folk Traditions of " + stateName,
+                desc: "Explore the profound regional artistry, local dyes, and ancient techniques unique to " + stateName + ". Our archivists are continually adding new artisan profiles.",
+                img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDaiKo8wj7NSpxtbjBq7XxE9dPBnShaLKI1dStSaEbBlwQXnRpshK_O5rGw4rIsVUC863Pg1c7VLp-5Vcg3X8XQxxnabGYWBMw9mgoRq7eT20WaDdvQzQemUscrJyNITFfyWQMChozHWk9GuXbLKPVRKkPNk1duhuJiQm2o-aBl4Tnxuf-OoMXvZzH7FZt5YmJZIJ4QGgSoIKVkcWlkQuyE1oaUETWqFSoR8qvitHO4bF-U5s-GQ8uo432J2VHYY-muTnss4lPIhFP7"
+            },
+            {
+                name: "Textiles & Weaves",
+                desc: "The delicate threads that bind the cultural history of the region. Distinctive motifs that have adorned royalty and everyday folk alike.",
+                img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCOSLMm-BtlP2ruZQbaOJ5RI-FaYP5Y1TTw7MoGfZLTBcbIe13KTbq9iFm3bnPEMpYEzo70mlVq5a_34abWMmNpmpGmK-e2mBfSZIiR9EOfKLdd_0YZON8W_Dq-dJmiFLMRJda2UlksIjeUt2Zyd6MEn5UPfCZuN0becBuHwQPd0GRizQlobvR7gewPRL2EX5nqy0HHwmJxd4PXci6u1fsmA-Kj-U7oq5pAPnwV4PHvRDL4vN_ONg_hUrai9bVmMfaWd6Qm-j3vKICJ"
+            }
+        ];
+
+        let artsHTML = arts.map(data => `
+            <div class="mb-12 w-full animate-fade-in border-b border-[#D4AF37]/10 pb-10 last:border-0 last:pb-4">
+                <h3 class="text-3xl font-serif text-[#D4AF37] mb-6 italic text-left">${data.name}</h3>
+                
+                <div class="w-full aspect-[16/9] overflow-hidden mb-6 rounded-lg border border-[#D4AF37]/20 shadow-lg group">
+                    <img src="${data.img}" alt="${data.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                </div>
+                
+                <p class="text-stone-300 font-sans leading-relaxed mb-6 text-left text-lg">
+                    ${data.desc}
+                </p>
+                
+                <div class="text-left mt-4">
+                    <button class="text-[#D4AF37] border-b border-[#D4AF37] pb-1 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:text-white transition-colors">
+                        View Artisans
+                    </button>
+                </div>
+            </div>
+        `).join("");
+
+        const infoDiv = document.getElementById("state-info");
+        infoDiv.parentElement.innerHTML = `
+            <div id="state-info" class="w-full h-full flex flex-col p-8 overflow-y-auto custom-scrollbar relative bg-[#0D0804]">
+                <div class="sticky top-0 bg-[#0D0804]/95 pt-2 pb-6 z-10 border-b border-[#D4AF37]/20 mb-8 backdrop-blur-md">
+                    <span class="font-sans text-[10px] font-bold text-[#B5451B] uppercase tracking-[0.3em] block text-left mb-2">Selected Region</span>
+                    <h2 class="text-4xl md:text-5xl font-serif text-[#F5E6D3] text-left drop-shadow-md">${stateName}</h2>
+                </div>
+                ${artsHTML}
+            </div>
+        `;
+    }
+  });
+</script>
+</body></html>
