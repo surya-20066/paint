@@ -6,7 +6,7 @@ export default function Hero() {
             {/* Full Background Video */}
             <div className="absolute inset-0 z-0">
                 <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-                    <source src="https://videos.pexels.com/video-files/5001962/5001962-hd_1920_1080_30fps.mp4" type="video/mp4" />
+                    <source src="/video.mp4" type="video/mp4" />
                 </video>
                 {/* Dark gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-[#1F160B] via-[#1F160B]/80 to-transparent"></div>
