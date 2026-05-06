@@ -1746,6 +1746,12 @@
                 });
             });
         });
+        // Optimization: Lazy load images that appear later
+        document.querySelectorAll('img').forEach(img => {
+            if (!img.hasAttribute('loading')) {
+                img.setAttribute('loading', 'lazy');
+            }
+        });
     </script>
 </body>
 
