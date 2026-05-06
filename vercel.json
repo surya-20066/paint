@@ -1,5 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/painted_muse.html" }
-  ]
-}
