@@ -13,7 +13,18 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <style>
+        :root {
+            --ink: #1A1208;
+            --ink-2: #241A0E;
+            --bg: #FDFBF7;
+            --cream: #F5F0E8;
+            --saffron: #D4AF37;
+            --border: rgba(26, 18, 8, 0.1);
+            --t: 0.3s ease;
+        }
+
         .material-symbols-outlined {
             font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
         }
@@ -274,15 +285,15 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            animation: scroll-up 80s linear infinite;
+            animation: scroll-up 40s linear infinite;
         }
 
         .testimonial-col:nth-child(2) {
-            animation-duration: 100s;
+            animation-duration: 50s;
         }
 
         .testimonial-col:nth-child(3) {
-            animation-duration: 90s;
+            animation-duration: 45s;
         }
 
         .testimonial-container {
@@ -311,6 +322,227 @@
             bottom: 0;
             background: linear-gradient(to top, #F5F0E8, transparent);
         }
+
+        /* ADDED FROM ADD.CSS */
+        .eyebrow {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--saffron);
+            margin-bottom: 12px;
+        }
+
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .h-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 24px;
+            padding: 20px 0 40px;
+            scroll-snap-type: x mandatory;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .h-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cat-card {
+            min-width: 320px;
+            height: 440px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            transition: transform var(--t);
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .cat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .cat-card .img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .cat-card:hover .img {
+            transform: scale(1.1);
+        }
+
+        .cat-card .content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 32px;
+            background: linear-gradient(transparent, rgba(26, 18, 8, 0.95));
+            color: white;
+        }
+
+        .cat-card h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .cat-card p {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .cat-card .btn-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--saffron);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* FOOTER STYLES FROM ADD.CSS */
+        footer {
+            background: var(--ink);
+            color: var(--bg);
+            padding: 100px 0 40px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--saffron), transparent);
+        }
+
+        .foot-top {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 60px;
+        }
+
+        .foot-brand p {
+            color: rgba(246, 241, 232, 0.6);
+            font-size: 14px;
+            margin: 20px 0 24px;
+            max-width: 320px;
+            line-height: 1.6;
+        }
+
+        .socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .socials a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(246, 241, 232, 0.15);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: var(--bg);
+            transition: all var(--t);
+        }
+
+        .socials a:hover {
+            background: var(--saffron);
+            color: var(--ink);
+            border-color: var(--saffron);
+            transform: translateY(-3px);
+        }
+
+        .foot-col h5 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 15px;
+            margin-bottom: 24px;
+            color: var(--saffron);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        .foot-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .foot-col li {
+            margin-bottom: 12px;
+        }
+
+        .foot-col a {
+            font-size: 14px;
+            color: rgba(246, 241, 232, 0.65);
+            transition: color var(--t);
+            text-decoration: none;
+        }
+
+        .foot-col a:hover {
+            color: var(--saffron);
+        }
+
+        .foot-bot {
+            border-top: 1px solid rgba(246, 241, 232, 0.1);
+            padding-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(246, 241, 232, 0.4);
+            font-size: 13px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.in {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (max-width: 1024px) {
+            .foot-top {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .foot-brand {
+                grid-column: span 3;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .foot-top {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .foot-brand {
+                grid-column: span 2;
+            }
+        }
     </style>
 </head>
 
@@ -331,8 +563,8 @@
                 data-section="artists">Artists</a>
             <a class="nav-item text-stone-500 hover:text-[#B5451B] transition-colors duration-500" href="#journal"
                 data-section="journal">Journal</a>
-            <a class="nav-item text-stone-500 hover:text-[#B5451B] transition-colors duration-500" href="#bookings"
-                data-section="bookings">Services</a>
+            <a class="nav-item text-stone-500 hover:text-[#B5451B] transition-colors duration-500" href="#art-forms"
+                data-section="art-forms">Art Forms</a>
             <div id="nav-indicator"></div>
         </div>
         <div class="flex items-center gap-6">
@@ -736,255 +968,302 @@
                 </div>
             </div>
 
-            <div class="container mx-auto px-6 mt-20 flex justify-center z-20 relative">
-                <button
-                    class="bg-[#B5451B] text-white px-12 py-5 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#D4AF37] transition-all duration-500 shadow-xl hover:-translate-y-1">
-                    Book an Artist
-                </button>
+
+        </section>
+        <!-- Art Forms Section Redesigned from add.css -->
+        <section id="art-forms" class="py-24" style="background: var(--cream);">
+            <div class="container mx-auto px-6">
+                <div class="section-head reveal">
+                    <span class="eyebrow">Art Forms</span>
+                    <h2 class="serif text-5xl mb-6 text-brown-900">Every Art Form Has a Home Here</h2>
+                    <p class="text-xl text-brown-700 max-w-2xl">From ancient temple murals to contemporary folk fusion,
+                        explore the diverse artistic heritage of the Indian subcontinent.</p>
+                </div>
+            </div>
+            <div class="container mx-auto px-6 reveal">
+                <div class="h-scroll" id="catScroll">
+                    <!-- Tanjore Card -->
+                    <div class="cat-card">
+                        <div class="img" style="background-image: url('tanjore_art.png')"></div>
+                        <div class="content">
+                            <h3>Tanjore Art</h3>
+                            <p>Sacred gold-leaf paintings from Tamil Nadu, known for their dense composition and surface
+                                richness.</p>
+                            <div class="btn-text">Explore Tradition <i data-lucide="chevron-right"></i></div>
+                        </div>
+                    </div>
+                    <!-- Pattachitra Card -->
+                    <div class="cat-card">
+                        <div class="img" style="background-image: url('pattachitra_art.png')"></div>
+                        <div class="content">
+                            <h3>Pattachitra</h3>
+                            <p>Traditional cloth-based scroll painting from Odisha and West Bengal, depicting
+                                mythological narratives.</p>
+                            <div class="btn-text">Explore Tradition <i data-lucide="chevron-right"></i></div>
+                        </div>
+                    </div>
+                    <!-- Gond Card -->
+                    <div class="cat-card">
+                        <div class="img" style="background-image: url('gond_art.png')"></div>
+                        <div class="content">
+                            <h3>Gond Art</h3>
+                            <p>Vibrant tribal art from Madhya Pradesh, characterized by intricate dots and lines forming
+                                mythical stories.</p>
+                            <div class="btn-text">Explore Tradition <i data-lucide="chevron-right"></i></div>
+                        </div>
+                    </div>
+                    <!-- Kalamkari Card -->
+                    <div class="cat-card">
+                        <div class="img" style="background-image: url('kalamkari_art.png')"></div>
+                        <div class="content">
+                            <h3>Kalamkari</h3>
+                            <p>Ancient style of hand-painted or block-printed cotton textile, produced in Andhra
+                                Pradesh.</p>
+                            <div class="btn-text">Explore Tradition <i data-lucide="chevron-right"></i></div>
+                        </div>
+                    </div>
+                    <!-- Phulkari Card -->
+                    <div class="cat-card">
+                        <div class="img" style="background-image: url('phulkari_art.png')"></div>
+                        <div class="content">
+                            <h3>Phulkari</h3>
+                            <p>Flowery embroidery technique from Punjab, traditionally used on shawls and dupattas.</p>
+                            <div class="btn-text">Explore Tradition <i data-lucide="chevron-right"></i></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-        <!-- Murals Section -->
-        <section class="py-28 section-light" id="murals">
-            <div class="container mx-auto px-6 md:px-12">
-                <div class="text-center mb-20">
-                    <span class="font-sans text-sm text-[#B5451B] uppercase tracking-[0.3em] font-bold">Our
-                        <span class="calligraphy">Craft</span></span>
-                    <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mt-4">Types of <span
-                            class="text-[#D4AF37] italic">Murals</span></h2>
-                    <p class="font-sans text-stone-600 mt-4 max-w-2xl mx-auto text-lg">From ancient temple frescoes to
-                        bold urban street art — we bring every wall to life.</p>
+        <!-- Meet the Makers Section -->
+        <section class="py-28 section-cream" id="artisans">
+            <div class="container mx-auto px-6 md:px-12 text-center">
+                <div class="flex items-center justify-center gap-4 mb-6">
+                    <div class="h-[1px] w-12 bg-[#1A1208]"></div>
+                    <span class="font-sans text-xs text-[#1A1208] uppercase tracking-[0.2em] font-bold">The
+                        Makers</span>
+                    <div class="h-[1px] w-12 bg-[#1A1208]"></div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-4">Meet the Makers</h2>
+                <p class="font-sans text-stone-500 mb-16">Real artists. Real stories. Every piece handcrafted.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                    <!-- Card 1 -->
                     <div
-                        class="bg-white rounded-xl p-8 shadow-md border border-stone-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 group">
-                        <div class="w-14 h-14 rounded-full bg-[#D4AF37]/10 flex items-center justify-center mb-6"><span
-                                class="material-symbols-outlined text-[#D4AF37] text-2xl">brush</span></div>
-                        <h3 class="text-xl font-serif text-[#1A1208] mb-3">Traditional Folk Murals</h3>
-                        <p class="text-stone-500 font-sans text-sm leading-relaxed mb-4">Warli, Gond, Sohrai, Pithora &
-                            Madhubani wall art traditions.</p>
-                        <span class="text-[10px] text-[#B5451B] font-bold uppercase tracking-widest">Cafes · Resorts ·
-                            Cultural Spaces</span>
+                        class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
+                        <div class="h-40 bg-stone-900 relative">
+                            <img src="madhubani_bg.png"
+                                class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                                alt="Madhubani Art">
+                            <img src="https://i.pravatar.cc/150?u=meera"
+                                class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-sm z-10"
+                                alt="Meera Devi">
+                        </div>
+                        <div class="pt-14 p-6 relative bg-white">
+                            <h3 class="font-serif text-xl text-[#1A1208] mb-3">Meera Devi</h3>
+                            <div class="flex gap-2 mb-4">
+                                <span
+                                    class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Bihar</span>
+                                <span
+                                    class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Madhubani</span>
+                            </div>
+                            <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
+                                ★★★★★ <span class="text-stone-500 font-sans ml-1">4.9 · 48 bookings</span>
+                            </div>
+                            <p class="text-stone-600 font-sans text-sm mb-6 h-10">5th generation Madhubani artist from
+                                Mithila, Bihar.</p>
+                            <div class="flex gap-3">
+                                <button
+                                    class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View
+                                    Portfolio</button>
+                                <button
+                                    class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
+                                    Now →</button>
+                            </div>
+                        </div>
                     </div>
+                    <!-- Card 2 -->
                     <div
-                        class="bg-white rounded-xl p-8 shadow-md border border-stone-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 group">
-                        <div class="w-14 h-14 rounded-full bg-[#B5451B]/10 flex items-center justify-center mb-6"><span
-                                class="material-symbols-outlined text-[#B5451B] text-2xl">location_city</span></div>
-                        <h3 class="text-xl font-serif text-[#1A1208] mb-3">Contemporary Urban Murals</h3>
-                        <p class="text-stone-500 font-sans text-sm leading-relaxed mb-4">Large-scale city wall art —
-                            women empowerment, heritage, sustainability themes.</p>
-                        <span class="text-[10px] text-[#B5451B] font-bold uppercase tracking-widest">Streets · Offices ·
-                            Public Spaces</span>
+                        class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
+                        <div class="h-40 bg-stone-900 relative">
+                            <img src="pattachitra_art.png"
+                                class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                                alt="Pattachitra Art">
+                            <img src="https://i.pravatar.cc/150?u=bhaskar"
+                                class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-sm z-10"
+                                alt="Bhaskar">
+                        </div>
+                        <div class="pt-14 p-6 relative bg-white">
+                            <h3 class="font-serif text-xl text-[#1A1208] mb-3">Bhaskar Mohapatra</h3>
+                            <div class="flex gap-2 mb-4">
+                                <span
+                                    class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Odisha</span>
+                                <span
+                                    class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Pattachitra</span>
+                            </div>
+                            <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
+                                ★★★★★ <span class="text-stone-500 font-sans ml-1">5.0 · 67 bookings</span>
+                            </div>
+                            <p class="text-stone-600 font-sans text-sm mb-6 h-10">Master chitrakar of Raghurajpur,
+                                painting the gods on palm leaves.</p>
+                            <div class="flex gap-3">
+                                <button
+                                    class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View
+                                    Portfolio</button>
+                                <button
+                                    class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
+                                    Now →</button>
+                            </div>
+                        </div>
                     </div>
+                    <!-- Card 3 -->
                     <div
-                        class="bg-white rounded-xl p-8 shadow-md border border-stone-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 group">
-                        <div class="w-14 h-14 rounded-full bg-[#D4AF37]/10 flex items-center justify-center mb-6"><span
-                                class="material-symbols-outlined text-[#D4AF37] text-2xl">temple_hindu</span></div>
-                        <h3 class="text-xl font-serif text-[#1A1208] mb-3">Spiritual & Temple Murals</h3>
-                        <p class="text-stone-500 font-sans text-sm leading-relaxed mb-4">Kerala temple murals, Buddhist
-                            art, Ramayana & Mahabharata storytelling.</p>
-                        <span class="text-[10px] text-[#B5451B] font-bold uppercase tracking-widest">Temples · Ashrams ·
-                            Heritage Sites</span>
+                        class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
+                        <div class="h-40 bg-stone-900 relative">
+                            <img src="warli_bg.png"
+                                class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                                alt="Warli Art">
+                            <img src="https://i.pravatar.cc/150?u=jivya"
+                                class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-sm z-10"
+                                alt="Jivya">
+                        </div>
+                        <div class="pt-14 p-6 relative bg-white">
+                            <h3 class="font-serif text-xl text-[#1A1208] mb-3">Jivya Soma Mashe</h3>
+                            <div class="flex gap-2 mb-4">
+                                <span
+                                    class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Maharashtra</span>
+                                <span
+                                    class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Warli</span>
+                            </div>
+                            <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
+                                ★★★★★ <span class="text-stone-500 font-sans ml-1">4.8 · 52 bookings</span>
+                            </div>
+                            <p class="text-stone-600 font-sans text-sm mb-6 h-10">Reviving the white-on-earth language
+                                of the Warli tribe.</p>
+                            <div class="flex gap-3">
+                                <button
+                                    class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View
+                                    Portfolio</button>
+                                <button
+                                    class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
+                                    Now →</button>
+                            </div>
+                        </div>
                     </div>
+                    <!-- Card 4 -->
                     <div
-                        class="bg-white rounded-xl p-8 shadow-md border border-stone-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 group">
-                        <div class="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mb-6"><span
-                                class="material-symbols-outlined text-green-600 text-2xl">eco</span></div>
-                        <h3 class="text-xl font-serif text-[#1A1208] mb-3">Nature Murals</h3>
-                        <p class="text-stone-500 font-sans text-sm leading-relaxed mb-4">Jungle art, wildlife, birds,
-                            mountains, rivers & botanical wall paintings.</p>
-                        <span class="text-[10px] text-[#B5451B] font-bold uppercase tracking-widest">Homes · Hotels ·
-                            Wellness Centers</span>
+                        class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
+                        <div class="h-40 bg-stone-900 relative">
+                            <img src="tanjore_art.png"
+                                class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                                alt="Tanjore Art">
+                            <img src="https://i.pravatar.cc/150?u=anjali"
+                                class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-sm z-10"
+                                alt="Anjali">
+                        </div>
+                        <div class="pt-14 p-6 relative bg-white">
+                            <h3 class="font-serif text-xl text-[#1A1208] mb-3">Anjali Pichai</h3>
+                            <div class="flex gap-2 mb-4">
+                                <span
+                                    class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Tamil
+                                    Nadu</span>
+                                <span
+                                    class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Tanjore</span>
+                            </div>
+                            <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
+                                ★★★★★ <span class="text-stone-500 font-sans ml-1">4.9 · 33 bookings</span>
+                            </div>
+                            <p class="text-stone-600 font-sans text-sm mb-6 h-10">Gold-leaf devotional art crafted
+                                across three months per piece.</p>
+                            <div class="flex gap-3">
+                                <button
+                                    class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View
+                                    Portfolio</button>
+                                <button
+                                    class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
+                                    Now →</button>
+                            </div>
+                        </div>
                     </div>
+                    <!-- Card 5 -->
                     <div
-                        class="bg-white rounded-xl p-8 shadow-md border border-stone-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 group">
-                        <div class="w-14 h-14 rounded-full bg-purple-50 flex items-center justify-center mb-6"><span
-                                class="material-symbols-outlined text-purple-500 text-2xl">palette</span></div>
-                        <h3 class="text-xl font-serif text-[#1A1208] mb-3">Abstract & Modern Murals</h3>
-                        <p class="text-stone-500 font-sans text-sm leading-relaxed mb-4">Minimal, luxury, geometric or
-                            conceptual art for premium interiors.</p>
-                        <span class="text-[10px] text-[#B5451B] font-bold uppercase tracking-widest">Offices · Studios ·
-                            Luxury Homes</span>
+                        class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
+                        <div class="h-40 bg-stone-900 relative">
+                            <img src="miniature_bg.png"
+                                class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                                alt="Miniature Art">
+                            <img src="https://i.pravatar.cc/150?u=rukmini"
+                                class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-sm z-10"
+                                alt="Rukmini">
+                        </div>
+                        <div class="pt-14 p-6 relative bg-white">
+                            <h3 class="font-serif text-xl text-[#1A1208] mb-3">Rukmini Verma</h3>
+                            <div class="flex gap-2 mb-4">
+                                <span
+                                    class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Rajasthan</span>
+                                <span
+                                    class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Miniature</span>
+                            </div>
+                            <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
+                                ★★★★★ <span class="text-stone-500 font-sans ml-1">4.7 · 91 bookings</span>
+                            </div>
+                            <p class="text-stone-600 font-sans text-sm mb-6 h-10">Squirrel-hair brushwork in the Bundi
+                                tradition since 1989.</p>
+                            <div class="flex gap-3">
+                                <button
+                                    class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View
+                                    Portfolio</button>
+                                <button
+                                    class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
+                                    Now →</button>
+                            </div>
+                        </div>
                     </div>
+                    <!-- Card 6 -->
                     <div
-                        class="bg-white rounded-xl p-8 shadow-md border border-stone-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 group">
-                        <div class="w-14 h-14 rounded-full bg-amber-50 flex items-center justify-center mb-6"><span
-                                class="material-symbols-outlined text-amber-600 text-2xl">diversity_3</span></div>
-                        <h3 class="text-xl font-serif text-[#1A1208] mb-3">Community & Social Impact</h3>
-                        <p class="text-stone-500 font-sans text-sm leading-relaxed mb-4">Public art — local communities,
-                            tribal stories, climate awareness, unity.</p>
-                        <span class="text-[10px] text-[#B5451B] font-bold uppercase tracking-widest">Villages · Schools
-                            · NGO Projects</span>
+                        class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
+                        <div class="h-40 bg-stone-900 relative">
+                            <img src="gond_art.png"
+                                class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                                alt="Gond Art">
+                            <img src="https://i.pravatar.cc/150?u=kalavati"
+                                class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-sm z-10"
+                                alt="Kalavati">
+                        </div>
+                        <div class="pt-14 p-6 relative bg-white">
+                            <h3 class="font-serif text-xl text-[#1A1208] mb-3">Kalavati Bai</h3>
+                            <div class="flex gap-2 mb-4">
+                                <span
+                                    class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Madhya
+                                    Pradesh</span>
+                                <span
+                                    class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Gond
+                                    Art</span>
+                            </div>
+                            <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
+                                ★★★★★ <span class="text-stone-500 font-sans ml-1">4.9 · 44 bookings</span>
+                            </div>
+                            <p class="text-stone-600 font-sans text-sm mb-6 h-10">Tribal dreamscapes from the heart of
+                                the Mandla forests.</p>
+                            <div class="flex gap-3">
+                                <button
+                                    class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View
+                                    Portfolio</button>
+                                <button
+                                    class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
+                                    Now →</button>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <div class="mt-16">
+                    <button
+                        class="border border-[#1A1208] text-[#1A1208] px-10 py-4 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#1A1208] hover:text-white transition-colors">View
+                        All Artists →</button>
                 </div>
             </div>
         </section>
 
-        <!-- Artist Portfolio Section -->
-        <section class="py-28 section-cream" id="artists">
-            <div class="container mx-auto px-6 md:px-12">
-                <div class="text-center mb-16">
-                    <span class="font-sans text-sm text-[#B5451B] uppercase tracking-[0.3em] font-bold"><span
-                            class="calligraphy">Featured</span></span>
-                    <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mt-4">Meet Our <span
-                            class="text-[#D4AF37] italic">Artisans</span></h2>
-                    <p class="font-sans text-stone-600 mt-4 max-w-2xl mx-auto">"Every artist carries a culture, a
-                        memory, and a story. The Painted Muse gives those stories a home."</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div
-                        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 group">
-                        <div class="aspect-square overflow-hidden"><img
-                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400"
-                                alt="Artist"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                        </div>
-                        <div class="p-5">
-                            <h4 class="font-serif text-lg text-[#1A1208]">Priya Sharma</h4>
-                            <p class="text-[9px] text-[#B5451B] uppercase tracking-widest font-bold mt-1">Madhubani ·
-                                Bihar</p>
-                            <p class="text-stone-500 text-xs mt-3 line-clamp-2">Turning forgotten walls into stories of
-                                India.</p>
-                            <div class="flex gap-2 mt-4 flex-wrap">
-                                <button
-                                    class="text-[8px] px-2 py-1 border border-[#D4AF37] text-[#D4AF37] uppercase tracking-wider font-bold hover:bg-[#D4AF37] hover:text-white transition-colors">Gallery</button>
-                                <button
-                                    class="text-[8px] px-2 py-1 border border-[#B5451B] text-[#B5451B] uppercase tracking-wider font-bold hover:bg-[#B5451B] hover:text-white transition-colors">Hire</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 group">
-                        <div class="aspect-square overflow-hidden"><img
-                                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400"
-                                alt="Artist"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                        </div>
-                        <div class="p-5">
-                            <h4 class="font-serif text-lg text-[#1A1208]">Ravi Khatri</h4>
-                            <p class="text-[9px] text-[#B5451B] uppercase tracking-widest font-bold mt-1">Warli ·
-                                Maharashtra</p>
-                            <p class="text-stone-500 text-xs mt-3 line-clamp-2">Geometry of the earth, drawn by
-                                ancestral hands.</p>
-                            <div class="flex gap-2 mt-4 flex-wrap">
-                                <button
-                                    class="text-[8px] px-2 py-1 border border-[#D4AF37] text-[#D4AF37] uppercase tracking-wider font-bold hover:bg-[#D4AF37] hover:text-white transition-colors">Gallery</button>
-                                <button
-                                    class="text-[8px] px-2 py-1 border border-[#B5451B] text-[#B5451B] uppercase tracking-wider font-bold hover:bg-[#B5451B] hover:text-white transition-colors">Commission</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 group">
-                        <div class="aspect-square overflow-hidden"><img
-                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400"
-                                alt="Artist"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                        </div>
-                        <div class="p-5">
-                            <h4 class="font-serif text-lg text-[#1A1208]">Ananya Reddy</h4>
-                            <p class="text-[9px] text-[#B5451B] uppercase tracking-widest font-bold mt-1">Kalamkari ·
-                                Andhra Pradesh</p>
-                            <p class="text-stone-500 text-xs mt-3 line-clamp-2">Ancient pen, modern canvas, timeless
-                                soul.</p>
-                            <div class="flex gap-2 mt-4 flex-wrap">
-                                <button
-                                    class="text-[8px] px-2 py-1 border border-[#D4AF37] text-[#D4AF37] uppercase tracking-wider font-bold hover:bg-[#D4AF37] hover:text-white transition-colors">Gallery</button>
-                                <button
-                                    class="text-[8px] px-2 py-1 border border-[#B5451B] text-[#B5451B] uppercase tracking-wider font-bold hover:bg-[#B5451B] hover:text-white transition-colors">Buy</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- View More Card -->
-                    <div
-                        class="bg-[#1A1208] rounded-xl overflow-hidden shadow-lg border border-[#D4AF37]/20 flex flex-col items-center justify-center p-8 text-center group cursor-pointer">
-                        <div
-                            class="w-16 h-16 rounded-full border border-[#D4AF37]/40 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                            <span class="material-symbols-outlined text-[#D4AF37] text-3xl">group_add</span>
-                        </div>
-                        <h4 class="text-white font-serif text-xl mb-2">View All 150+</h4>
-                        <p class="text-stone-500 text-xs font-sans mb-6">Discover master artisans from across India</p>
-                        <button
-                            class="text-[#D4AF37] border-b border-[#D4AF37] pb-1 font-sans text-[10px] font-bold uppercase tracking-[0.2em] hover:text-white transition-colors">Explore
-                            Roster</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Bookings & Services -->
-        <section class="py-28 section-warm" id="bookings">
-            <div class="container mx-auto px-6 md:px-12">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <span class="font-sans text-sm text-[#B5451B] uppercase tracking-[0.3em] font-bold"><span
-                                class="calligraphy">Services</span></span>
-                        <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mt-4 mb-8">Bookings & <span
-                                class="text-[#D4AF37] italic">Collaborations</span></h2>
-                        <div class="space-y-5">
-                            <div
-                                class="flex items-start gap-4 bg-white p-5 rounded-lg shadow-sm border border-stone-100">
-                                <span class="material-symbols-outlined text-[#D4AF37] mt-1">brush</span>
-                                <div>
-                                    <h4 class="font-serif text-lg text-[#1A1208]">Live Painting</h4>
-                                    <p class="text-stone-500 text-sm mt-1">Book artists for live art at your events.</p>
-                                </div>
-                            </div>
-                            <div
-                                class="flex items-start gap-4 bg-white p-5 rounded-lg shadow-sm border border-stone-100">
-                                <span class="material-symbols-outlined text-[#B5451B] mt-1">school</span>
-                                <div>
-                                    <h4 class="font-serif text-lg text-[#1A1208]">Workshops</h4>
-                                    <p class="text-stone-500 text-sm mt-1">Learn folk art from master artisans.</p>
-                                </div>
-                            </div>
-                            <div
-                                class="flex items-start gap-4 bg-white p-5 rounded-lg shadow-sm border border-stone-100">
-                                <span class="material-symbols-outlined text-[#D4AF37] mt-1">wall_art</span>
-                                <div>
-                                    <h4 class="font-serif text-lg text-[#1A1208]">Custom Murals</h4>
-                                    <p class="text-stone-500 text-sm mt-1">Commission wall art for homes, offices &
-                                        brands.</p>
-                                </div>
-                            </div>
-                            <div
-                                class="flex items-start gap-4 bg-white p-5 rounded-lg shadow-sm border border-stone-100">
-                                <span class="material-symbols-outlined text-[#B5451B] mt-1">handshake</span>
-                                <div>
-                                    <h4 class="font-serif text-lg text-[#1A1208]">Brand Collaborations</h4>
-                                    <p class="text-stone-500 text-sm mt-1">Partner with artisans for campaigns &
-                                        products.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-xl p-10 shadow-lg border border-stone-100">
-                        <h3 class="font-serif text-2xl text-[#1A1208] mb-6">Send a <span
-                                class="text-[#D4AF37] italic">Proposal</span></h3>
-                        <div class="space-y-4">
-                            <input
-                                class="w-full border border-stone-200 rounded-lg px-4 py-3 font-sans text-sm outline-none focus:border-[#D4AF37] transition-colors"
-                                placeholder="Your Name" />
-                            <input
-                                class="w-full border border-stone-200 rounded-lg px-4 py-3 font-sans text-sm outline-none focus:border-[#D4AF37] transition-colors"
-                                placeholder="Email" type="email" />
-                            <select
-                                class="w-full border border-stone-200 rounded-lg px-4 py-3 font-sans text-sm outline-none focus:border-[#D4AF37] text-stone-500">
-                                <option>Select Service</option>
-                                <option>Live Painting</option>
-                                <option>Workshop</option>
-                                <option>Mural</option>
-                                <option>Collaboration</option>
-                            </select>
-                            <textarea
-                                class="w-full border border-stone-200 rounded-lg px-4 py-3 font-sans text-sm outline-none focus:border-[#D4AF37] transition-colors"
-                                rows="3" placeholder="Tell us about your project..."></textarea>
-                            <button
-                                class="w-full bg-[#B5451B] text-white py-3 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#D4AF37] transition-colors rounded-lg">Send</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- Testimonials -->
         <section class="py-24 section-cream">
@@ -999,9 +1278,9 @@
                         <div class="testimonial-col">
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Everything
-                                    about The Painted Muse screams luxury. From the infinity pool to the impeccable
-                                    concierge service."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"A brilliant
+                                    platform. We discovered a 7th generation Pattachitra artist for our gallery
+                                    exhibition."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=ms"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1013,9 +1292,9 @@
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The hospitality
-                                    here is unmatched. The staff goes above and beyond to make every moment feel
-                                    special."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The craft
+                                    retreats are life-changing. Learning Warli directly from the tribal masters in their
+                                    village was an unforgettable experience."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=rw"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1028,8 +1307,9 @@
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"A sanctuary in
-                                    the heart of the city. The attention to detail in the murals is breathtaking."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Commissioning a
+                                    mural was seamless. The artist understood our vision and transformed our office
+                                    space with incredible Gond art."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=er"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1042,9 +1322,9 @@
                             <!-- Duplicates -->
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Everything
-                                    about The Painted Muse screams luxury. From the infinity pool to the impeccable
-                                    concierge service."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Every piece
+                                    tells a story. I purchased a Madhubani painting and the authenticity and detail are
+                                    unmatched."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=ms"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1056,9 +1336,9 @@
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The hospitality
-                                    here is unmatched. The staff goes above and beyond to make every moment feel
-                                    special."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"This is what
+                                    preservation looks like. A beautiful, dignified way to connect directly with India's
+                                    heritage artisans."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=rw"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1071,8 +1351,9 @@
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"A sanctuary in
-                                    the heart of the city. The attention to detail in the murals is breathtaking."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The live
+                                    painting session at our event left guests mesmerized. Such a powerful way to
+                                    experience Indian folk art."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=er"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1088,9 +1369,9 @@
                         <div class="testimonial-col">
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"A true gem in
-                                    India. We spent every evening watching the sunset while local artisans worked.
-                                    Magical."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"A brilliant
+                                    platform. We discovered a 7th generation Pattachitra artist for our gallery
+                                    exhibition."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=ps"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1102,9 +1383,9 @@
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Modern,
-                                    sophisticated, yet incredibly welcoming. The architecture perfectly mirrors the
-                                    beautiful coastline."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The craft
+                                    retreats are life-changing. Learning Warli directly from the tribal masters in their
+                                    village was an unforgettable experience."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=el"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1116,8 +1397,9 @@
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The dining was
-                                    the highlight of our trip. Executive chef's attention to detail is remarkable."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Commissioning a
+                                    mural was seamless. The artist understood our vision and transformed our office
+                                    space with incredible Gond art."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=dc"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1131,9 +1413,9 @@
                             <!-- Duplicates -->
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"A true gem in
-                                    India. We spent every evening watching the sunset while local artisans worked.
-                                    Magical."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Every piece
+                                    tells a story. I purchased a Madhubani painting and the authenticity and detail are
+                                    unmatched."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=ps"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1145,9 +1427,9 @@
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Modern,
-                                    sophisticated, yet incredibly welcoming. The architecture perfectly mirrors the
-                                    beautiful coastline."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"This is what
+                                    preservation looks like. A beautiful, dignified way to connect directly with India's
+                                    heritage artisans."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=el"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1159,8 +1441,9 @@
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The dining was
-                                    the highlight of our trip. Executive chef's attention to detail is remarkable."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The live
+                                    painting session at our event left guests mesmerized. Such a powerful way to
+                                    experience Indian folk art."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=dc"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1177,9 +1460,9 @@
                         <div class="testimonial-col">
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"An absolute
-                                    sanctuary. The views from the Heritage Suite are unlike anything I've experienced.
-                                    Truly five-star."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"A brilliant
+                                    platform. We discovered a 7th generation Pattachitra artist for our gallery
+                                    exhibition."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=sj"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1191,8 +1474,9 @@
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"A true gem in
-                                    India. We spent every evening watching the sunset. Magical."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The craft
+                                    retreats are life-changing. Learning Warli directly from the tribal masters in their
+                                    village was an unforgettable experience."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=ps2"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1204,9 +1488,9 @@
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Modern,
-                                    sophisticated, yet incredibly welcoming. The architecture perfectly mirrors the soul
-                                    of India."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Commissioning a
+                                    mural was seamless. The artist understood our vision and transformed our office
+                                    space with incredible Gond art."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=er2"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1219,9 +1503,9 @@
                             <!-- Duplicates -->
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"An absolute
-                                    sanctuary. The views from the Heritage Suite are unlike anything I've experienced.
-                                    Truly five-star."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Every piece
+                                    tells a story. I purchased a Madhubani painting and the authenticity and detail are
+                                    unmatched."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=sj"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1233,8 +1517,9 @@
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"A true gem in
-                                    India. We spent every evening watching the sunset. Magical."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"This is what
+                                    preservation looks like. A beautiful, dignified way to connect directly with India's
+                                    heritage artisans."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=ps2"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1246,9 +1531,9 @@
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
                                 <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
-                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Modern,
-                                    sophisticated, yet incredibly welcoming. The architecture perfectly mirrors the soul
-                                    of India."</p>
+                                <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The live
+                                    painting session at our event left guests mesmerized. Such a powerful way to
+                                    experience Indian folk art."</p>
                                 <div class="flex items-center gap-3">
                                     <img src="https://i.pravatar.cc/150?u=er2"
                                         class="w-10 h-10 rounded-full object-cover" alt="Avatar">
@@ -1265,34 +1550,51 @@
             </div>
         </section>
 
-        <!-- Support & Social -->
-        <section class="py-20 section-light">
-            <div class="container mx-auto px-6 md:px-12 text-center">
-                <h2 class="text-3xl font-serif text-[#1A1208] mb-4">Support an <span
-                        class="text-[#D4AF37] italic">Artist</span></h2>
-                <p class="text-stone-500 font-sans max-w-xl mx-auto mb-10">Donate, sponsor art supplies, or fund a mural
-                    project. Every contribution keeps India's artistic heritage alive.</p>
-                <div class="flex justify-center gap-4 flex-wrap">
-                    <button
-                        class="bg-[#D4AF37] text-white px-8 py-3 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#B5451B] transition-colors shadow-lg rounded-lg">Donate
-                        Now</button>
-                    <button
-                        class="border border-[#D4AF37] text-[#D4AF37] px-8 py-3 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#D4AF37] hover:text-white transition-colors rounded-lg">Sponsor
-                        Supplies</button>
-                    <button
-                        class="border border-stone-300 text-stone-600 px-8 py-3 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-stone-100 transition-colors rounded-lg">Fund
-                        a Mural</button>
+        <!-- Split CTA Section -->
+        <section class="flex flex-col md:flex-row w-full">
+            <!-- Left: Artist CTA -->
+            <div class="w-full md:w-1/2 bg-[#1A1208] text-white py-24 px-12 md:px-24 relative overflow-hidden group">
+                <div class="absolute inset-0 opacity-[0.08] mix-blend-overlay">
+                    <img src="warli_bg.png"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                        alt="Texture">
                 </div>
-                <div class="flex justify-center gap-6 mt-12">
-                    <a href="#"
-                        class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 hover:bg-[#D4AF37] hover:text-white transition-all"><span
-                            class="material-symbols-outlined text-lg">photo_camera</span></a>
-                    <a href="#"
-                        class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 hover:bg-[#B5451B] hover:text-white transition-all"><span
-                            class="material-symbols-outlined text-lg">play_arrow</span></a>
-                    <a href="#"
-                        class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 hover:bg-[#D4AF37] hover:text-white transition-all"><span
-                            class="material-symbols-outlined text-lg">language</span></a>
+                <div class="relative z-10 flex flex-col items-start max-w-md mx-auto">
+                    <div
+                        class="w-16 h-16 rounded-full border border-[#D4AF37]/30 flex items-center justify-center mb-8">
+                        <span class="material-symbols-outlined text-2xl text-[#D4AF37]">palette</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-serif mb-6">Are You an Artist?</h2>
+                    <p class="text-white/70 font-sans mb-10 leading-relaxed">Join India's largest art platform. Showcase
+                        your work, get discovered, take bookings, and share your story with the world.</p>
+                    <button
+                        class="bg-[#F5F0E8] text-[#1A1208] px-8 py-4 font-sans text-sm font-bold hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors shadow-lg">Join
+                        as an Artist →</button>
+                    <p class="text-[#D4AF37]/60 text-[10px] font-bold uppercase tracking-widest mt-6">FREE TO JOIN · NO
+                        COMMISSION ON FIRST 3 BOOKINGS</p>
+                </div>
+            </div>
+            <!-- Right: Collector CTA -->
+            <div
+                class="w-full md:w-1/2 bg-[#F5F0E8] text-[#1A1208] py-24 px-12 md:px-24 relative overflow-hidden group">
+                <div class="absolute inset-0 opacity-[0.15] mix-blend-multiply">
+                    <img src="pattachitra_art.png"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale"
+                        alt="Texture">
+                </div>
+                <div class="relative z-10 flex flex-col items-start max-w-md mx-auto">
+                    <div
+                        class="w-16 h-16 rounded-full border border-[#1A1208]/20 flex items-center justify-center mb-8">
+                        <span class="material-symbols-outlined text-2xl text-[#B5451B]">visibility</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-serif mb-6">Love Art?</h2>
+                    <p class="text-stone-600 font-sans mb-10 leading-relaxed">Collect original pieces, commission custom
+                        work, attend retreats, and become part of India's living art community.</p>
+                    <button
+                        class="bg-[#B5451B] text-white px-8 py-4 font-sans text-sm font-bold hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors shadow-lg">Start
+                        Exploring →</button>
+                    <p class="text-stone-500 text-[10px] font-bold uppercase tracking-widest mt-6">2,400+ ARTISTS · 15
+                        ART FORMS · 28 STATES</p>
                 </div>
             </div>
         </section>
@@ -1309,65 +1611,70 @@
         Send a Message
     </a>
 
-    <!-- Footer -->
-    <footer class="bg-[#1A1208] border-t border-stone-200 relative">
-        <div class="max-w-7xl mx-auto px-8 py-12">
-            <!-- Top Row -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
-                <!-- Brand -->
-                <div class="md:col-span-1">
-                    <h2 class="font-serif text-2xl font-bold italic text-[#D4AF37] mb-4">The Painted Muse</h2>
-                    <p class="font-sans text-stone-500 text-sm leading-relaxed">Preserving India's artistic heritage
-                        through curation, education, and community.</p>
-                </div>
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37] mb-4">Explore
-                    </h3>
-                    <ul class="space-y-2 font-sans text-sm text-stone-400">
-                        <li><a href="#" class="hover:text-[#D4AF37] transition-colors">The Collection</a></li>
-                        <li><a href="#artisans" class="hover:text-[#D4AF37] transition-colors">Artisans</a></li>
-                        <li><a href="#heritage" class="hover:text-[#D4AF37] transition-colors">Heritage Map</a></li>
-                        <li><a href="#journal" class="hover:text-[#D4AF37] transition-colors">Journal</a></li>
-                    </ul>
-                </div>
-                <!-- Company -->
-                <div>
-                    <h3 class="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37] mb-4">Company
-                    </h3>
-                    <ul class="space-y-2 font-sans text-sm text-stone-400">
-                        <li><a href="#" class="hover:text-[#D4AF37] transition-colors">About Us</a></li>
-                        <li><a href="#" class="hover:text-[#D4AF37] transition-colors">Careers</a></li>
-                        <li><a href="#" class="hover:text-[#D4AF37] transition-colors">Press</a></li>
-                        <li><a href="#" class="hover:text-[#D4AF37] transition-colors">Contact</a></li>
-                    </ul>
-                </div>
-                <!-- Newsletter -->
-                <div>
-                    <h3 class="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37] mb-4">Stay
-                        Connected</h3>
-                    <p class="font-sans text-stone-500 text-sm mb-4">Get updates on exhibitions & new artisans.</p>
-                    <div class="flex border border-[#D4AF37]/30 overflow-hidden">
-                        <input
-                            class="bg-transparent px-4 py-2.5 w-full font-sans text-sm text-stone-300 placeholder:text-stone-600 outline-none"
-                            placeholder="Your email" type="email" />
-                        <button
-                            class="bg-[#D4AF37] text-[#0D0804] px-4 font-sans text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors whitespace-nowrap">Join</button>
+
+
+    <!-- Footer Redesigned from add.css -->
+    <footer id="footer">
+        <div class="container mx-auto px-6">
+            <div class="foot-top">
+                <div class="foot-brand">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="w-10 h-10 bg-brown-800 rounded-full flex items-center justify-center text-white">
+                            <i data-lucide="palette"></i>
+                        </span>
+                        <div class="text-2xl font-serif italic text-white">The Painted Muse</div>
+                    </div>
+                    <p>India's premier multi-art platform — celebrating the living traditions of every state through
+                        artisanal AI and human craft.</p>
+                    <div class="socials">
+                        <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                        <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                        <a href="#" aria-label="Youtube"><i data-lucide="youtube"></i></a>
                     </div>
                 </div>
-            </div>
-            <!-- Bottom Bar -->
-            <div class="border-t border-[#D4AF37]/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="font-sans text-xs text-stone-600">&copy; 2026 The Painted Muse. All rights reserved.</p>
-                <div class="flex gap-6 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500">
-                    <a href="#" class="hover:text-[#D4AF37] transition-colors">Privacy</a>
-                    <a href="#" class="hover:text-[#D4AF37] transition-colors">Terms</a>
-                    <a href="#" class="hover:text-[#D4AF37] transition-colors">Accessibility</a>
+                <div class="foot-col">
+                    <h5>Platform</h5>
+                    <ul>
+                        <li><a href="#art-forms">Art Forms</a></li>
+                        <li><a href="#living-map-section">Interactive Map</a></li>
+                        <li><a href="#artisans">Meet the Makers</a></li>
+                        <li><a href="#journal">The Muse Journal</a></li>
+                    </ul>
                 </div>
+                <div class="foot-col">
+                    <h5>Community</h5>
+                    <ul>
+                        <li><a href="#">Join as Artist</a></li>
+                        <li><a href="#">Art Collectors</a></li>
+                        <li><a href="#">Patron Program</a></li>
+                        <li><a href="#">Workshops</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Heritage Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Artist Agreement</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="foot-bot">
+                <div>© 2025 The Painted Muse · Made with ❤️ for Indian Art</div>
+                <div>Crafted in India 🇮🇳</div>
             </div>
         </div>
     </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const mapContainer = document.getElementById('india-map');
@@ -1745,6 +2052,22 @@
                     updateIndicator(e.target);
                 });
             });
+
+            // Reveal Animation Observer
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            // Initialize Lucide Icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         });
         // Optimization: Lazy load images that appear later
         document.querySelectorAll('img').forEach(img => {
