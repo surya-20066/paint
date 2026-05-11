@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="Meet the legendary master artisans of India. Explore their stories, view portfolios, and book retreats directly with the keepers of ancient traditions." />
+    <title>Meet the Masters | The Painted Muse</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+        :root { 
+            --ink: #1A1208; 
+            --saffron: #D4AF37; 
+            --bg: #FDFBF7; 
+            --cream: #F5F0E8; 
+            --terracotta: #B5451B;
+        }
+        body { 
+            background-color: var(--bg); 
+            color: var(--ink); 
+            font-family: 'DM Sans', sans-serif; 
+            overflow-x: hidden; 
+        }
+        .serif { font-family: 'Playfair Display', serif; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
+        .reveal.in { opacity: 1; transform: translateY(0); }
+        
+        /* Premium Card Styles */
+        .artisan-card {
+            background: white;
+            border: 1px solid rgba(26, 18, 8, 0.08);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 30px rgba(26, 18, 8, 0.02);
+        }
+        .artisan-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--saffron);
+            box-shadow: 0 20px 40px rgba(26, 18, 8, 0.08);
+        }
+        
+        .search-bar { 
+            border: 1px solid rgba(26, 18, 8, 0.1); 
+            background: white; 
+            border-radius: 100px; 
+            padding: 12px 24px; 
+            width: 100%; 
+            max-width: 500px; 
+            transition: all 0.3s ease; 
+        }
+        .search-bar:focus-within { 
+            border-color: var(--saffron); 
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); 
+        }
+
+        /* Category Filter Button styles */
+        .filter-btn {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 10px 24px;
+            border-radius: 100px;
+            border: 1px solid rgba(26, 18, 8, 0.1);
+            background: transparent;
+            color: var(--ink);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover {
+            border-color: var(--saffron);
+            background: rgba(212, 175, 55, 0.05);
+        }
+        .filter-btn.active {
+            background: var(--ink);
+            color: white;
+            border-color: var(--ink);
+        }
+        
+        /* Custom scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 2px; }
+
+        /* Moving Nav Underline */
+        #nav-indicator {
+            position: absolute;
+            bottom: -2px;
+            height: 2px;
+            background-color: #B5451B;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        /* FOOTER STYLES */
+        footer {
+            background: #F5F0E8;
+            color: var(--ink);
+            padding: 100px 0 40px;
+            position: relative;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--saffron), transparent);
+        }
+        .foot-top {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 60px;
+        }
+        @media (max-width: 1024px) {
+            .foot-top { grid-template-columns: 1fr 1fr; }
+            .foot-brand { grid-column: 1 / -1; }
+        }
+        @media (max-width: 640px) {
+            .foot-top { grid-template-columns: 1fr; }
+        }
+        .foot-brand p {
+            color: rgba(26, 18, 8, 0.7);
+            font-size: 14px;
+            margin: 20px 0 24px;
+            max-width: 320px;
+            line-height: 1.6;
+        }
+        .socials {
+            display: flex;
+            gap: 12px;
+        }
+        .socials a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(26, 18, 8, 0.15);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: var(--ink);
+            transition: all 0.3s;
+        }
+        .socials a:hover {
+            background: var(--saffron);
+            color: var(--ink);
+            border-color: var(--saffron);
+            transform: translateY(-3px);
+        }
+        .foot-col h5 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 15px;
+            margin-bottom: 24px;
+            color: var(--saffron);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        .foot-col ul { list-style: none; padding: 0; }
+        .foot-col li { margin-bottom: 12px; }
+        .foot-col a {
+            font-size: 14px;
+            color: rgba(26, 18, 8, 0.75);
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+        .foot-col a:hover { color: var(--ink); }
+        .foot-bot {
+            border-top: 1px solid rgba(26, 18, 8, 0.1);
+            padding-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(26, 18, 8, 0.5);
+            font-size: 13px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+    </style>
+</head>
+<body class="selection:bg-[#D4AF37]/30">
+
+    <!-- TopAppBar -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-4 border-b border-transparent shadow-none transition-all duration-500">
+        <!-- Logo Area -->
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-[#1A1208] rounded-full flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#D4AF37] text-xl">star</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-[#1A1208] font-serif font-bold text-xl leading-none tracking-tight">The Painted Muse</span>
+                    <span class="font-sans text-[8px] uppercase tracking-[0.3em] text-stone-500 mt-1 font-bold">Where India Creates</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Nav Links -->
+        <div class="hidden md:flex gap-10 font-sans text-[10px] font-bold uppercase tracking-[0.15em] items-center relative" id="nav-links">
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#"
+                data-section="hero">Home</a>
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#about-india"
+                data-section="about-india">About</a>
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#journal"
+                data-section="journal">Stories</a>
+            <a class="nav-item text-[#B5451B] hover:text-[#B5451B] transition-colors duration-500 font-extrabold" href="artists.html"
+                data-section="artisans">Be an Artist</a>
+            <div id="nav-indicator" style="background-color: #B5451B;"></div>
+        </div>
+
+        <!-- Right Side Actions -->
+        <div class="flex items-center gap-4 md:gap-6">
+            <button class="text-stone-900 hover:text-[#B5451B] transition-colors flex items-center justify-center">
+                <span class="material-symbols-outlined text-xl md:text-2xl">search</span>
+            </button>
+            <button
+                class="hidden sm:block font-sans text-[10px] font-bold uppercase tracking-wider text-stone-900 px-6 py-2.5 border border-stone-900 hover:bg-stone-50 transition-colors">
+                Sign In
+            </button>
+            <button
+                class="hidden lg:flex font-sans text-[10px] font-bold uppercase tracking-wider bg-[#1A1208] text-white px-6 py-2.5 hover:bg-stone-800 transition-all shadow-lg items-center gap-2 group">
+                Book Artist
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </button>
+            
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-stone-900 p-2">
+                <span class="material-symbols-outlined text-3xl">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 md:hidden">
+        <div class="flex justify-between items-center p-6 border-b border-stone-100">
+            <span class="text-[#1A1208] font-serif font-bold text-xl">The Painted Muse</span>
+            <button id="close-menu-btn" class="text-stone-900 p-2">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col p-12 gap-8 font-sans text-xl font-bold uppercase tracking-[0.2em]">
+            <a class="mobile-nav-item" href="index.html#">Home</a>
+            <a class="mobile-nav-item" href="index.html#about-india">About</a>
+            <a class="mobile-nav-item" href="index.html#journal">Stories</a>
+            <a class="mobile-nav-item" href="artists.html">Be an Artist</a>
+        </div>
+        <div class="absolute bottom-12 left-12 right-12 flex flex-col gap-4">
+             <button class="w-full py-4 border border-stone-900 font-sans text-xs font-bold uppercase tracking-widest">Sign In</button>
+             <button class="w-full py-4 bg-[#1A1208] text-white font-sans text-xs font-bold uppercase tracking-widest">Book an Artist</button>
+        </div>
+    </div>
+
+    <!-- Hero Header -->
+    <header class="pt-32 pb-12 bg-[#F5F0E8] relative overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.05] pointer-events-none">
+            <img src="pics/warli_pattern_1778230295803.png" class="w-full h-full object-cover" alt="pattern">
+        </div>
+        <div class="container mx-auto px-6 relative z-10 text-center max-w-4xl">
+            <div class="inline-block mb-6">
+                <span class="font-sans text-[10px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold border-b border-[#D4AF37]/30 pb-2">The Masters Guild</span>
+            </div>
+            <h1 class="text-6xl md:text-8xl font-serif text-[#1A1208] mb-8 italic">Meet the <span class="text-[#B5451B] not-italic">Makers</span></h1>
+            <p class="text-xl text-stone-600 font-sans leading-relaxed max-w-2xl mx-auto">
+                A sanctuary dedicated to the legendary master artisans keeping India's sacred traditions alive. Explore their lineages, view their collections, and collaborate directly with them.
+            </p>
+        </div>
+    </header>
+
+    <!-- Interactive Filters & Search -->
+    <section class="py-6 bg-white sticky top-[72px] z-40 border-b border-stone-100 shadow-sm">
+        <div class="container mx-auto px-6 flex flex-col lg:flex-row justify-between items-center gap-8">
+            <!-- Search -->
+            <div class="search-bar flex items-center gap-4">
+                <span class="material-symbols-outlined text-stone-400">search</span>
+                <input type="text" id="artistSearch" placeholder="Search by name, state, or art form..." class="bg-transparent border-none focus:ring-0 w-full text-sm font-sans placeholder-stone-300">
+            </div>
+            
+            <!-- Category Regions -->
+            <div class="flex gap-2 overflow-x-auto no-scrollbar py-2 max-w-full custom-scrollbar">
+                <button class="filter-btn active" data-region="all">All Regions</button>
+                <button class="filter-btn" data-region="North">North</button>
+                <button class="filter-btn" data-region="South">South</button>
+                <button class="filter-btn" data-region="East">East</button>
+                <button class="filter-btn" data-region="West">West</button>
+                <button class="filter-btn" data-region="Central">Central</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guild Members Grid -->
+    <main class="py-24 container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+            <!-- Dynamic Count and Title -->
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="font-serif text-2xl text-stone-800 italic">Guild <span class="text-[#D4AF37]">Roster</span></h2>
+                <p id="rosterCount" class="font-sans text-xs uppercase tracking-widest text-stone-400 font-bold">Showing 6 masters</p>
+            </div>
+            
+            <!-- Cards Grid -->
+            <div id="artistsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Javascript will populate this -->
+            </div>
+            
+            <!-- Empty State -->
+            <div id="emptyState" class="hidden py-32 text-center">
+                <span class="material-symbols-outlined text-stone-200 text-6xl mb-4">person_search</span>
+                <h3 class="text-2xl font-serif text-stone-400">No master artisans found</h3>
+                <p class="text-stone-400 font-sans text-sm mt-2">Try adjusting your search criteria or choosing another region.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Redesigned from add.css -->
+    <footer id="footer">
+        <div class="container mx-auto px-6">
+            <div class="foot-top">
+                <div class="foot-brand">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="w-10 h-10 bg-[#1A1208] rounded-full flex items-center justify-center text-[#D4AF37]">
+                            <i data-lucide="palette"></i>
+                        </span>
+                        <div class="text-2xl font-serif italic text-[#1A1208]">The Painted Muse</div>
+                    </div>
+                    <p>India's premier multi-art platform — celebrating the living traditions of every state through
+                        artisanal AI and human craft.</p>
+                    <div class="socials">
+                        <a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp" class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
+                        <a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram" class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
+                        <a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube" class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
+                        <a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn" class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="foot-col">
+                    <h5>Navigations</h5>
+                    <ul>
+                        <li>
+                            <a href="index.html#living-map-section" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Live Map
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#yreel-hub" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Reels
+                            </a>
+                        </li>
+                        <li>
+                            <a href="artists.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Explore Artists
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Art Retreats
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h5>Contact Us</h5>
+                    <ul>
+                        <li>
+                            <a href="mailto:painterdmuse_2k26@gmail.com" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                painterdmuse_2k26@gmail.com
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+917798345690" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                +91 7798345690
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="foot-bot justify-center text-center">
+                <div>© 2025 The Painted Muse · Made with ❤️ for Indian Art</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const artistsData = [
+            { 
+                name: "Meera Devi", 
+                art: "Madhubani", 
+                state: "Bihar", 
+                region: "East", 
+                desc: "5th generation Madhubani artist from Mithila, Bihar, celebrating ancestral forest dreamscapes.", 
+                rating: "4.9", 
+                bookings: "48", 
+                bgImg: "pics/madhubani_bg.png", 
+                profileImg: "https://i.pravatar.cc/150?u=meera" 
+            },
+            { 
+                name: "Bhaskar Mohapatra", 
+                art: "Pattachitra", 
+                state: "Odisha", 
+                region: "East", 
+                desc: "Master chitrakar of Raghurajpur, painting epic narratives of gods on handmade palm leaves.", 
+                rating: "5.0", 
+                bookings: "67", 
+                bgImg: "pics/pattachitra_art.png", 
+                profileImg: "https://i.pravatar.cc/150?u=bhaskar" 
+            },
+            { 
+                name: "Jivya Soma Mashe", 
+                art: "Warli", 
+                state: "Maharashtra", 
+                region: "West", 
+                desc: "Reviving the ancient white-on-earth geometric language of the Warli tribe.", 
+                rating: "4.8", 
+                bookings: "52", 
+                bgImg: "pics/warli_bg.png", 
+                profileImg: "https://i.pravatar.cc/150?u=jivya" 
+            },
+            { 
+                name: "Anjali Pichai", 
+                art: "Tanjore", 
+                state: "Tamil Nadu", 
+                region: "South", 
+                desc: "Devotional classical art crafted with pure gold foils and embedded semi-precious stones.", 
+                rating: "4.9", 
+                bookings: "33", 
+                bgImg: "pics/tanjore_art.png", 
+                profileImg: "https://i.pravatar.cc/150?u=anjali" 
+            },
+            { 
+                name: "Rukmini Verma", 
+                art: "Miniature", 
+                state: "Rajasthan", 
+                region: "West", 
+                desc: "Intricate courtly squirrel-hair brushwork in the royal Bundi tradition since 1989.", 
+                rating: "4.7", 
+                bookings: "91", 
+                bgImg: "pics/miniature_bg.png", 
+                profileImg: "pics/rukmini_profile.png" 
+            },
+            { 
+                name: "Kalavati Bai", 
+                art: "Gond Art", 
+                state: "Madhya Pradesh", 
+                region: "Central", 
+                desc: "Whimsical forest dreamscapes styled with vibrant fine lines and custom tribal dot patterns.", 
+                rating: "4.9", 
+                bookings: "44", 
+                bgImg: "pics/gond_bg.png", 
+                profileImg: "pics/kalavati_profile.png" 
+            }
+        ];
+
+        let activeRegion = "all";
+
+        function renderRoster(data) {
+            const grid = document.getElementById('artistsGrid');
+            const countLabel = document.getElementById('rosterCount');
+            const empty = document.getElementById('emptyState');
+            
+            if (data.length === 0) {
+                grid.innerHTML = '';
+                countLabel.textContent = 'Showing 0 masters';
+                empty.classList.remove('hidden');
+                return;
+            }
+            
+            empty.classList.add('hidden');
+            countLabel.textContent = `Showing ${data.length} master${data.length > 1 ? 's' : ''}`;
+            
+            grid.innerHTML = data.map((item) => `
+                <div class="artisan-card reveal">
+                    <div class="h-44 bg-stone-900 relative overflow-hidden">
+                        <img src="${item.bgImg}" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-700" alt="${item.art}">
+                        <img src="${item.profileImg}" class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-lg z-10" alt="${item.name}">
+                    </div>
+                    <div class="pt-14 p-6 relative bg-white">
+                        <h3 class="font-serif text-2xl text-[#1A1208] mb-3">${item.name}</h3>
+                        <div class="flex gap-2 mb-4">
+                            <span class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">${item.state}</span>
+                            <span class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">${item.art}</span>
+                        </div>
+                        <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-xs font-sans">
+                            ★★★★★ <span class="text-stone-400 font-sans ml-1 text-[11px]">${item.rating} · ${item.bookings} bookings</span>
+                        </div>
+                        <p class="text-stone-600 font-sans text-sm mb-6 h-12 leading-relaxed">${item.desc}</p>
+                        <div class="flex gap-3 pt-2 border-t border-stone-100">
+                            <button class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View Portfolio</button>
+                            <button class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book Now →</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Trigger reveals with stagger
+            const cards = grid.querySelectorAll('.reveal');
+            cards.forEach((el, i) => {
+                setTimeout(() => el.classList.add('in'), i * 60);
+            });
+        }
+
+        // Search & Region Filter Logic
+        const searchInput = document.getElementById('artistSearch');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        function handleFilters() {
+            let filtered = [...artistsData];
+            const query = searchInput.value.toLowerCase();
+            
+            // Search filter
+            if (query) {
+                filtered = filtered.filter(item => 
+                    item.name.toLowerCase().includes(query) || 
+                    item.state.toLowerCase().includes(query) || 
+                    item.art.toLowerCase().includes(query)
+                );
+            }
+            
+            // Region filter
+            if (activeRegion !== "all") {
+                filtered = filtered.filter(item => item.region === activeRegion);
+            }
+            
+            renderRoster(filtered);
+        }
+
+        searchInput.addEventListener('input', handleFilters);
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeRegion = btn.getAttribute('data-region');
+                handleFilters();
+            });
+        });
+
+        // Initialize Page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navbar Solid on Scroll
+            const nav = document.querySelector('nav');
+            function handleScroll() {
+                if (window.scrollY > 20) {
+                    nav.classList.add('bg-[#FDFBF7]', 'border-stone-200/30', 'shadow-sm');
+                    nav.classList.remove('bg-transparent', 'border-transparent', 'shadow-none');
+                } else {
+                    nav.classList.remove('bg-[#FDFBF7]', 'border-stone-200/30', 'shadow-sm');
+                    nav.classList.add('bg-transparent', 'border-transparent', 'shadow-none');
+                }
+            }
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Initial check
+
+            renderRoster(artistsData);
+            
+            // Mobile Menu Logic
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+            });
+
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+
+        });
+
+        // Intersection Observer for Scroll Revealing
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

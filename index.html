@@ -137,12 +137,21 @@
             width: 0.1em;
             height: 1em;
             background: linear-gradient(#000080, #00004d);
-            position: fixed;
-            top: 90px;
-            left: 24px;
+            position: absolute;
+            top: 100px;
+            left: 80px;
             z-index: 40;
             animation: rotate_coin 7s infinite linear;
             transform-style: preserve-3d;
+        }
+
+        @media (max-width: 1024px) {
+            .coin {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin: 0 auto 3rem;
+            }
         }
 
         .coin .side,
@@ -414,8 +423,8 @@
 
         /* FOOTER STYLES FROM ADD.CSS */
         footer {
-            background: var(--ink);
-            color: var(--bg);
+            background: #FDFBF7;
+            color: var(--ink);
             padding: 100px 0 40px;
             position: relative;
         }
@@ -438,7 +447,7 @@
         }
 
         .foot-brand p {
-            color: rgba(246, 241, 232, 0.6);
+            color: rgba(26, 18, 8, 0.7);
             font-size: 14px;
             margin: 20px 0 24px;
             max-width: 320px;
@@ -453,11 +462,11 @@
         .socials a {
             width: 40px;
             height: 40px;
-            border: 1px solid rgba(246, 241, 232, 0.15);
+            border: 1px solid rgba(26, 18, 8, 0.15);
             border-radius: 50%;
             display: grid;
             place-items: center;
-            color: var(--bg);
+            color: var(--ink);
             transition: all var(--t);
         }
 
@@ -474,7 +483,7 @@
             font-size: 15px;
             margin-bottom: 24px;
             color: var(--saffron);
-            font-weight: 500;
+            font-weight: 700;
             letter-spacing: 0.05em;
         }
 
@@ -489,22 +498,22 @@
 
         .foot-col a {
             font-size: 14px;
-            color: rgba(246, 241, 232, 0.65);
+            color: rgba(26, 18, 8, 0.75);
             transition: color var(--t);
             text-decoration: none;
         }
 
         .foot-col a:hover {
-            color: var(--saffron);
+            color: var(--ink);
         }
 
         .foot-bot {
-            border-top: 1px solid rgba(246, 241, 232, 0.1);
+            border-top: 1px solid rgba(26, 18, 8, 0.1);
             padding-top: 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: rgba(246, 241, 232, 0.4);
+            color: rgba(26, 18, 8, 0.5);
             font-size: 13px;
             flex-wrap: wrap;
             gap: 16px;
@@ -542,38 +551,94 @@
             }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#E63946",
+                        secondary: "#F4A261",
+                        accent: "#2A9D8F",
+                        "background-light": "#FFF9F2",
+                        "background-dark": "#1A1614",
+                    },
+                    fontFamily: {
+                        display: ["Playfair Display", "serif"],
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                        'xl': "20px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        .glass-overlay {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .reel-aspect {
+            aspect-ratio: 9 / 16;
+        }
+        .gradient-bottom {
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%);
+        }
+        .border-madhubani {
+            border: 12px solid transparent;
+            border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><path d="M0 0h40v40H0V0zm20 2a18 18 0 1 0 0 36 18 18 0 0 0 0-36z" fill="%23E63946"/><circle cx="20" cy="20" r="12" fill="%23F4A261"/></svg>') 20 round;
+        }
+        .border-warli {
+            border: 10px solid transparent;
+            border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><path d="M10 10l20 20M30 10L10 20" stroke="%232A9D8F" stroke-width="2" fill="none"/><circle cx="20" cy="15" r="4" fill="%232A9D8F"/></svg>') 15 round;
+        }
+        .border-pattachitra {
+            border: 14px solid transparent;
+            border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><rect width="30" height="30" fill="%23F4A261"/><circle cx="15" cy="15" r="8" fill="%23E63946"/></svg>') 15 stretch;
+        }
+        @keyframes bounce-subtle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .animate-fun {
+            animation: bounce-subtle 2s infinite ease-in-out;
+        }
+    </style>
 </head>
 
 <body class="bg-background font-body-md selection:bg-[#D4AF37]/30" style="color:#1A1208">
 
     <!-- TopAppBar -->
     <nav
-        class="fixed top-0 w-full z-50 bg-[#FDFBF7]/95 backdrop-blur-md flex justify-between items-center px-6 md:px-12 py-4 border-b border-stone-200 shadow-sm">
+        class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-4 border-b border-transparent shadow-none transition-all duration-500">
         <!-- Logo Area -->
         <div class="flex items-center gap-4">
-            <div class="w-10 h-10 bg-[#1A1208] rounded-full flex items-center justify-center">
-                <span class="material-symbols-outlined text-[#D4AF37] text-xl">star</span>
-            </div>
-            <div class="flex flex-col">
-                <span class="text-[#1A1208] font-serif font-bold text-xl leading-none tracking-tight">The Painted Muse</span>
-                <span class="font-sans text-[8px] uppercase tracking-[0.3em] text-stone-500 mt-1 font-bold">Where India Creates</span>
-            </div>
+            <a href="index.html" class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-[#1A1208] rounded-full flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#D4AF37] text-xl">star</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-[#1A1208] font-serif font-bold text-xl leading-none tracking-tight">The Painted Muse</span>
+                    <span class="font-sans text-[8px] uppercase tracking-[0.3em] text-stone-500 mt-1 font-bold">Where India Creates</span>
+                </div>
+            </a>
         </div>
 
         <!-- Nav Links -->
         <div class="hidden md:flex gap-10 font-sans text-[10px] font-bold uppercase tracking-[0.15em] items-center relative" id="nav-links">
-            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="#"
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#"
                 data-section="hero">Home</a>
-            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="#about-india"
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#about-india"
                 data-section="about-india">About</a>
-            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="#journal"
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#journal"
                 data-section="journal">Stories</a>
-            <div class="flex items-center gap-2">
-                <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="#art-forms"
-                    data-section="art-forms">Explore Arts</a>
-                <span class="bg-[#B5451B] text-white text-[7px] px-1.5 py-0.5 rounded-sm font-black tracking-tighter">NEW</span>
-            </div>
-            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="#artisans"
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="artists.html"
                 data-section="artisans">Be an Artist</a>
             <div id="nav-indicator"></div>
         </div>
@@ -609,11 +674,10 @@
             </button>
         </div>
         <div class="flex flex-col p-12 gap-8 font-sans text-xl font-bold uppercase tracking-[0.2em]">
-            <a class="mobile-nav-item" href="#">Home</a>
-            <a class="mobile-nav-item" href="#about-india">About</a>
-            <a class="mobile-nav-item" href="#journal">Stories</a>
-            <a class="mobile-nav-item" href="#art-forms">Explore Arts</a>
-            <a class="mobile-nav-item" href="#artisans">Be an Artist</a>
+            <a class="mobile-nav-item" href="index.html#">Home</a>
+            <a class="mobile-nav-item" href="index.html#about-india">About</a>
+            <a class="mobile-nav-item" href="index.html#journal">Stories</a>
+            <a class="mobile-nav-item" href="artists.html">Be an Artist</a>
         </div>
         <div class="absolute bottom-12 left-12 right-12 flex flex-col gap-4">
              <button class="w-full py-4 border border-stone-900 font-sans text-xs font-bold uppercase tracking-widest">Sign In</button>
@@ -621,51 +685,7 @@
         </div>
     </div>
 
-    <!-- Ashoka Chakra 3D Coin -->
-    <div class="coin">
-        <div class="side heads">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="48" fill="#FDFBF7" stroke="#000080" stroke-width="2" />
-                <circle cx="50" cy="50" r="42" fill="none" stroke="#000080" stroke-width="1.5" />
-                <circle cx="50" cy="50" r="8" fill="#000080" />
-                <g stroke="#000080" stroke-width="1.2">
-                    <line x1="50" y1="10" x2="50" y2="90" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(15 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(30 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(45 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(60 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(75 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(90 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(105 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(120 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(135 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(150 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(165 50 50)" />
-                </g>
-            </svg>
-        </div>
-        <div class="side tails">
-            <svg class="svg_back" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="48" fill="#FDFBF7" stroke="#000080" stroke-width="2" />
-                <circle cx="50" cy="50" r="42" fill="none" stroke="#000080" stroke-width="1.5" />
-                <circle cx="50" cy="50" r="8" fill="#000080" />
-                <g stroke="#000080" stroke-width="1.2">
-                    <line x1="50" y1="10" x2="50" y2="90" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(15 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(30 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(45 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(60 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(75 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(90 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(105 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(120 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(135 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(150 50 50)" />
-                    <line x1="50" y1="10" x2="50" y2="90" transform="rotate(165 50 50)" />
-                </g>
-            </svg>
-        </div>
-    </div>
+
 
     <main class="relative">
         <!-- Hero Section (Full-bleed Video Background like Loyal Daddy) -->
@@ -695,13 +715,13 @@
                     living traditions of the subcontinent.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-start items-start">
-                    <a href="#artisans"
+                    <a href="artists.html"
                         class="bg-[#D4AF37] text-stone-950 px-8 py-4 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-stone-950 transition-all duration-500 shadow-lg inline-block text-center">
                         Explore Artists
                     </a>
                     <a href="#art-forms"
                         class="border border-white/30 text-white px-8 py-4 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all duration-500 inline-block text-center">
-                        Explore Art Forms
+                        Art Retreats
                     </a>
                 </div>
 
@@ -709,69 +729,7 @@
             </div>
         </section>
 
-        <!-- Asymmetric Bento Grid Section -->
-        <section class="py-32 section-cream" id="heritage">
-            <div class="container mx-auto px-6 md:px-12">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-                    <!-- Text Block -->
-                    <div class="md:col-span-5 md:sticky md:top-32 mb-12 md:mb-0 pr-8">
-                        <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-8 leading-tight">
-                            Masterpieces of the <span class="italic font-light text-[#D4AF37]">Ancient Earth</span></h2>
-                        <p class="font-sans text-lg text-stone-600 mb-10 max-w-md leading-relaxed">
-                            From the vibrant lines of Madhubani to the intricate geometry of Warli, every stroke is a
-                            testament to thousands of years of whispered history.
-                        </p>
-                        <a class="font-sans text-xs font-bold text-[#D4AF37] underline-paintbrush uppercase tracking-[0.2em]"
-                            href="heritage.html">View Heritage Guide</a>
-                    </div>
-                    <!-- Visual Grid -->
-                    <div class="md:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Card 1 -->
-                        <div class="warli-border group overflow-hidden bg-stone-900 aspect-[4/5] shadow-2xl">
-                            <img alt="Madhubani Painting"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl6KoRE4304r6yaz87N6CPFxSjVl5ThVTQ_5DB05Qa4BBwZVVoDT7hB54h4PLSUkYodDRQ7AxFeANNz5KTigRfwP0MA5iv-58kfRpIII-E-ZsaXdtBYlaqF-pYkMKQ06LvGukSg5cr2KXcb0bnQukgApRkOwYwghIh52McxMf849lF8Eoqu9RI7CWCkGdxiHXPUpL0yFHgShcMU-FJquGOgKOVGC_sDdUQWHC55l5N2Y9P4CPiI4yqO4wx4nASNz5uKq4XZ2pcQcSy" />
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                                <h3 class="text-2xl font-serif text-[#D4AF37]">Madhubani Flora</h3>
-                                <p class="text-stone-300 font-sans mt-2 text-sm tracking-wide">Mithila Tradition, 2024
-                                </p>
-                            </div>
-                        </div>
-                        <!-- Card 2 -->
-                        <div
-                            class="warli-border group overflow-hidden bg-stone-900 aspect-[4/5] mt-0 md:mt-16 shadow-2xl">
-                            <img alt="Pattachitra Art"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvOxBoc17GD0pCjKedkupx2GGZulLfiliHG8jb7_zcMvxOuC5vqAGnoWSkTL_XqygikyeaGHBCzvO1MuL8u-x84ZsjbJwDF25uglIBbAYrcPnbXwb1mk3SBesZR5aPrZL96bC6YhB-jM9pIXZNXpWz2tqPgjR4zFHW2v1BV7WztE9Cx-ZmYqXvhDSzcp02r0IJasCHS2Po5O-z_6fl1C-x83JitCLZkbOxUgAz44xzL-rRwtRO-wN5Wampwrsj0LcAQ9_Fh1xoW9Io" />
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                                <h3 class="text-2xl font-serif text-[#D4AF37]">Eternal Scroll</h3>
-                                <p class="text-stone-300 font-sans mt-2 text-sm tracking-wide">Raghurajpur Heritage</p>
-                            </div>
-                        </div>
-                        <!-- Card 3 (Wide) -->
-                        <div
-                            class="md:col-span-2 warli-border group overflow-hidden bg-stone-900 aspect-[16/9] shadow-2xl">
-                            <img alt="Indian Canvas"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJmf-j9GSQDGrt2wkFmgQF5vfJyxnbjMQi99nYqDH5_HAwlspkJL91E9URUs9nlpSW6nNrUfH4n3FDLEYTPCjN6oqg2pemQKnQ7v448CIatSkzKwmGq_PGtpHlAiZHoMxEjroxoV_iI0cr0iT1T_rc2ljq4T6TjiDwYbMvhXDNPA5N0baDmyvxWltRDEeN-pvPmmoW9cGNV26SSGzO707_BkhoEZ7QJRTOnigKiyvtfXpK2ddWiwwsSdjg7vVecanj1pj_r8MJvmpz" />
-                            <div
-                                class="absolute inset-0 bg-stone-950/50 p-12 flex items-center justify-center transition-all duration-500 group-hover:bg-stone-950/70">
-                                <div
-                                    class="text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                    <h3 class="text-4xl md:text-5xl font-serif text-[#D4AF37] italic">The Artisan's
-                                        Breath</h3>
-                                    <p
-                                        class="font-sans text-xs tracking-[0.3em] text-stone-300 mt-6 uppercase border border-[#D4AF37]/30 inline-block px-6 py-3 hover:bg-[#D4AF37]/10 cursor-pointer transition-colors">
-                                        Discover the process</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
         <!-- About India Section (New) -->
         <section id="about-india" class="py-32 bg-[#FDFBF7] relative overflow-hidden">
@@ -779,11 +737,57 @@
             <div class="absolute top-0 right-0 w-1/3 h-full opacity-[0.03] pointer-events-none">
                 <img src="pics/madhubani_pattern_1778230275283.png" class="w-full h-full object-cover" alt="pattern">
             </div>
+
+            <!-- Ashoka Chakra 3D Coin (Only visible in this section) -->
+            <div class="coin">
+                <div class="side heads">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="48" fill="#FDFBF7" stroke="#000080" stroke-width="2" />
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="#000080" stroke-width="1.5" />
+                        <circle cx="50" cy="50" r="8" fill="#000080" />
+                        <g stroke="#000080" stroke-width="1.2">
+                            <line x1="50" y1="10" x2="50" y2="90" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(15 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(30 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(45 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(60 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(75 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(90 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(105 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(120 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(135 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(150 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(165 50 50)" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="side tails">
+                    <svg class="svg_back" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="48" fill="#FDFBF7" stroke="#000080" stroke-width="2" />
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="#000080" stroke-width="1.5" />
+                        <circle cx="50" cy="50" r="8" fill="#000080" />
+                        <g stroke="#000080" stroke-width="1.2">
+                            <line x1="50" y1="10" x2="50" y2="90" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(15 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(30 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(45 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(60 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(75 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(90 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(105 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(120 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(135 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(150 50 50)" />
+                            <line x1="50" y1="10" x2="50" y2="90" transform="rotate(165 50 50)" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
             
             <div class="container mx-auto px-6 md:px-12 relative z-10">
                 <div class="max-w-4xl mx-auto text-center mb-20">
-                    <span class="font-sans text-[11px] uppercase tracking-[0.4em] text-[#D4AF37] font-bold mb-4 block">The Subcontinent's Soul</span>
-                    <h2 class="text-5xl md:text-6xl font-serif text-[#1A1208] mb-8 italic">About <span class="text-[#B5451B] not-italic">India</span></h2>
+                    <span class="font-sans text-[11px] uppercase tracking-[0.4em] text-[#D4AF37] font-bold mb-4 block">the significance to</span>
+                    <h2 class="text-5xl md:text-6xl font-serif text-[#1A1208] mb-8 italic">Made in <span class="text-[#B5451B] not-italic">India</span></h2>
                     <p class="text-xl text-stone-600 font-sans leading-relaxed reveal">
                         India is a land of timeless traditions, vibrant culture, and extraordinary artistic heritage. Known for its diversity, India brings together different languages, religions, festivals, and customs while maintaining a strong sense of unity and harmony. The country reflects a perfect blend of ancient history and modern progress.
                     </p>
@@ -880,7 +884,7 @@
                         <svg id="india-map" class="w-full h-full bg-transparent"></svg>
 
                         <!-- Map Controls -->
-                        <div class="absolute bottom-6 left-6 flex gap-2 z-20">
+                        <div class="absolute bottom-6 left-6 flex gap-2 z-20 items-center">
                             <button id="zoom-in"
                                 class="w-12 h-12 bg-stone-900/80 backdrop-blur-sm border border-[#D4AF37]/30 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-stone-950 rounded-full flex items-center justify-center transition-all shadow-lg hover:scale-105">
                                 <span class="material-symbols-outlined">add</span>
@@ -895,6 +899,13 @@
                                 <span class="material-symbols-outlined">home</span>
                             </button>
                         </div>
+
+                        <!-- View Heritage Guide button placed on the bottom-right of the map box -->
+                        <a class="absolute bottom-6 right-6 h-12 bg-[#1A1208]/90 backdrop-blur-sm text-white hover:bg-[#D4AF37] hover:text-[#1A1208] border border-[#D4AF37]/30 rounded-full flex items-center justify-center px-6 transition-all shadow-xl hover:scale-105 font-sans text-[10px] font-bold uppercase tracking-widest gap-2 z-20"
+                            href="heritage.html">
+                            <span class="material-symbols-outlined text-sm">menu_book</span>
+                            View Heritage Guide
+                        </a>
                     </div>
 
                     <!-- Right: State Info Panel -->
@@ -909,19 +920,67 @@
                                     class="material-symbols-outlined text-4xl text-[#D4AF37]/50 animate-pulse">touch_app</span>
                             </div>
                             <h3 class="text-3xl font-serif text-[#D4AF37] mb-4">Select a Region</h3>
-                            <p class="text-stone-500 font-sans max-w-md text-lg">Click on any state on the map to
+                            <p class="text-stone-500 font-sans max-w-md text-lg mb-8">Click on any state on the map to
                                 discover its unique living art traditions, techniques, and the master artisans who
                                 preserve them.</p>
+                            <a class="bg-[#1A1208] text-white px-8 py-3.5 rounded font-sans text-[10px] font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#1A1208] transition-all flex items-center gap-2 shadow-lg hover:scale-105" href="heritage.html">
+                                <span class="material-symbols-outlined text-sm">menu_book</span>
+                                View Heritage Guide
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Divider -->
-        <div class="w-full py-12 flex justify-center section-warm">
-            <div class="w-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent"></div>
-        </div>
+        <!-- Split CTA Section (Shifted below Living Map) -->
+        <section class="flex flex-col md:flex-row w-full">
+            <!-- Left: Artist CTA -->
+            <div class="w-full md:w-1/2 bg-[#1A1208] text-white py-24 px-12 md:px-24 relative overflow-hidden group">
+                <div class="absolute inset-0 opacity-[0.08] mix-blend-overlay">
+                    <img src="pics/warli_bg.png"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                        alt="Texture">
+                </div>
+                <div class="relative z-10 flex flex-col items-start max-w-md mx-auto">
+                    <div
+                        class="w-16 h-16 rounded-full border border-[#D4AF37]/30 flex items-center justify-center mb-8">
+                        <span class="material-symbols-outlined text-2xl text-[#D4AF37]">palette</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-serif mb-6">Are You an Artist?</h2>
+                    <p class="text-white/70 font-sans mb-10 leading-relaxed">Join India's largest art platform. Showcase
+                        your work, get discovered, take bookings, and share your story with the world.</p>
+                    <a href="artists.html"
+                        class="bg-[#F5F0E8] text-[#1A1208] px-8 py-4 font-sans text-sm font-bold hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors shadow-lg inline-block text-center">Join
+                        as an Artist →</a>
+                    <p class="text-[#D4AF37]/60 text-[10px] font-bold uppercase tracking-widest mt-6">FREE TO JOIN · NO
+                        COMMISSION ON FIRST 3 BOOKINGS</p>
+                </div>
+            </div>
+            <!-- Right: Collector CTA -->
+            <div
+                class="w-full md:w-1/2 bg-[#F5F0E8] text-[#1A1208] py-24 px-12 md:px-24 relative overflow-hidden group">
+                <div class="absolute inset-0 opacity-[0.15] mix-blend-multiply">
+                    <img src="pics/pattachitra_art.png"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale"
+                        alt="Texture">
+                </div>
+                <div class="relative z-10 flex flex-col items-start max-w-md mx-auto">
+                    <div
+                        class="w-16 h-16 rounded-full border border-[#1A1208]/20 flex items-center justify-center mb-8">
+                        <span class="material-symbols-outlined text-2xl text-[#B5451B]">visibility</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-serif mb-6">Love Art?</h2>
+                    <p class="text-stone-600 font-sans mb-10 leading-relaxed">Collect original pieces, commission custom
+                        work, attend retreats, and become part of India's living art community.</p>
+                    <a href="artists.html"
+                        class="bg-[#B5451B] text-white px-8 py-4 font-sans text-sm font-bold hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors shadow-lg inline-block text-center">Start
+                        Exploring →</a>
+                    <p class="text-stone-500 text-[10px] font-bold uppercase tracking-widest mt-6">2,400+ ARTISTS · 15
+                        ART FORMS · 28 STATES</p>
+                </div>
+            </div>
+        </section>
 
         <!-- The Muse Journal (Auto-Scrolling Carousel) -->
         <section class="py-24 section-cream overflow-hidden" id="journal">
@@ -1083,307 +1142,114 @@
 
 
         </section>
-        <!-- Art Forms Section Redesigned from add.css -->
-        <section id="art-forms" class="py-24" style="background: var(--cream);">
-            <div class="container mx-auto px-6">
-                <div class="section-head reveal">
-                    <span class="eyebrow">Art Forms</span>
-                    <h2 class="serif text-5xl mb-6 text-brown-900">Every Art Form Has a Home Here</h2>
-                    <p class="text-xl text-brown-700 max-w-2xl">From ancient temple murals to contemporary folk fusion,
-                        explore the diverse artistic heritage of the Indian subcontinent.</p>
+
+        <!-- yReel Hub Section -->
+        <section id="yreel-hub" class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-sans relative">
+            <div class="max-w-screen-xl mx-auto px-6 py-12 md:py-24 relative z-10">
+                <header class="text-center mb-16">
+                    <h2 class="font-display text-5xl md:text-6xl font-bold text-primary dark:text-secondary mb-4 tracking-tight">
+                        The Artisan Reel
+                    </h2>
+                    <div class="w-24 h-1 bg-accent mx-auto mb-6 rounded-full"></div>
+                    <p class="text-slate-600 dark:text-slate-400 max-w-lg mx-auto font-medium text-lg">
+                        Witness the rhythmic dance of creation through our curated collection of short-form art stories.
+                    </p>
+                </header>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                    <!-- Reel 1: Tanjore with Madhubani Border Style -->
+                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer border-madhubani">
+                        <img alt="Tanjore painting details" class="absolute inset-0 w-full h-full object-cover transition-scale duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFUJR3nGXvncfGC6mC1D6kxvcIm4cBIP2DbKEbT5Y5JcyEaqlTzd8_2IBemGd1NtjxgaCLqYvLzcED32p_4oHSEZ0xVNiHhCVxMqGcGq0gX4xV87nIULET0IF139ea6ZRVYCrwj9vaRCxBtvATHXxqNMVbcWzK8mF-TKuSk3ogTfiQT-gkXfIgT7SdKGYRNkdowfBU2JkF8c2YUcc8xtZrqevBsRV93yf8q_oj30n6wyTRX9Rn_jTzHmVVYvjpbCEUKL69GyEwfcj1"/>
+                        <div class="absolute inset-0 gradient-bottom"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-primary/40 backdrop-blur-md rounded-full p-4 border border-white/30">
+                                <span class="material-icons-outlined text-white text-4xl">play_circle_filled</span>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-4 md:p-6 w-full">
+                            <p class="text-secondary text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">Tradition</p>
+                            <h3 class="font-display text-lg md:text-2xl text-white mb-2 leading-tight">The Tanjore Stroke</h3>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary flex items-center justify-center text-[10px] text-white font-bold">RM</div>
+                                <span class="text-white/80 text-xs md:text-sm truncate">@Rajan_Masters</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Reel 2: Pottery with Warli Border Style -->
+                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer border-warli">
+                        <img alt="Pottery wheel shaping clay" class="absolute inset-0 w-full h-full object-cover transition-scale duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwnXzS2xgE3x3rV3I6PgEjAzbD35n5dv_R_jLE6x1MW2Vea9RNmJOC-A8CPQmPEv_rUKTcXMRtsYvbKtEXb6c-Zda5ALdrwIPuTanVhhhRzpInRRro6_lF1X1MhYi1Ssq0SuwiU5FZ5RbMfh1kwfAInE1QfHiNGsLptAi5XxQqRc6sZOy5NMvlaccRh8PqMdL-RfeS3GKEGKEiuBNn46Qi5myv2eAl-MYyH0sSZJz1gO1wq2sHZ8_3fdufbZK0rwbmQLW5cGh_Ffod"/>
+                        <div class="absolute inset-0 gradient-bottom"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-accent/40 backdrop-blur-md rounded-full p-4 border border-white/30">
+                                <span class="material-icons-outlined text-white text-4xl">play_circle_filled</span>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-4 md:p-6 w-full">
+                            <p class="text-accent text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">Handcrafted</p>
+                            <h3 class="font-display text-lg md:text-2xl text-white mb-2 leading-tight">Earth &amp; Clay</h3>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-slate-600 flex items-center justify-center text-[10px] text-white font-bold">SK</div>
+                                <span class="text-white/80 text-xs md:text-sm truncate">@Sita_Kumari</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Reel 3: Mithila with Pattachitra Border Style -->
+                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer border-pattachitra">
+                        <img alt="Detailed artistic sketch" class="absolute inset-0 w-full h-full object-cover transition-scale duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDE4nm4na4uD2J9ff1aD_bN-TCyLSD5q9rMJ7FCBtMoW7hZvoRntfqkIlKEDd_nJzbOcQl--QHewyUYEjJ-JIx5_Dfpvk6l7W7O01R8Xo33poLMuwokDDKOvRiQKDnOlM528a0mBw5MLd6BVm-YS6i26qdD8kCxfkGp1-x86aCRPDYVgS_jmnTdWuND1FmWr9aM9N4Gji2mEauSvXn6Gp2G7MVVPYZs79C9ivyvg58FID13puV2zDng4dV6uGiAuZU8nod_RDnZ318"/>
+                        <div class="absolute inset-0 gradient-bottom"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-secondary/40 backdrop-blur-md rounded-full p-4 border border-white/30">
+                                <span class="material-icons-outlined text-white text-4xl">play_circle_filled</span>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-4 md:p-6 w-full">
+                            <p class="text-secondary text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">Sketch</p>
+                            <h3 class="font-display text-lg md:text-2xl text-white mb-2 leading-tight">Vibrant Mithila</h3>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-amber-600 flex items-center justify-center text-[10px] text-white font-bold">AP</div>
+                                <span class="text-white/80 text-xs md:text-sm truncate">@Amit_Paints</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Upload Card: Bright and Celebratory -->
+                    <div class="reel-aspect border-4 border-dashed border-accent/60 dark:border-accent/40 rounded-2xl flex flex-col items-center justify-center p-6 bg-gradient-to-br from-secondary/20 to-accent/10 dark:from-secondary/5 dark:to-accent/5 relative group overflow-hidden">
+                        <div class="absolute -top-4 -right-4 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-accent/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg shadow-accent/20">
+                            <span class="material-icons-outlined text-3xl">add_photo_alternate</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-slate-800 dark:text-white mb-3 text-center leading-tight">Share Your Magic</h3>
+                        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 text-center mb-8 px-2">
+                            Upload your creative process and join our community of master artisans.
+                        </p>
+                        <button class="bg-primary hover:bg-red-700 text-white px-8 py-3 rounded-full font-bold transition-all shadow-xl hover:shadow-primary/30 flex items-center space-x-2 active:scale-95">
+                            <span class="material-icons-outlined text-lg">cloud_upload</span>
+                            <span>Select Story</span>
+                        </button>
+                        <!-- Corner Accents -->
+                        <div class="absolute top-4 left-4 w-6 h-6 border-t-4 border-l-4 border-primary/40 rounded-tl-lg"></div>
+                        <div class="absolute bottom-4 right-4 w-6 h-6 border-b-4 border-r-4 border-primary/40 rounded-br-lg"></div>
+                    </div>
+                </div>
+                <!-- Fun Animated Show More Button -->
+                <div class="mt-20 text-center">
+                    <button class="group inline-flex flex-col items-center transition-all">
+                        <div class="bg-white dark:bg-slate-800 px-8 py-3 rounded-full border-2 border-accent text-accent font-bold tracking-widest uppercase text-xs shadow-md group-hover:bg-accent group-hover:text-white group-hover:scale-110 transition-all duration-300 flex items-center space-x-2">
+                            <span>View All Masterpieces</span>
+                        </div>
+                        <span class="material-icons-outlined text-primary text-3xl mt-4 animate-fun">expand_circle_down</span>
+                    </button>
                 </div>
             </div>
-            <div class="container mx-auto px-6 reveal">
-                <div class="h-scroll" id="catScroll">
-                    <!-- Tanjore Card -->
-                    <div class="cat-card">
-                        <div class="img" style="background-image: url('pics/tanjore_art.png')"></div>
-                        <div class="content">
-                            <h3>Tanjore Art</h3>
-                            <p>Sacred gold-leaf paintings from Tamil Nadu, known for their dense composition and surface
-                                richness.</p>
-                            <div class="btn-text">Explore Tradition <i data-lucide="chevron-right"></i></div>
-                        </div>
-                    </div>
-                    <!-- Pattachitra Card -->
-                    <div class="cat-card">
-                        <div class="img" style="background-image: url('pics/pattachitra_art.png')"></div>
-                        <div class="content">
-                            <h3>Pattachitra</h3>
-                            <p>Traditional cloth-based scroll painting from Odisha and West Bengal, depicting
-                                mythological narratives.</p>
-                            <div class="btn-text">Explore Tradition <i data-lucide="chevron-right"></i></div>
-                        </div>
-                    </div>
-                    <!-- Gond Card -->
-                    <div class="cat-card">
-                        <div class="img" style="background-image: url('pics/gond_art.png')"></div>
-                        <div class="content">
-                            <h3>Gond Art</h3>
-                            <p>Vibrant tribal art from Madhya Pradesh, characterized by intricate dots and lines forming
-                                mythical stories.</p>
-                            <div class="btn-text">Explore Tradition <i data-lucide="chevron-right"></i></div>
-                        </div>
-                    </div>
-                    <!-- Kalamkari Card -->
-                    <div class="cat-card">
-                        <div class="img" style="background-image: url('pics/kalamkari_art.png')"></div>
-                        <div class="content">
-                            <h3>Kalamkari</h3>
-                            <p>Ancient style of hand-painted or block-printed cotton textile, produced in Andhra
-                                Pradesh.</p>
-                            <div class="btn-text">Explore Tradition <i data-lucide="chevron-right"></i></div>
-                        </div>
-                    </div>
-                    <!-- Phulkari Card -->
-                    <div class="cat-card">
-                        <div class="img" style="background-image: url('pics/phulkari_art.png')"></div>
-                        <div class="content">
-                            <h3>Phulkari</h3>
-                            <p>Flowery embroidery technique from Punjab, traditionally used on shawls and dupattas.</p>
-                            <div class="btn-text">Explore Tradition <i data-lucide="chevron-right"></i></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Textured Background -->
+            <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.04] dark:opacity-[0.07] z-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuANejk-qUx7pDU-v57NBJU5x3fmcRnSecK_jcTJJAEMkElUF1u3KQsJLsNNlbRt05Myc9jxHxrgvyUL8xvqR9XxuW1JCftti41cU-vCc7V50vm7jwiP32btDw_10KiB6VQfbPryg-dC9OTua0QzNJed6vnJZ8mzaCA8AdOtKlMf_DxiOwxrLtC2gIoFB9nCJfPlcJzS-0VdaHRQ8W5TGZOOHfULRgFhUaBxmutidcpMHFCrj2U_r6GI0dDRu7Wh9doX9fcQYVOd7F35'); background-size: 200px;"></div>
         </section>
-        <!-- Meet the Makers Section -->
-        <section class="py-28 section-cream" id="artisans">
-            <div class="container mx-auto px-6 md:px-12 text-center">
-                <div class="flex items-center justify-center gap-4 mb-6">
-                    <div class="h-[1px] w-12 bg-[#1A1208]"></div>
-                    <span class="font-sans text-xs text-[#1A1208] uppercase tracking-[0.2em] font-bold">The
-                        Makers</span>
-                    <div class="h-[1px] w-12 bg-[#1A1208]"></div>
-                </div>
-                <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-4">Meet the Makers</h2>
-                <p class="font-sans text-stone-500 mb-16">Real artists. Real stories. Every piece handcrafted.</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
-                    <!-- Card 1 -->
-                    <div
-                        class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
-                        <div class="h-40 bg-stone-900 relative">
-                            <img src="pics/madhubani_bg.png"
-                                class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
-                                alt="Madhubani Art">
-                            <img src="https://i.pravatar.cc/150?u=meera"
-                                class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-sm z-10"
-                                alt="Meera Devi">
-                        </div>
-                        <div class="pt-14 p-6 relative bg-white">
-                            <h3 class="font-serif text-xl text-[#1A1208] mb-3">Meera Devi</h3>
-                            <div class="flex gap-2 mb-4">
-                                <span
-                                    class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Bihar</span>
-                                <span
-                                    class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Madhubani</span>
-                            </div>
-                            <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
-                                ★★★★★ <span class="text-stone-500 font-sans ml-1">4.9 · 48 bookings</span>
-                            </div>
-                            <p class="text-stone-600 font-sans text-sm mb-6 h-10">5th generation Madhubani artist from
-                                Mithila, Bihar.</p>
-                            <div class="flex gap-3">
-                                <button
-                                    class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View
-                                    Portfolio</button>
-                                <button
-                                    class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
-                                    Now →</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div
-                        class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
-                        <div class="h-40 bg-stone-900 relative">
-                            <img src="pics/pattachitra_art.png"
-                                class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
-                                alt="Pattachitra Art">
-                            <img src="https://i.pravatar.cc/150?u=bhaskar"
-                                class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-sm z-10"
-                                alt="Bhaskar">
-                        </div>
-                        <div class="pt-14 p-6 relative bg-white">
-                            <h3 class="font-serif text-xl text-[#1A1208] mb-3">Bhaskar Mohapatra</h3>
-                            <div class="flex gap-2 mb-4">
-                                <span
-                                    class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Odisha</span>
-                                <span
-                                    class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Pattachitra</span>
-                            </div>
-                            <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
-                                ★★★★★ <span class="text-stone-500 font-sans ml-1">5.0 · 67 bookings</span>
-                            </div>
-                            <p class="text-stone-600 font-sans text-sm mb-6 h-10">Master chitrakar of Raghurajpur,
-                                painting the gods on palm leaves.</p>
-                            <div class="flex gap-3">
-                                <button
-                                    class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View
-                                    Portfolio</button>
-                                <button
-                                    class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
-                                    Now →</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 3 -->
-                    <div
-                        class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
-                        <div class="h-40 bg-stone-900 relative">
-                            <img src="pics/warli_bg.png"
-                                class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
-                                alt="Warli Art">
-                            <img src="https://i.pravatar.cc/150?u=jivya"
-                                class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-sm z-10"
-                                alt="Jivya">
-                        </div>
-                        <div class="pt-14 p-6 relative bg-white">
-                            <h3 class="font-serif text-xl text-[#1A1208] mb-3">Jivya Soma Mashe</h3>
-                            <div class="flex gap-2 mb-4">
-                                <span
-                                    class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Maharashtra</span>
-                                <span
-                                    class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Warli</span>
-                            </div>
-                            <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
-                                ★★★★★ <span class="text-stone-500 font-sans ml-1">4.8 · 52 bookings</span>
-                            </div>
-                            <p class="text-stone-600 font-sans text-sm mb-6 h-10">Reviving the white-on-earth language
-                                of the Warli tribe.</p>
-                            <div class="flex gap-3">
-                                <button
-                                    class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View
-                                    Portfolio</button>
-                                <button
-                                    class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
-                                    Now →</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 4 -->
-                    <div
-                        class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
-                        <div class="h-40 bg-stone-900 relative">
-                            <img src="pics/tanjore_art.png"
-                                class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
-                                alt="Tanjore Art">
-                            <img src="https://i.pravatar.cc/150?u=anjali"
-                                class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-sm z-10"
-                                alt="Anjali">
-                        </div>
-                        <div class="pt-14 p-6 relative bg-white">
-                            <h3 class="font-serif text-xl text-[#1A1208] mb-3">Anjali Pichai</h3>
-                            <div class="flex gap-2 mb-4">
-                                <span
-                                    class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Tamil
-                                    Nadu</span>
-                                <span
-                                    class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Tanjore</span>
-                            </div>
-                            <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
-                                ★★★★★ <span class="text-stone-500 font-sans ml-1">4.9 · 33 bookings</span>
-                            </div>
-                            <p class="text-stone-600 font-sans text-sm mb-6 h-10">Gold-leaf devotional art crafted
-                                across three months per piece.</p>
-                            <div class="flex gap-3">
-                                <button
-                                    class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View
-                                    Portfolio</button>
-                                <button
-                                    class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
-                                    Now →</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 5 -->
-                    <div
-                        class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
-                        <div class="h-40 bg-stone-900 relative">
-                            <img src="pics/miniature_bg.png"
-                                class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
-                                alt="Miniature Art">
-                            <img src="pics/rukmini_profile.png"
-                                class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-sm z-10"
-                                alt="Rukmini">
-                        </div>
-                        <div class="pt-14 p-6 relative bg-white">
-                            <h3 class="font-serif text-xl text-[#1A1208] mb-3">Rukmini Verma</h3>
-                            <div class="flex gap-2 mb-4">
-                                <span
-                                    class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Rajasthan</span>
-                                <span
-                                    class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Miniature</span>
-                            </div>
-                            <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
-                                ★★★★★ <span class="text-stone-500 font-sans ml-1">4.7 · 91 bookings</span>
-                            </div>
-                            <p class="text-stone-600 font-sans text-sm mb-6 h-10">Squirrel-hair brushwork in the Bundi
-                                tradition since 1989.</p>
-                            <div class="flex gap-3">
-                                <button
-                                    class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View
-                                    Portfolio</button>
-                                <button
-                                    class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
-                                    Now →</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 6 -->
-                    <div
-                        class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
-                        <div class="h-40 bg-stone-900 relative">
-                            <img src="pics/gond_bg.png"
-                                class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
-                                alt="Gond Art">
-                            <img src="pics/kalavati_profile.png"
-                                class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-sm z-10"
-                                alt="Kalavati">
-                        </div>
-                        <div class="pt-14 p-6 relative bg-white">
-                            <h3 class="font-serif text-xl text-[#1A1208] mb-3">Kalavati Bai</h3>
-                            <div class="flex gap-2 mb-4">
-                                <span
-                                    class="bg-[#B5451B] text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Madhya
-                                    Pradesh</span>
-                                <span
-                                    class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Gond
-                                    Art</span>
-                            </div>
-                            <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
-                                ★★★★★ <span class="text-stone-500 font-sans ml-1">4.9 · 44 bookings</span>
-                            </div>
-                            <p class="text-stone-600 font-sans text-sm mb-6 h-10">Tribal dreamscapes from the heart of
-                                the Mandla forests.</p>
-                            <div class="flex gap-3">
-                                <button
-                                    class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View
-                                    Portfolio</button>
-                                <button
-                                    class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
-                                    Now →</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-16">
-                    <button
-                        class="border border-[#1A1208] text-[#1A1208] px-10 py-4 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#1A1208] hover:text-white transition-colors">View
-                        All Artists →</button>
-                </div>
-            </div>
-        </section>
-
 
         <!-- Testimonials -->
         <section class="py-24 section-cream">
             <div class="container mx-auto px-6 md:px-12">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-serif text-[#1A1208]">What People <span
-                            class="text-[#D4AF37] italic">Say</span></h2>
+                    <h2 class="text-4xl font-serif text-[#1A1208]">Customer <span
+                            class="text-[#D4AF37] italic">Testimonials</span></h2>
                 </div>
                 <div class="testimonial-container">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-full">
@@ -1663,54 +1529,6 @@
             </div>
         </section>
 
-        <!-- Split CTA Section -->
-        <section class="flex flex-col md:flex-row w-full">
-            <!-- Left: Artist CTA -->
-            <div class="w-full md:w-1/2 bg-[#1A1208] text-white py-24 px-12 md:px-24 relative overflow-hidden group">
-                <div class="absolute inset-0 opacity-[0.08] mix-blend-overlay">
-                    <img src="warli_bg.png"
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-                        alt="Texture">
-                </div>
-                <div class="relative z-10 flex flex-col items-start max-w-md mx-auto">
-                    <div
-                        class="w-16 h-16 rounded-full border border-[#D4AF37]/30 flex items-center justify-center mb-8">
-                        <span class="material-symbols-outlined text-2xl text-[#D4AF37]">palette</span>
-                    </div>
-                    <h2 class="text-4xl md:text-5xl font-serif mb-6">Are You an Artist?</h2>
-                    <p class="text-white/70 font-sans mb-10 leading-relaxed">Join India's largest art platform. Showcase
-                        your work, get discovered, take bookings, and share your story with the world.</p>
-                    <button
-                        class="bg-[#F5F0E8] text-[#1A1208] px-8 py-4 font-sans text-sm font-bold hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors shadow-lg">Join
-                        as an Artist →</button>
-                    <p class="text-[#D4AF37]/60 text-[10px] font-bold uppercase tracking-widest mt-6">FREE TO JOIN · NO
-                        COMMISSION ON FIRST 3 BOOKINGS</p>
-                </div>
-            </div>
-            <!-- Right: Collector CTA -->
-            <div
-                class="w-full md:w-1/2 bg-[#F5F0E8] text-[#1A1208] py-24 px-12 md:px-24 relative overflow-hidden group">
-                <div class="absolute inset-0 opacity-[0.15] mix-blend-multiply">
-                    <img src="pattachitra_art.png"
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale"
-                        alt="Texture">
-                </div>
-                <div class="relative z-10 flex flex-col items-start max-w-md mx-auto">
-                    <div
-                        class="w-16 h-16 rounded-full border border-[#1A1208]/20 flex items-center justify-center mb-8">
-                        <span class="material-symbols-outlined text-2xl text-[#B5451B]">visibility</span>
-                    </div>
-                    <h2 class="text-4xl md:text-5xl font-serif mb-6">Love Art?</h2>
-                    <p class="text-stone-600 font-sans mb-10 leading-relaxed">Collect original pieces, commission custom
-                        work, attend retreats, and become part of India's living art community.</p>
-                    <button
-                        class="bg-[#B5451B] text-white px-8 py-4 font-sans text-sm font-bold hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors shadow-lg">Start
-                        Exploring →</button>
-                    <p class="text-stone-500 text-[10px] font-bold uppercase tracking-widest mt-6">2,400+ ARTISTS · 15
-                        ART FORMS · 28 STATES</p>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Fixed Send a Message Button -->
@@ -1724,72 +1542,94 @@
         Send a Message
     </a>
 
-
-
     <!-- Footer Redesigned from add.css -->
     <footer id="footer">
         <div class="container mx-auto px-6">
             <div class="foot-top">
                 <div class="foot-brand">
                     <div class="flex items-center gap-3 mb-6">
-                        <span class="w-10 h-10 bg-brown-800 rounded-full flex items-center justify-center text-white">
+                        <span class="w-10 h-10 bg-[#1A1208] rounded-full flex items-center justify-center text-[#D4AF37]">
                             <i data-lucide="palette"></i>
                         </span>
-                        <div class="text-2xl font-serif italic text-white">The Painted Muse</div>
+                        <div class="text-2xl font-serif italic text-[#1A1208]">The Painted Muse</div>
                     </div>
                     <p>India's premier multi-art platform — celebrating the living traditions of every state through
                         artisanal AI and human craft.</p>
                     <div class="socials">
-                        <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
-                        <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
-                        <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
-                        <a href="#" aria-label="Youtube"><i data-lucide="youtube"></i></a>
+                        <a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp" class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
+                        <a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram" class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
+                        <a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube" class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
+                        <a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn" class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
                     </div>
                 </div>
                 <div class="foot-col">
-                    <h5>Platform</h5>
+                    <h5>Navigations</h5>
                     <ul>
-                        <li><a href="#art-forms">Art Forms</a></li>
-                        <li><a href="#living-map-section">Interactive Map</a></li>
-                        <li><a href="#artisans">Meet the Makers</a></li>
-                        <li><a href="#journal">The Muse Journal</a></li>
+                        <li>
+                            <a href="index.html#living-map-section" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Live Map
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#yreel-hub" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Reels
+                            </a>
+                        </li>
+                        <li>
+                            <a href="artists.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Explore Artists
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Art Retreats
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="foot-col">
-                    <h5>Community</h5>
+                    <h5>Contact Us</h5>
                     <ul>
-                        <li><a href="#">Join as Artist</a></li>
-                        <li><a href="#">Art Collectors</a></li>
-                        <li><a href="#">Patron Program</a></li>
-                        <li><a href="#">Workshops</a></li>
-                    </ul>
-                </div>
-                <div class="foot-col">
-                    <h5>Company</h5>
-                    <ul>
-                        <li><a href="#">Our Story</a></li>
-                        <li><a href="#">Heritage Blog</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="foot-col">
-                    <h5>Legal</h5>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Artist Agreement</a></li>
+                        <li>
+                            <a href="mailto:painterdmuse_2k26@gmail.com" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                painterdmuse_2k26@gmail.com
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+917798345690" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                +91 7798345690
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
-            <div class="foot-bot">
+            <div class="foot-bot justify-center text-center">
                 <div>© 2025 The Painted Muse · Made with ❤️ for Indian Art</div>
-                <div>Crafted in India 🇮🇳</div>
             </div>
         </div>
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Navbar Solid on Scroll
+            const nav = document.querySelector('nav');
+            function handleScroll() {
+                if (window.scrollY > 20) {
+                    nav.classList.add('bg-[#FDFBF7]', 'border-stone-200/30', 'shadow-sm');
+                    nav.classList.remove('bg-transparent', 'border-transparent', 'shadow-none');
+                } else {
+                    nav.classList.remove('bg-[#FDFBF7]', 'border-stone-200/30', 'shadow-sm');
+                    nav.classList.add('bg-transparent', 'border-transparent', 'shadow-none');
+                }
+            }
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Initial check
+
             const mapContainer = document.getElementById('india-map');
             if (!mapContainer) return;
 
@@ -1802,8 +1642,8 @@
 
             // Define projection for India (centered to include POK & Ladakh)
             const projection = d3.geoMercator()
-                .center([82, 24])
-                .scale(Math.min(width, height) * 1.25)
+                .center([81.3, 23.0])
+                .scale(Math.min(width, height) * 0.95)
                 .translate([width / 2, height / 2]);
 
             const path = d3.geoPath().projection(projection);
@@ -2044,7 +1884,11 @@
                     <span class="material-symbols-outlined text-4xl text-[#D4AF37]/50 animate-pulse">touch_app</span>
                 </div>
                 <h3 class="text-3xl font-serif text-[#D4AF37] mb-4">Select a Region</h3>
-                <p class="text-stone-400 font-sans max-w-md text-lg">Click on any state on the map to discover its unique living art traditions, techniques, and the master artisans who preserve them.</p>
+                <p class="text-stone-500 font-sans max-w-md text-lg mb-8">Click on any state on the map to discover its unique living art traditions, techniques, and the master artisans who preserve them.</p>
+                <a class="bg-[#1A1208] text-white px-8 py-3.5 rounded font-sans text-[10px] font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#1A1208] transition-all flex items-center gap-2 shadow-lg hover:scale-105 inline-flex" href="heritage.html">
+                    <span class="material-symbols-outlined text-sm">menu_book</span>
+                    View Heritage Guide
+                </a>
             `;
                 }
             }
