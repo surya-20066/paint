@@ -1161,15 +1161,18 @@
                 </header>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
                     <!-- Reel 1: Tanjore with Madhubani Border Style -->
-                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer border-madhubani">
-                        <img alt="Tanjore painting details" class="absolute inset-0 w-full h-full object-cover transition-scale duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFUJR3nGXvncfGC6mC1D6kxvcIm4cBIP2DbKEbT5Y5JcyEaqlTzd8_2IBemGd1NtjxgaCLqYvLzcED32p_4oHSEZ0xVNiHhCVxMqGcGq0gX4xV87nIULET0IF139ea6ZRVYCrwj9vaRCxBtvATHXxqNMVbcWzK8mF-TKuSk3ogTfiQT-gkXfIgT7SdKGYRNkdowfBU2JkF8c2YUcc8xtZrqevBsRV93yf8q_oj30n6wyTRX9Rn_jTzHmVVYvjpbCEUKL69GyEwfcj1"/>
-                        <div class="absolute inset-0 gradient-bottom"></div>
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="bg-primary/40 backdrop-blur-md rounded-full p-4 border border-white/30">
-                                <span class="material-icons-outlined text-white text-4xl">play_circle_filled</span>
+                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 border-madhubani cursor-pointer" onclick="playReel(this, 'https://www.youtube.com/embed/bW9oJ1iT9G0?autoplay=1&amp;rel=0')">
+                        <div class="absolute inset-0 z-0 bg-slate-900 flex items-center justify-center">
+                            <div class="video-placeholder absolute inset-0 w-full h-full"></div>
+                        </div>
+                        <img src="pics/tanjore_cover.png" class="absolute inset-0 w-full h-full object-cover z-10 transition-all duration-500 group-hover:scale-105" alt="The Tanjore Stroke Cover">
+                        <div class="absolute inset-0 flex items-center justify-center z-15 transition-all duration-500">
+                            <div class="w-14 h-14 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-xl group-hover:scale-115 group-hover:bg-[#B5451B] group-hover:border-[#B5451B] transition-all duration-500 pointer-events-none">
+                                <span class="material-icons-outlined text-3xl">play_arrow</span>
                             </div>
                         </div>
-                        <div class="absolute bottom-0 left-0 p-4 md:p-6 w-full">
+                        <div class="absolute inset-0 gradient-bottom pointer-events-none z-20"></div>
+                        <div class="absolute bottom-0 left-0 p-4 md:p-6 w-full pointer-events-none z-30">
                             <p class="text-secondary text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">Tradition</p>
                             <h3 class="font-display text-lg md:text-2xl text-white mb-2 leading-tight">The Tanjore Stroke</h3>
                             <div class="flex items-center space-x-2">
@@ -1179,15 +1182,18 @@
                         </div>
                     </div>
                     <!-- Reel 2: Pottery with Warli Border Style -->
-                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer border-warli">
-                        <img alt="Pottery wheel shaping clay" class="absolute inset-0 w-full h-full object-cover transition-scale duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwnXzS2xgE3x3rV3I6PgEjAzbD35n5dv_R_jLE6x1MW2Vea9RNmJOC-A8CPQmPEv_rUKTcXMRtsYvbKtEXb6c-Zda5ALdrwIPuTanVhhhRzpInRRro6_lF1X1MhYi1Ssq0SuwiU5FZ5RbMfh1kwfAInE1QfHiNGsLptAi5XxQqRc6sZOy5NMvlaccRh8PqMdL-RfeS3GKEGKEiuBNn46Qi5myv2eAl-MYyH0sSZJz1gO1wq2sHZ8_3fdufbZK0rwbmQLW5cGh_Ffod"/>
-                        <div class="absolute inset-0 gradient-bottom"></div>
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="bg-accent/40 backdrop-blur-md rounded-full p-4 border border-white/30">
-                                <span class="material-icons-outlined text-white text-4xl">play_circle_filled</span>
+                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 border-warli cursor-pointer" onclick="playReel(this, 'https://www.youtube.com/embed/L1m41P05XjE?autoplay=1&amp;rel=0')">
+                        <div class="absolute inset-0 z-0 bg-slate-900 flex items-center justify-center">
+                            <div class="video-placeholder absolute inset-0 w-full h-full"></div>
+                        </div>
+                        <img src="pics/pottery_cover.png" class="absolute inset-0 w-full h-full object-cover z-10 transition-all duration-500 group-hover:scale-105" alt="Earth &amp; Clay Cover">
+                        <div class="absolute inset-0 flex items-center justify-center z-15 transition-all duration-500">
+                            <div class="w-14 h-14 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-xl group-hover:scale-115 group-hover:bg-[#B5451B] group-hover:border-[#B5451B] transition-all duration-500 pointer-events-none">
+                                <span class="material-icons-outlined text-3xl">play_arrow</span>
                             </div>
                         </div>
-                        <div class="absolute bottom-0 left-0 p-4 md:p-6 w-full">
+                        <div class="absolute inset-0 gradient-bottom pointer-events-none z-20"></div>
+                        <div class="absolute bottom-0 left-0 p-4 md:p-6 w-full pointer-events-none z-30">
                             <p class="text-accent text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">Handcrafted</p>
                             <h3 class="font-display text-lg md:text-2xl text-white mb-2 leading-tight">Earth &amp; Clay</h3>
                             <div class="flex items-center space-x-2">
@@ -1197,15 +1203,18 @@
                         </div>
                     </div>
                     <!-- Reel 3: Mithila with Pattachitra Border Style -->
-                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer border-pattachitra">
-                        <img alt="Detailed artistic sketch" class="absolute inset-0 w-full h-full object-cover transition-scale duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDE4nm4na4uD2J9ff1aD_bN-TCyLSD5q9rMJ7FCBtMoW7hZvoRntfqkIlKEDd_nJzbOcQl--QHewyUYEjJ-JIx5_Dfpvk6l7W7O01R8Xo33poLMuwokDDKOvRiQKDnOlM528a0mBw5MLd6BVm-YS6i26qdD8kCxfkGp1-x86aCRPDYVgS_jmnTdWuND1FmWr9aM9N4Gji2mEauSvXn6Gp2G7MVVPYZs79C9ivyvg58FID13puV2zDng4dV6uGiAuZU8nod_RDnZ318"/>
-                        <div class="absolute inset-0 gradient-bottom"></div>
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="bg-secondary/40 backdrop-blur-md rounded-full p-4 border border-white/30">
-                                <span class="material-icons-outlined text-white text-4xl">play_circle_filled</span>
+                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 border-pattachitra cursor-pointer" onclick="playReel(this, 'https://www.youtube.com/embed/sL2lUvO2q6c?autoplay=1&amp;rel=0')">
+                        <div class="absolute inset-0 z-0 bg-slate-900 flex items-center justify-center">
+                            <div class="video-placeholder absolute inset-0 w-full h-full"></div>
+                        </div>
+                        <img src="pics/mithila_cover.png" class="absolute inset-0 w-full h-full object-cover z-10 transition-all duration-500 group-hover:scale-105" alt="Vibrant Mithila Cover">
+                        <div class="absolute inset-0 flex items-center justify-center z-15 transition-all duration-500">
+                            <div class="w-14 h-14 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-xl group-hover:scale-115 group-hover:bg-[#B5451B] group-hover:border-[#B5451B] transition-all duration-500 pointer-events-none">
+                                <span class="material-icons-outlined text-3xl">play_arrow</span>
                             </div>
                         </div>
-                        <div class="absolute bottom-0 left-0 p-4 md:p-6 w-full">
+                        <div class="absolute inset-0 gradient-bottom pointer-events-none z-20"></div>
+                        <div class="absolute bottom-0 left-0 p-4 md:p-6 w-full pointer-events-none z-30">
                             <p class="text-secondary text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">Sketch</p>
                             <h3 class="font-display text-lg md:text-2xl text-white mb-2 leading-tight">Vibrant Mithila</h3>
                             <div class="flex items-center space-x-2">
@@ -1215,7 +1224,7 @@
                         </div>
                     </div>
                     <!-- Upload Card: Bright and Celebratory -->
-                    <div class="reel-aspect border-4 border-dashed border-accent/60 dark:border-accent/40 rounded-2xl flex flex-col items-center justify-center p-6 bg-gradient-to-br from-secondary/20 to-accent/10 dark:from-secondary/5 dark:to-accent/5 relative group overflow-hidden">
+                    <div id="uploadReelCard" class="cursor-pointer reel-aspect border-4 border-dashed border-accent/60 dark:border-accent/40 rounded-2xl flex flex-col items-center justify-center p-6 bg-gradient-to-br from-secondary/20 to-accent/10 dark:from-secondary/5 dark:to-accent/5 relative group overflow-hidden">
                         <div class="absolute -top-4 -right-4 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
                         <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-accent/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
                         <div class="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg shadow-accent/20">
@@ -1225,7 +1234,8 @@
                         <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 text-center mb-8 px-2">
                             Upload your creative process and join our community of master artisans.
                         </p>
-                        <button class="bg-primary hover:bg-red-700 text-white px-8 py-3 rounded-full font-bold transition-all shadow-xl hover:shadow-primary/30 flex items-center space-x-2 active:scale-95">
+                        <input type="file" id="reelUploadInput" accept="video/*" capture="environment" class="hidden">
+                        <button id="uploadReelBtn" class="bg-primary hover:bg-red-700 text-white px-8 py-3 rounded-full font-bold transition-all shadow-xl hover:shadow-primary/30 flex items-center space-x-2 active:scale-95">
                             <span class="material-icons-outlined text-lg">cloud_upload</span>
                             <span>Select Story</span>
                         </button>
@@ -1234,9 +1244,13 @@
                         <div class="absolute bottom-4 right-4 w-6 h-6 border-b-4 border-r-4 border-primary/40 rounded-br-lg"></div>
                     </div>
                 </div>
+                <!-- Recorded Reels Container -->
+                <div id="recordedReelsContainer" class="hidden mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 w-full transition-all duration-500">
+                    <!-- Dynamic Uploads injected here -->
+                </div>
                 <!-- Fun Animated Show More Button -->
                 <div class="mt-20 text-center">
-                    <button class="group inline-flex flex-col items-center transition-all">
+                    <button id="viewAllMasterpiecesBtn" class="group inline-flex flex-col items-center transition-all">
                         <div class="bg-white dark:bg-slate-800 px-8 py-3 rounded-full border-2 border-accent text-accent font-bold tracking-widest uppercase text-xs shadow-md group-hover:bg-accent group-hover:text-white group-hover:scale-110 transition-all duration-300 flex items-center space-x-2">
                             <span>View All Masterpieces</span>
                         </div>
@@ -2092,7 +2106,130 @@
                     img.setAttribute('loading', 'lazy');
                 }
             });
+
+            // Artisan Reel Story Upload Logic with IndexedDB Persistence
+            const uploadBtn = document.getElementById('uploadReelBtn');
+            const uploadCard = document.getElementById('uploadReelCard');
+            const fileInput = document.getElementById('reelUploadInput');
+            const viewAllBtn = document.getElementById('viewAllMasterpiecesBtn');
+            const reelsContainer = document.getElementById('recordedReelsContainer');
+            
+            const triggerUpload = () => { if (fileInput) fileInput.click(); };
+            
+            if (uploadBtn) uploadBtn.addEventListener('click', (e) => { e.stopPropagation(); triggerUpload(); });
+            if (uploadCard) uploadCard.addEventListener('click', triggerUpload);
+            
+            // --- INDEXEDDB SETUP FOR PERSISTENCE ---
+            const dbName = "ReelsDB";
+            const storeName = "videos";
+            let db;
+
+            const initDB = () => {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(dbName, 1);
+                    request.onerror = event => reject(event.target.error);
+                    request.onsuccess = event => {
+                        db = event.target.result;
+                        resolve(db);
+                    };
+                    request.onupgradeneeded = event => {
+                        const db = event.target.result;
+                        if (!db.objectStoreNames.contains(storeName)) {
+                            db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
+                        }
+                    };
+                });
+            };
+
+            const saveVideo = async (file) => {
+                const transaction = db.transaction([storeName], "readwrite");
+                const store = transaction.objectStore(storeName);
+                const record = { file: file, timestamp: Date.now() };
+                store.add(record);
+            };
+
+            const renderVideo = (file, position = 'beforeend') => {
+                if (!reelsContainer) return;
+                const videoURL = URL.createObjectURL(file);
+                const newReelHTML = `
+                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl border-4 border-dashed border-accent/60">
+                        <video src="${videoURL}" controls class="absolute inset-0 w-full h-full object-cover"></video>
+                        <div class="absolute top-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-xs backdrop-blur-md z-20">Your Story</div>
+                    </div>
+                `;
+                reelsContainer.insertAdjacentHTML(position, newReelHTML);
+            };
+
+            const loadVideos = async () => {
+                if (!db) return;
+                const transaction = db.transaction([storeName], "readonly");
+                const store = transaction.objectStore(storeName);
+                const request = store.getAll();
+                request.onsuccess = () => {
+                    const videos = request.result;
+                    // Sort descending by timestamp (latest on top)
+                    videos.sort((a, b) => b.timestamp - a.timestamp);
+                    if (videos.length > 0 && reelsContainer) {
+                        reelsContainer.classList.remove('hidden');
+                        videos.forEach(record => {
+                            renderVideo(record.file, 'beforeend');
+                        });
+                    }
+                };
+            };
+
+            initDB().then(() => {
+                loadVideos();
+            }).catch(err => console.error("IndexedDB initialization failed:", err));
+
+            if (fileInput) {
+                fileInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        // Render immediately at the top
+                        renderVideo(file, 'afterbegin');
+                        if (reelsContainer) reelsContainer.classList.remove('hidden');
+                        
+                        // Save to DB
+                        if (db) saveVideo(file);
+                        
+                        alert('Story uploaded successfully!');
+                        // clear input so user can upload same file again if they want
+                        fileInput.value = '';
+                    }
+                });
+            }
+            
+            if (viewAllBtn) {
+                viewAllBtn.addEventListener('click', () => {
+                    reelsContainer.classList.toggle('hidden');
+                    if (!reelsContainer.classList.contains('hidden')) {
+                        reelsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            }
         });
+
+        // Global function to play standard reels dynamically with custom cover fade-outs
+        window.playReel = function(card, embedUrl) {
+            const placeholder = card.querySelector('.video-placeholder');
+            const coverImg = card.querySelector('img');
+            const playBtn = card.querySelector('.z-15');
+            
+            if (placeholder && !placeholder.querySelector('iframe')) {
+                placeholder.innerHTML = `<iframe class="absolute inset-0 w-full h-full object-cover" src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+                
+                // Fade out cover & play button seamlessly
+                if (coverImg) {
+                    coverImg.classList.add('opacity-0');
+                    setTimeout(() => coverImg.style.display = 'none', 500);
+                }
+                if (playBtn) {
+                    playBtn.classList.add('opacity-0');
+                    setTimeout(() => playBtn.style.display = 'none', 500);
+                }
+            }
+        };
     </script>
 </body>
 

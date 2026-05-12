@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dashboard | The Painted Muse</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+            // Mobile Menu Logic
+            const mobileMenuBtns = document.querySelectorAll('.mobile-menu-btn-toggle');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuBtns && closeMenuBtn && mobileMenu) {
+                mobileMenuBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        mobileMenu.classList.remove('translate-x-full');
+                    });
+                });
+
+                closeMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+            }
+
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&amp;family=DM+Sans:wght@400;500;700&amp;family=Mrs+Saint+Delafield&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #B5451B;
+            --accent: #D4AF37;
+            --background: #FDFBF7;
+            --text: #1A1208;
+            --cream: #F5F0E8;
+            --warm: #FFF8F0;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-calligraphy {
+            font-family: 'Mrs Saint Delafield', cursive;
+        }
+
+        .ink-grain {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCRrEuwmrE10cxB2Oae845GDrP3kU-WyjvkShm1EQbrQg1J8AWwsnfTOa_Yd43-yDsPK-k7jiLPfPtwwOdYsTOwnMBabRznvfeo8h3bqtwD5gH2q4U30MBCCjJNiRgFbchZDN5lhWytQEYI5xTmEfIbnzuDLCKKDPl8_NyfmuWMuR86PhGc-JnOKloK4F3ni1MSTH5prPAgGGKWuf8SBOUfiXyBj35iXGC3XCEi91OQTXGj39Posri3UHGrcYXiOqWISXFGxeYn7Z7y);
+            opacity: 0.03;
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99;
+        }
+
+        .warli-border {
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+        }
+
+        .warli-border::before {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            pointer-events: none;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .sidebar-item.active {
+            color: var(--primary);
+            background: rgba(181, 69, 27, 0.05);
+            border-right: 3px solid var(--primary);
+        }
+
+        .artist-card:hover .artist-overlay {
+            opacity: 1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(26, 18, 8, 0.05);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        /* Hide Scrollbar */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col overflow-hidden">
+
+    <!-- Top Nav Bar -->
+    <nav class="w-full z-[100] bg-[#FDFBF7] border-b border-stone-200 flex justify-between items-center px-6 md:px-12 py-4 shrink-0 shadow-sm relative">
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-[#1A1208] rounded-full flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#D4AF37] text-xl">star</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-[#1A1208] font-serif font-bold text-xl leading-none tracking-tight">The Painted Muse</span>
+                    <span class="font-sans text-[8px] uppercase tracking-[0.3em] text-stone-500 mt-1 font-bold">Where India Creates</span>
+                </div>
+            </a>
+        </div>
+        <div class="hidden md:flex gap-10 font-sans text-[10px] font-bold uppercase tracking-[0.15em] items-center">
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html">Home</a>
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#about-india">About</a>
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#journal">Stories</a>
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="artists.html">Be an Artist</a>
+        </div>
+        <div class="flex items-center gap-4 md:gap-6">
+            <button class="mobile-menu-btn-toggle md:hidden text-stone-900 p-2">
+                <span class="material-symbols-outlined text-3xl">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <div id="dashboard-layout-wrapper" class="flex flex-1 overflow-hidden">
+    <div class="ink-grain"></div>
+
+    <!-- Sidebar -->
+    <aside class="w-64 glass-panel border-r border-stone-200 hidden lg:flex flex-col z-50">
+        <div class="p-8 border-b border-stone-100">
+            <a href="index.html" class="font-serif italic font-bold text-xl tracking-tight text-[#1A1208]">The Painted
+                Muse</a>
+        </div>
+        <nav class="flex-1 py-8 overflow-y-auto no-scrollbar">
+            <div class="px-8 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Main Menu</div>
+            <a href="dashboard.html" class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="text-sm font-medium">Overview</span>
+            </a>
+            <a href="dashboard-artists.html" class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">palette</span>
+                <span class="text-sm font-medium">Artists</span>
+            </a>
+            <a href="dashboard-commissions.html" class="sidebar-item active flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">history_edu</span>
+                <span class="text-sm font-medium">My Commissions</span>
+            </a>
+            <a href="dashboard-workshops.html" class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">event_available</span>
+                <span class="text-sm font-medium">Workshops</span>
+            </a>
+
+            <div class="px-8 mt-12 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Discovery</div>
+            <a href="index.html#living-map-section"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">map</span>
+                <span class="text-sm font-medium">Interactive Map</span>
+            </a>
+            <a href="index.html#journal"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">auto_stories</span>
+                <span class="text-sm font-medium">Heritage Journal</span>
+            </a>
+
+            <div class="px-8 mt-12 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Account</div>
+            <a href="#"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="text-sm font-medium">Settings</span>
+            </a>
+        </nav>
+        <div class="p-8 border-t border-stone-100">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-10 h-10 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center overflow-hidden">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User"
+                        class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <div class="text-xs font-bold text-[#1A1208]">Sathwik Manoj</div>
+                    <div class="text-[10px] text-stone-500">Premium Member</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto custom-scrollbar relative">
+        <!-- Top Nav -->
+        <header
+            class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-stone-100 px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4 flex-1">
+                
+                <button class="mobile-menu-btn-toggle lg:hidden text-stone-900 p-2 flex items-center justify-center mr-2">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+                <div class="relative max-w-md w-full">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm">search</span>
+                    <input type="text" placeholder="Search artists, art forms, or regions..."
+                        class="w-full pl-10 pr-4 py-2 bg-stone-100 border-none rounded-lg text-sm focus:ring-1 focus:ring-[#D4AF37]">
+                </div>
+            </div>
+            <div class="flex items-center gap-6">
+                <button class="relative text-stone-500 hover:text-[#B5451B] transition-colors">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span class="absolute -top-1 -right-1 w-2 h-2 bg-[#B5451B] rounded-full"></span>
+                </button>
+                <button
+                    class="font-sans text-[10px] font-bold uppercase tracking-widest bg-[#B5451B] text-white px-4 py-2 rounded shadow-lg hover:bg-[#D4AF37] transition-all">Book
+                    Artist</button>
+            </div>
+        </header>
+
+        <!-- Dashboard Body -->
+        <div class="p-8 space-y-12">
+            
+<section class="mb-12">
+    <h1 class="text-4xl font-serif text-[#1A1208] mb-2">My <span class="italic text-[#D4AF37]">Commissions</span></h1>
+    <p class="text-stone-500 text-lg">Track the progress of your customized heritage artworks and past collections.</p>
+</section>
+
+<!-- Active Commissions -->
+<section class="mb-16">
+    <h2 class="text-2xl font-serif text-[#1A1208] mb-6 border-b border-stone-200 pb-2">Active Commissions</h2>
+    <div class="grid gap-6">
+        <div class="glass-panel p-8 rounded-2xl border border-stone-200 flex flex-col md:flex-row gap-8 items-center bg-white shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-40 h-40 rounded-xl overflow-hidden shadow-lg shrink-0 relative">
+                <img src="pics/kalamkari_art.png" class="w-full h-full object-cover"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </div>
+            <div class="flex-1 w-full">
+                <div class="flex justify-between items-start mb-4 flex-wrap gap-4">
+                    <div>
+                        <h3 class="text-2xl font-serif font-bold text-[#1A1208]">Tree of Life Kalamkari</h3>
+                        <p class="text-sm text-[#B5451B] font-bold uppercase mt-1">Artist: Raghavendra</p>
+                    </div>
+                    <span class="px-4 py-2 bg-yellow-100 text-yellow-700 text-[10px] font-bold uppercase tracking-widest rounded shadow-sm border border-yellow-200">In Progress</span>
+                </div>
+                <p class="text-sm text-stone-500 mb-4 line-clamp-2">"Working on the intricate border detailing with natural dyes. The pomegranate reds are setting beautifully on the cotton fabric." - Raghavendra</p>
+                <div class="w-full bg-stone-100 rounded-full h-3 mb-3 shadow-inner overflow-hidden border border-stone-200"><div class="bg-gradient-to-r from-[#D4AF37] to-[#B5451B] h-3 rounded-full" style="width: 65%"></div></div>
+                <div class="flex justify-between text-xs text-stone-600 font-bold uppercase">
+                    <p class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Started: Apr 12</p>
+                    <p class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">local_shipping</span> Est. Delivery: May 20</p>
+                </div>
+                <div class="mt-6 flex gap-4">
+                    <button class="px-6 py-2 border border-[#B5451B] text-[#B5451B] text-[10px] font-bold uppercase tracking-widest rounded hover:bg-[#B5451B] hover:text-white transition-colors">Message Artist</button>
+                    <button class="px-6 py-2 border border-stone-300 text-stone-600 text-[10px] font-bold uppercase tracking-widest rounded hover:bg-stone-100 transition-colors">View Details</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="glass-panel p-8 rounded-2xl border border-stone-200 flex flex-col md:flex-row gap-8 items-center bg-white shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-40 h-40 rounded-xl overflow-hidden shadow-lg shrink-0 relative">
+                <img src="pics/madhubani_bg.png" class="w-full h-full object-cover"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </div>
+            <div class="flex-1 w-full">
+                <div class="flex justify-between items-start mb-4 flex-wrap gap-4">
+                    <div>
+                        <h3 class="text-2xl font-serif font-bold text-[#1A1208]">Custom Wedding Kohbar</h3>
+                        <p class="text-sm text-[#B5451B] font-bold uppercase mt-1">Artist: Meera Devi</p>
+                    </div>
+                    <span class="px-4 py-2 bg-blue-100 text-blue-700 text-[10px] font-bold uppercase tracking-widest rounded shadow-sm border border-blue-200">Preparing Materials</span>
+                </div>
+                <p class="text-sm text-stone-500 mb-4 line-clamp-2">"Sourcing handmade paper and preparing organic pigments extracted from local flowers for your special wedding piece." - Meera Devi</p>
+                <div class="w-full bg-stone-100 rounded-full h-3 mb-3 shadow-inner overflow-hidden border border-stone-200"><div class="bg-gradient-to-r from-blue-400 to-blue-600 h-3 rounded-full" style="width: 20%"></div></div>
+                <div class="flex justify-between text-xs text-stone-600 font-bold uppercase">
+                    <p class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Started: May 02</p>
+                    <p class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">local_shipping</span> Est. Delivery: June 15</p>
+                </div>
+                <div class="mt-6 flex gap-4">
+                    <button class="px-6 py-2 border border-[#B5451B] text-[#B5451B] text-[10px] font-bold uppercase tracking-widest rounded hover:bg-[#B5451B] hover:text-white transition-colors">Message Artist</button>
+                    <button class="px-6 py-2 border border-stone-300 text-stone-600 text-[10px] font-bold uppercase tracking-widest rounded hover:bg-stone-100 transition-colors">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Past Commissions -->
+<section class="mb-12">
+    <h2 class="text-2xl font-serif text-[#1A1208] mb-6 border-b border-stone-200 pb-2">Past Commissions</h2>
+    <div class="grid gap-6">
+        <div class="glass-panel p-6 rounded-2xl border border-stone-200 flex flex-col md:flex-row gap-6 items-center bg-stone-50 opacity-80 hover:opacity-100 transition-opacity">
+            <div class="w-24 h-24 rounded-lg overflow-hidden shadow shrink-0"><img src="pics/tanjore_art.png" class="w-full h-full object-cover grayscale"/></div>
+            <div class="flex-1 w-full">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h3 class="text-lg font-serif font-bold text-[#1A1208]">Krishna Tanjore Panel</h3>
+                        <p class="text-xs text-stone-500 font-bold uppercase mt-1">Artist: Anjali Pichai</p>
+                    </div>
+                    <span class="px-3 py-1 bg-green-100 text-green-700 text-[9px] font-bold uppercase tracking-widest rounded border border-green-200">Delivered</span>
+                </div>
+                <div class="flex justify-between text-[10px] text-stone-500 font-bold uppercase pt-3 border-t border-stone-200 mt-3">
+                    <p>Delivered: Jan 05, 2026</p>
+                    <p class="flex items-center gap-1 text-[#D4AF37]"><span class="material-symbols-outlined text-[14px]">star</span> You Rated 5.0</p>
+                </div>
+            </div>
+            <div class="shrink-0 flex flex-col gap-2">
+                <button class="w-full px-4 py-2 bg-stone-200 text-stone-700 text-[9px] font-bold uppercase tracking-widest rounded hover:bg-stone-300 transition-colors">Buy Again</button>
+                <button class="w-full px-4 py-2 border border-stone-300 text-stone-600 text-[9px] font-bold uppercase tracking-widest rounded hover:bg-stone-100 transition-colors">Invoice</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+        </div>
+
+        <!-- Footer (Dashboard Style) -->
+        <footer
+            class="mt-auto border-t border-stone-100 p-8 text-center text-stone-400 text-[10px] uppercase tracking-widest font-bold">
+            &copy; 2026 The Painted Muse. All Rights Reserved. · <a href="#" class="hover:text-[#B5451B]">Privacy
+                Policy</a> · <a href="#" class="hover:text-[#B5451B]">Terms of Service</a>
+        </footer>
+    </main>
+    </div><!-- End dashboard-layout-wrapper -->
+
+    <script>
+        const artistsData = {
+            "Maharashtra": [
+                { name: "Jivya Soma Mashe", style: "Warli", experience: "40 Years", img: "pics/warli_pattern_1778230295803.png", rating: 4.9 },
+                { name: "Sunita Dhavale", style: "Warli", experience: "12 Years", img: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&q=80&w=400", rating: 4.7 },
+                { name: "Anil Vangad", style: "Warli", experience: "25 Years", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400", rating: 4.8 },
+                { name: "Mayur Vayeda", style: "Warli", experience: "15 Years", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400", rating: 4.6 }
+            ],
+            "Bihar": [
+                { name: "Dulari Devi", style: "Madhubani", experience: "35 Years", img: "pics/madhubani_pattern_1778230275283.png", rating: 5.0 },
+                { name: "Bauwa Devi", style: "Madhubani", experience: "45 Years", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400", rating: 4.9 },
+                { name: "Mahasundari Devi", style: "Madhubani", experience: "50 Years", img: "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&q=80&w=400", rating: 4.8 },
+                { name: "Jagdamba Devi", style: "Madhubani", experience: "40 Years", img: "https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&q=80&w=400", rating: 4.7 }
+            ],
+            "Rajasthan": [
+                { name: "Kalyan Joshi", style: "Phad", experience: "30 Years", img: "pics/rajasthan_phad_art_pattern_1778229955905.png", rating: 4.9 },
+                { name: "Pradip Mukherjee", style: "Phad", experience: "28 Years", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400", rating: 4.8 },
+                { name: "Shantilal Joshi", style: "Phad", experience: "32 Years", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400", rating: 4.7 },
+                { name: "Vijay Joshi", style: "Phad", experience: "22 Years", img: "https://images.unsplash.com/photo-1542178243-bc20204b1418?auto=format&fit=crop&q=80&w=400", rating: 4.6 }
+            ],
+            "Odisha": [
+                { name: "Sudarshan Sahoo", style: "Pattachitra", experience: "40 Years", img: "pics/pattachitra_pattern_1778230348344.png", rating: 5.0 },
+                { name: "Jagannath Mohapatra", style: "Pattachitra", experience: "35 Years", img: "https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&q=80&w=400", rating: 4.9 },
+                { name: "Bijay Mohapatra", style: "Pattachitra", experience: "20 Years", img: "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&q=80&w=400", rating: 4.7 },
+                { name: "Pramod Maharana", style: "Pattachitra", experience: "18 Years", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400", rating: 4.8 }
+            ]
+        };
+
+        const fallbackRegion = "Bihar";
+
+        async function requestLocation() {
+            const btn = document.getElementById('location-btn');
+            const text = document.getElementById('location-text');
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">sync</span> Accessing...';
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+
+                        try {
+                            // Using BigDataCloud's free reverse geocoding API
+                            const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+                            const data = await response.json();
+
+                            // Get the administrative region (state)
+                            const state = data.principalSubdivision || data.city || "Your Region";
+
+                            // Check if we have specific artists for this state
+                            const regions = Object.keys(artistsData);
+                            const matchedRegion = regions.find(r => state.includes(r));
+
+                            if (matchedRegion) {
+                                updateDashboard(matchedRegion, false, state);
+                            } else {
+                                // If no direct artist match for the state, show state name but use fallback data
+                                updateDashboard(fallbackRegion, false, state);
+                            }
+                        } catch (error) {
+                            console.error("Geocoding error:", error);
+                            updateDashboard(fallbackRegion, true);
+                        }
+                    },
+                    (error) => {
+                        console.error("Location error:", error);
+                        let msg = "Access Denied";
+                        if (error.code === 1) msg = "Location Blocked";
+                        text.innerHTML = `<p class="text-xs text-red-400 font-bold uppercase tracking-widest">${msg}</p><p class="text-sm font-bold">Showing Featured Artists</p>`;
+                        updateDashboard(fallbackRegion, true);
+                    }
+                );
+            } else {
+                updateDashboard(fallbackRegion, true);
+            }
+        }
+
+        function updateDashboard(region, isFallback = false, realStateName = "") {
+            const regionSpan = document.getElementById('current-region');
+            const locationText = document.getElementById('location-text');
+            const locationBtn = document.getElementById('location-btn');
+            const grid = document.getElementById('artists-grid');
+
+            const displayRegion = realStateName || region;
+            regionSpan.innerText = displayRegion;
+            locationText.innerHTML = `
+                <p class="text-xs text-[#D4AF37] font-bold uppercase tracking-widest">${isFallback ? 'Default Region' : 'Location Verified'}</p>
+                <p class="text-sm font-bold">${displayRegion}, India</p>
+            `;
+            locationBtn.classList.add('hidden');
+
+            // Render Artists
+            const artists = artistsData[region] || artistsData[fallbackRegion];
+            grid.innerHTML = '';
+
+            artists.forEach((artist, index) => {
+                const card = `
+                    <div class="warli-border group artist-card rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 opacity-0 animate-fade-in" style="animation-delay: ${index * 100}ms; animation-fill-mode: forwards;">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="${artist.img}" alt="${artist.name}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                            <div class="artist-overlay absolute inset-0 bg-gradient-to-t from-[#B5451B]/90 to-transparent opacity-0 transition-opacity duration-300 flex flex-col justify-end p-4">
+                                <button class="bg-white text-[#B5451B] text-[8px] font-bold uppercase tracking-widest py-2 rounded shadow-lg hover:bg-[#D4AF37] hover:text-white transition-all">View Portfolio</button>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="text-lg font-serif text-[#1A1208] leading-tight">${artist.name}</h4>
+                                <div class="flex items-center gap-1 text-[#D4AF37]">
+                                    <span class="material-symbols-outlined text-xs">star</span>
+                                    <span class="text-[10px] font-bold">${artist.rating}</span>
+                                </div>
+                            </div>
+                            <p class="text-[10px] text-stone-400 uppercase tracking-widest font-bold mb-4">${artist.style} Master · ${artist.experience}</p>
+                            <button class="w-full py-2 bg-[#B5451B] text-white text-[9px] font-bold uppercase tracking-widest rounded hover:bg-[#D4AF37] transition-all">Hire Artist</button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        // Add fade-in animation style
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.6s ease-out forwards;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-[#FDFBF7] translate-x-full transition-transform duration-500 lg:hidden">
+        <div class="flex justify-between items-center p-6 border-b border-stone-100">
+            <span class="text-[#1A1208] font-serif font-bold text-xl">The Painted Muse</span>
+            <button id="close-menu-btn" class="text-stone-900 p-2">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col p-12 gap-8 font-sans text-xl font-bold uppercase tracking-[0.2em]">
+            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard.html">Overview</a>
+            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard-artists.html">Artists</a>
+            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard-commissions.html" class="text-[#B5451B] font-bold">My Commissions</a>
+            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard-workshops.html">Workshops</a>
+            <hr class="border-stone-100 my-2">
+            <a class="mobile-nav-item text-stone-400 text-sm hover:text-stone-600 transition-colors" href="index.html">Main Website</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
