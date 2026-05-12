@@ -84,6 +84,14 @@
         .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 2px; }
+        
+        .custom-scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .custom-scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
 
         /* Moving Nav Underline */
         #nav-indicator {
@@ -301,9 +309,20 @@
                 <p id="rosterCount" class="font-sans text-xs uppercase tracking-widest text-stone-400 font-bold">Showing 6 masters</p>
             </div>
             
-            <!-- Cards Grid -->
-            <div id="artistsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Javascript will populate this -->
+            <!-- Cards Slider -->
+            <div class="relative w-full group py-4">
+                <!-- Navigation Arrows -->
+                <button id="slideLeftBtn" class="absolute -left-4 md:-left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center justify-center text-stone-600 hover:text-[#B5451B] transition-all opacity-0 group-hover:opacity-100 hover:scale-110 disabled:opacity-0 disabled:cursor-not-allowed">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+
+                <div id="artistsGrid" class="flex gap-6 overflow-x-auto pb-12 pt-4 snap-x snap-mandatory px-4 md:px-0 custom-scrollbar-hide">
+                    <!-- Javascript will populate this -->
+                </div>
+
+                <button id="slideRightBtn" class="absolute -right-4 md:-right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center justify-center text-stone-600 hover:text-[#B5451B] transition-all opacity-0 group-hover:opacity-100 hover:scale-110 disabled:opacity-0 disabled:cursor-not-allowed">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
             </div>
             
             <!-- Empty State -->
@@ -483,7 +502,7 @@
             countLabel.textContent = `Showing ${data.length} master${data.length > 1 ? 's' : ''}`;
             
             grid.innerHTML = data.map((item) => `
-                <div class="artisan-card reveal">
+                <div class="artisan-card reveal w-[300px] md:w-[380px] flex-shrink-0 snap-start relative group/card">
                     <div class="h-44 bg-stone-900 relative overflow-hidden">
                         <img src="${item.bgImg}" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-700" alt="${item.art}">
                         <img src="${item.profileImg}" class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-lg z-10" alt="${item.name}">
@@ -511,6 +530,11 @@
             cards.forEach((el, i) => {
                 setTimeout(() => el.classList.add('in'), i * 60);
             });
+            
+            // Trigger scroll event to update arrows
+            setTimeout(() => {
+                if (grid) grid.dispatchEvent(new Event('scroll'));
+            }, 100);
         }
 
         // Search & Region Filter Logic
@@ -566,6 +590,32 @@
             handleScroll(); // Initial check
 
             renderRoster(artistsData);
+            
+            // Slider Logic
+            const artistsGrid = document.getElementById('artistsGrid');
+            const slideLeftBtn = document.getElementById('slideLeftBtn');
+            const slideRightBtn = document.getElementById('slideRightBtn');
+
+            function updateSlideButtons() {
+                if (!artistsGrid || !slideLeftBtn || !slideRightBtn) return;
+                const { scrollLeft, scrollWidth, clientWidth } = artistsGrid;
+                slideLeftBtn.disabled = scrollLeft <= 0;
+                slideRightBtn.disabled = scrollLeft >= scrollWidth - clientWidth - 1;
+            }
+
+            if (slideLeftBtn && slideRightBtn && artistsGrid) {
+                slideLeftBtn.addEventListener('click', () => {
+                    artistsGrid.scrollBy({ left: -400, behavior: 'smooth' });
+                });
+                
+                slideRightBtn.addEventListener('click', () => {
+                    artistsGrid.scrollBy({ left: 400, behavior: 'smooth' });
+                });
+
+                artistsGrid.addEventListener('scroll', updateSlideButtons);
+                window.addEventListener('resize', updateSlideButtons);
+                setTimeout(updateSlideButtons, 100);
+            }
             
             // Mobile Menu Logic
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
