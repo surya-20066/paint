@@ -1,616 +1,278 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Dashboard | The Painted Muse</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
-            // Mobile Menu Logic
-            const mobileMenuBtns = document.querySelectorAll('.mobile-menu-btn-toggle');
-            const closeMenuBtn = document.getElementById('close-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            if (mobileMenuBtns && closeMenuBtn && mobileMenu) {
-                mobileMenuBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        mobileMenu.classList.remove('translate-x-full');
-                    });
-                });
-
-                closeMenuBtn.addEventListener('click', () => {
-                    mobileMenu.classList.add('translate-x-full');
-                });
-            }
-
-    </script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&amp;family=DM+Sans:wght@400;500;700&amp;family=Mrs+Saint+Delafield&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <style>
-        :root {
-            --primary: #B5451B;
-            --accent: #D4AF37;
-            --background: #FDFBF7;
-            --text: #1A1208;
-            --cream: #F5F0E8;
-            --warm: #FFF8F0;
-        }
-
-        .material-symbols-outlined {
-            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
-        }
-
-        body {
-            background-color: var(--background);
-            color: var(--text);
-            font-family: 'DM Sans', sans-serif;
-        }
-
-        .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .font-calligraphy {
-            font-family: 'Mrs Saint Delafield', cursive;
-        }
-
-        .ink-grain {
-            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCRrEuwmrE10cxB2Oae845GDrP3kU-WyjvkShm1EQbrQg1J8AWwsnfTOa_Yd43-yDsPK-k7jiLPfPtwwOdYsTOwnMBabRznvfeo8h3bqtwD5gH2q4U30MBCCjJNiRgFbchZDN5lhWytQEYI5xTmEfIbnzuDLCKKDPl8_NyfmuWMuR86PhGc-JnOKloK4F3ni1MSTH5prPAgGGKWuf8SBOUfiXyBj35iXGC3XCEi91OQTXGj39Posri3UHGrcYXiOqWISXFGxeYn7Z7y);
-            opacity: 0.03;
-            pointer-events: none;
-            position: fixed;
-            inset: 0;
-            z-index: 99;
-        }
-
-        .warli-border {
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            position: relative;
-        }
-
-        .warli-border::before {
-            content: "";
-            position: absolute;
-            inset: 4px;
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            pointer-events: none;
-        }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-        }
-
-        .sidebar-item.active {
-            color: var(--primary);
-            background: rgba(181, 69, 27, 0.05);
-            border-right: 3px solid var(--primary);
-        }
-
-        .artist-card:hover .artist-overlay {
-            opacity: 1;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        .animate-float {
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(26, 18, 8, 0.05);
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 10px;
-        }
-
-        /* Hide Scrollbar */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .shimmer {
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
-            background-size: 200% 100%;
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                background-position: -200% 0;
-            }
-
-            100% {
-                background-position: 200% 0;
-            }
-        }
-    </style>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Upload Artwork | The Painted Muse Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-background":"#241915",outline:"#8b7169","outline-variant":"#dfc0b6","on-error":"#ffffff","surface-bright":"#fff8f6",surface:"#fff8f6","surface-container-low":"#fff1ed",primary:"#942e02",background:"#fff8f6","on-surface":"#241915","surface-container":"#ffe9e3","on-primary":"#ffffff",secondary:"#795900","primary-container":"#b5451b","surface-dim":"#ebd5cf","surface-variant":"#f4ded7","on-primary-container":"#ffe4dc","surface-container-highest":"#f4ded7","secondary-container":"#ffc641","on-surface-variant":"#58423b","surface-container-high":"#fae3dd","surface-container-lowest":"#ffffff","secondary-fixed":"#ffdfa0","primary-fixed":"#ffdbd0",error:"#ba1a1a","on-secondary":"#ffffff"},borderRadius:{DEFAULT:"12px",lg:"16px",xl:"20px",full:"9999px"},spacing:{"margin-edge":"40px",gutter:"24px"},fontFamily:{"label-sm":["DM Sans"],"headline-lg":["Playfair Display"],"headline-md":["Playfair Display"],"body-lg":["DM Sans"],"body-md":["DM Sans"]}}}}
+</script>
+<style>
+body{background:#fff8f6;color:#241915;font-family:'DM Sans',sans-serif;min-height:max(884px,100dvh)}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+.paper-grain{background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.03;pointer-events:none}
+.upload-type{transition:all .3s ease;border:2px solid transparent}
+.upload-type.active{border-color:#942e02;background:rgba(148,46,2,.06)}
+</style>
 </head>
+<body class="bg-surface">
+<div class="fixed inset-0 paper-grain z-0"></div>
+<div class="relative flex h-screen w-full flex-row overflow-hidden z-10">
 
-<body class="min-h-screen flex flex-col overflow-hidden">
+<aside class="hidden lg:flex w-72 flex-col bg-surface-container border-r border-outline-variant h-screen sticky top-0">
+<div class="p-8 cursor-pointer" onclick="window.location.href='index.html'"><img src="logo.jpeg" alt="The Painted Muse Logo" class="h-12 w-auto object-contain mb-2" /></div>
+<nav class="flex-1 px-4"><ul class="flex flex-col gap-2">
+<li onclick="window.location.href='artist-home.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">home</span><p class="font-body-md font-medium">Home</p></li>
+<li onclick="window.location.href='artist-gallery.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">dashboard</span><p class="font-body-md font-medium">Gallery</p></li>
+<li class="flex h-14 items-center gap-4 px-4 rounded-lg bg-primary text-on-primary shadow-sm cursor-default"><span class="material-symbols-outlined">cloud_upload</span><p class="font-body-md font-bold">Upload Artwork</p></li>
+<li onclick="window.location.href='artist-portfolio.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">account_circle</span><p class="font-body-md font-medium">Portfolio</p></li>
+<li onclick="window.location.href='artist-settings.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">settings</span><p class="font-body-md font-medium">Settings</p></li>
+</ul></nav>
+<div class="p-8 border-t border-outline-variant"><div class="flex items-center gap-3"><div class="size-10 bg-surface-dim overflow-hidden border border-outline rounded-full"><img id="sidebar-img" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T"/></div><div><p id="sidebar-name" class="font-label-sm text-on-surface">AMRITA R.</p><p id="sidebar-role" class="text-[10px] text-on-surface-variant">MASTER ARTIST</p></div></div></div>
+</aside>
 
-    <!-- Top Nav Bar -->
-    <nav class="w-full z-[100] bg-[#FDFBF7] border-b border-stone-200 flex justify-between items-center px-6 md:px-12 py-4 shrink-0 shadow-sm relative">
-        <div class="flex items-center gap-4">
-            <a href="index.html" class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-[#1A1208] rounded-full flex items-center justify-center">
-                    <span class="material-symbols-outlined text-[#D4AF37] text-xl">star</span>
-                </div>
-                <div class="flex flex-col">
-                    <span class="text-[#1A1208] font-serif font-bold text-xl leading-none tracking-tight">The Painted Muse</span>
-                    <span class="font-sans text-[8px] uppercase tracking-[0.3em] text-stone-500 mt-1 font-bold">Where India Creates</span>
-                </div>
-            </a>
-        </div>
-        <div class="hidden md:flex gap-10 font-sans text-[10px] font-bold uppercase tracking-[0.15em] items-center">
-            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html">Home</a>
-            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#about-india">About</a>
-            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#journal">Stories</a>
-            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="artists.html">Be an Artist</a>
-        </div>
-        <div class="flex items-center gap-4 md:gap-6">
-            <button class="mobile-menu-btn-toggle md:hidden text-stone-900 p-2">
-                <span class="material-symbols-outlined text-3xl">menu</span>
-            </button>
-        </div>
-    </nav>
+<main class="flex-1 flex flex-col min-w-0 bg-surface-bright h-screen overflow-y-auto">
+<div class="lg:hidden flex items-center bg-surface p-4 border-b border-outline-variant justify-between"><span class="material-symbols-outlined text-on-surface">menu</span><h2 class="text-on-surface font-headline-md text-xl font-bold flex-1 text-center">Upload</h2><div class="size-10"></div></div>
 
-    <div id="dashboard-layout-wrapper" class="flex flex-1 overflow-hidden">
-    <div class="ink-grain"></div>
+<div class="flex flex-col xl:flex-row gap-8 w-full max-w-6xl mx-auto px-6 md:px-10 py-12">
+<!-- Left: Upload Form -->
+<div class="flex-1">
+<header class="mb-8"><h1 class="font-headline-lg text-on-background text-4xl mb-2">New Masterpiece</h1><p class="font-body-lg text-on-surface-variant">Upload high-res art or a short reel to your gallery.</p></header>
 
-    <!-- Sidebar -->
-    <aside class="w-64 glass-panel border-r border-stone-200 hidden lg:flex flex-col z-50">
-        <div class="p-8 border-b border-stone-100">
-            <a href="index.html" class="font-serif italic font-bold text-xl tracking-tight text-[#1A1208]">The Painted
-                Muse</a>
-        </div>
-        <nav class="flex-1 py-8 overflow-y-auto no-scrollbar">
-            <div class="px-8 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Main Menu</div>
-            <a href="dashboard.html" class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
-                <span class="material-symbols-outlined">dashboard</span>
-                <span class="text-sm font-medium">Overview</span>
-            </a>
-            <a href="dashboard-artists.html" class="sidebar-item active flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
-                <span class="material-symbols-outlined">palette</span>
-                <span class="text-sm font-medium">Artists</span>
-            </a>
-            <a href="dashboard-commissions.html" class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
-                <span class="material-symbols-outlined">history_edu</span>
-                <span class="text-sm font-medium">My Commissions</span>
-            </a>
-            <a href="dashboard-workshops.html" class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
-                <span class="material-symbols-outlined">event_available</span>
-                <span class="text-sm font-medium">Workshops</span>
-            </a>
+<!-- Upload Type Selector -->
+<div class="flex gap-4 mb-8">
+<button onclick="setType('art')" id="type-art" class="upload-type active flex-1 flex items-center gap-3 p-5 rounded-xl bg-surface-container-lowest border border-outline-variant cursor-pointer hover:shadow-md">
+<span class="material-symbols-outlined text-primary text-3xl">image</span>
+<div class="text-left"><h3 class="font-headline-md text-lg">Art / Photo</h3><p class="text-xs text-on-surface-variant">PNG, TIFF, JPG</p></div>
+</button>
+<button onclick="setType('reel')" id="type-reel" class="upload-type flex-1 flex items-center gap-3 p-5 rounded-xl bg-surface-container-lowest border border-outline-variant cursor-pointer hover:shadow-md">
+<span class="material-symbols-outlined text-primary text-3xl">movie</span>
+<div class="text-left"><h3 class="font-headline-md text-lg">Reel / Video</h3><p class="text-xs text-on-surface-variant">MP4, MOV, WebM</p></div>
+</button>
+</div>
 
-            <div class="px-8 mt-12 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Discovery</div>
-            <a href="index.html#living-map-section"
-                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
-                <span class="material-symbols-outlined">map</span>
-                <span class="text-sm font-medium">Interactive Map</span>
-            </a>
-            <a href="index.html#journal"
-                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
-                <span class="material-symbols-outlined">auto_stories</span>
-                <span class="text-sm font-medium">Heritage Journal</span>
-            </a>
+<!-- Dropzone -->
+<div class="flex flex-col items-center gap-6 border-2 border-dashed border-outline-variant bg-surface-container-lowest px-6 py-16 rounded-xl group hover:border-primary transition-colors cursor-pointer mb-8" onclick="document.getElementById('fileInput').click()">
+<div class="bg-surface-container p-4 rounded-full"><span class="material-symbols-outlined text-primary text-4xl" id="dropzone-icon">add_photo_alternate</span></div>
+<div class="text-center">
+<p class="text-on-surface font-headline-md text-xl" id="dropzone-title">Drop your artwork here</p>
+<p class="text-on-surface-variant font-body-md text-sm mt-1" id="dropzone-desc">Or click to browse. Min 3000px recommended.</p>
+</div>
+<input type="file" id="fileInput" accept="image/*" class="hidden" onchange="handleFileSelect(event)"/>
+<p id="file-name" class="text-sm text-primary font-bold hidden"></p>
+</div>
 
-            <div class="px-8 mt-12 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Account</div>
-            <a href="#"
-                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
-                <span class="material-symbols-outlined">settings</span>
-                <span class="text-sm font-medium">Settings</span>
-            </a>
-        </nav>
-        <div class="p-8 border-t border-stone-100">
-            <div class="flex items-center gap-3">
-                <div
-                    class="w-10 h-10 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center overflow-hidden">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User"
-                        class="w-full h-full object-cover">
-                </div>
-                <div>
-                    <div class="text-xs font-bold text-[#1A1208]">Sathwik Manoj</div>
-                    <div class="text-[10px] text-stone-500">Premium Member</div>
-                </div>
-            </div>
-        </div>
-    </aside>
+<!-- Form Fields -->
+<div class="bg-surface-container-low border border-outline-variant p-8 rounded-xl grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+<div class="flex flex-col gap-2"><label class="font-label-sm text-on-surface uppercase tracking-widest text-[10px]">Title</label><input id="inp-title" oninput="updatePreview()" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-3 font-headline-md text-xl placeholder:text-outline-variant" placeholder="e.g. Eternal Echoes" type="text"/></div>
+<div class="flex flex-col gap-2"><label class="font-label-sm text-on-surface uppercase tracking-widest text-[10px]">Price (₹)</label><div class="relative"><span class="absolute left-0 top-1/2 -translate-y-1/2 font-headline-md text-xl text-on-surface-variant">₹</span><input id="inp-price" oninput="updatePreview()" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 pl-6 py-3 w-full font-headline-md text-xl placeholder:text-outline-variant" placeholder="0" type="number"/></div></div>
+<div class="flex flex-col gap-2"><label class="font-label-sm text-on-surface uppercase tracking-widest text-[10px]">Status</label><select id="inp-status" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-3 font-body-lg appearance-none cursor-pointer rounded-none"><option value="Available">Available for Sale</option><option value="Reserved">Reserved</option><option value="Sold">Sold / Not for Sale</option></select></div>
+<div class="flex flex-col gap-2"><label class="font-label-sm text-on-surface uppercase tracking-widest text-[10px]">Category</label><select id="inp-category" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-3 font-body-lg appearance-none cursor-pointer rounded-none"><option value="Madhubani">Madhubani</option><option value="Tanjore">Tanjore</option><option value="Warli">Warli</option><option value="Pattachitra">Pattachitra</option></select></div>
+<div class="md:col-span-2 flex flex-col gap-2"><label class="font-label-sm text-on-surface uppercase tracking-widest text-[10px]">Artisan's Note</label><textarea id="inp-desc" oninput="updatePreview()" class="bg-transparent border border-outline-variant text-on-surface focus:border-primary focus:ring-0 p-4 font-body-md placeholder:text-outline-variant resize-none rounded-lg" placeholder="Describe the medium, inspiration..." rows="3"></textarea></div>
+</div>
 
-    <!-- Main Content -->
-    <main class="flex-1 flex flex-col h-screen overflow-y-auto custom-scrollbar relative">
-        <!-- Top Nav -->
-        <header
-            class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-stone-100 px-8 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-4 flex-1">
-                
-                <button class="mobile-menu-btn-toggle lg:hidden text-stone-900 p-2 flex items-center justify-center mr-2">
-                    <span class="material-symbols-outlined text-2xl">menu</span>
-                </button>
-                <div class="relative max-w-md w-full">
-                    <span
-                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm">search</span>
-                    <input type="text" placeholder="Search artists, art retreats, or regions..."
-                        class="w-full pl-10 pr-4 py-2 bg-stone-100 border-none rounded-lg text-sm focus:ring-1 focus:ring-[#D4AF37]">
-                </div>
-            </div>
-            <div class="flex items-center gap-6">
-                <button class="relative text-stone-500 hover:text-[#B5451B] transition-colors">
-                    <span class="material-symbols-outlined">notifications</span>
-                    <span class="absolute -top-1 -right-1 w-2 h-2 bg-[#B5451B] rounded-full"></span>
-                </button>
-                <button
-                    class="font-sans text-[10px] font-bold uppercase tracking-widest bg-[#B5451B] text-white px-4 py-2 rounded shadow-lg hover:bg-[#D4AF37] transition-all">Book
-                    Artist</button>
-            </div>
-        </header>
+<div class="flex flex-col sm:flex-row items-center justify-end gap-4 mb-12">
+<button class="font-label-sm text-on-surface-variant uppercase tracking-widest hover:text-primary transition-colors">Save Draft</button>
+<button onclick="publishItem()" class="h-14 px-10 bg-primary text-on-primary font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg rounded-lg flex items-center gap-2"><span class="material-symbols-outlined">publish</span>Publish to Gallery</button>
+</div>
+</div>
 
-        <!-- Dashboard Body -->
-        <div class="p-8 space-y-12">
-            
-<section class="relative overflow-hidden rounded-3xl bg-stone-900 p-12 text-white shadow-2xl mb-12">
-    <div class="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
-        <img src="pics/warli_pattern_1778230295803.png" alt="Pattern" class="w-full h-full object-cover grayscale invert">
-    </div>
-    <div class="relative z-10 max-w-2xl">
-        <h1 class="text-4xl md:text-5xl font-serif mb-6 leading-tight">Explore Master <br><span class="italic text-[#D4AF37]">Artisans</span></h1>
-        <p class="text-stone-300">Discover hand-picked creators across India and dive deep into their heritage collections.</p>
-    </div>
-</section>
+<!-- Right: Live Preview -->
+<div class="w-full xl:w-96 xl:sticky xl:top-8 xl:self-start">
+<h3 class="font-label-sm text-on-surface uppercase tracking-widest mb-6">Live Preview</h3>
+<div class="border border-outline-variant bg-surface-container-lowest rounded-xl overflow-hidden shadow-lg">
+<!-- Small clickable thumbnail -->
+<div class="aspect-video bg-surface-variant relative overflow-hidden cursor-pointer group" id="preview-media" onclick="openModal()">
+<div class="absolute inset-0 flex items-center justify-center text-outline-variant" id="preview-placeholder"><span class="material-symbols-outlined text-5xl">image</span></div>
+<img id="preview-img" class="w-full h-full object-cover hidden" src=""/>
+<video id="preview-vid" class="w-full h-full object-cover hidden"></video>
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center"><span class="material-symbols-outlined text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity">fullscreen</span></div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2"><h4 class="font-headline-md text-lg" id="preview-title">Untitled Work</h4><span class="text-primary font-bold text-sm" id="preview-price">₹0</span></div>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-3 text-[10px]">Amrita R. • 2024</p>
+<div class="h-[1px] w-full bg-outline-variant mb-3"></div>
+<p class="font-body-md text-on-surface-variant italic text-xs line-clamp-2" id="preview-desc">Your artwork's story will appear here.</p>
+</div>
+</div>
+<div class="mt-6 p-5 bg-secondary-fixed text-on-secondary-fixed rounded-xl">
+<div class="flex items-center gap-2 mb-2"><span class="material-symbols-outlined text-secondary text-lg">verified</span><h5 class="font-label-sm uppercase tracking-widest text-[10px]">Artist Tip</h5></div>
+<p class="text-sm leading-relaxed">Pieces with detailed notes attract 40% more collector inquiries.</p>
+</div>
+</div>
 
-<!-- Featured Master Section -->
-<section class="mb-12">
-    <div class="flex justify-between items-end mb-6">
-        <div>
-            <h2 class="text-2xl font-serif text-[#1A1208]">Featured <span class="italic text-[#D4AF37]">Master of the Month</span></h2>
-            <p class="text-stone-500 text-sm mt-1">Honoring decades of unwavering dedication.</p>
-        </div>
-    </div>
-    <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-xl flex flex-col md:flex-row">
-        <div class="md:w-1/3 h-64 md:h-auto relative">
-            <img src="pics/mithila_cover.png" class="w-full h-full object-cover" alt="Master">
-        </div>
-        <div class="md:w-2/3 p-8 md:p-12 flex flex-col justify-center">
-            <span class="text-[#B5451B] text-[10px] font-bold uppercase tracking-widest mb-2">Madhubani Tradition</span>
-            <h3 class="text-3xl font-serif text-[#1A1208] mb-4">Meera Devi</h3>
-            <p class="text-stone-600 mb-6 leading-relaxed">Meera Devi is a 5th generation Madhubani artist from Mithila, Bihar. Her intricate brushwork captures the essence of ancestral forest dreamscapes. With over 40 years of experience, her works have been displayed in galleries worldwide, bridging the gap between traditional storytelling and modern appreciation.</p>
-            <div class="flex items-center gap-6 text-sm text-stone-500 font-bold mb-8">
-                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[#D4AF37]">star</span> 5.0 Rating</span>
-                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[#D4AF37]">history_edu</span> 150+ Commissions</span>
-            </div>
-            <div>
-                <button class="bg-[#1A1208] text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors rounded">View Full Portfolio</button>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- Fullscreen Modal -->
+<div id="preview-modal" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-8" onclick="closeModal()">
+<button class="absolute top-6 right-6 text-white hover:text-primary transition-colors" onclick="closeModal()"><span class="material-symbols-outlined text-4xl">close</span></button>
+<div class="max-w-4xl max-h-[90vh] w-full flex items-center justify-center" onclick="event.stopPropagation()">
+<img id="modal-img" class="max-w-full max-h-[85vh] object-contain hidden rounded-xl shadow-2xl"/>
+<video id="modal-vid" class="max-w-full max-h-[85vh] object-contain hidden rounded-xl shadow-2xl" controls></video>
+</div>
+</div>
+</div>
+</main>
+</div>
 
-<section class="space-y-6 mb-12">
-    <h2 class="text-2xl font-serif text-[#1A1208]">More <span class="italic text-[#D4AF37]">Masters</span></h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="masters-grid">
-        <div class="warli-border group rounded-xl overflow-hidden bg-white shadow-lg cursor-pointer artist-profile-card" data-name="Rajeshwari Devi" data-art="Madhubani" data-tradition="Madhubani Tradition" data-img="pics/madhubani_bg.png" data-rating="4.9" data-commissions="120+" data-bio="Rajeshwari Devi specializes in Kohbar patterns used in traditional weddings across the Mithila region. Her geometric precision and vibrant natural dyes have earned her national recognition, with exhibitions across Delhi, Mumbai, and international galleries in London.">
-            <div class="h-48 relative"><img src="pics/madhubani_bg.png" class="w-full h-full object-cover"/><div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div></div>
-            <div class="p-6">
-                <h3 class="text-xl font-serif mb-1">Rajeshwari Devi</h3>
-                <p class="text-xs text-[#B5451B] font-bold uppercase tracking-widest mb-4">Madhubani Master</p>
-                <p class="text-sm text-stone-500 mb-4 line-clamp-2">Specializing in Kohbar patterns used in traditional weddings.</p>
-                <button class="w-full py-3 border border-[#B5451B] text-[#B5451B] text-xs font-bold uppercase rounded hover:bg-[#B5451B] hover:text-white transition-all">View Profile</button>
-            </div>
-        </div>
-        <div class="warli-border group rounded-xl overflow-hidden bg-white shadow-lg cursor-pointer artist-profile-card" data-name="Bhaskar Mohapatra" data-art="Pattachitra" data-tradition="Pattachitra Tradition" data-img="pics/pattachitra_art.png" data-rating="5.0" data-commissions="67" data-bio="Bhaskar Mohapatra is a master chitrakar from the legendary village of Raghurajpur, Odisha. He paints epic narratives of gods on handmade palm leaves using natural pigments, continuing a 700-year-old tradition passed through his family lineage.">
-            <div class="h-48 relative"><img src="pics/pattachitra_art.png" class="w-full h-full object-cover"/><div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div></div>
-            <div class="p-6">
-                <h3 class="text-xl font-serif mb-1">Bhaskar Mohapatra</h3>
-                <p class="text-xs text-[#B5451B] font-bold uppercase tracking-widest mb-4">Pattachitra Master</p>
-                <p class="text-sm text-stone-500 mb-4 line-clamp-2">Master chitrakar of Raghurajpur, painting epic narratives of gods.</p>
-                <button class="w-full py-3 border border-[#B5451B] text-[#B5451B] text-xs font-bold uppercase rounded hover:bg-[#B5451B] hover:text-white transition-all">View Profile</button>
-            </div>
-        </div>
-        <div class="warli-border group rounded-xl overflow-hidden bg-white shadow-lg cursor-pointer artist-profile-card" data-name="Jivya Soma Mashe" data-art="Warli" data-tradition="Warli Tradition" data-img="pics/warli_bg.png" data-rating="4.8" data-commissions="52" data-bio="Jivya Soma Mashe is a legendary Warli artist from Maharashtra, reviving the ancient white-on-earth geometric language of the Warli tribe. His minimalist works depicting daily life and rituals have been exhibited at the Pompidou Centre in Paris and the Museum of Sacred Art.">
-            <div class="h-48 relative"><img src="pics/warli_bg.png" class="w-full h-full object-cover"/><div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div></div>
-            <div class="p-6">
-                <h3 class="text-xl font-serif mb-1">Jivya Soma Mashe</h3>
-                <p class="text-xs text-[#B5451B] font-bold uppercase tracking-widest mb-4">Warli Legend</p>
-                <p class="text-sm text-stone-500 mb-4 line-clamp-2">Reviving the ancient white-on-earth geometric language.</p>
-                <button class="w-full py-3 border border-[#B5451B] text-[#B5451B] text-xs font-bold uppercase rounded hover:bg-[#B5451B] hover:text-white transition-all">View Profile</button>
-            </div>
-        </div>
-        <div class="warli-border group rounded-xl overflow-hidden bg-white shadow-lg cursor-pointer artist-profile-card" data-name="Narayana Rao" data-art="Kalamkari" data-tradition="Kalamkari Tradition" data-img="pics/kalamkari_art.png" data-rating="4.7" data-commissions="85" data-bio="Narayana Rao is a celebrated Kalamkari artist from Srikalahasti, Andhra Pradesh. Using natural dyes extracted from roots and flowers, his intricate pen work brings mythological scenes to life on hand-spun cotton, preserving a craft dating back 3,000 years.">
-            <div class="h-48 relative"><img src="pics/kalamkari_art.png" class="w-full h-full object-cover"/><div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div></div>
-            <div class="p-6">
-                <h3 class="text-xl font-serif mb-1">Narayana Rao</h3>
-                <p class="text-xs text-[#B5451B] font-bold uppercase tracking-widest mb-4">Kalamkari Master</p>
-                <p class="text-sm text-stone-500 mb-4 line-clamp-2">Using natural dyes and intricate pen work for mythological scenes.</p>
-                <button class="w-full py-3 border border-[#B5451B] text-[#B5451B] text-xs font-bold uppercase rounded hover:bg-[#B5451B] hover:text-white transition-all">View Profile</button>
-            </div>
-        </div>
-        <div class="warli-border group rounded-xl overflow-hidden bg-white shadow-lg cursor-pointer artist-profile-card" data-name="Kalavati Bai" data-art="Gond Art" data-tradition="Gond Art Tradition" data-img="pics/gond_bg.png" data-rating="4.9" data-commissions="44" data-bio="Kalavati Bai creates whimsical forest dreamscapes styled with vibrant fine lines and custom tribal dot patterns. Her Gond paintings from Madhya Pradesh capture the spiritual bond between the Gond tribe and the natural world, earning her the National Award for Folk Art.">
-            <div class="h-48 relative"><img src="pics/gond_bg.png" class="w-full h-full object-cover"/><div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div></div>
-            <div class="p-6">
-                <h3 class="text-xl font-serif mb-1">Kalavati Bai</h3>
-                <p class="text-xs text-[#B5451B] font-bold uppercase tracking-widest mb-4">Gond Art</p>
-                <p class="text-sm text-stone-500 mb-4 line-clamp-2">Whimsical forest dreamscapes styled with vibrant fine lines.</p>
-                <button class="w-full py-3 border border-[#B5451B] text-[#B5451B] text-xs font-bold uppercase rounded hover:bg-[#B5451B] hover:text-white transition-all">View Profile</button>
-            </div>
-        </div>
-        <div class="warli-border group rounded-xl overflow-hidden bg-white shadow-lg cursor-pointer artist-profile-card" data-name="Rukmini Verma" data-art="Miniature Painting" data-tradition="Miniature Painting Tradition" data-img="pics/miniature_bg.png" data-rating="4.7" data-commissions="91" data-bio="Rukmini Verma creates intricate courtly miniature paintings using squirrel-hair brushes in the royal Bundi tradition of Rajasthan since 1989. Her devotional works on handmade wasli paper are treasured by collectors worldwide for their precision and luminous detail.">
-            <div class="h-48 relative"><img src="pics/miniature_bg.png" class="w-full h-full object-cover"/><div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div></div>
-            <div class="p-6">
-                <h3 class="text-xl font-serif mb-1">Rukmini Verma</h3>
-                <p class="text-xs text-[#B5451B] font-bold uppercase tracking-widest mb-4">Miniature Painting</p>
-                <p class="text-sm text-stone-500 mb-4 line-clamp-2">Intricate courtly squirrel-hair brushwork in royal Bundi tradition.</p>
-                <button class="w-full py-3 border border-[#B5451B] text-[#B5451B] text-xs font-bold uppercase rounded hover:bg-[#B5451B] hover:text-white transition-all">View Profile</button>
-            </div>
-        </div>
-    </div>
-</section>
+<script>
+let currentFileUrl=null;
+let currentFileType='image'; // default
 
-        </div>
+function setType(type){
+document.querySelectorAll('.upload-type').forEach(b=>b.classList.remove('active'));
+document.getElementById('type-'+type).classList.add('active');
+const icon=document.getElementById('dropzone-icon');
+const title=document.getElementById('dropzone-title');
+const desc=document.getElementById('dropzone-desc');
+const fi=document.getElementById('fileInput');
+if(type==='reel'){
+  icon.textContent='video_call';
+  title.textContent='Drop your reel here';
+  desc.textContent='MP4, MOV, WebM up to 100MB';
+  fi.accept='video/*';
+  currentFileType='video';
+} else {
+  icon.textContent='add_photo_alternate';
+  title.textContent='Drop your artwork here';
+  desc.textContent='Or click to browse. Min 3000px recommended.';
+  fi.accept='image/*';
+  currentFileType='image';
+}
+}
 
-        <!-- Footer (Dashboard Style) -->
-        <footer
-            class="mt-auto border-t border-stone-100 p-8 text-center text-stone-400 text-[10px] uppercase tracking-widest font-bold">
-            &copy; 2026 The Painted Muse. All Rights Reserved. · <a href="#" class="hover:text-[#B5451B]">Privacy
-                Policy</a> · <a href="#" class="hover:text-[#B5451B]">Terms of Service</a>
-        </footer>
-    </main>
-    </div><!-- End dashboard-layout-wrapper -->
+function handleFileSelect(e){
+const file=e.target.files[0];
+if(!file)return;
+document.getElementById('file-name').textContent=file.name;
+document.getElementById('file-name').classList.remove('hidden');
+const prevImg=document.getElementById('preview-img');
+const prevVid=document.getElementById('preview-vid');
+const placeholder=document.getElementById('preview-placeholder');
 
-    <script>
-        const artistsData = {
-            "Maharashtra": [
-                { name: "Jivya Soma Mashe", style: "Warli", experience: "40 Years", img: "pics/warli_pattern_1778230295803.png", rating: 4.9 },
-                { name: "Sunita Dhavale", style: "Warli", experience: "12 Years", img: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&q=80&w=400", rating: 4.7 },
-                { name: "Anil Vangad", style: "Warli", experience: "25 Years", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400", rating: 4.8 },
-                { name: "Mayur Vayeda", style: "Warli", experience: "15 Years", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400", rating: 4.6 }
-            ],
-            "Bihar": [
-                { name: "Dulari Devi", style: "Madhubani", experience: "35 Years", img: "pics/madhubani_pattern_1778230275283.png", rating: 5.0 },
-                { name: "Bauwa Devi", style: "Madhubani", experience: "45 Years", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400", rating: 4.9 },
-                { name: "Mahasundari Devi", style: "Madhubani", experience: "50 Years", img: "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&q=80&w=400", rating: 4.8 },
-                { name: "Jagdamba Devi", style: "Madhubani", experience: "40 Years", img: "https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&q=80&w=400", rating: 4.7 }
-            ],
-            "Rajasthan": [
-                { name: "Kalyan Joshi", style: "Phad", experience: "30 Years", img: "pics/rajasthan_phad_art_pattern_1778229955905.png", rating: 4.9 },
-                { name: "Pradip Mukherjee", style: "Phad", experience: "28 Years", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400", rating: 4.8 },
-                { name: "Shantilal Joshi", style: "Phad", experience: "32 Years", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400", rating: 4.7 },
-                { name: "Vijay Joshi", style: "Phad", experience: "22 Years", img: "https://images.unsplash.com/photo-1542178243-bc20204b1418?auto=format&fit=crop&q=80&w=400", rating: 4.6 }
-            ],
-            "Odisha": [
-                { name: "Sudarshan Sahoo", style: "Pattachitra", experience: "40 Years", img: "pics/pattachitra_pattern_1778230348344.png", rating: 5.0 },
-                { name: "Jagannath Mohapatra", style: "Pattachitra", experience: "35 Years", img: "https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&q=80&w=400", rating: 4.9 },
-                { name: "Bijay Mohapatra", style: "Pattachitra", experience: "20 Years", img: "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&q=80&w=400", rating: 4.7 },
-                { name: "Pramod Maharana", style: "Pattachitra", experience: "18 Years", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400", rating: 4.8 }
-            ]
-        };
+currentFileUrl=URL.createObjectURL(file);
 
-        const fallbackRegion = "Bihar";
+if(file.type.startsWith('image/')){
+currentFileType='image';
+prevImg.src=currentFileUrl;
+prevImg.classList.remove('hidden');
+prevVid.classList.add('hidden');
+placeholder.classList.add('hidden');
+}else if(file.type.startsWith('video/')){
+currentFileType='video';
+prevVid.src=currentFileUrl;
+prevVid.classList.remove('hidden');
+prevImg.classList.add('hidden');
+placeholder.classList.add('hidden');
+}
+}
 
-        async function requestLocation() {
-            const btn = document.getElementById('location-btn');
-            const text = document.getElementById('location-text');
-            btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">sync</span> Accessing...';
+function openModal(){
+if(!currentFileUrl)return;
+const modal=document.getElementById('preview-modal');
+const mImg=document.getElementById('modal-img');
+const mVid=document.getElementById('modal-vid');
+if(currentFileType==='image'){
+  mImg.src=currentFileUrl;
+  mImg.classList.remove('hidden');
+  mVid.classList.add('hidden');
+  mVid.pause();
+} else {
+  mVid.src=currentFileUrl;
+  mVid.classList.remove('hidden');
+  mImg.classList.add('hidden');
+}
+modal.classList.remove('hidden');
+modal.classList.add('flex');
+}
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    async (position) => {
-                        const lat = position.coords.latitude;
-                        const lon = position.coords.longitude;
+function closeModal(){
+const modal=document.getElementById('preview-modal');
+modal.classList.add('hidden');
+modal.classList.remove('flex');
+const mVid=document.getElementById('modal-vid');
+mVid.pause();
+}
 
-                        try {
-                            // Using BigDataCloud's free reverse geocoding API
-                            const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
-                            const data = await response.json();
+function updatePreview(){
+const t=document.getElementById('inp-title').value;
+const p=document.getElementById('inp-price').value;
+const d=document.getElementById('inp-desc').value;
+document.getElementById('preview-title').textContent=t||'Untitled Work';
+document.getElementById('preview-price').textContent=p?'₹'+Number(p).toLocaleString('en-IN'):'₹0';
+document.getElementById('preview-desc').textContent=d||"Your artwork's story will appear here.";
+}
 
-                            // Get the administrative region (state)
-                            const state = data.principalSubdivision || data.city || "Your Region";
+function publishItem() {
+  const title = document.getElementById('inp-title').value.trim();
+  const priceVal = document.getElementById('inp-price').value;
+  const status = document.getElementById('inp-status').value;
+  const category = document.getElementById('inp-category').value;
+  const desc = document.getElementById('inp-desc').value.trim();
+  
+  if (!title) {
+    alert('Please enter a title for your masterwork.');
+    return;
+  }
+  
+  if (currentFileType === 'image') {
+    // Publish Post
+    const storedPosts = localStorage.getItem('artist_posts');
+    let posts = storedPosts ? JSON.parse(storedPosts) : [];
+    
+    // Seed default file if user hasn't uploaded
+    const imgUrl = currentFileUrl || 'https://lh3.googleusercontent.com/aida-public/AB6AXuCE85tliyBtatM4Sf9CGMCkZrJLQbMkAvenwVo9STCUkhlAfIfFaU5PR6Y48rZ-4KuIoI4eJK09WtYLHNewz2WrIJDF7vSM-QmXbO-njNqxgped5JbFyOnwVHgsDWZQERAp-dpFK6R30NrvKIMYqnkpxBetfDPqAHpWry3YDm8YSkPQM-KnvLHPRK0yBW8Y4uRF9NOADCjtyLuP8ZjuNSGP2x2zmQmYzZS3FzJ2_Td2xvEs6udYptzb_3IbEQmsQO6uBrO3MZdbXeua';
+    
+    posts.unshift({
+      title: title,
+      category: category,
+      dimensions: '24×36 in',
+      price: parseFloat(priceVal) || 0,
+      status: status,
+      imgUrl: imgUrl
+    });
+    
+    localStorage.setItem('artist_posts', JSON.stringify(posts));
+    
+  } else {
+    // Publish Reel
+    const storedReels = localStorage.getItem('artist_reels');
+    let reels = storedReels ? JSON.parse(storedReels) : [];
+    
+    // Seed default file if user hasn't uploaded
+    const videoUrl = currentFileUrl || 'https://lh3.googleusercontent.com/aida-public/AB6AXuDtntfX-Ln9Zw1VZ0Hpkb2gPLxVGo-8i2HCOQq8MuDWfMJ2R8rgP_bq6LuBgIgo3JgCiAL1gf7XMnMQnarbhaXApQCbdgiH5J6IEDNWep-L2TYfsPvnDvypEd-aqOQD1Cja_lGLbojN9phmbZ6mwRBP9PEOFZcjvFm_WXH7XdrbwO0pOyT242yuLXNIchrOTtBgei5F4QraRKm3KIVqWxT6AX6MpcVZgTW8r293ODOFXu-5fLVr9dMl3bbcU4vwotycF13aX7JWcw0N';
+    
+    reels.unshift({
+      title: title,
+      videoUrl: videoUrl
+    });
+    
+    localStorage.setItem('artist_reels', JSON.stringify(reels));
+  }
+  
+  alert('Successfully published to your Gallery!');
+  window.location.href = 'artist-gallery.html';
+}
 
-                            // Check if we have specific artists for this state
-                            const regions = Object.keys(artistsData);
-                            const matchedRegion = regions.find(r => state.includes(r));
+function loadSidebarProfile() {
+  const storedProfile = localStorage.getItem('artist_profile_data');
+  if (storedProfile) {
+    const profile = JSON.parse(storedProfile);
+    
+    const sbImg = document.getElementById('sidebar-img');
+    const sbName = document.getElementById('sidebar-name');
+    const sbRole = document.getElementById('sidebar-role');
+    
+    if (sbImg) sbImg.src = profile.photoUrl;
+    if (sbName) sbName.textContent = profile.displayName;
+    if (sbRole) sbRole.textContent = profile.specialization.toUpperCase();
+  }
+}
 
-                            if (matchedRegion) {
-                                updateDashboard(matchedRegion, false, state);
-                            } else {
-                                // If no direct artist match for the state, show state name but use fallback data
-                                updateDashboard(fallbackRegion, false, state);
-                            }
-                        } catch (error) {
-                            console.error("Geocoding error:", error);
-                            updateDashboard(fallbackRegion, true);
-                        }
-                    },
-                    (error) => {
-                        console.error("Location error:", error);
-                        let msg = "Access Denied";
-                        if (error.code === 1) msg = "Location Blocked";
-                        text.innerHTML = `<p class="text-xs text-red-400 font-bold uppercase tracking-widest">${msg}</p><p class="text-sm font-bold">Showing Featured Artists</p>`;
-                        updateDashboard(fallbackRegion, true);
-                    }
-                );
-            } else {
-                updateDashboard(fallbackRegion, true);
-            }
-        }
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
-        function updateDashboard(region, isFallback = false, realStateName = "") {
-            const regionSpan = document.getElementById('current-region');
-            const locationText = document.getElementById('location-text');
-            const locationBtn = document.getElementById('location-btn');
-            const grid = document.getElementById('artists-grid');
-
-            const displayRegion = realStateName || region;
-            regionSpan.innerText = displayRegion;
-            locationText.innerHTML = `
-                <p class="text-xs text-[#D4AF37] font-bold uppercase tracking-widest">${isFallback ? 'Default Region' : 'Location Verified'}</p>
-                <p class="text-sm font-bold">${displayRegion}, India</p>
-            `;
-            locationBtn.classList.add('hidden');
-
-            // Render Artists
-            const artists = artistsData[region] || artistsData[fallbackRegion];
-            grid.innerHTML = '';
-
-            artists.forEach((artist, index) => {
-                const card = `
-                    <div class="warli-border group artist-card rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 opacity-0 animate-fade-in" style="animation-delay: ${index * 100}ms; animation-fill-mode: forwards;">
-                        <div class="h-48 overflow-hidden relative">
-                            <img src="${artist.img}" alt="${artist.name}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-                            <div class="artist-overlay absolute inset-0 bg-gradient-to-t from-[#B5451B]/90 to-transparent opacity-0 transition-opacity duration-300 flex flex-col justify-end p-4">
-                                <button class="bg-white text-[#B5451B] text-[8px] font-bold uppercase tracking-widest py-2 rounded shadow-lg hover:bg-[#D4AF37] hover:text-white transition-all">View Portfolio</button>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <h4 class="text-lg font-serif text-[#1A1208] leading-tight">${artist.name}</h4>
-                                <div class="flex items-center gap-1 text-[#D4AF37]">
-                                    <span class="material-symbols-outlined text-xs">star</span>
-                                    <span class="text-[10px] font-bold">${artist.rating}</span>
-                                </div>
-                            </div>
-                            <p class="text-[10px] text-stone-400 uppercase tracking-widest font-bold mb-4">${artist.style} Master · ${artist.experience}</p>
-                            <button class="w-full py-2 bg-[#B5451B] text-white text-[9px] font-bold uppercase tracking-widest rounded hover:bg-[#D4AF37] transition-all">Hire Artist</button>
-                        </div>
-                    </div>
-                `;
-                grid.innerHTML += card;
-            });
-        }
-
-        // Add fade-in animation style
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            .animate-fade-in {
-                animation: fadeIn 0.6s ease-out forwards;
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Artist Profile Modal Logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('artist-modal');
-            const modalClose = document.getElementById('modal-close');
-            const modalBackdrop = document.getElementById('modal-backdrop');
-
-            function openModal(card) {
-                document.getElementById('modal-img').src = card.dataset.img;
-                document.getElementById('modal-img').alt = card.dataset.name;
-                document.getElementById('modal-name').textContent = card.dataset.name;
-                document.getElementById('modal-tradition').textContent = card.dataset.tradition;
-                document.getElementById('modal-bio').textContent = card.dataset.bio;
-                document.getElementById('modal-rating').textContent = card.dataset.rating;
-                document.getElementById('modal-commissions').textContent = card.dataset.commissions;
-                modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeModal() {
-                modal.classList.add('hidden');
-                document.body.style.overflow = '';
-            }
-
-            document.querySelectorAll('.artist-profile-card').forEach(card => {
-                card.addEventListener('click', () => openModal(card));
-            });
-
-            // Also make the Featured Master card clickable
-            const featuredCard = document.querySelector('.bg-white.rounded-3xl.overflow-hidden.border');
-            if (featuredCard) {
-                featuredCard.style.cursor = 'pointer';
-                featuredCard.addEventListener('click', () => {
-                    document.getElementById('modal-img').src = 'pics/mithila_cover.png';
-                    document.getElementById('modal-img').alt = 'Meera Devi';
-                    document.getElementById('modal-name').textContent = 'Meera Devi';
-                    document.getElementById('modal-tradition').textContent = 'Madhubani Tradition';
-                    document.getElementById('modal-bio').textContent = 'Meera Devi is a 5th generation Madhubani artist from Mithila, Bihar. Her intricate brushwork captures the essence of ancestral forest dreamscapes. With over 40 years of experience, her works have been displayed in galleries worldwide, bridging the gap between traditional storytelling and modern appreciation.';
-                    document.getElementById('modal-rating').textContent = '5.0';
-                    document.getElementById('modal-commissions').textContent = '150+';
-                    modal.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                });
-            }
-
-            if (modalClose) modalClose.addEventListener('click', closeModal);
-            if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
-            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-        });
-    </script>
-
-    <!-- Artist Profile Modal -->
-    <div id="artist-modal" class="fixed inset-0 z-[200] hidden">
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="modal-backdrop"></div>
-        <div class="absolute inset-4 md:inset-12 lg:inset-20 bg-[#FDFBF7] rounded-3xl overflow-hidden shadow-2xl border border-stone-200 flex flex-col md:flex-row z-10">
-            <button id="modal-close" class="absolute top-4 right-4 z-20 w-10 h-10 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-stone-600 hover:text-[#B5451B] hover:bg-white transition-all shadow-lg border border-stone-200">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-            <div class="md:w-2/5 h-64 md:h-auto relative shrink-0">
-                <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
-            </div>
-            <div class="md:w-3/5 p-8 md:p-12 flex flex-col justify-center overflow-y-auto">
-                <span id="modal-tradition" class="text-[#B5451B] text-[10px] font-bold uppercase tracking-widest mb-2"></span>
-                <h3 id="modal-name" class="text-3xl font-serif text-[#1A1208] mb-4"></h3>
-                <p id="modal-bio" class="text-stone-600 mb-6 leading-relaxed"></p>
-                <div class="flex items-center gap-6 text-sm text-stone-500 font-bold mb-8">
-                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[#D4AF37]">star</span> <span id="modal-rating"></span> Rating</span>
-                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[#D4AF37]">history_edu</span> <span id="modal-commissions"></span> Commissions</span>
-                </div>
-                <div>
-                    <button class="bg-[#1A1208] text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors rounded">View Full Portfolio</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-[#FDFBF7] translate-x-full transition-transform duration-500 lg:hidden">
-        <div class="flex justify-between items-center p-6 border-b border-stone-100">
-            <span class="text-[#1A1208] font-serif font-bold text-xl">The Painted Muse</span>
-            <button id="close-menu-btn" class="text-stone-900 p-2">
-                <span class="material-symbols-outlined text-3xl">close</span>
-            </button>
-        </div>
-        <div class="flex flex-col p-12 gap-8 font-sans text-xl font-bold uppercase tracking-[0.2em]">
-            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard.html">Overview</a>
-            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard-artists.html" class="text-[#B5451B] font-bold">Artists</a>
-            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard-commissions.html">My Commissions</a>
-            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard-workshops.html">Workshops</a>
-            <hr class="border-stone-100 my-2">
-            <a class="mobile-nav-item text-stone-400 text-sm hover:text-stone-600 transition-colors" href="index.html">Main Website</a>
-        </div>
-    </div>
-
-</body>
-
-</html>
+document.addEventListener('DOMContentLoaded', () => {
+  loadSidebarProfile();
+});
+</script>
+</body></html>
