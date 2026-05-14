@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,30 +13,40 @@
         .serif { font-family: 'Playfair Display', serif; }
         .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
         .reveal.in { opacity: 1; transform: translateY(0); }
+        
+        /* Table Styles */
         .registry-table { width: 100%; border-collapse: separate; border-spacing: 0 12px; }
         .registry-table th { text-align: left; padding: 20px; font-family: 'Playfair Display', serif; font-weight: 600; color: var(--saffron); text-transform: uppercase; letter-spacing: 0.1em; font-size: 13px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
         .registry-table td { padding: 24px 20px; background: white; border-top: 1px solid #F0EDE8; border-bottom: 1px solid #F0EDE8; transition: all 0.3s ease; }
         .registry-table tr td:first-child { border-left: 1px solid #F0EDE8; border-radius: 8px 0 0 8px; }
         .registry-table tr td:last-child { border-right: 1px solid #F0EDE8; border-radius: 0 8px 8px 0; }
         .registry-table tr:hover td { background: var(--cream); border-color: var(--saffron); transform: scale(1.01); }
+        
         .search-bar { border: 1px solid rgba(26, 18, 8, 0.1); background: white; border-radius: 100px; padding: 12px 24px; width: 100%; max-width: 500px; transition: all 0.3s ease; }
         .search-bar:focus-within { border-color: var(--saffron); box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); }
+        
+        /* Custom UI Elements */
         .badge { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; padding: 4px 12px; border-radius: 100px; }
     </style>
 </head>
 <body class="selection:bg-[#D4AF37]/30">
-    <nav class="fixed top-0 w-full z-50 bg-[#FDFBF7]/60 backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-1 border-b border-stone-200/30 shadow-sm">
+    <!-- Navbar (Consistent Branding) -->
+    <nav class="fixed top-0 w-full z-50 bg-[#FDFBF7]/60 backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-2 border-b border-stone-200/30 shadow-sm">
         <a href="index.html" class="flex items-center gap-4">
-    <img src="logo.jpeg" alt="The Painted Muse Logo" class="h-16 w-48 object-contain" />
+    <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
 </a>
         <div class="flex items-center gap-4 md:gap-8">
              <a href="index.html" class="hidden md:block font-sans text-[10px] font-bold uppercase tracking-widest text-stone-500 hover:text-[#B5451B] transition-colors">Back to Sanctuary</a>
              <a href="artists.html" class="hidden sm:block bg-[#1A1208] text-white px-5 py-2 font-sans text-[10px] font-bold uppercase tracking-widest rounded shadow-lg hover:bg-[#D4AF37] hover:text-[#1A1208] transition-all text-center">Book Artisan</a>
+             
+             <!-- Mobile Menu Toggle -->
              <button id="mobile-menu-btn" class="md:hidden text-stone-900 p-2">
                  <span class="material-symbols-outlined text-3xl">menu</span>
              </button>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 md:hidden">
         <div class="flex justify-between items-center p-6 border-b border-stone-100">
             <span class="text-[#1A1208] font-serif font-bold text-xl">Heritage Guide</span>
@@ -51,12 +61,15 @@
             <a href="heritage.html">Archive Search</a>
         </div>
     </div>
+
+    <!-- Hero Section -->
     <header class="pt-48 pb-24 bg-[#F5F0E8] relative overflow-hidden">
         <div class="absolute inset-0 opacity-[0.05] pointer-events-none">
             <img src="pics/madhubani_pattern_1778230275283.png" class="w-full h-full object-cover" alt="pattern">
         </div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Left Side: Main Narrative -->
                 <div class="text-left">
                     <div class="inline-block mb-6">
                         <span class="font-sans text-[10px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold border-b border-[#D4AF37]/30 pb-2">The Great Archive</span>
@@ -66,6 +79,8 @@
                         A living document chronicling the sub-continent's artistic lineage. From tribal murals to courtly miniatures, explore the masters who preserve India's soul.
                     </p>
                 </div>
+                
+                <!-- Right Side: Archive Insights -->
                 <div class="bg-white/40 backdrop-blur-sm p-10 rounded-2xl border border-white/50 shadow-sm relative">
                     <div class="absolute -top-4 -right-4 w-20 h-20 opacity-10">
                         <span class="material-symbols-outlined text-[80px] text-[#D4AF37]">history_edu</span>
@@ -98,6 +113,8 @@
             </div>
         </div>
     </header>
+
+    <!-- Search & Filter Section -->
     <section class="py-12 bg-white sticky top-[72px] z-40 border-b border-stone-100 shadow-sm">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="search-bar flex items-center gap-4">
@@ -115,6 +132,8 @@
             </div>
         </div>
     </section>
+
+    <!-- Registry Table -->
     <main class="py-24 container mx-auto px-6">
         <div class="max-w-6xl mx-auto">
             <div class="overflow-x-auto custom-scrollbar">
@@ -128,9 +147,12 @@
                         </tr>
                     </thead>
                     <tbody id="registryBody">
+                        <!-- Data will be populated via JS -->
                     </tbody>
                 </table>
             </div>
+            
+            <!-- Empty State -->
             <div id="emptyState" class="hidden py-32 text-center">
                 <span class="material-symbols-outlined text-stone-200 text-6xl mb-4">search_off</span>
                 <h3 class="text-2xl font-serif text-stone-400">No records found</h3>
@@ -138,6 +160,9 @@
             </div>
         </div>
     </main>
+
+
+    <!-- Footer -->
     <footer class="bg-[#1A1208] text-white pt-16 pb-8">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-start border-b border-white/5 pb-12 mb-8 gap-12">
@@ -146,7 +171,7 @@
                         <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
                             <span class="material-symbols-outlined text-[#D4AF37]">star</span>
                         </div>
-                        <img src="logo.jpeg" alt="The Painted Muse Logo" class="h-28 w-auto object-contain" />
+                        <img src="dp.png" alt="The Painted Muse Logo" class="h-36 w-auto object-contain" />
                     </div>
                     <p class="text-stone-500 font-sans text-sm leading-relaxed">
                         Curating the subcontinent's most profound artistic expressions for a global audience of seekers and collectors.
@@ -172,7 +197,7 @@
                 </div>
             </div>
             <div class="flex flex-col md:flex-row justify-between items-center text-stone-600 font-sans text-[10px] uppercase tracking-[0.2em] gap-6">
-                <div>Â© 2025 The Painted Muse Â· India's Cultural Bastion</div>
+                <div>© 2025 The Painted Muse · India's Cultural Bastion</div>
                 <div class="flex gap-8">
                     <a href="#" class="hover:text-white transition-colors">Privacy</a>
                     <a href="#" class="hover:text-white transition-colors">Terms</a>
@@ -181,6 +206,7 @@
             </div>
         </div>
     </footer>
+
     <script>
         const heritageData = [
             { state: "Bihar", art: "Madhubani Painting", artist: "Meera Devi", status: "Active Heritage", type: "Painting", region: "North" },
@@ -199,14 +225,17 @@
             { state: "Kerala", art: "Temple Murals", artist: "Sashi Edavarad", status: "Sacred Fresco", type: "Mural", region: "South" },
             { state: "Assam", art: "Assamese Scrolls", artist: "Pradip Baruah", status: "Manuscript Art", type: "Painting", region: "Northeast" }
         ];
+
         function populateTable(data) {
             const body = document.getElementById('registryBody');
             const empty = document.getElementById('emptyState');
+            
             if (data.length === 0) {
                 body.innerHTML = '';
                 empty.classList.remove('hidden');
                 return;
             }
+            
             empty.classList.add('hidden');
             body.innerHTML = data.map((item, i) => `
                 <tr class="reveal">
@@ -231,11 +260,14 @@
                     </td>
                 </tr>
             `).join('');
+            
+            // Re-trigger reveal animation with stagger
             const rows = body.querySelectorAll('.reveal');
             rows.forEach((el, i) => {
                 setTimeout(() => el.classList.add('in'), i * 40);
             });
         }
+
         function getRegionColor(region) {
             switch(region) {
                 case 'North': return 'bg-blue-400';
@@ -246,11 +278,15 @@
                 default: return 'bg-stone-400';
             }
         }
+
+        // Search & Sort logic
         const searchInput = document.getElementById('registrySearch');
         const sortSelect = document.getElementById('sortRegion');
+
         function handleFilter() {
             let filtered = [...heritageData];
             const query = searchInput.value.toLowerCase();
+            
             if (query) {
                 filtered = filtered.filter(item => 
                     item.state.toLowerCase().includes(query) || 
@@ -258,25 +294,36 @@
                     item.artist.toLowerCase().includes(query)
                 );
             }
+            
             if (sortSelect.value === 'alpha') {
                 filtered.sort((a, b) => a.state.localeCompare(b.state));
             }
+            
             populateTable(filtered);
         }
+
         searchInput.addEventListener('input', handleFilter);
         sortSelect.addEventListener('change', handleFilter);
+
+        // Initial populate
         document.addEventListener('DOMContentLoaded', () => {
             populateTable(heritageData);
+            
+            // Mobile Menu Logic
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const closeMenuBtn = document.getElementById('close-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
+
             mobileMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.remove('translate-x-full');
             });
+
             closeMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.add('translate-x-full');
             });
         });
+
+        // Intersection Observer for scroll animations
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -284,6 +331,7 @@
                 }
             });
         }, { threshold: 0.1 });
+        
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     </script>
 </body>

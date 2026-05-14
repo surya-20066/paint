@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -24,13 +25,16 @@
             --border: rgba(26, 18, 8, 0.1);
             --t: 0.3s ease;
         }
+
         .material-symbols-outlined {
             font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
         }
+
         .underline-paintbrush {
             position: relative;
             display: inline-block
         }
+
         .underline-paintbrush::after {
             content: "";
             position: absolute;
@@ -41,17 +45,21 @@
             background: #D4AF37;
             transition: width 0.5s ease-in-out;
         }
+
         .underline-paintbrush:hover::after {
             width: 100%
         }
+
         .border-image-source-madhubani {
             border-image-source: linear-gradient(90deg, #D4AF37 0%, #B5451B 50%, #D4AF37 100%);
             border-image-slice: 1
         }
+
         .warli-border {
             border: 1px solid rgba(212, 175, 55, 0.2);
             position: relative
         }
+
         .warli-border::before {
             content: "";
             position: absolute;
@@ -59,57 +67,71 @@
             border: 1px solid rgba(212, 175, 55, 0.1);
             pointer-events: none
         }
+
         .ink-grain {
             background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCRrEuwmrE10cxB2Oae845GDrP3kU-WyjvkShm1EQbrQg1J8AWwsnfTOa_Yd43-yDsPK-k7jiLPfPtwwOdYsTOwnMBabRznvfeo8h3bqtwD5gH2q4U30MBCCjJNiRgFbchZDN5lhWytQEYI5xTmEfIbnzuDLCKKDPl8_NyfmuWMuR86PhGc-JnOKloK4F3ni1MSTH5prPAgGGKWuf8SBOUfiXyBj35iXGC3XCEi91OQTXGj39Posri3UHGrcYXiOqWISXFGxeYn7Z7y);
             opacity: 0.03
         }
+
         @keyframes fade-in {
             from {
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
         .animate-fade-in {
             animation: fade-in 0.5s ease-out forwards;
         }
+
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-track {
             background: rgba(26, 18, 8, 0.5);
             border-radius: 4px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #D4AF37;
             border-radius: 4px;
         }
+
         @keyframes scroll-carousel {
             0% {
                 transform: translateX(0);
             }
+
             100% {
                 transform: translateX(calc(-350px * 5 - 3rem * 5));
             }
         }
+
         .carousel-track {
             display: flex;
             gap: 3rem;
             width: max-content;
             animation: scroll-carousel 30s linear infinite;
         }
+
         .carousel-track:hover {
             animation-play-state: paused;
         }
+
         body {
             min-height: max(884px, 100dvh);
             overflow-x: hidden;
             background: #FDFBF7;
             color: #1A1208;
         }
+
+        /* Ashoka Chakra Coin Animation */
         .coin {
             font-size: 60px;
             width: 0.1em;
@@ -122,6 +144,7 @@
             animation: rotate_coin 7s infinite linear;
             transform-style: preserve-3d;
         }
+
         @media (max-width: 1024px) {
             .coin {
                 position: relative;
@@ -130,6 +153,7 @@
                 margin: 0 auto 3rem;
             }
         }
+
         .coin .side,
         .coin:before,
         .coin:after {
@@ -146,43 +170,55 @@
             backface-visibility: hidden;
             background: #FDFBF7;
         }
+
         .coin .tails,
         .coin:after {
             left: -0.4em;
             transform: rotateY(90deg);
         }
+
         .coin:before,
         .coin:after {
             background: linear-gradient(#000080, #00004d);
             backface-visibility: hidden;
             transform: rotateY(90deg);
         }
+
         .coin:after {
             transform: rotateY(-90deg);
         }
+
         @keyframes rotate_coin {
             100% {
                 transform: rotateY(360deg);
             }
         }
+
         .coin .side svg {
             display: block;
         }
+
         .svg_back {
             transform: scaleX(-1);
         }
+
+        /* Section backgrounds for light theme */
         .section-light {
             background: #FDFBF7;
         }
+
         .section-cream {
             background: #F5F0E8;
         }
+
         .section-warm {
             background: #FFF8F0;
         }
+
         .calligraphy {
             font-family: 'Lucida Handwriting', 'Lucida Calligraphy', cursive;
             color: #B5451B;
+            /* Heritage Rust */
             font-size: 1.8rem;
             vertical-align: middle;
             line-height: 1;
@@ -191,37 +227,47 @@
             margin: 0 0.3rem;
             filter: drop-shadow(0px 1px 1px rgba(181, 69, 27, 0.1));
         }
+
+        /* Continuous Loop with no gap */
         @keyframes scroll-gapless {
             0% {
                 transform: translateX(0);
             }
+
             100% {
                 transform: translateX(-50%);
             }
         }
+
         .carousel-container {
             overflow: hidden;
             width: 100%;
         }
+
         .carousel-track-gapless {
             display: flex;
             width: max-content;
             animation: scroll-gapless 120s linear infinite;
         }
+
         .carousel-track-gapless:hover {
             animation-play-state: paused;
         }
+
         .journal-card {
             width: 400px;
             flex-shrink: 0;
             padding: 0 1.5rem;
             transition: all 0.5s ease;
         }
+
         .carousel-track-gapless {
             display: flex;
             width: max-content;
             animation: scroll-gapless 60s linear infinite;
         }
+
+        /* Moving Nav Underline */
         #nav-indicator {
             position: absolute;
             bottom: -2px;
@@ -230,31 +276,39 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
         }
+
+        /* Vertical Testimonial Scroll */
         @keyframes scroll-up {
             0% {
                 transform: translateY(0);
             }
+
             100% {
                 transform: translateY(-50%);
             }
         }
+
         .testimonial-col {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
             animation: scroll-up 40s linear infinite;
         }
+
         .testimonial-col:nth-child(2) {
             animation-duration: 50s;
         }
+
         .testimonial-col:nth-child(3) {
             animation-duration: 45s;
         }
+
         .testimonial-container {
             height: 700px;
             overflow: hidden;
             position: relative;
         }
+
         .testimonial-container::before,
         .testimonial-container::after {
             content: "";
@@ -265,14 +319,18 @@
             z-index: 10;
             pointer-events: none;
         }
+
         .testimonial-container::before {
             top: 0;
             background: linear-gradient(to bottom, #F5F0E8, transparent);
         }
+
         .testimonial-container::after {
             bottom: 0;
             background: linear-gradient(to top, #F5F0E8, transparent);
         }
+
+        /* ADDED FROM ADD.CSS */
         .eyebrow {
             display: block;
             font-size: 14px;
@@ -282,9 +340,11 @@
             color: var(--saffron);
             margin-bottom: 12px;
         }
+
         .serif {
             font-family: 'Playfair Display', serif;
         }
+
         .h-scroll {
             display: flex;
             overflow-x: auto;
@@ -294,9 +354,11 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
         .h-scroll::-webkit-scrollbar {
             display: none;
         }
+
         .cat-card {
             min-width: 320px;
             height: 440px;
@@ -308,9 +370,11 @@
             cursor: pointer;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
+
         .cat-card:hover {
             transform: translateY(-10px);
         }
+
         .cat-card .img {
             width: 100%;
             height: 100%;
@@ -318,9 +382,11 @@
             background-position: center;
             transition: transform 0.6s ease;
         }
+
         .cat-card:hover .img {
             transform: scale(1.1);
         }
+
         .cat-card .content {
             position: absolute;
             bottom: 0;
@@ -330,17 +396,20 @@
             background: linear-gradient(transparent, rgba(26, 18, 8, 0.95));
             color: white;
         }
+
         .cat-card h3 {
             font-size: 24px;
             margin-bottom: 8px;
             font-family: 'Playfair Display', serif;
         }
+
         .cat-card p {
             font-size: 14px;
             opacity: 0.85;
             margin-bottom: 20px;
             line-height: 1.5;
         }
+
         .cat-card .btn-text {
             display: flex;
             align-items: center;
@@ -351,12 +420,15 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+
+        /* FOOTER STYLES FROM ADD.CSS */
         footer {
             background: #FDFBF7;
             color: var(--ink);
             padding: 100px 0 40px;
             position: relative;
         }
+
         footer::before {
             content: '';
             position: absolute;
@@ -366,12 +438,14 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--saffron), transparent);
         }
+
         .foot-top {
             display: grid;
             grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
             gap: 48px;
             margin-bottom: 60px;
         }
+
         .foot-brand p {
             color: rgba(26, 18, 8, 0.7);
             font-size: 14px;
@@ -379,10 +453,12 @@
             max-width: 320px;
             line-height: 1.6;
         }
+
         .socials {
             display: flex;
             gap: 12px;
         }
+
         .socials a {
             width: 40px;
             height: 40px;
@@ -393,12 +469,14 @@
             color: var(--ink);
             transition: all var(--t);
         }
+
         .socials a:hover {
             background: var(--saffron);
             color: var(--ink);
             border-color: var(--saffron);
             transform: translateY(-3px);
         }
+
         .foot-col h5 {
             font-family: 'Playfair Display', serif;
             font-style: italic;
@@ -408,22 +486,27 @@
             font-weight: 700;
             letter-spacing: 0.05em;
         }
+
         .foot-col ul {
             list-style: none;
             padding: 0;
         }
+
         .foot-col li {
             margin-bottom: 12px;
         }
+
         .foot-col a {
             font-size: 14px;
             color: rgba(26, 18, 8, 0.75);
             transition: color var(--t);
             text-decoration: none;
         }
+
         .foot-col a:hover {
             color: var(--ink);
         }
+
         .foot-bot {
             border-top: 1px solid rgba(26, 18, 8, 0.1);
             padding-top: 32px;
@@ -435,35 +518,42 @@
             flex-wrap: wrap;
             gap: 16px;
         }
+
         .reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
+
         .reveal.in {
             opacity: 1;
             transform: none;
         }
+
         @media (max-width: 1024px) {
             .foot-top {
                 grid-template-columns: repeat(3, 1fr);
             }
+
             .foot-brand {
                 grid-column: span 3;
                 margin-bottom: 20px;
             }
         }
+
         @media (max-width: 768px) {
             .foot-top {
                 grid-template-columns: repeat(2, 1fr);
             }
+
             .foot-brand {
                 grid-column: span 2;
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -495,48 +585,69 @@
             -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         .reel-aspect {
             aspect-ratio: 9 / 16;
         }
+
         .gradient-bottom {
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 50%);
         }
+
         .border-madhubani {
             border: 12px solid transparent;
             border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><path d="M0 0h40v40H0V0zm20 2a18 18 0 1 0 0 36 18 18 0 0 0 0-36z" fill="%23E63946"/><circle cx="20" cy="20" r="12" fill="%23F4A261"/></svg>') 20 round;
         }
+
         .border-warli {
             border: 10px solid transparent;
             border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><path d="M10 10l20 20M30 10L10 20" stroke="%232A9D8F" stroke-width="2" fill="none"/><circle cx="20" cy="15" r="4" fill="%232A9D8F"/></svg>') 15 round;
         }
+
         .border-pattachitra {
             border: 14px solid transparent;
             border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><rect width="30" height="30" fill="%23F4A261"/><circle cx="15" cy="15" r="8" fill="%23E63946"/></svg>') 15 stretch;
         }
+
         @keyframes bounce-subtle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
         }
+
         .animate-fun {
             animation: bounce-subtle 2s infinite ease-in-out;
         }
     </style>
 </head>
+
 <body class="bg-background font-body-md selection:bg-[#D4AF37]/30" style="color:#1A1208">
-    <nav
-        class="fixed top-0 w-full z-50 bg-[#FDFBF7] backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-1 border-b border-stone-200/30 shadow-sm -translate-y-full transition-all duration-500 opacity-0" id="main-nav">
+
+    <!-- TopAppBar -->
+    <nav class="fixed top-0 w-full z-50 bg-[#FDFBF7] backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-2 border-b border-stone-200/30 shadow-sm -translate-y-full transition-all duration-500 opacity-0"
+        id="main-nav">
+        <!-- Logo Area -->
         <div class="flex items-center gap-4">
             <a href="index.html" class="flex items-center gap-4">
-    <img src="logo.jpeg" alt="The Painted Muse Logo" class="h-16 w-48 object-contain" />
-</a>
+                <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+            </a>
         </div>
-        <div class="hidden md:flex gap-10 font-sans text-[10px] font-bold uppercase tracking-[0.15em] items-center relative" id="nav-links">
+
+        <!-- Nav Links -->
+        <div class="hidden md:flex gap-10 font-sans text-[10px] font-bold uppercase tracking-[0.15em] items-center relative"
+            id="nav-links">
             <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#"
                 data-section="hero">Home</a>
-            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#about-india"
-                data-section="about-india">About</a>
-            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#journal"
-                data-section="journal">Stories</a>
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500"
+                href="index.html#about-india" data-section="about-india">About</a>
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500"
+                href="index.html#journal" data-section="journal">Stories</a>
             <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="explore.html"
                 data-section="art-forms">Art Retreats</a>
             <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="team.html"
@@ -545,24 +656,35 @@
                 data-section="artisans">Be an Artist</a>
             <div id="nav-indicator"></div>
         </div>
+
+
+        <!-- Right Side Actions -->
         <div class="flex items-center gap-4 md:gap-6">
             <button class="text-stone-900 hover:text-[#B5451B] transition-colors flex items-center justify-center">
                 <span class="material-symbols-outlined text-xl md:text-2xl">search</span>
             </button>
-            <button onclick="window.location.href='signin.html'" class="hidden sm:block font-sans text-[10px] font-bold uppercase tracking-wider text-stone-900 px-6 py-2.5 border border-stone-900 hover:bg-stone-50 transition-colors">Artist Login</button>
+            <button onclick="window.location.href='signin.html'"
+                class="hidden sm:block font-sans text-[10px] font-bold uppercase tracking-wider text-stone-900 px-6 py-2.5 border border-stone-900 hover:bg-stone-50 transition-colors">Artist
+                Login</button>
             <button onclick="window.location.href='dashboard.html'"
                 class="hidden lg:flex font-sans text-[10px] font-bold uppercase tracking-wider bg-[#1A1208] text-white px-6 py-2.5 hover:bg-stone-800 transition-all shadow-lg items-center gap-2 group">
                 Book Artist
-                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                <span
+                    class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </button>
+
+            <!-- Mobile Menu Toggle -->
             <button id="mobile-menu-btn" class="md:hidden text-stone-900 p-2">
                 <span class="material-symbols-outlined text-3xl">menu</span>
             </button>
         </div>
     </nav>
-    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 md:hidden">
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 md:hidden">
         <div class="flex justify-between items-center p-6 border-b border-stone-100">
-            <img src="logo.jpeg" alt="The Painted Muse Logo" class="h-12 w-40 object-contain" />
+            <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
             <button id="close-menu-btn" class="text-stone-900 p-2">
                 <span class="material-symbols-outlined text-3xl">close</span>
             </button>
@@ -576,19 +698,31 @@
             <a class="mobile-nav-item" href="artists.html">Be an Artist</a>
         </div>
         <div class="absolute bottom-12 left-12 right-12 flex flex-col gap-4">
-             <button onclick="window.location.href='signin.html'" class="w-full py-4 border border-stone-900 font-sans text-xs font-bold uppercase tracking-widest">Artist Login</button>
-             <button onclick="window.location.href='dashboard.html'" class="w-full py-4 bg-[#1A1208] text-white font-sans text-xs font-bold uppercase tracking-widest">Book an Artist</button>
+            <button onclick="window.location.href='signin.html'"
+                class="w-full py-4 border border-stone-900 font-sans text-xs font-bold uppercase tracking-widest">Artist
+                Login</button>
+            <button onclick="window.location.href='dashboard.html'"
+                class="w-full py-4 bg-[#1A1208] text-white font-sans text-xs font-bold uppercase tracking-widest">Book
+                an Artist</button>
         </div>
     </div>
+
+
+
     <main class="relative">
+        <!-- Hero Section (Full-bleed Video Background like Loyal Daddy) -->
         <section id="hero" class="relative h-screen w-full overflow-hidden">
+            <!-- Full Background Video -->
             <div class="absolute inset-0 z-0">
                 <video autoplay loop muted playsinline class="w-full h-full object-cover">
                     <source src="pics/video.mp4" type="video/mp4">
                 </video>
+                <!-- Dark gradient overlay: deep and immersive for premium feel -->
                 <div class="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-900/60 to-transparent"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/40"></div>
             </div>
+
+            <!-- Overlaid Text Content -->
             <div class="relative z-10 h-full flex flex-col justify-center px-8 md:px-16 lg:px-24 max-w-3xl pt-[72px]">
                 <div class="mb-4">
                     <span class="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-bold">Cultural
@@ -612,12 +746,21 @@
                         Art Retreats
                     </a>
                 </div>
+
+
             </div>
         </section>
+
+
+
+        <!-- About India Section (New) -->
         <section id="about-india" class="py-32 bg-[#FDFBF7] relative overflow-hidden">
+            <!-- Decorative Background Element -->
             <div class="absolute top-0 right-0 w-1/3 h-full opacity-[0.03] pointer-events-none">
                 <img src="pics/madhubani_pattern_1778230275283.png" class="w-full h-full object-cover" alt="pattern">
             </div>
+
+            <!-- Ashoka Chakra 3D Coin (Only visible in this section) -->
             <div class="coin">
                 <div class="side heads">
                     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -662,55 +805,91 @@
                     </svg>
                 </div>
             </div>
+
             <div class="container mx-auto px-6 md:px-12 relative z-10">
                 <div class="max-w-4xl mx-auto text-center mb-20">
-                    <span class="font-sans text-[11px] uppercase tracking-[0.4em] text-[#D4AF37] font-bold mb-4 block">the significance to</span>
-                    <h2 class="text-5xl md:text-6xl font-serif text-[#1A1208] mb-8 italic">Made in <span class="text-[#B5451B] not-italic">India</span></h2>
+                    <span
+                        class="font-sans text-[11px] uppercase tracking-[0.4em] text-[#D4AF37] font-bold mb-4 block">the
+                        significance to</span>
+                    <h2 class="text-5xl md:text-6xl font-serif text-[#1A1208] mb-8 italic">Made in <span
+                            class="text-[#B5451B] not-italic">India</span></h2>
                     <p class="text-xl text-stone-600 font-sans leading-relaxed reveal">
-                        India is a land of timeless traditions, vibrant culture, and extraordinary artistic heritage. Known for its diversity, India brings together different languages, religions, festivals, and customs while maintaining a strong sense of unity and harmony. The country reflects a perfect blend of ancient history and modern progress.
+                        India is a land of timeless traditions, vibrant culture, and extraordinary artistic heritage.
+                        Known for its diversity, India brings together different languages, religions, festivals, and
+                        customs while maintaining a strong sense of unity and harmony. The country reflects a perfect
+                        blend of ancient history and modern progress.
                     </p>
                 </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <!-- Traditions -->
                     <div class="reveal border-t border-stone-200 pt-8">
                         <h3 class="font-serif text-2xl text-[#1A1208] mb-6 flex items-center gap-3">
                             <span class="w-8 h-[1px] bg-[#D4AF37]"></span> Traditions
                         </h3>
                         <p class="text-stone-600 font-sans leading-relaxed text-sm italic">
-                            Indian traditions are deeply rooted in values, spirituality, and respect for family and community. Festivals such as Diwali, Holi, Pongal, Navratri, Eid, and Christmas are celebrated with great joy across the nation. Traditional practices like yoga, meditation, classical rituals, and hospitality continue to shape everyday life in India. The famous phrase â€œAtithi Devo Bhava,â€ meaning â€œGuest is God,â€ reflects the warm and welcoming nature of Indian culture.
+                            Indian traditions are deeply rooted in values, spirituality, and respect for family and
+                            community. Festivals such as Diwali, Holi, Pongal, Navratri, Eid, and Christmas are
+                            celebrated with great joy across the nation. Traditional practices like yoga, meditation,
+                            classical rituals, and hospitality continue to shape everyday life in India. The famous
+                            phrase “Atithi Devo Bhava,” meaning “Guest is God,” reflects the warm and welcoming nature
+                            of Indian culture.
                         </p>
                     </div>
+
+                    <!-- Culture -->
                     <div class="reveal border-t border-stone-200 pt-8">
                         <h3 class="font-serif text-2xl text-[#1A1208] mb-6 flex items-center gap-3">
                             <span class="w-8 h-[1px] bg-[#D4AF37]"></span> Culture
                         </h3>
                         <p class="text-stone-600 font-sans leading-relaxed text-sm">
-                            Indiaâ€™s culture is one of the richest and oldest in the world. It is famous for classical dance forms like Bharatanatyam, Kathak, Kuchipudi, and Odissi, along with traditional music styles such as Carnatic and Hindustani music. Indian clothing represents elegance and tradition. The country is also known for magnificent temples, historical monuments, colorful markets, and diverse cuisines that vary from region to region.
+                            India’s culture is one of the richest and oldest in the world. It is famous for classical
+                            dance forms like Bharatanatyam, Kathak, Kuchipudi, and Odissi, along with traditional music
+                            styles such as Carnatic and Hindustani music. Indian clothing represents elegance and
+                            tradition. The country is also known for magnificent temples, historical monuments, colorful
+                            markets, and diverse cuisines that vary from region to region.
                         </p>
                     </div>
+
+                    <!-- Art -->
                     <div class="reveal border-t border-stone-200 pt-8">
                         <h3 class="font-serif text-2xl text-[#1A1208] mb-6 flex items-center gap-3">
                             <span class="w-8 h-[1px] bg-[#D4AF37]"></span> Art & Paintings
                         </h3>
                         <p class="text-stone-600 font-sans leading-relaxed text-sm">
-                            Indian art and paintings showcase centuries of creativity, spirituality, and storytelling. Traditional painting styles like Madhubani, Tanjore, Warli, Kalamkari, Pattachitra, and Miniature Paintings are admired worldwide for their intricate details and cultural significance. These artworks often depict mythology, nature, village life, gods and goddesses, and historical events. Indian paintings are not just art retreatsâ€”they are reflections of the nationâ€™s soul, traditions, and heritage.
+                            Indian art and paintings showcase centuries of creativity, spirituality, and storytelling.
+                            Traditional painting styles like Madhubani, Tanjore, Warli, Kalamkari, Pattachitra, and
+                            Miniature Paintings are admired worldwide for their intricate details and cultural
+                            significance. These artworks often depict mythology, nature, village life, gods and
+                            goddesses, and historical events. Indian paintings are not just art retreats—they are
+                            reflections of the nation’s soul, traditions, and heritage.
                         </p>
                     </div>
                 </div>
+
+                <!-- Call to Action -->
                 <div class="mt-24 text-center">
-                    <div class="inline-flex items-center gap-4 group cursor-pointer" onclick="document.getElementById('living-map-section').scrollIntoView({behavior: 'smooth'})">
-                        <div class="w-12 h-12 rounded-full border border-stone-200 flex items-center justify-center group-hover:border-[#D4AF37] transition-colors">
+                    <div class="inline-flex items-center gap-4 group cursor-pointer"
+                        onclick="document.getElementById('living-map-section').scrollIntoView({behavior: 'smooth'})">
+                        <div
+                            class="w-12 h-12 rounded-full border border-stone-200 flex items-center justify-center group-hover:border-[#D4AF37] transition-colors">
                             <span class="material-symbols-outlined text-[#D4AF37]">arrow_downward</span>
                         </div>
-                        <span class="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400 group-hover:text-[#1A1208] transition-colors">Continue Your Journey</span>
+                        <span
+                            class="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400 group-hover:text-[#1A1208] transition-colors">Continue
+                            Your Journey</span>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- India's Living Canvas Map Section -->
         <section class="py-32 section-warm overflow-hidden relative" id="living-map-section">
             <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
                 <img alt="Texture" class="w-full h-full object-cover"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaiKo8wj7NSpxtbjBq7XxE9dPBnShaLKI1dStSaEbBlwQXnRpshK_O5rGw4rIsVUC863Pg1c7VLp-5Vcg3X8XQxxnabGYWBMw9mgoRq7eT20WaDdvQzQemUscrJyNITFfyWQMChozHWk9GuXbLKPVRKkPNk1duhuJiQm2o-aBl4Tnxuf-OoMXvZzH7FZt5YmJZIJ4QGgSoIKVkcWlkQuyE1oaUETWqFSoR8qvitHO4bF-U5s-GQ8uo432J2VHYY-muTnss4lPIhFP7" />
             </div>
+
             <div class="container mx-auto px-6 md:px-12 relative z-10">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208]">The Living <span
@@ -718,9 +897,12 @@
                     <p class="font-sans text-lg text-stone-600 mt-4">Trace the lineage of art across the sub-continent.
                     </p>
                 </div>
+
                 <div class="flex flex-col lg:flex-row gap-8 h-[800px] lg:h-[750px]">
+                    <!-- Left: Map Container -->
                     <div
                         class="lg:w-1/2 h-full border border-stone-200 rounded-xl overflow-hidden relative bg-white shadow-lg group">
+                        <!-- Map Loader -->
                         <div id="map-loader"
                             class="absolute inset-0 flex flex-col items-center justify-center bg-white z-30 transition-opacity duration-500">
                             <div
@@ -729,6 +911,8 @@
                             <p class="text-[#D4AF37] font-sans text-xs tracking-widest uppercase animate-pulse">Loading
                                 Cartography</p>
                         </div>
+
+                        <!-- Artist Slogan Overlay -->
                         <div
                             class="absolute top-0 left-0 right-0 z-20 text-center py-6 px-8 bg-gradient-to-b from-white via-white/95 to-transparent pointer-events-none">
                             <h3
@@ -737,11 +921,15 @@
                             </h3>
                             <p
                                 class="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-[#D4AF37] font-bold">
-                                A Canvas for the Creator Â· A Sanctuary for the Muse
+                                A Canvas for the Creator · A Sanctuary for the Muse
                             </p>
                             <div class="w-16 h-[1px] bg-[#D4AF37]/30 mx-auto mt-3"></div>
                         </div>
+
+                        <!-- Map SVG -->
                         <svg id="india-map" class="w-full h-full bg-transparent"></svg>
+
+                        <!-- Map Controls -->
                         <div class="absolute bottom-6 left-6 flex gap-2 z-20 items-center">
                             <button id="zoom-in"
                                 class="w-12 h-12 bg-stone-900/80 backdrop-blur-sm border border-[#D4AF37]/30 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-stone-950 rounded-full flex items-center justify-center transition-all shadow-lg hover:scale-105">
@@ -757,16 +945,21 @@
                                 <span class="material-symbols-outlined">home</span>
                             </button>
                         </div>
+
+                        <!-- View Heritage Guide button placed on the bottom-right of the map box -->
                         <a class="absolute bottom-6 right-6 h-12 bg-[#1A1208]/90 backdrop-blur-sm text-white hover:bg-[#D4AF37] hover:text-[#1A1208] border border-[#D4AF37]/30 rounded-full flex items-center justify-center px-6 transition-all shadow-xl hover:scale-105 font-sans text-[10px] font-bold uppercase tracking-widest gap-2 z-20"
                             href="heritage.html">
                             <span class="material-symbols-outlined text-sm">menu_book</span>
                             View Heritage Guide
                         </a>
                     </div>
+
+                    <!-- Right: State Info Panel -->
                     <div id="state-info-container"
                         class="lg:w-1/2 h-full border border-stone-200 bg-white rounded-xl overflow-hidden shadow-lg relative">
                         <div id="state-info"
                             class="w-full h-full p-8 flex flex-col justify-center items-center text-center transition-opacity duration-300">
+                            <!-- Default State -->
                             <div
                                 class="w-24 h-24 rounded-full border-2 border-dashed border-[#D4AF37]/30 flex items-center justify-center mb-8 animate-[spin_10s_linear_infinite]">
                                 <span
@@ -776,7 +969,8 @@
                             <p class="text-stone-500 font-sans max-w-md text-lg mb-8">Click on any state on the map to
                                 discover its unique living art traditions, techniques, and the master artisans who
                                 preserve them.</p>
-                            <a class="bg-[#1A1208] text-white px-8 py-3.5 rounded font-sans text-[10px] font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#1A1208] transition-all flex items-center gap-2 shadow-lg hover:scale-105" href="heritage.html">
+                            <a class="bg-[#1A1208] text-white px-8 py-3.5 rounded font-sans text-[10px] font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#1A1208] transition-all flex items-center gap-2 shadow-lg hover:scale-105"
+                                href="heritage.html">
                                 <span class="material-symbols-outlined text-sm">menu_book</span>
                                 View Heritage Guide
                             </a>
@@ -785,7 +979,10 @@
                 </div>
             </div>
         </section>
+
+        <!-- Split CTA Section (Shifted below Living Map) -->
         <section class="flex flex-col md:flex-row w-full">
+            <!-- Left: Artist CTA -->
             <div class="w-full md:w-1/2 bg-[#1A1208] text-white py-24 px-12 md:px-24 relative overflow-hidden group">
                 <div class="absolute inset-0 opacity-[0.08] mix-blend-overlay">
                     <img src="pics/warli_bg.png"
@@ -802,11 +999,12 @@
                         your work, get discovered, take bookings, and share your story with the world.</p>
                     <a href="signin.html"
                         class="bg-[#F5F0E8] text-[#1A1208] px-8 py-4 font-sans text-sm font-bold hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors shadow-lg inline-block text-center">Join
-                        as an Artist â†’</a>
-                    <p class="text-[#D4AF37]/60 text-[10px] font-bold uppercase tracking-widest mt-6">FREE TO JOIN Â· NO
+                        as an Artist →</a>
+                    <p class="text-[#D4AF37]/60 text-[10px] font-bold uppercase tracking-widest mt-6">FREE TO JOIN · NO
                         COMMISSION ON FIRST 3 BOOKINGS</p>
                 </div>
             </div>
+            <!-- Right: Collector CTA -->
             <div
                 class="w-full md:w-1/2 bg-[#F5F0E8] text-[#1A1208] py-24 px-12 md:px-24 relative overflow-hidden group">
                 <div class="absolute inset-0 opacity-[0.15] mix-blend-multiply">
@@ -822,14 +1020,16 @@
                     <h2 class="text-4xl md:text-5xl font-serif mb-6">Love Art?</h2>
                     <p class="text-stone-600 font-sans mb-10 leading-relaxed">Collect original pieces, commission custom
                         work, attend retreats, and become part of India's living art community.</p>
-                    <a href="explore.html"
+                    <a href="art-retreats.html"
                         class="bg-[#B5451B] text-white px-8 py-4 font-sans text-sm font-bold hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors shadow-lg inline-block text-center">Start
-                        Exploring â†’</a>
-                    <p class="text-stone-500 text-[10px] font-bold uppercase tracking-widest mt-6">2,400+ ARTISTS Â· 15
-                        ART RETREATS Â· 28 STATES</p>
+                        Exploring →</a>
+                    <p class="text-stone-500 text-[10px] font-bold uppercase tracking-widest mt-6">2,400+ ARTISTS · 15
+                        ART RETREATS · 28 STATES</p>
                 </div>
             </div>
         </section>
+
+        <!-- The Muse Journal (Auto-Scrolling Carousel) -->
         <section class="py-24 section-cream overflow-hidden" id="journal">
             <div class="container mx-auto px-6 md:px-12">
                 <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
@@ -843,15 +1043,20 @@
                         href="#">Read All Entries</a>
                 </div>
             </div>
+
+            <!-- Carousel -->
             <div class="w-full relative mt-8">
+                <!-- Fade edges for smooth scrolling effect -->
                 <div
                     class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none">
                 </div>
                 <div
                     class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none">
                 </div>
+
                 <div class="carousel-container mt-20">
                     <div class="carousel-track-gapless">
+                        <!-- Set 1 -->
                         <div class="journal-card group cursor-pointer">
                             <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
                                 <img alt="Journal"
@@ -863,6 +1068,7 @@
                             <h4 class="text-2xl font-serif text-[#D4AF37] mt-3 group-hover:italic transition-all">The
                                 Silence of the Brush</h4>
                         </div>
+
                         <div class="journal-card group cursor-pointer">
                             <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
                                 <img alt="Journal"
@@ -875,6 +1081,7 @@
                                 &amp;
                                 Gesso</h4>
                         </div>
+
                         <div class="journal-card group cursor-pointer">
                             <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
                                 <img alt="Journal"
@@ -887,6 +1094,7 @@
                                 Digital
                                 Manuscripts</h4>
                         </div>
+
                         <div class="journal-card group cursor-pointer">
                             <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
                                 <img alt="Journal"
@@ -898,6 +1106,7 @@
                             <h4 class="text-2xl font-serif text-[#D4AF37] mt-3 group-hover:italic transition-all">The
                                 Madhubani Line</h4>
                         </div>
+
                         <div class="journal-card group cursor-pointer">
                             <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
                                 <img alt="Journal"
@@ -910,6 +1119,8 @@
                                 Scrolls of
                                 Raghurajpur</h4>
                         </div>
+
+                        <!-- Duplicates for Seamless Loop -->
                         <div class="journal-card group cursor-pointer">
                             <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
                                 <img alt="Journal"
@@ -921,6 +1132,7 @@
                             <h4 class="text-2xl font-serif text-[#D4AF37] mt-3 group-hover:italic transition-all">The
                                 Silence of the Brush</h4>
                         </div>
+
                         <div class="journal-card group cursor-pointer">
                             <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
                                 <img alt="Journal"
@@ -933,6 +1145,7 @@
                                 &amp;
                                 Gesso</h4>
                         </div>
+
                         <div class="journal-card group cursor-pointer">
                             <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
                                 <img alt="Journal"
@@ -945,6 +1158,7 @@
                                 Digital
                                 Manuscripts</h4>
                         </div>
+
                         <div class="journal-card group cursor-pointer">
                             <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
                                 <img alt="Journal"
@@ -956,6 +1170,7 @@
                             <h4 class="text-2xl font-serif text-[#D4AF37] mt-3 group-hover:italic transition-all">The
                                 Madhubani Line</h4>
                         </div>
+
                         <div class="journal-card group cursor-pointer">
                             <div class="overflow-hidden mb-6 aspect-square border border-[#D4AF37]/20 shadow-lg">
                                 <img alt="Journal"
@@ -971,8 +1186,13 @@
                     </div>
                 </div>
             </div>
+
+
         </section>
-        <section id="yreel-hub" class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-sans relative">
+
+        <!-- yReel Hub Section -->
+        <section id="yreel-hub"
+            class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-sans relative">
             <div class="max-w-screen-xl mx-auto px-6 py-12 md:py-24 relative z-10">
                 <header class="text-center mb-16">
                     <h2 class="font-display text-5xl md:text-6xl font-bold text-[#D4AF37] mb-4 tracking-tight">
@@ -984,96 +1204,149 @@
                     </p>
                 </header>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 border-madhubani cursor-pointer" onclick="playReel(this, 'https://www.youtube.com/embed/bW9oJ1iT9G0?autoplay=1&amp;rel=0')">
+                    <!-- Reel 1: Tanjore with Madhubani Border Style -->
+                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 border-madhubani cursor-pointer"
+                        onclick="playReel(this, 'https://www.youtube.com/embed/bW9oJ1iT9G0?autoplay=1&amp;rel=0')">
                         <div class="absolute inset-0 z-0 bg-slate-900 flex items-center justify-center">
                             <div class="video-placeholder absolute inset-0 w-full h-full"></div>
                         </div>
-                        <img src="pics/tanjore_cover.png" class="absolute inset-0 w-full h-full object-cover z-10 transition-all duration-500 group-hover:scale-105" alt="The Tanjore Stroke Cover">
+                        <img src="pics/tanjore_cover.png"
+                            class="absolute inset-0 w-full h-full object-cover z-10 transition-all duration-500 group-hover:scale-105"
+                            alt="The Tanjore Stroke Cover">
                         <div class="absolute inset-0 flex items-center justify-center z-15 transition-all duration-500">
-                            <div class="w-14 h-14 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-xl group-hover:scale-115 group-hover:bg-[#B5451B] group-hover:border-[#B5451B] transition-all duration-500 pointer-events-none">
+                            <div
+                                class="w-14 h-14 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-xl group-hover:scale-115 group-hover:bg-[#B5451B] group-hover:border-[#B5451B] transition-all duration-500 pointer-events-none">
                                 <span class="material-icons-outlined text-3xl">play_arrow</span>
                             </div>
                         </div>
                         <div class="absolute inset-0 gradient-bottom pointer-events-none z-20"></div>
                         <div class="absolute bottom-0 left-0 p-4 md:p-6 w-full pointer-events-none z-30">
-                            <p class="text-secondary text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">Tradition</p>
-                            <h3 class="font-display text-lg md:text-2xl text-white mb-2 leading-tight">The Tanjore Stroke</h3>
+                            <p class="text-secondary text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">
+                                Tradition</p>
+                            <h3 class="font-display text-lg md:text-2xl text-white mb-2 leading-tight">The Tanjore
+                                Stroke</h3>
                             <div class="flex items-center space-x-2">
-                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary flex items-center justify-center text-[10px] text-white font-bold">RM</div>
+                                <div
+                                    class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary flex items-center justify-center text-[10px] text-white font-bold">
+                                    RM</div>
                                 <span class="text-white/80 text-xs md:text-sm truncate">@Rajan_Masters</span>
                             </div>
                         </div>
                     </div>
-                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 border-warli cursor-pointer" onclick="playReel(this, 'https://www.youtube.com/embed/L1m41P05XjE?autoplay=1&amp;rel=0')">
+                    <!-- Reel 2: Pottery with Warli Border Style -->
+                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 border-warli cursor-pointer"
+                        onclick="playReel(this, 'https://www.youtube.com/embed/L1m41P05XjE?autoplay=1&amp;rel=0')">
                         <div class="absolute inset-0 z-0 bg-slate-900 flex items-center justify-center">
                             <div class="video-placeholder absolute inset-0 w-full h-full"></div>
                         </div>
-                        <img src="pics/pottery_cover.png" class="absolute inset-0 w-full h-full object-cover z-10 transition-all duration-500 group-hover:scale-105" alt="Earth &amp; Clay Cover">
+                        <img src="pics/pottery_cover.png"
+                            class="absolute inset-0 w-full h-full object-cover z-10 transition-all duration-500 group-hover:scale-105"
+                            alt="Earth &amp; Clay Cover">
                         <div class="absolute inset-0 flex items-center justify-center z-15 transition-all duration-500">
-                            <div class="w-14 h-14 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-xl group-hover:scale-115 group-hover:bg-[#B5451B] group-hover:border-[#B5451B] transition-all duration-500 pointer-events-none">
+                            <div
+                                class="w-14 h-14 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-xl group-hover:scale-115 group-hover:bg-[#B5451B] group-hover:border-[#B5451B] transition-all duration-500 pointer-events-none">
                                 <span class="material-icons-outlined text-3xl">play_arrow</span>
                             </div>
                         </div>
                         <div class="absolute inset-0 gradient-bottom pointer-events-none z-20"></div>
                         <div class="absolute bottom-0 left-0 p-4 md:p-6 w-full pointer-events-none z-30">
-                            <p class="text-accent text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">Handcrafted</p>
-                            <h3 class="font-display text-lg md:text-2xl text-white mb-2 leading-tight">Earth &amp; Clay</h3>
+                            <p class="text-accent text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">
+                                Handcrafted</p>
+                            <h3 class="font-display text-lg md:text-2xl text-white mb-2 leading-tight">Earth &amp; Clay
+                            </h3>
                             <div class="flex items-center space-x-2">
-                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-slate-600 flex items-center justify-center text-[10px] text-white font-bold">SK</div>
+                                <div
+                                    class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-slate-600 flex items-center justify-center text-[10px] text-white font-bold">
+                                    SK</div>
                                 <span class="text-white/80 text-xs md:text-sm truncate">@Sita_Kumari</span>
                             </div>
                         </div>
                     </div>
-                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 border-pattachitra cursor-pointer" onclick="playReel(this, 'https://www.youtube.com/embed/sL2lUvO2q6c?autoplay=1&amp;rel=0')">
+                    <!-- Reel 3: Mithila with Pattachitra Border Style -->
+                    <div class="group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 border-pattachitra cursor-pointer"
+                        onclick="playReel(this, 'https://www.youtube.com/embed/sL2lUvO2q6c?autoplay=1&amp;rel=0')">
                         <div class="absolute inset-0 z-0 bg-slate-900 flex items-center justify-center">
                             <div class="video-placeholder absolute inset-0 w-full h-full"></div>
                         </div>
-                        <img src="pics/mithila_cover.png" class="absolute inset-0 w-full h-full object-cover z-10 transition-all duration-500 group-hover:scale-105" alt="Vibrant Mithila Cover">
+                        <img src="pics/mithila_cover.png"
+                            class="absolute inset-0 w-full h-full object-cover z-10 transition-all duration-500 group-hover:scale-105"
+                            alt="Vibrant Mithila Cover">
                         <div class="absolute inset-0 flex items-center justify-center z-15 transition-all duration-500">
-                            <div class="w-14 h-14 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-xl group-hover:scale-115 group-hover:bg-[#B5451B] group-hover:border-[#B5451B] transition-all duration-500 pointer-events-none">
+                            <div
+                                class="w-14 h-14 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-xl group-hover:scale-115 group-hover:bg-[#B5451B] group-hover:border-[#B5451B] transition-all duration-500 pointer-events-none">
                                 <span class="material-icons-outlined text-3xl">play_arrow</span>
                             </div>
                         </div>
                         <div class="absolute inset-0 gradient-bottom pointer-events-none z-20"></div>
                         <div class="absolute bottom-0 left-0 p-4 md:p-6 w-full pointer-events-none z-30">
-                            <p class="text-secondary text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">Sketch</p>
-                            <h3 class="font-display text-lg md:text-2xl text-white mb-2 leading-tight">Vibrant Mithila</h3>
+                            <p class="text-secondary text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1">
+                                Sketch</p>
+                            <h3 class="font-display text-lg md:text-2xl text-white mb-2 leading-tight">Vibrant Mithila
+                            </h3>
                             <div class="flex items-center space-x-2">
-                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-amber-600 flex items-center justify-center text-[10px] text-white font-bold">AP</div>
+                                <div
+                                    class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-amber-600 flex items-center justify-center text-[10px] text-white font-bold">
+                                    AP</div>
                                 <span class="text-white/80 text-xs md:text-sm truncate">@Amit_Paints</span>
                             </div>
                         </div>
                     </div>
-                    <div id="uploadReelCard" class="cursor-pointer reel-aspect border-4 border-dashed border-accent/60 dark:border-accent/40 rounded-2xl flex flex-col items-center justify-center p-6 bg-gradient-to-br from-secondary/20 to-accent/10 dark:from-secondary/5 dark:to-accent/5 relative group overflow-hidden" onclick="window.location.href='signin.html'">
-                        <div class="absolute -top-4 -right-4 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
-                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-accent/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
-                        <div class="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg shadow-accent/20">
+                    <!-- Upload Card: Bright and Celebratory -->
+                    <div id="uploadReelCard"
+                        class="cursor-pointer reel-aspect border-4 border-dashed border-accent/60 dark:border-accent/40 rounded-2xl flex flex-col items-center justify-center p-6 bg-gradient-to-br from-secondary/20 to-accent/10 dark:from-secondary/5 dark:to-accent/5 relative group overflow-hidden"
+                        onclick="window.location.href='signin.html'">
+                        <div
+                            class="absolute -top-4 -right-4 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700">
+                        </div>
+                        <div
+                            class="absolute -bottom-4 -left-4 w-16 h-16 bg-accent/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700">
+                        </div>
+                        <div
+                            class="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg shadow-accent/20">
                             <span class="material-icons-outlined text-3xl">add_photo_alternate</span>
                         </div>
-                        <h3 class="font-display text-2xl font-bold text-slate-800 dark:text-white mb-3 text-center leading-tight">Share Your Magic</h3>
+                        <h3
+                            class="font-display text-2xl font-bold text-slate-800 dark:text-white mb-3 text-center leading-tight">
+                            Share Your Magic</h3>
                         <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 text-center mb-8 px-2">
                             Upload your creative process and join our community of master artisans.
                         </p>
                         <input type="file" id="reelUploadInput" accept="video/*" capture="environment" class="hidden">
-                        <button id="uploadReelBtn" class="bg-primary hover:bg-red-700 text-white px-8 py-3 rounded-full font-bold transition-all shadow-xl hover:shadow-primary/30 flex items-center space-x-2 active:scale-95" onclick="event.stopPropagation(); window.location.href='signin.html'">
+                        <button id="uploadReelBtn"
+                            class="bg-primary hover:bg-red-700 text-white px-8 py-3 rounded-full font-bold transition-all shadow-xl hover:shadow-primary/30 flex items-center space-x-2 active:scale-95"
+                            onclick="event.stopPropagation(); window.location.href='signin.html'">
                             <span class="material-icons-outlined text-lg">cloud_upload</span>
                             <span>Select Story</span>
                         </button>
-                        <div class="absolute top-4 left-4 w-6 h-6 border-t-4 border-l-4 border-primary/40 rounded-tl-lg"></div>
-                        <div class="absolute bottom-4 right-4 w-6 h-6 border-b-4 border-r-4 border-primary/40 rounded-br-lg"></div>
+                        <!-- Corner Accents -->
+                        <div
+                            class="absolute top-4 left-4 w-6 h-6 border-t-4 border-l-4 border-primary/40 rounded-tl-lg">
+                        </div>
+                        <div
+                            class="absolute bottom-4 right-4 w-6 h-6 border-b-4 border-r-4 border-primary/40 rounded-br-lg">
+                        </div>
                     </div>
                 </div>
+                <!-- Fun Animated Show More Button -->
                 <div class="mt-20 text-center">
-                    <button onclick="window.location.href='masterpieces.html'" id="viewAllMasterpiecesBtn" class="group inline-flex flex-col items-center transition-all">
-                        <div class="bg-white dark:bg-slate-800 px-8 py-3 rounded-full border-2 border-accent text-accent font-bold tracking-widest uppercase text-xs shadow-md group-hover:bg-accent group-hover:text-white group-hover:scale-110 transition-all duration-300 flex items-center space-x-2">
+                    <button onclick="window.location.href='masterpieces.html'" id="viewAllMasterpiecesBtn"
+                        class="group inline-flex flex-col items-center transition-all">
+                        <div
+                            class="bg-white dark:bg-slate-800 px-8 py-3 rounded-full border-2 border-accent text-accent font-bold tracking-widest uppercase text-xs shadow-md group-hover:bg-accent group-hover:text-white group-hover:scale-110 transition-all duration-300 flex items-center space-x-2">
                             <span>View All Masterpieces</span>
                         </div>
-                        <span class="material-icons-outlined text-primary text-3xl mt-4 animate-fun">expand_circle_down</span>
+                        <span
+                            class="material-icons-outlined text-primary text-3xl mt-4 animate-fun">expand_circle_down</span>
                     </button>
                 </div>
             </div>
-            <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.04] dark:opacity-[0.07] z-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuANejk-qUx7pDU-v57NBJU5x3fmcRnSecK_jcTJJAEMkElUF1u3KQsJLsNNlbRt05Myc9jxHxrgvyUL8xvqR9XxuW1JCftti41cU-vCc7V50vm7jwiP32btDw_10KiB6VQfbPryg-dC9OTua0QzNJed6vnJZ8mzaCA8AdOtKlMf_DxiOwxrLtC2gIoFB9nCJfPlcJzS-0VdaHRQ8W5TGZOOHfULRgFhUaBxmutidcpMHFCrj2U_r6GI0dDRu7Wh9doX9fcQYVOd7F35'); background-size: 200px;"></div>
+            <!-- Textured Background -->
+            <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.04] dark:opacity-[0.07] z-0"
+                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuANejk-qUx7pDU-v57NBJU5x3fmcRnSecK_jcTJJAEMkElUF1u3KQsJLsNNlbRt05Myc9jxHxrgvyUL8xvqR9XxuW1JCftti41cU-vCc7V50vm7jwiP32btDw_10KiB6VQfbPryg-dC9OTua0QzNJed6vnJZ8mzaCA8AdOtKlMf_DxiOwxrLtC2gIoFB9nCJfPlcJzS-0VdaHRQ8W5TGZOOHfULRgFhUaBxmutidcpMHFCrj2U_r6GI0dDRu7Wh9doX9fcQYVOd7F35'); background-size: 200px;">
+            </div>
         </section>
+
+        <!-- Meet the Makers Section -->
         <section class="py-28 section-cream" id="artisans">
             <div class="container mx-auto px-6 md:px-12 text-center">
                 <div class="flex items-center justify-center gap-4 mb-6">
@@ -1084,7 +1357,9 @@
                 </div>
                 <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-4">Meet the Makers</h2>
                 <p class="font-sans text-stone-500 mb-16">Real artists. Real stories. Every piece handcrafted.</p>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                    <!-- Card 1 -->
                     <div
                         class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
                         <div class="h-40 bg-stone-900 relative">
@@ -1104,7 +1379,7 @@
                                     class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Madhubani</span>
                             </div>
                             <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
-                                â˜…â˜…â˜…â˜…â˜… <span class="text-stone-500 font-sans ml-1">4.9 Â· 48 bookings</span>
+                                ★★★★★ <span class="text-stone-500 font-sans ml-1">4.9 · 48 bookings</span>
                             </div>
                             <p class="text-stone-600 font-sans text-sm mb-6 h-10">5th generation Madhubani artist from
                                 Mithila, Bihar.</p>
@@ -1114,10 +1389,11 @@
                                     Portfolio</button>
                                 <button onclick="window.location.href='dashboard.html'"
                                     class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
-                                    Now â†’</button>
+                                    Now →</button>
                             </div>
                         </div>
                     </div>
+                    <!-- Card 2 -->
                     <div
                         class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
                         <div class="h-40 bg-stone-900 relative">
@@ -1137,7 +1413,7 @@
                                     class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Pattachitra</span>
                             </div>
                             <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
-                                â˜…â˜…â˜…â˜…â˜… <span class="text-stone-500 font-sans ml-1">5.0 Â· 67 bookings</span>
+                                ★★★★★ <span class="text-stone-500 font-sans ml-1">5.0 · 67 bookings</span>
                             </div>
                             <p class="text-stone-600 font-sans text-sm mb-6 h-10">Master chitrakar of Raghurajpur,
                                 painting the gods on palm leaves.</p>
@@ -1147,10 +1423,11 @@
                                     Portfolio</button>
                                 <button onclick="window.location.href='dashboard.html'"
                                     class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
-                                    Now â†’</button>
+                                    Now →</button>
                             </div>
                         </div>
                     </div>
+                    <!-- Card 3 -->
                     <div
                         class="bg-white rounded-sm shadow-md overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-500 group">
                         <div class="h-40 bg-stone-900 relative">
@@ -1170,7 +1447,7 @@
                                     class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Warli</span>
                             </div>
                             <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-[10px]">
-                                â˜…â˜…â˜…â˜…â˜… <span class="text-stone-500 font-sans ml-1">4.8 Â· 52 bookings</span>
+                                ★★★★★ <span class="text-stone-500 font-sans ml-1">4.8 · 52 bookings</span>
                             </div>
                             <p class="text-stone-600 font-sans text-sm mb-6 h-10">Reviving the white-on-earth language
                                 of the Warli tribe.</p>
@@ -1180,18 +1457,21 @@
                                     Portfolio</button>
                                 <button onclick="window.location.href='dashboard.html'"
                                     class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book
-                                    Now â†’</button>
+                                    Now →</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="mt-16">
                     <button onclick="window.location.href='dashboard.html'"
                         class="border border-[#1A1208] text-[#1A1208] px-10 py-4 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#1A1208] hover:text-white transition-colors">View
-                        All Artists â†’</button>
+                        All Artists →</button>
                 </div>
             </div>
         </section>
+
+        <!-- Testimonials -->
         <section class="py-24 section-cream">
             <div class="container mx-auto px-6 md:px-12">
                 <div class="text-center mb-16">
@@ -1200,9 +1480,10 @@
                 </div>
                 <div class="testimonial-container">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-full">
+                        <!-- Column 1 -->
                         <div class="testimonial-col">
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"A brilliant
                                     platform. We discovered a 7th generation Pattachitra artist for our gallery
                                     exhibition."</p>
@@ -1216,7 +1497,7 @@
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The craft
                                     retreats are life-changing. Learning Warli directly from the tribal masters in their
                                     village was an unforgettable experience."</p>
@@ -1231,7 +1512,7 @@
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Commissioning a
                                     mural was seamless. The artist understood our vision and transformed our office
                                     space with incredible Gond art."</p>
@@ -1244,8 +1525,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Duplicates -->
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Every piece
                                     tells a story. I purchased a Madhubani painting and the authenticity and detail are
                                     unmatched."</p>
@@ -1259,7 +1541,7 @@
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"This is what
                                     preservation looks like. A beautiful, dignified way to connect directly with India's
                                     heritage artisans."</p>
@@ -1274,7 +1556,7 @@
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The live
                                     painting session at our event left guests mesmerized. Such a powerful way to
                                     experience Indian folk art."</p>
@@ -1288,9 +1570,11 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Column 2 -->
                         <div class="testimonial-col">
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"A brilliant
                                     platform. We discovered a 7th generation Pattachitra artist for our gallery
                                     exhibition."</p>
@@ -1304,7 +1588,7 @@
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The craft
                                     retreats are life-changing. Learning Warli directly from the tribal masters in their
                                     village was an unforgettable experience."</p>
@@ -1318,7 +1602,7 @@
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Commissioning a
                                     mural was seamless. The artist understood our vision and transformed our office
                                     space with incredible Gond art."</p>
@@ -1332,8 +1616,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Duplicates -->
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Every piece
                                     tells a story. I purchased a Madhubani painting and the authenticity and detail are
                                     unmatched."</p>
@@ -1347,7 +1632,7 @@
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"This is what
                                     preservation looks like. A beautiful, dignified way to connect directly with India's
                                     heritage artisans."</p>
@@ -1361,7 +1646,7 @@
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The live
                                     painting session at our event left guests mesmerized. Such a powerful way to
                                     experience Indian folk art."</p>
@@ -1376,9 +1661,11 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Column 3 -->
                         <div class="testimonial-col">
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"A brilliant
                                     platform. We discovered a 7th generation Pattachitra artist for our gallery
                                     exhibition."</p>
@@ -1392,7 +1679,7 @@
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The craft
                                     retreats are life-changing. Learning Warli directly from the tribal masters in their
                                     village was an unforgettable experience."</p>
@@ -1406,7 +1693,7 @@
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Commissioning a
                                     mural was seamless. The artist understood our vision and transformed our office
                                     space with incredible Gond art."</p>
@@ -1419,8 +1706,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Duplicates -->
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"Every piece
                                     tells a story. I purchased a Madhubani painting and the authenticity and detail are
                                     unmatched."</p>
@@ -1434,7 +1722,7 @@
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"This is what
                                     preservation looks like. A beautiful, dignified way to connect directly with India's
                                     heritage artisans."</p>
@@ -1448,7 +1736,7 @@
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
-                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">â˜…â˜…â˜…â˜…â˜…</div>
+                                <div class="flex gap-1 mb-4 text-[#D4AF37] text-xs">★★★★★</div>
                                 <p class="text-stone-600 font-sans text-sm italic leading-relaxed mb-6">"The live
                                     painting session at our event left guests mesmerized. Such a powerful way to
                                     experience Indian folk art."</p>
@@ -1467,7 +1755,10 @@
             </div>
             </div>
         </section>
+
     </main>
+
+    <!-- Fixed Send a Message Button -->
     <a href="mailto:hello@thepaintedmuse.com"
         class="fixed bottom-6 right-6 z-50 bg-[#D4AF37] text-[#0D0804] px-6 py-3 font-sans text-xs font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white transition-all duration-300 flex items-center gap-2">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1477,48 +1768,59 @@
         </svg>
         Send a Message
     </a>
+
+    <!-- Footer Redesigned from add.css -->
     <footer id="footer">
         <div class="container mx-auto px-6">
             <div class="foot-top">
                 <div class="foot-brand">
                     <div class="flex items-center gap-3 mb-6">
-                        <span class="w-10 h-10 bg-[#1A1208] rounded-full flex items-center justify-center text-[#D4AF37]">
+                        <span
+                            class="w-10 h-10 bg-[#1A1208] rounded-full flex items-center justify-center text-[#D4AF37]">
                             <i data-lucide="palette"></i>
                         </span>
                         <div class="text-2xl font-serif italic text-[#1A1208]">The Painted Muse</div>
                     </div>
-                    <p>India's premier multi-art platform â€” celebrating the living traditions of every state through
+                    <p>India's premier multi-art platform — celebrating the living traditions of every state through
                         artisanal AI and human craft.</p>
                     <div class="socials">
-                        <a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp" class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
-                        <a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram" class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
-                        <a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube" class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
-                        <a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn" class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
+                        <a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp"
+                            class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
+                        <a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram"
+                            class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
+                        <a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube"
+                            class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
+                        <a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn"
+                            class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
                     </div>
                 </div>
                 <div class="foot-col">
                     <h5>Related</h5>
                     <ul>
                         <li>
-                            <a href="heritage.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                            <a href="heritage.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                 Heritage Guide
                             </a>
                         </li>
                         <li>
-                            <a href="masterpieces.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                            <a href="masterpieces.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                 Masterpieces
                             </a>
                         </li>
                         <li>
-                            <a href="team.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                            <a href="team.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                 Our Team
                             </a>
                         </li>
                         <li>
-                            <a href="signin.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                            <a href="signin.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                 Artist Login
                             </a>
@@ -1529,25 +1831,29 @@
                     <h5>Navigations</h5>
                     <ul>
                         <li>
-                            <a href="index.html#living-map-section" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                            <a href="index.html#living-map-section"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                 Live Map
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#yreel-hub" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                            <a href="index.html#yreel-hub"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                 Reels
                             </a>
                         </li>
                         <li>
-                            <a href="artists.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                            <a href="artists.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                 Explore Artists
                             </a>
                         </li>
                         <li>
-                            <a href="index.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                            <a href="index.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                 Art Retreats
                             </a>
@@ -1558,13 +1864,15 @@
                     <h5>Contact Us</h5>
                     <ul>
                         <li>
-                            <a href="mailto:painterdmuse_2k26@gmail.com" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                            <a href="mailto:painterdmuse_2k26@gmail.com"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                 painterdmuse_2k26@gmail.com
                             </a>
                         </li>
                         <li>
-                            <a href="tel:+917798345690" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                            <a href="tel:+917798345690"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                 +91 7798345690
                             </a>
@@ -1573,12 +1881,13 @@
                 </div>
             </div>
             <div class="foot-bot justify-center text-center">
-                <div>Â© 2025 The Painted Muse Â· Made with â¤ï¸ for Indian Art</div>
+                <div>© 2025 The Painted Muse · Made with ❤️ for Indian Art</div>
             </div>
         </div>
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Navbar Solid on Scroll
             const nav = document.getElementById('main-nav');
             function handleScroll() {
                 if (window.scrollY > 5) {
@@ -1590,32 +1899,45 @@
                 }
             }
             window.addEventListener('scroll', handleScroll);
-            handleScroll(); 
+            handleScroll(); // Initial check
+
             const mapContainer = document.getElementById('india-map');
             if (!mapContainer) return;
+
             const width = mapContainer.clientWidth;
             const height = mapContainer.clientHeight;
+
             const svg = d3.select("#india-map");
-            const defs = svg.append("defs"); 
+            const defs = svg.append("defs"); // For art patterns
             const g = svg.append("g");
+
+            // Define projection for India (centered to include POK & Ladakh)
             const projection = d3.geoMercator()
                 .center([81.3, 23.0])
                 .scale(Math.min(width, height) * 0.95)
                 .translate([width / 2, height / 2]);
+
             const path = d3.geoPath().projection(projection);
+
+            // Zoom behavior
             const zoom = d3.zoom()
                 .scaleExtent([0.8, 10])
                 .on("zoom", (event) => {
                     g.attr("transform", event.transform);
                     g.selectAll("path").style("stroke-width", 1.5 / event.transform.k + "px");
                 });
+
             svg.call(zoom);
+
+            // Controls
             d3.select("#zoom-in").on("click", () => svg.transition().duration(500).call(zoom.scaleBy, 1.5));
             d3.select("#zoom-out").on("click", () => svg.transition().duration(500).call(zoom.scaleBy, 0.75));
             d3.select("#zoom-reset").on("click", () => {
                 svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
                 resetStateSelection();
             });
+
+            // Mock data for multiple arts per state
             const artData = {
                 "Andhra Pradesh": [
                     { name: "Kalamkari", desc: "Hand-painted or block-printed cotton textile, known for its earthy colors and mythological motifs.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDl6KoRE4304r6yaz87N6CPFxSjVl5ThVTQ_5DB05Qa4BBwZVVoDT7hB54h4PLSUkYodDRQ7AxFeANNz5KTigRfwP0MA5iv-58kfRpIII-E-ZsaXdtBYlaqF-pYkMKQ06LvGukSg5cr2KXcb0bnQukgApRkOwYwghIh52McxMf849lF8Eoqu9RI7CWCkGdxiHXPUpL0yFHgShcMU-FJquGOgKOVGC_sDdUQWHC55l5N2Y9P4CPiI4yqO4wx4nASNz5uKq4XZ2pcQcSy", patternImg: "pics/kalamkari_pattern_1778230370773.png" }
@@ -1708,28 +2030,43 @@
                     { name: "Terracotta Art", desc: "Ancient tradition of crafting figures and motifs in fired clay.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCOSLMm-BtlP2ruZQbaOJ5RI-FaYP5Y1TTw7MoGfZLTBcbIe13KTbq9iFm3bnPEMpYEzo70mlVq5a_34abWMmNpmpGmK-e2mBfSZIiR9EOfKLdd_0YZON8W_Dq-dJmiFLMRJda2UlksIjeUt2Zyd6MEn5UPfCZuN0becBuHwQPd0GRizQlobvR7gewPRL2EX5nqy0HHwmJxd4PXci6u1fsmA-Kj-U7oq5pAPnwV4PHvRDL4vN_ONg_hUrai9bVmMfaWd6Qm-j3vKICJ", patternImg: "pics/kalamkari_pattern_1778230370773.png" }
                 ]
             };
+
             let activeState = null;
+
+            // Complete India map TopoJSON (includes J&K, Ladakh, POK as per official India boundaries)
             d3.json("https://cdn.jsdelivr.net/gh/udit-001/india-maps-data@ef25ebc/topojson/india.json").then(function (topoData) {
+
+                // Hide loader
                 const loader = document.getElementById('map-loader');
                 if (loader) {
                     loader.style.opacity = '0';
                     setTimeout(() => loader.style.display = 'none', 500);
                 }
+
+                // Get the first object key from the TopoJSON
                 const objectKey = Object.keys(topoData.objects)[0];
                 const allFeatures = topojson.feature(topoData, topoData.objects[objectKey]).features;
+
+                // Group districts by state name (st_nm)
                 const stateGroups = {};
                 allFeatures.forEach(f => {
                     const name = f.properties.st_nm;
                     if (!stateGroups[name]) stateGroups[name] = [];
                     stateGroups[name].push(f);
                 });
+
+                // Filter out island territories for cleaner mainland view
                 const excludeStates = ["Andaman & Nicobar Island", "Lakshadweep"];
+
+                // Build merged state features using topojson.merge to dissolve internal district boundaries
                 const stateFeatures = [];
                 for (const [stateName, districts] of Object.entries(stateGroups)) {
                     if (excludeStates.includes(stateName)) continue;
+                    // Find the matching geometries in the original topology
                     const geomIndices = topoData.objects[objectKey].geometries.filter(
                         g => g.properties.st_nm === stateName
                     );
+                    // topojson.merge dissolves shared borders between districts
                     const merged = topojson.merge(topoData, geomIndices);
                     stateFeatures.push({
                         type: "Feature",
@@ -1737,6 +2074,7 @@
                         geometry: merged
                     });
                 }
+
                 g.selectAll("path")
                     .data(stateFeatures)
                     .enter()
@@ -1764,19 +2102,25 @@
                         const arts = artData[stateName] || [{ name: "Folk Art", desc: "Traditional artistic expressions of the region.", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDaiKo8wj7NSpxtbjBq7XxE9dPBnShaLKI1dStSaEbBlwQXnRpshK_O5rGw4rIsVUC863Pg1c7VLp-5Vcg3X8XQxxnabGYWBMw9mgoRq7eT20WaDdvQzQemUscrJyNITFfyWQMChozHWk9GuXbLKPVRKkPNk1duhuJiQm2o-aBl4Tnxuf-OoMXvZzH7FZt5YmJZIJ4QGgSoIKVkcWlkQuyE1oaUETWqFSoR8qvitHO4bF-U5s-GQ8uo432J2VHYY-muTnss4lPIhFP7", patternImg: "phulkari_pattern_1778230389596.png" }];
                         const artImg = arts[0].patternImg || arts[0].img;
                         const patternId = "pattern-" + stateName.replace(/\s+/g, '-').toLowerCase();
+
+                        // Reset previous active state
                         if (activeState) {
                             d3.select(activeState).style("fill", "#EDE8DE").style("stroke", "#C4B99A").style("stroke-width", "1.5px");
                         }
+
+                        // Create pattern if it doesn't exist
                         if (defs.select("#" + patternId).empty()) {
                             const pattern = defs.append("pattern")
                                 .attr("id", patternId)
                                 .attr("patternUnits", "userSpaceOnUse")
-                                .attr("width", 80) 
+                                .attr("width", 80) // Slightly smaller for finer detail
                                 .attr("height", 80);
+
                             pattern.append("rect")
                                 .attr("width", 80)
                                 .attr("height", 80)
                                 .attr("fill", "#B5451B");
+
                             pattern.append("image")
                                 .attr("href", artImg)
                                 .attr("width", 80)
@@ -1784,11 +2128,14 @@
                                 .attr("preserveAspectRatio", "xMidYMid slice")
                                 .attr("opacity", "0.7");
                         }
+
                         activeState = this;
+                        // Fill with art pattern
                         d3.select(this)
                             .style("fill", `url(#${patternId})`)
                             .style("stroke", "#D4AF37")
                             .style("stroke-width", "2.5px");
+
                         updateStateInfo(stateName);
                     });
             }).catch(err => {
@@ -1798,6 +2145,7 @@
                     loader.innerHTML = '<p class="text-red-400 font-sans tracking-widest text-sm uppercase">Connection Error</p>';
                 }
             });
+
             function resetStateSelection() {
                 if (activeState) {
                     d3.select(activeState).style("fill", "#EDE8DE").style("stroke", "#C4B99A");
@@ -1815,7 +2163,9 @@
             `;
                 }
             }
+
             function updateStateInfo(stateName) {
+                // Find art array or use default
                 let arts = artData[stateName] || [
                     {
                         name: "Heritage Art of " + stateName,
@@ -1823,13 +2173,16 @@
                         img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDaiKo8wj7NSpxtbjBq7XxE9dPBnShaLKI1dStSaEbBlwQXnRpshK_O5rGw4rIsVUC863Pg1c7VLp-5Vcg3X8XQxxnabGYWBMw9mgoRq7eT20WaDdvQzQemUscrJyNITFfyWQMChozHWk9GuXbLKPVRKkPNk1duhuJiQm2o-aBl4Tnxuf-OoMXvZzH7FZt5YmJZIJ4QGgSoIKVkcWlkQuyE1oaUETWqFSoR8qvitHO4bF-U5s-GQ8uo432J2VHYY-muTnss4lPIhFP7"
                     }
                 ];
+
                 const mainArt = arts[0];
+
                 const infoDiv = document.getElementById("state-info");
                 infoDiv.parentElement.innerHTML = `
             <div id="state-info" class="w-full h-full flex flex-col p-8 overflow-y-auto custom-scrollbar relative bg-white">
                 <div class="sticky top-0 bg-white/95 pt-2 pb-6 z-10 border-b border-[#D4AF37]/20 mb-8 backdrop-blur-md">
                     <span class="font-sans text-[10px] font-bold text-[#B5451B] uppercase tracking-[0.3em] block text-left mb-2">Selected Region</span>
                     <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] text-left">${stateName}</h2>
+                    
                     <div class="flex gap-3 mt-6 overflow-x-auto pb-2 no-scrollbar">
                         <button class="whitespace-nowrap px-4 py-2 bg-[#F5F0E8] text-[#1A1208] font-sans text-[10px] font-bold uppercase tracking-widest rounded hover:bg-[#D4AF37] hover:text-white transition-all">Overview</button>
                         <button class="whitespace-nowrap px-4 py-2 border border-stone-100 text-stone-500 font-sans text-[10px] font-bold uppercase tracking-widest rounded hover:border-[#D4AF37] transition-all">Artists</button>
@@ -1839,18 +2192,26 @@
                         <button class="whitespace-nowrap px-4 py-2 border border-stone-100 text-stone-500 font-sans text-[10px] font-bold uppercase tracking-widest rounded hover:border-[#D4AF37] transition-all">Workshops</button>
                     </div>
                 </div>
+
                 <div class="animate-fade-in space-y-12 pb-12">
+                    <!-- Art Form -->
                     <div>
                         <h3 class="text-3xl font-serif text-[#D4AF37] mb-6 italic text-left">${mainArt.name}</h3>
+                        
+                        <!-- Artwork Images -->
                         <div class="w-full aspect-[16/9] overflow-hidden mb-8 rounded-lg border border-[#D4AF37]/20 shadow-lg group">
                             <img src="${mainArt.img}" alt="${mainArt.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         </div>
+                        
+                        <!-- Short Description -->
                         <div class="mb-10">
                              <h4 class="font-sans text-xs font-bold text-[#1A1208] uppercase tracking-[0.2em] mb-4">Description</h4>
                              <p class="text-stone-600 font-sans leading-relaxed text-left text-lg">
                                 ${mainArt.desc}
                              </p>
                         </div>
+
+                        <!-- Signature Elements -->
                         <div class="mb-10 bg-[#F5F0E8] p-6 rounded-lg border border-[#D4AF37]/10">
                              <h4 class="font-sans text-xs font-bold text-[#B5451B] uppercase tracking-[0.2em] mb-4">Signature Elements</h4>
                              <div class="grid grid-cols-2 gap-4">
@@ -1872,6 +2233,8 @@
                                 </div>
                              </div>
                         </div>
+
+                        <!-- Artist Stories -->
                         <div class="mb-10">
                              <h4 class="font-sans text-xs font-bold text-[#1A1208] uppercase tracking-[0.2em] mb-6">Artist Story</h4>
                              <div class="flex gap-6 items-center bg-white p-6 rounded-xl border border-stone-100 shadow-sm">
@@ -1882,6 +2245,8 @@
                                 </div>
                              </div>
                         </div>
+
+                        <!-- Engagement Options -->
                         <div class="grid grid-cols-2 gap-4 mt-12 pt-8 border-t border-stone-100">
                             <button class="bg-[#B5451B] text-white py-4 px-6 rounded font-sans text-[10px] font-bold uppercase tracking-widest hover:bg-[#D4AF37] transition-all flex items-center justify-center gap-2">
                                 <span class="material-symbols-outlined text-sm">shopping_cart</span> Buy Art
@@ -1895,16 +2260,20 @@
             </div>
         `;
             }
+
+            // Navbar Underline Logic
             const navLinks = document.getElementById('nav-links');
             const indicator = document.getElementById('nav-indicator');
             const items = document.querySelectorAll('.nav-item');
             const sections = document.querySelectorAll('section[id]');
+
             function updateIndicator(target) {
                 if (!target) return;
                 const rect = target.getBoundingClientRect();
                 const parentRect = navLinks.getBoundingClientRect();
                 indicator.style.width = `${rect.width}px`;
                 indicator.style.left = `${rect.left - parentRect.left}px`;
+
                 items.forEach(item => {
                     item.classList.remove('text-[#B5451B]');
                     item.classList.add('text-stone-900');
@@ -1912,11 +2281,14 @@
                 target.classList.add('text-[#B5451B]');
                 target.classList.remove('text-stone-900');
             }
+
+            // Intersection Observer for Active Section
             const navObserverOptions = {
                 root: null,
                 rootMargin: '-20% 0px -70% 0px',
                 threshold: 0
             };
+
             const navObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1926,22 +2298,30 @@
                     }
                 });
             }, navObserverOptions);
+
             sections.forEach(section => navObserver.observe(section));
+
+            // Mobile Menu Logic
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const closeMenuBtn = document.getElementById('close-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileLinks = document.querySelectorAll('.mobile-nav-item');
+
             mobileMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.remove('translate-x-full');
             });
+
             closeMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.add('translate-x-full');
             });
+
             mobileLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.add('translate-x-full');
                 });
             });
+
+            // Initialize navigation position
             setTimeout(() => {
                 const firstSection = sections[0]?.getAttribute('id');
                 if (firstSection) {
@@ -1949,11 +2329,15 @@
                     if (initialLink) updateIndicator(initialLink);
                 }
             }, 500);
+
+            // Manual Click Handling
             items.forEach(item => {
                 item.addEventListener('click', (e) => {
                     updateIndicator(e.target);
                 });
             });
+
+            // Reveal Animation Observer
             const revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1961,23 +2345,33 @@
                     }
                 });
             }, { threshold: 0.1 });
+
             document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            // Initialize Lucide Icons
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
+
+            // Optimization: Lazy load images that appear later
             document.querySelectorAll('img').forEach(img => {
                 if (!img.hasAttribute('loading')) {
                     img.setAttribute('loading', 'lazy');
                 }
             });
+
+            // Artisan Reel Story Upload Logic with IndexedDB Persistence
             const uploadBtn = document.getElementById('uploadReelBtn');
             const uploadCard = document.getElementById('uploadReelCard');
             const fileInput = document.getElementById('reelUploadInput');
             const viewAllBtn = document.getElementById('viewAllMasterpiecesBtn');
             const reelsContainer = document.getElementById('recordedReelsContainer');
+
             const triggerUpload = () => { if (fileInput) fileInput.click(); };
+
             if (uploadBtn) uploadBtn.addEventListener('click', (e) => { e.stopPropagation(); triggerUpload(); });
             if (uploadCard) uploadCard.addEventListener('click', triggerUpload);
+
             if (viewAllBtn) {
                 viewAllBtn.addEventListener('click', () => {
                     reelsContainer.classList.toggle('hidden');
@@ -1987,12 +2381,17 @@
                 });
             }
         });
-        window.playReel = function(card, embedUrl) {
+
+        // Global function to play standard reels dynamically with custom cover fade-outs
+        window.playReel = function (card, embedUrl) {
             const placeholder = card.querySelector('.video-placeholder');
             const coverImg = card.querySelector('img');
             const playBtn = card.querySelector('.z-15');
+
             if (placeholder && !placeholder.querySelector('iframe')) {
                 placeholder.innerHTML = `<iframe class="absolute inset-0 w-full h-full object-cover" src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+
+                // Fade out cover & play button seamlessly
                 if (coverImg) {
                     coverImg.classList.add('opacity-0');
                     setTimeout(() => coverImg.style.display = 'none', 500);
@@ -2005,4 +2404,5 @@
         };
     </script>
 </body>
+
 </html>

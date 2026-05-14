@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,11 +29,14 @@
         }
     </style>
 </head>
+
 <body class="relative">
     <div class="bg-texture"></div>
-    <nav class="w-full z-50 bg-[#FDFBF7]/90 backdrop-blur-md sticky top-0 flex justify-between items-center px-6 md:px-12 py-5 border-b border-stone-200/50 shadow-sm">
+
+    <!-- Navigation -->
+    <nav class="w-full z-50 bg-[#FDFBF7]/90 backdrop-blur-md sticky top-0 flex justify-between items-center px-6 md:px-12 py-2 border-b border-stone-200/50 shadow-sm">
         <a href="index.html" class="flex items-center gap-4 group">
-    <img src="logo.jpeg" alt="The Painted Muse Logo" class="h-28 w-auto object-contain" />
+    <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
 </a>
         <div class="flex items-center gap-4">
             <a href="index.html" class="font-sans text-[10px] font-bold uppercase tracking-wider text-stone-900 px-6 py-3 border border-stone-900 hover:bg-[#1A1208] hover:text-white transition-colors">
@@ -44,6 +47,8 @@
             </a>
         </div>
     </nav>
+
+    <!-- Header -->
     <header class="pt-24 pb-16 px-6 relative z-10 text-center">
         <div class="inline-flex items-center gap-4 mb-6">
             <div class="h-[1px] w-12 bg-[#B5451B]"></div>
@@ -55,9 +60,13 @@
             A curated collection of creative processes, untold stories, and magical moments captured directly by our master artisans across India.
         </p>
     </header>
+
+    <!-- Grid -->
     <main class="container mx-auto px-6 md:px-12 pb-32 relative z-10">
         <div id="reelsContainer" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+            <!-- Dynamic Uploads -->
         </div>
+        
         <div id="noReelsMsg" class="hidden text-center py-32 bg-white/50 backdrop-blur-sm border border-stone-200 rounded-2xl mt-8">
             <div class="w-24 h-24 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
                 <span class="material-symbols-outlined text-4xl text-stone-400">movie</span>
@@ -69,14 +78,21 @@
             </a>
         </div>
     </main>
+
+    <!-- Video Modal -->
     <div id="videoModal" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl hidden flex-col items-center justify-center p-4 md:p-8 transition-opacity duration-300 opacity-0">
         <button onclick="closeModal()" class="absolute top-6 right-6 md:top-8 md:right-8 text-white/50 hover:text-white transition-colors bg-white/5 hover:bg-white/20 p-3 rounded-full z-50">
             <span class="material-symbols-outlined text-2xl leading-none">close</span>
         </button>
+        
         <div class="w-full max-w-5xl h-[85vh] md:h-[80vh] relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 flex flex-col md:flex-row bg-[#0D0804] transform scale-95 transition-transform duration-500" id="modalContent">
+            
+            <!-- Video Player -->
             <div class="w-full md:w-2/3 h-[60%] md:h-full bg-black relative flex items-center justify-center group">
                 <video id="modalVideo" src="" class="w-full h-full object-contain" controls autoplay></video>
             </div>
+            
+            <!-- Details Sidebar -->
             <div class="w-full md:w-1/3 h-[40%] md:h-full p-6 md:p-10 flex flex-col border-t md:border-t-0 md:border-l border-white/10 bg-gradient-to-b from-[#1A1208] to-[#0D0804]">
                 <div class="flex items-center gap-4 mb-8">
                     <div class="w-14 h-14 rounded-full bg-gradient-to-br from-[#B5451B] to-[#D4AF37] p-[2px]">
@@ -87,12 +103,14 @@
                         <p class="font-sans text-[#D4AF37] text-xs font-bold tracking-widest mt-1" id="modalHandle">@handle</p>
                     </div>
                 </div>
+                
                 <div class="flex-1">
                     <p class="text-white/60 font-serif text-lg italic leading-relaxed relative">
                         <span class="text-[#D4AF37] text-4xl absolute -top-4 -left-2 opacity-50">"</span>
                         <span class="pl-4 relative z-10">Every masterpiece is a silent symphony of heritage, patience, and devotion passed down through generations.</span>
                     </p>
                 </div>
+                
                 <div class="mt-auto pt-6 border-t border-white/10">
                     <p class="text-white/40 text-[10px] uppercase tracking-[0.2em] mb-4 text-center">Support the Artisan</p>
                     <button class="w-full py-4 bg-[#D4AF37] hover:bg-white text-[#1A1208] font-bold font-sans text-[10px] md:text-xs uppercase tracking-[0.2em] transition-all rounded-sm shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
@@ -102,13 +120,16 @@
             </div>
         </div>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const reelsContainer = document.getElementById('reelsContainer');
             const noReelsMsg = document.getElementById('noReelsMsg');
+            
             const dbName = "ReelsDB";
             const storeName = "videos";
             let db;
+
             const initDB = () => {
                 return new Promise((resolve, reject) => {
                     const request = indexedDB.open(dbName, 1);
@@ -125,31 +146,42 @@
                     };
                 });
             };
+
             window.openModal = (videoURL, artistName, handle, initials) => {
                 const modal = document.getElementById('videoModal');
                 const video = document.getElementById('modalVideo');
                 const content = document.getElementById('modalContent');
+                
                 document.getElementById('modalArtistName').textContent = artistName;
                 document.getElementById('modalHandle').textContent = handle;
                 document.getElementById('modalInitials').textContent = initials;
+                
                 video.src = videoURL;
+                
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
+                
+                // Trigger reflow
                 void modal.offsetWidth;
+                
                 modal.classList.remove('opacity-0');
                 modal.classList.add('opacity-100');
                 content.classList.remove('scale-95');
                 content.classList.add('scale-100');
+                
                 video.play().catch(e => console.log("Autoplay prevented:", e));
             };
+
             window.closeModal = () => {
                 const modal = document.getElementById('videoModal');
                 const video = document.getElementById('modalVideo');
                 const content = document.getElementById('modalContent');
+                
                 modal.classList.remove('opacity-100');
                 modal.classList.add('opacity-0');
                 content.classList.remove('scale-100');
                 content.classList.add('scale-95');
+                
                 setTimeout(() => {
                     modal.classList.add('hidden');
                     modal.classList.remove('flex');
@@ -157,28 +189,43 @@
                     video.src = "";
                 }, 300);
             };
+
             const renderVideoCard = (record) => {
                 const videoURL = URL.createObjectURL(record.file);
+                
+                // Fallbacks if data doesn't exist
                 const artistName = record.artistName || "Unknown Artist";
                 const handle = record.handle || "@artisan";
+                
+                // Generate initials
                 const nameParts = artistName.split(' ');
                 const initials = nameParts.length > 1 
                     ? (nameParts[0][0] + nameParts[1][0]).toUpperCase() 
                     : artistName.substring(0, 2).toUpperCase();
+
+                // Generate safe strings for function call
                 const safeName = artistName.replace(/'/g, "\\'");
                 const safeHandle = handle.replace(/'/g, "\\'");
                 const safeInitials = initials.replace(/'/g, "\\'");
+
                 const newReelHTML = `
                     <div class="group cursor-pointer flex flex-col" onclick="openModal('${videoURL}', '${safeName}', '${safeHandle}', '${safeInitials}')">
                         <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-lg border border-stone-200 group-hover:shadow-2xl group-hover:border-[#D4AF37]/50 transition-all duration-500 transform group-hover:-translate-y-1">
+                            
+                            <!-- Video Thumbnail -->
                             <video src="${videoURL}#t=0.1" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105 pointer-events-none" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+                            
+                            <!-- Overlays -->
                             <div class="absolute inset-0 bg-gradient-to-t from-[#1A1208]/90 via-[#1A1208]/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500"></div>
+                            
+                            <!-- Content -->
                             <div class="absolute inset-0 p-4 flex flex-col justify-between">
                                 <div class="self-end">
                                     <div class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-[#D4AF37] group-hover:text-[#1A1208] transition-all duration-300 border border-white/20 transform group-hover:scale-110 shadow-lg">
                                         <span class="material-symbols-outlined text-lg ml-0.5">play_arrow</span>
                                     </div>
                                 </div>
+                                
                                 <div class="flex items-center gap-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                                     <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#B5451B] to-[#D4AF37] p-[1px] shadow-lg shrink-0">
                                         <div class="w-full h-full rounded-full bg-[#1A1208] flex items-center justify-center text-[#D4AF37] font-serif text-sm border border-transparent">
@@ -196,6 +243,7 @@
                 `;
                 reelsContainer.insertAdjacentHTML('beforeend', newReelHTML);
             };
+
             const loadVideos = async () => {
                 if (!db) return;
                 const transaction = db.transaction([storeName], "readonly");
@@ -213,6 +261,7 @@
                     }
                 };
             };
+
             initDB().then(() => {
                 loadVideos();
             }).catch(err => console.error("IndexedDB initialization failed:", err));
