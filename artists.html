@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,8 +25,6 @@
         .serif { font-family: 'Playfair Display', serif; }
         .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
         .reveal.in { opacity: 1; transform: translateY(0); }
-        
-        /* Premium Card Styles */
         .artisan-card {
             background: white;
             border: 1px solid rgba(26, 18, 8, 0.08);
@@ -40,7 +38,6 @@
             border-color: var(--saffron);
             box-shadow: 0 20px 40px rgba(26, 18, 8, 0.08);
         }
-        
         .search-bar { 
             border: 1px solid rgba(26, 18, 8, 0.1); 
             background: white; 
@@ -54,8 +51,6 @@
             border-color: var(--saffron); 
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); 
         }
-
-        /* Category Filter Button styles */
         .filter-btn {
             font-family: 'DM Sans', sans-serif;
             font-size: 10px;
@@ -79,12 +74,9 @@
             color: white;
             border-color: var(--ink);
         }
-        
-        /* Custom scrollbar */
         .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 2px; }
-        
         .custom-scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
@@ -92,8 +84,6 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-
-        /* Moving Nav Underline */
         #nav-indicator {
             position: absolute;
             bottom: -2px;
@@ -102,8 +92,6 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
         }
-
-        /* FOOTER STYLES */
         footer {
             background: #F5F0E8;
             color: var(--ink);
@@ -191,18 +179,13 @@
     </style>
 </head>
 <body class="selection:bg-[#D4AF37]/30">
-
-    <!-- TopAppBar -->
     <nav
         class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-1.5 border-b border-transparent shadow-none transition-all duration-500">
-        <!-- Logo Area -->
         <div class="flex items-center gap-4">
             <a href="index.html" class="flex items-center gap-4">
     <img src="logo.jpeg" alt="The Painted Muse Logo" class="h-16 w-48 object-contain" />
 </a>
         </div>
-
-        <!-- Nav Links -->
         <div class="hidden md:flex gap-10 font-sans text-[10px] font-bold uppercase tracking-[0.15em] items-center relative" id="nav-links">
             <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#"
                 data-section="hero">Home</a>
@@ -214,8 +197,6 @@
                 data-section="artisans">Be an Artist</a>
             <div id="nav-indicator" style="background-color: #B5451B;"></div>
         </div>
-
-        <!-- Right Side Actions -->
         <div class="flex items-center gap-4 md:gap-6">
             <button class="text-stone-900 hover:text-[#B5451B] transition-colors flex items-center justify-center">
                 <span class="material-symbols-outlined text-xl md:text-2xl">search</span>
@@ -229,15 +210,11 @@
                 Book Artist
                 <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </button>
-            
-            <!-- Mobile Menu Toggle -->
             <button id="mobile-menu-btn" class="md:hidden text-stone-900 p-2">
                 <span class="material-symbols-outlined text-3xl">menu</span>
             </button>
         </div>
     </nav>
-
-    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 md:hidden">
         <div class="flex justify-between items-center p-6 border-b border-stone-100">
             <img src="logo.jpeg" alt="The Painted Muse Logo" class="h-12 w-40 object-contain" />
@@ -256,8 +233,6 @@
              <button class="w-full py-4 bg-[#1A1208] text-white font-sans text-xs font-bold uppercase tracking-widest">Book an Artist</button>
         </div>
     </div>
-
-    <!-- Hero Header -->
     <header class="pt-32 pb-12 bg-[#F5F0E8] relative overflow-hidden">
         <div class="absolute inset-0 opacity-[0.05] pointer-events-none">
             <img src="pics/warli_pattern_1778230295803.png" class="w-full h-full object-cover" alt="pattern">
@@ -272,17 +247,12 @@
             </p>
         </div>
     </header>
-
-    <!-- Interactive Filters & Search -->
     <section class="py-6 bg-white sticky top-[72px] z-40 border-b border-stone-100 shadow-sm">
         <div class="container mx-auto px-6 flex flex-col lg:flex-row justify-between items-center gap-8">
-            <!-- Search -->
             <div class="search-bar flex items-center gap-4">
                 <span class="material-symbols-outlined text-stone-400">search</span>
                 <input type="text" id="artistSearch" placeholder="Search by name, state, or art form..." class="bg-transparent border-none focus:ring-0 w-full text-sm font-sans placeholder-stone-300">
             </div>
-            
-            <!-- Category Regions -->
             <div class="flex gap-2 overflow-x-auto no-scrollbar py-2 max-w-full custom-scrollbar">
                 <button class="filter-btn active" data-region="all">All Regions</button>
                 <button class="filter-btn" data-region="North">North</button>
@@ -293,49 +263,34 @@
             </div>
         </div>
     </section>
-
-    <!-- Guild Members Grid -->
     <main class="py-24 container mx-auto px-6">
         <div class="max-w-6xl mx-auto">
-            <!-- Dynamic Count and Title -->
             <div class="flex justify-between items-center mb-12">
                 <h2 class="font-serif text-2xl text-stone-800 italic">Guild <span class="text-[#D4AF37]">Roster</span></h2>
                 <p id="rosterCount" class="font-sans text-xs uppercase tracking-widest text-stone-400 font-bold">Showing 6 masters</p>
             </div>
-            
-            <!-- Cards Slider -->
             <div class="relative w-full group py-4">
-                <!-- Navigation Arrows -->
                 <button id="slideLeftBtn" class="absolute -left-4 md:-left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center justify-center text-stone-600 hover:text-[#B5451B] transition-all opacity-0 group-hover:opacity-100 hover:scale-110 disabled:opacity-0 disabled:cursor-not-allowed">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </button>
-
                 <div id="artistsGrid" class="flex gap-6 overflow-x-auto pb-12 pt-4 snap-x snap-mandatory px-4 md:px-0 custom-scrollbar-hide">
-                    <!-- Javascript will populate this -->
                 </div>
-
                 <button id="slideRightBtn" class="absolute -right-4 md:-right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center justify-center text-stone-600 hover:text-[#B5451B] transition-all opacity-0 group-hover:opacity-100 hover:scale-110 disabled:opacity-0 disabled:cursor-not-allowed">
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
             </div>
-            
-            <!-- Empty State -->
             <div id="emptyState" class="hidden py-32 text-center">
                 <span class="material-symbols-outlined text-stone-200 text-6xl mb-4">person_search</span>
                 <h3 class="text-2xl font-serif text-stone-400">No master artisans found</h3>
                 <p class="text-stone-400 font-sans text-sm mt-2">Try adjusting your search criteria or choosing another region.</p>
             </div>
-
-            <!-- View More Artists Button -->
             <div class="mt-16 text-center">
                 <a href="dashboard.html" class="inline-block bg-[#1A1208] text-white px-8 py-4 font-sans text-sm font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#1A1208] transition-all shadow-lg hover:-translate-y-1">
-                    Create Portfolio →
+                    Create Portfolio â†’
                 </a>
             </div>
         </div>
     </main>
-
-    <!-- Footer Redesigned from add.css -->
     <footer id="footer">
         <div class="container mx-auto px-6">
             <div class="foot-top">
@@ -346,7 +301,7 @@
                         </span>
                         <div class="text-2xl font-serif italic text-[#1A1208]">The Painted Muse</div>
                     </div>
-                    <p>India's premier multi-art platform — celebrating the living traditions of every state through
+                    <p>India's premier multi-art platform â€” celebrating the living traditions of every state through
                         artisanal AI and human craft.</p>
                     <div class="socials">
                         <a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp" class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
@@ -403,11 +358,10 @@
                 </div>
             </div>
             <div class="foot-bot justify-center text-center">
-                <div>© 2025 The Painted Muse · Made with ❤️ for Indian Art</div>
+                <div>Â© 2025 The Painted Muse Â· Made with â¤ï¸ for Indian Art</div>
             </div>
         </div>
     </footer>
-
     <script>
         const artistsData = [
             { 
@@ -477,24 +431,19 @@
                 profileImg: "pics/kalavati_profile.png" 
             }
         ];
-
         let activeRegion = "all";
-
         function renderRoster(data) {
             const grid = document.getElementById('artistsGrid');
             const countLabel = document.getElementById('rosterCount');
             const empty = document.getElementById('emptyState');
-            
             if (data.length === 0) {
                 grid.innerHTML = '';
                 countLabel.textContent = 'Showing 0 masters';
                 empty.classList.remove('hidden');
                 return;
             }
-            
             empty.classList.add('hidden');
             countLabel.textContent = `Showing ${data.length} master${data.length > 1 ? 's' : ''}`;
-            
             grid.innerHTML = data.map((item) => `
                 <div class="artisan-card reveal w-[300px] md:w-[380px] flex-shrink-0 snap-start relative group/card">
                     <div class="h-44 bg-stone-900 relative overflow-hidden">
@@ -508,38 +457,29 @@
                             <span class="border border-stone-300 text-stone-500 text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">${item.art}</span>
                         </div>
                         <div class="flex items-center gap-1 mb-4 text-[#D4AF37] text-xs font-sans">
-                            ★★★★★ <span class="text-stone-400 font-sans ml-1 text-[11px]">${item.rating} · ${item.bookings} bookings</span>
+                            â˜…â˜…â˜…â˜…â˜… <span class="text-stone-400 font-sans ml-1 text-[11px]">${item.rating} Â· ${item.bookings} bookings</span>
                         </div>
                         <p class="text-stone-600 font-sans text-sm mb-6 h-12 leading-relaxed">${item.desc}</p>
                         <div class="flex gap-3 pt-2 border-t border-stone-100">
                             <button class="flex-1 border border-stone-300 text-[#1A1208] text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-stone-50 transition-colors">View Portfolio</button>
-                            <button class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book Now →</button>
+                            <button class="flex-1 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-wider py-3 hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors">Book Now â†’</button>
                         </div>
                     </div>
                 </div>
             `).join('');
-            
-            // Trigger reveals with stagger
             const cards = grid.querySelectorAll('.reveal');
             cards.forEach((el, i) => {
                 setTimeout(() => el.classList.add('in'), i * 60);
             });
-            
-            // Trigger scroll event to update arrows
             setTimeout(() => {
                 if (grid) grid.dispatchEvent(new Event('scroll'));
             }, 100);
         }
-
-        // Search & Region Filter Logic
         const searchInput = document.getElementById('artistSearch');
         const filterButtons = document.querySelectorAll('.filter-btn');
-
         function handleFilters() {
             let filtered = [...artistsData];
             const query = searchInput.value.toLowerCase();
-            
-            // Search filter
             if (query) {
                 filtered = filtered.filter(item => 
                     item.name.toLowerCase().includes(query) || 
@@ -547,17 +487,12 @@
                     item.art.toLowerCase().includes(query)
                 );
             }
-            
-            // Region filter
             if (activeRegion !== "all") {
                 filtered = filtered.filter(item => item.region === activeRegion);
             }
-            
             renderRoster(filtered);
         }
-
         searchInput.addEventListener('input', handleFilters);
-
         filterButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 filterButtons.forEach(b => b.classList.remove('active'));
@@ -566,10 +501,7 @@
                 handleFilters();
             });
         });
-
-        // Initialize Page
         document.addEventListener('DOMContentLoaded', () => {
-            // Navbar Solid on Scroll
             const nav = document.querySelector('nav');
             function handleScroll() {
                 if (window.scrollY > 20) {
@@ -581,52 +513,38 @@
                 }
             }
             window.addEventListener('scroll', handleScroll);
-            handleScroll(); // Initial check
-
+            handleScroll(); 
             renderRoster(artistsData);
-            
-            // Slider Logic
             const artistsGrid = document.getElementById('artistsGrid');
             const slideLeftBtn = document.getElementById('slideLeftBtn');
             const slideRightBtn = document.getElementById('slideRightBtn');
-
             function updateSlideButtons() {
                 if (!artistsGrid || !slideLeftBtn || !slideRightBtn) return;
                 const { scrollLeft, scrollWidth, clientWidth } = artistsGrid;
                 slideLeftBtn.disabled = scrollLeft <= 0;
                 slideRightBtn.disabled = scrollLeft >= scrollWidth - clientWidth - 1;
             }
-
             if (slideLeftBtn && slideRightBtn && artistsGrid) {
                 slideLeftBtn.addEventListener('click', () => {
                     artistsGrid.scrollBy({ left: -400, behavior: 'smooth' });
                 });
-                
                 slideRightBtn.addEventListener('click', () => {
                     artistsGrid.scrollBy({ left: 400, behavior: 'smooth' });
                 });
-
                 artistsGrid.addEventListener('scroll', updateSlideButtons);
                 window.addEventListener('resize', updateSlideButtons);
                 setTimeout(updateSlideButtons, 100);
             }
-            
-            // Mobile Menu Logic
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const closeMenuBtn = document.getElementById('close-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-
             mobileMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.remove('translate-x-full');
             });
-
             closeMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.add('translate-x-full');
             });
-
         });
-
-        // Intersection Observer for Scroll Revealing
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -634,11 +552,8 @@
                 }
             });
         }, { threshold: 0.1 });
-        
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     </script>
-
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         lucide.createIcons();

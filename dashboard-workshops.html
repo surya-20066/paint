@@ -1,28 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Dashboard | The Painted Muse</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
-            // Mobile Menu Logic
             const mobileMenuBtns = document.querySelectorAll('.mobile-menu-btn-toggle');
             const closeMenuBtn = document.getElementById('close-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-
             if (mobileMenuBtns && closeMenuBtn && mobileMenu) {
                 mobileMenuBtns.forEach(btn => {
                     btn.addEventListener('click', () => {
                         mobileMenu.classList.remove('translate-x-full');
                     });
                 });
-
                 closeMenuBtn.addEventListener('click', () => {
                     mobileMenu.classList.add('translate-x-full');
                 });
             }
-
     </script>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&amp;family=DM+Sans:wght@400;500;700&amp;family=Mrs+Saint+Delafield&amp;display=swap"
@@ -39,25 +34,20 @@
             --cream: #F5F0E8;
             --warm: #FFF8F0;
         }
-
         .material-symbols-outlined {
             font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
         }
-
         body {
             background-color: var(--background);
             color: var(--text);
             font-family: 'DM Sans', sans-serif;
         }
-
         .font-serif {
             font-family: 'Playfair Display', serif;
         }
-
         .font-calligraphy {
             font-family: 'Mrs Saint Delafield', cursive;
         }
-
         .ink-grain {
             background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCRrEuwmrE10cxB2Oae845GDrP3kU-WyjvkShm1EQbrQg1J8AWwsnfTOa_Yd43-yDsPK-k7jiLPfPtwwOdYsTOwnMBabRznvfeo8h3bqtwD5gH2q4U30MBCCjJNiRgFbchZDN5lhWytQEYI5xTmEfIbnzuDLCKKDPl8_NyfmuWMuR86PhGc-JnOKloK4F3ni1MSTH5prPAgGGKWuf8SBOUfiXyBj35iXGC3XCEi91OQTXGj39Posri3UHGrcYXiOqWISXFGxeYn7Z7y);
             opacity: 0.03;
@@ -66,12 +56,10 @@
             inset: 0;
             z-index: 99;
         }
-
         .warli-border {
             border: 1px solid rgba(212, 175, 55, 0.2);
             position: relative;
         }
-
         .warli-border::before {
             content: "";
             position: absolute;
@@ -79,85 +67,66 @@
             border: 1px solid rgba(212, 175, 55, 0.1);
             pointer-events: none;
         }
-
         .glass-panel {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.1);
         }
-
         .sidebar-item.active {
             color: var(--primary);
             background: rgba(181, 69, 27, 0.05);
             border-right: 3px solid var(--primary);
         }
-
         .artist-card:hover .artist-overlay {
             opacity: 1;
         }
-
         @keyframes float {
             0% {
                 transform: translateY(0px);
             }
-
             50% {
                 transform: translateY(-10px);
             }
-
             100% {
                 transform: translateY(0px);
             }
         }
-
         .animate-float {
             animation: float 4s ease-in-out infinite;
         }
-
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
-
         .custom-scrollbar::-webkit-scrollbar-track {
             background: rgba(26, 18, 8, 0.05);
         }
-
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: var(--accent);
             border-radius: 10px;
         }
-
-        /* Hide Scrollbar */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
-
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-
         .shimmer {
             background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
             background-size: 200% 100%;
             animation: shimmer 2s infinite;
         }
-
         @keyframes shimmer {
             0% {
                 background-position: -200% 0;
             }
-
             100% {
                 background-position: 200% 0;
             }
         }
     </style>
 </head>
-
 <body class="min-h-screen flex flex-col overflow-hidden">
-
-    <!-- Top Nav Bar -->
     <nav class="w-full z-[100] bg-[#FDFBF7] border-b border-stone-200 flex justify-between items-center px-6 md:px-12 py-4 shrink-0 shadow-sm relative">
         <div class="flex items-center gap-4">
             <a href="index.html" class="flex items-center gap-4">
@@ -176,11 +145,8 @@
             </button>
         </div>
     </nav>
-
     <div id="dashboard-layout-wrapper" class="flex flex-1 overflow-hidden">
     <div class="ink-grain"></div>
-
-    <!-- Sidebar -->
     <aside class="w-64 glass-panel border-r border-stone-200 hidden lg:flex flex-col z-50">
         <div class="p-8 border-b border-stone-100">
             <a href="index.html" class="font-serif italic font-bold text-xl tracking-tight text-[#1A1208]">The Painted
@@ -204,7 +170,6 @@
                 <span class="material-symbols-outlined">event_available</span>
                 <span class="text-sm font-medium">Workshops</span>
             </a>
-
             <div class="px-8 mt-12 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Discovery</div>
             <a href="index.html#living-map-section"
                 class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
@@ -216,7 +181,6 @@
                 <span class="material-symbols-outlined">auto_stories</span>
                 <span class="text-sm font-medium">Heritage Journal</span>
             </a>
-
             <div class="px-8 mt-12 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Account</div>
             <a href="#"
                 class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
@@ -238,14 +202,10 @@
             </div>
         </div>
     </aside>
-
-    <!-- Main Content -->
     <main class="flex-1 flex flex-col h-screen overflow-y-auto custom-scrollbar relative">
-        <!-- Top Nav -->
         <header
             class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-stone-100 px-8 py-4 flex justify-between items-center">
             <div class="flex items-center gap-4 flex-1">
-                
                 <button class="mobile-menu-btn-toggle lg:hidden text-stone-900 p-2 flex items-center justify-center mr-2">
                     <span class="material-symbols-outlined text-2xl">menu</span>
                 </button>
@@ -266,10 +226,7 @@
                     Artist</button>
             </div>
         </header>
-
-        <!-- Dashboard Body -->
         <div class="p-8 space-y-12">
-            
 <section class="relative overflow-hidden rounded-3xl bg-[#F5F0E8] border border-stone-200 p-12 shadow-lg mb-12">
     <div class="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
         <img src="pics/aipan_pattern_uttarakhand_1778230515155.png" alt="Pattern" class="w-full h-full object-cover grayscale mix-blend-multiply">
@@ -279,8 +236,6 @@
         <p class="text-stone-600 text-lg">Learn the sacred geometry, natural dye techniques, and storytelling from the masters directly.</p>
     </div>
 </section>
-
-<!-- Upcoming Featured Workshops -->
 <section class="mb-16">
     <h2 class="text-2xl font-serif text-[#1A1208] mb-6 flex items-center gap-3 border-b border-stone-200 pb-2">
         <span class="material-symbols-outlined text-[#B5451B]">event_upcoming</span> Upcoming Featured Sessions
@@ -324,7 +279,6 @@
                 </div>
             </div>
         </div>
-        
         <div class="bg-white rounded-2xl overflow-hidden border border-stone-100 shadow-lg group flex flex-col">
             <div class="h-56 relative overflow-hidden">
                 <img src="pics/pithora_pattern_1778230468406.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
@@ -364,8 +318,6 @@
         </div>
     </div>
 </section>
-
-<!-- Private Retreats Info -->
 <section class="bg-stone-900 rounded-3xl p-12 text-center text-white relative overflow-hidden mb-12 shadow-2xl">
     <div class="absolute inset-0 opacity-20"><img src="pics/tanjore_gold_pattern_1778230407842.png" class="w-full h-full object-cover"></div>
     <div class="relative z-10 max-w-2xl mx-auto">
@@ -375,18 +327,14 @@
         <button class="px-8 py-4 bg-[#D4AF37] text-[#1A1208] text-xs font-bold uppercase tracking-widest rounded hover:bg-white transition-colors shadow-lg hover:shadow-xl">Request Custom Retreat</button>
     </div>
 </section>
-
         </div>
-
-        <!-- Footer (Dashboard Style) -->
         <footer
             class="mt-auto border-t border-stone-100 p-8 text-center text-stone-400 text-[10px] uppercase tracking-widest font-bold">
-            &copy; 2026 The Painted Muse. All Rights Reserved. · <a href="#" class="hover:text-[#B5451B]">Privacy
-                Policy</a> · <a href="#" class="hover:text-[#B5451B]">Terms of Service</a>
+            &copy; 2026 The Painted Muse. All Rights Reserved. Â· <a href="#" class="hover:text-[#B5451B]">Privacy
+                Policy</a> Â· <a href="#" class="hover:text-[#B5451B]">Terms of Service</a>
         </footer>
     </main>
-    </div><!-- End dashboard-layout-wrapper -->
-
+    </div>
     <script>
         const artistsData = {
             "Maharashtra": [
@@ -414,36 +362,25 @@
                 { name: "Pramod Maharana", style: "Pattachitra", experience: "18 Years", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400", rating: 4.8 }
             ]
         };
-
         const fallbackRegion = "Bihar";
-
         async function requestLocation() {
             const btn = document.getElementById('location-btn');
             const text = document.getElementById('location-text');
             btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">sync</span> Accessing...';
-
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     async (position) => {
                         const lat = position.coords.latitude;
                         const lon = position.coords.longitude;
-
                         try {
-                            // Using BigDataCloud's free reverse geocoding API
                             const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
                             const data = await response.json();
-
-                            // Get the administrative region (state)
                             const state = data.principalSubdivision || data.city || "Your Region";
-
-                            // Check if we have specific artists for this state
                             const regions = Object.keys(artistsData);
                             const matchedRegion = regions.find(r => state.includes(r));
-
                             if (matchedRegion) {
                                 updateDashboard(matchedRegion, false, state);
                             } else {
-                                // If no direct artist match for the state, show state name but use fallback data
                                 updateDashboard(fallbackRegion, false, state);
                             }
                         } catch (error) {
@@ -463,13 +400,11 @@
                 updateDashboard(fallbackRegion, true);
             }
         }
-
         function updateDashboard(region, isFallback = false, realStateName = "") {
             const regionSpan = document.getElementById('current-region');
             const locationText = document.getElementById('location-text');
             const locationBtn = document.getElementById('location-btn');
             const grid = document.getElementById('artists-grid');
-
             const displayRegion = realStateName || region;
             regionSpan.innerText = displayRegion;
             locationText.innerHTML = `
@@ -477,11 +412,8 @@
                 <p class="text-sm font-bold">${displayRegion}, India</p>
             `;
             locationBtn.classList.add('hidden');
-
-            // Render Artists
             const artists = artistsData[region] || artistsData[fallbackRegion];
             grid.innerHTML = '';
-
             artists.forEach((artist, index) => {
                 const card = `
                     <div class="warli-border group artist-card rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 opacity-0 animate-fade-in" style="animation-delay: ${index * 100}ms; animation-fill-mode: forwards;">
@@ -499,7 +431,7 @@
                                     <span class="text-[10px] font-bold">${artist.rating}</span>
                                 </div>
                             </div>
-                            <p class="text-[10px] text-stone-400 uppercase tracking-widest font-bold mb-4">${artist.style} Master · ${artist.experience}</p>
+                            <p class="text-[10px] text-stone-400 uppercase tracking-widest font-bold mb-4">${artist.style} Master Â· ${artist.experience}</p>
                             <button class="w-full py-2 bg-[#B5451B] text-white text-[9px] font-bold uppercase tracking-widest rounded hover:bg-[#D4AF37] transition-all">Hire Artist</button>
                         </div>
                     </div>
@@ -507,8 +439,6 @@
                 grid.innerHTML += card;
             });
         }
-
-        // Add fade-in animation style
         const style = document.createElement('style');
         style.innerHTML = `
             @keyframes fadeIn {
@@ -521,8 +451,6 @@
         `;
         document.head.appendChild(style);
     </script>
-
-    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-0 z-[60] bg-[#FDFBF7] translate-x-full transition-transform duration-500 lg:hidden">
         <div class="flex justify-between items-center p-6 border-b border-stone-100">
             <img src="logo.jpeg" alt="The Painted Muse Logo" class="h-18 w-auto object-contain" />
@@ -539,7 +467,5 @@
             <a class="mobile-nav-item text-stone-400 text-sm hover:text-stone-600 transition-colors" href="index.html">Main Website</a>
         </div>
     </div>
-
 </body>
-
 </html>

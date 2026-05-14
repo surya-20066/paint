@@ -1,6 +1,5 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -22,11 +21,9 @@
       font-family: 'DM Sans', sans-serif;
       min-height: max(884px, 100dvh)
     }
-
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
     }
-
     .paper-grain {
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       opacity: .03;
@@ -34,12 +31,9 @@
     }
   </style>
 </head>
-
 <body class="bg-surface">
   <div class="fixed inset-0 paper-grain z-0"></div>
   <div class="relative flex h-screen w-full flex-row overflow-hidden z-10">
-
-    <!-- Sidebar -->
     <aside
       class="hidden lg:flex w-72 flex-col bg-surface-container border-r border-outline-variant h-screen sticky top-0">
       <div class="p-8 cursor-pointer flex items-center gap-3" onclick="window.location.href='index.html'">
@@ -87,17 +81,13 @@
         </div>
       </div>
     </aside>
-
-    <!-- Main -->
     <main class="flex-1 flex flex-col min-w-0 bg-surface-bright h-screen overflow-y-auto">
       <div class="lg:hidden flex items-center bg-surface p-4 border-b border-outline-variant justify-between">
         <span class="material-symbols-outlined text-on-surface">menu</span>
         <h2 class="text-on-surface font-headline-md text-xl font-bold flex-1 text-center">Home</h2>
         <div class="size-10"></div>
       </div>
-
       <div class="max-w-5xl mx-auto w-full px-6 md:px-10 py-12">
-        <!-- Welcome -->
         <header class="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
             <p class="font-label-sm text-primary uppercase tracking-widest mb-2">Welcome back</p>
@@ -110,8 +100,6 @@
             <span class="material-symbols-outlined text-lg">add</span> New Artwork
           </button>
         </header>
-
-        <!-- Stats -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
           <div class="bg-surface-container-low border border-outline-variant p-6">
             <div class="flex items-center gap-2 mb-3"><span
@@ -127,7 +115,7 @@
                 class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Profile Views</span>
             </div>
             <p class="font-headline-md text-4xl text-on-surface">1,248</p>
-            <p class="text-xs text-green-700 mt-1 font-bold">↑ 12% vs last month</p>
+            <p class="text-xs text-green-700 mt-1 font-bold">â†‘ 12% vs last month</p>
           </div>
           <div class="bg-surface-container-low border border-outline-variant p-6">
             <div class="flex items-center gap-2 mb-3"><span
@@ -142,17 +130,15 @@
                 class="material-symbols-outlined text-on-primary-container">payments</span><span
                 class="font-label-sm text-on-primary-container/70 uppercase tracking-widest text-[10px]">Total
                 Earnings</span></div>
-            <p class="font-headline-md text-4xl text-on-primary-container">₹2.4L</p>
-            <p class="text-xs text-on-primary-container/70 mt-1 font-bold">₹45K this month</p>
+            <p class="font-headline-md text-4xl text-on-primary-container">â‚¹2.4L</p>
+            <p class="text-xs text-on-primary-container/70 mt-1 font-bold">â‚¹45K this month</p>
           </div>
         </div>
-
-        <!-- Recent Artworks -->
         <section class="mb-12">
           <div class="flex items-center justify-between mb-6">
             <h2 class="font-headline-md text-2xl text-on-background">Recent Uploads</h2>
             <a href="artist-gallery.html"
-              class="font-label-sm text-primary uppercase tracking-widest text-xs hover:underline">View All →</a>
+              class="font-label-sm text-primary uppercase tracking-widest text-xs hover:underline">View All â†’</a>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div
@@ -164,7 +150,7 @@
               <div class="p-4">
                 <h4 class="font-headline-md text-lg mb-1">Eternal Echoes</h4>
                 <div class="flex justify-between"><span class="text-xs text-on-surface-variant">Madhubani</span><span
-                    class="text-sm text-primary font-bold">₹18,000</span></div>
+                    class="text-sm text-primary font-bold">â‚¹18,000</span></div>
               </div>
             </div>
             <div
@@ -176,7 +162,7 @@
               <div class="p-4">
                 <h4 class="font-headline-md text-lg mb-1">Tree of Life</h4>
                 <div class="flex justify-between"><span class="text-xs text-on-surface-variant">Madhubani</span><span
-                    class="text-sm text-primary font-bold">₹24,500</span></div>
+                    class="text-sm text-primary font-bold">â‚¹24,500</span></div>
               </div>
             </div>
             <div
@@ -191,8 +177,6 @@
             </div>
           </div>
         </section>
-
-        <!-- Recent Activity -->
         <section class="mb-12">
           <h2 class="font-headline-md text-2xl text-on-background mb-6">Recent Activity</h2>
           <div
@@ -202,14 +186,14 @@
               <div class="flex-1">
                 <p class="font-body-md text-on-surface"><strong>Eternal Echoes</strong> was purchased by a collector</p>
                 <p class="text-xs text-on-surface-variant">2 hours ago</p>
-              </div><span class="text-primary font-bold">₹18,000</span>
+              </div><span class="text-primary font-bold">â‚¹18,000</span>
             </div>
             <div class="flex items-center gap-4 p-5"><span
                 class="material-symbols-outlined text-green-700">shopping_bag</span>
               <div class="flex-1">
                 <p class="font-body-md text-on-surface"><strong>Lotus Dreams</strong> was purchased by a collector</p>
                 <p class="text-xs text-on-surface-variant">3 days ago</p>
-              </div><span class="text-primary font-bold">₹12,000</span>
+              </div><span class="text-primary font-bold">â‚¹12,000</span>
             </div>
             <div class="flex items-center gap-4 p-5"><span
                 class="material-symbols-outlined text-secondary">event_available</span>
@@ -217,28 +201,25 @@
                 <p class="font-body-md text-on-surface"><strong>Sacred Rivers</strong> was booked for private viewing
                 </p>
                 <p class="text-xs text-on-surface-variant">5 days ago</p>
-              </div><span class="text-primary font-bold">₹35,000</span>
+              </div><span class="text-primary font-bold">â‚¹35,000</span>
             </div>
             <div class="flex items-center gap-4 p-5"><span
                 class="material-symbols-outlined text-green-700">shopping_bag</span>
               <div class="flex-1">
                 <p class="font-body-md text-on-surface"><strong>Morning Raaga</strong> was purchased by a collector</p>
                 <p class="text-xs text-on-surface-variant">1 week ago</p>
-              </div><span class="text-primary font-bold">₹15,500</span>
+              </div><span class="text-primary font-bold">â‚¹15,500</span>
             </div>
           </div>
         </section>
       </div>
     </main>
   </div>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Load profile links
       const storedLinks = localStorage.getItem('artist_profile_links');
       const linksContainer = document.getElementById('home-links');
       let links = [];
-
       if (storedLinks) {
         links = JSON.parse(storedLinks);
       } else {
@@ -247,7 +228,6 @@
           { title: 'Instagram', url: 'https://instagram.com/amrita_madhubani' }
         ];
       }
-
       if (links.length > 0) {
         linksContainer.innerHTML = links.map(link => `
       <a href="${link.url}" target="_blank" class="text-xs text-primary font-bold uppercase tracking-wider flex items-center gap-1 hover:underline bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant transition-colors">
@@ -257,31 +237,22 @@
       } else {
         linksContainer.innerHTML = '';
       }
-
-      // Load profile details
       const storedProfile = localStorage.getItem('artist_profile_data');
       if (storedProfile) {
         const profile = JSON.parse(storedProfile);
-
-        // Update welcome header name
         const welcomeHeader = document.querySelector('h1.font-headline-lg');
         if (welcomeHeader) welcomeHeader.textContent = profile.fullName;
-
-        // Update sidebar profile
         const sbImg = document.getElementById('sidebar-img');
         const sbName = document.getElementById('sidebar-name');
         const sbRole = document.getElementById('sidebar-role');
-
         if (sbImg) sbImg.src = profile.photoUrl;
         if (sbName) sbName.textContent = profile.displayName;
         if (sbRole) sbRole.textContent = profile.specialization.toUpperCase();
       }
-      // IndexedDB Logic for Uploading Reels
       const fileInput = document.getElementById('reelUploadInput');
       const dbName = "ReelsDB";
       const storeName = "videos";
       let db;
-
       const initDB = () => {
         return new Promise((resolve, reject) => {
           const request = indexedDB.open(dbName, 1);
@@ -298,11 +269,9 @@
           };
         });
       };
-
       const saveVideo = async (file) => {
         const transaction = db.transaction([storeName], "readwrite");
         const store = transaction.objectStore(storeName);
-        
         let artistName = "Amrita Devi";
         let handle = "@amrita_art";
         try {
@@ -313,7 +282,6 @@
             if (profile.displayName) handle = "@" + profile.displayName.toLowerCase().replace(/\s+/g, '_');
           }
         } catch (e) {}
-
         const record = { 
           file: file, 
           timestamp: Date.now(),
@@ -322,9 +290,7 @@
         };
         store.add(record);
       };
-
       initDB().catch(err => console.error("IndexedDB initialization failed:", err));
-
       if (fileInput) {
         fileInput.addEventListener('change', (e) => {
           const file = e.target.files[0];
@@ -338,5 +304,4 @@
     });
   </script>
 </body>
-
 </html>

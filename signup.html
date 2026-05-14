@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="light" lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -117,14 +117,11 @@
     </style>
 </head>
 <body class="bg-surface text-on-surface font-body-md min-h-screen relative overflow-hidden">
-    <!-- Soft-focus Artistic Background -->
     <div class="fixed inset-0 z-0">
         <img alt="Background pattern" class="h-full w-full object-cover blur-sm opacity-20 scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE85tliyBtatM4Sf9CGMCkZrJLQbMkAvenwVo9STCUkhlAfIfFaU5PR6Y48rZ-4KuIoI4eJK09WtYLHNewz2WrIJDF7vSM-QmXbO-njNqxgped5JbFyOnwVHgsDWZQERAp-dpFK6R30NrvKIMYqnkpxBetfDPqAHpWry3YDm8YSkPQM-KnvLHPRK0yBW8Y4uRF9NOADCjtyLuP8ZjuNSGP2x2zmQmYzZS3FzJ2_Td2xvEs6udYptzb_3IbEQmsQO6uBrO3MZdbXeua"/>
         <div class="absolute inset-0 bg-gradient-to-tr from-surface via-surface/80 to-primary/5"></div>
     </div>
-    
     <div class="relative z-10 flex min-h-screen flex-col lg:flex-row items-center justify-center lg:p-12 p-4">
-        <!-- Brand Visual Side (Desktop only, subtle overlay) -->
         <div class="hidden lg:flex w-1/3 flex-col justify-center p-12 text-on-surface">
             <div class="max-w-md">
                 <div class="mb-10 flex items-center gap-4 cursor-pointer" onclick="window.location.href='index.html'">
@@ -141,15 +138,10 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Form Side - Glassmorphism Card -->
         <div class="flex w-full lg:w-[540px] flex-col glass-card rounded-xl p-8 lg:p-12 overflow-y-auto max-h-[90vh]">
-            <!-- Mobile Header -->
             <div class="lg:hidden mb-10 flex flex-col items-center cursor-pointer" onclick="window.location.href='index.html'">
                 <img src="logo.jpeg" alt="The Painted Muse Logo" class="h-32 w-auto object-contain mb-6 mx-auto" />
             </div>
-            
-            <!-- Navigation -->
             <div class="mb-10 flex items-center justify-between">
                 <a class="group inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="index.html">
                     <span class="material-symbols-outlined text-[20px]">arrow_back</span>
@@ -160,10 +152,8 @@
                     <button class="px-6 py-2 rounded-full bg-white shadow-sm text-on-surface font-bold font-label-sm uppercase tracking-wider transition-all text-xs">Sign Up</button>
                 </div>
             </div>
-            
             <div class="w-full">
                 <form class="space-y-6" onsubmit="event.preventDefault(); window.location.href='artist-home.html';">
-                    <!-- Name Field -->
                     <div class="space-y-1 text-left">
                         <label class="block text-on-surface-variant font-label-sm uppercase tracking-widest text-[10px]" for="full-name">Full Name</label>
                         <div class="relative group">
@@ -171,7 +161,6 @@
                             <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-primary/40 group-focus-within:text-primary transition-colors">person</span>
                         </div>
                     </div>
-                    <!-- Art Specialization Field -->
                     <div class="space-y-1 text-left">
                         <label class="block text-on-surface-variant font-label-sm uppercase tracking-widest text-[10px]" for="specialization">Art Specialization</label>
                         <div class="relative group">
@@ -185,7 +174,6 @@
                             <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-primary/40 group-focus-within:text-primary transition-colors">palette</span>
                         </div>
                     </div>
-                    <!-- Email Field -->
                     <div class="space-y-1 text-left">
                         <label class="block text-on-surface-variant font-label-sm uppercase tracking-widest text-[10px]" for="email">Email Address</label>
                         <div class="relative group">
@@ -193,11 +181,10 @@
                             <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-primary/40 group-focus-within:text-primary transition-colors">mail</span>
                         </div>
                     </div>
-                    <!-- Password Field -->
                     <div class="space-y-1 text-left">
                         <label class="block text-on-surface-variant font-label-sm uppercase tracking-widest text-[10px]" for="password">Password</label>
                         <div class="relative group">
-                            <input required class="w-full bg-white/50 border border-outline-variant/30 rounded-lg py-3 px-4 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-on-surface text-sm" id="password" placeholder="••••••••" type="password"/>
+                            <input required class="w-full bg-white/50 border border-outline-variant/30 rounded-lg py-3 px-4 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-on-surface text-sm" id="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" type="password"/>
                             <span id="togglePassword" onclick="const p = document.getElementById('password'); p.type = p.type === 'password' ? 'text' : 'password'; this.textContent = p.type === 'password' ? 'visibility_off' : 'visibility';" class="material-symbols-outlined absolute right-12 top-1/2 -translate-y-1/2 text-primary/40 cursor-pointer hover:text-primary transition-colors">visibility_off</span>
                             <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-primary/40 group-focus-within:text-primary transition-colors">lock</span>
                         </div>
@@ -233,8 +220,6 @@
             </div>
         </div>
     </div>
-    
-    <!-- Floating Decorative Element -->
     <div class="fixed top-12 right-12 pointer-events-none opacity-40 hidden lg:block animate-pulse">
         <svg class="text-primary" fill="none" height="160" viewbox="0 0 100 100" width="160">
             <path d="M50 0C22.4 0 0 22.4 0 50C0 77.6 22.4 100 50 100C77.6 100 100 77.6 100 50C100 22.4 77.6 0 50 0ZM50 90C27.9 90 10 72.1 10 50C10 27.9 27.9 10 50 10C72.1 10 90 27.9 90 50C90 72.1 72.1 90 50 90Z" fill="currentColor" fill-opacity="0.1"></path>
