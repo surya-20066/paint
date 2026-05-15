@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -40,6 +40,114 @@
         }
         .section-cream {
             background-color: #F5F0E8;
+        }
+
+        /* Standard Footer Styles */
+        footer {
+            background: #FDFBF7;
+            color: var(--ink);
+            padding: 100px 0 40px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--saffron), transparent);
+        }
+
+        .foot-top {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 60px;
+        }
+
+        .foot-brand p {
+            color: rgba(26, 18, 8, 0.7);
+            font-size: 14px;
+            margin: 20px 0 24px;
+            max-width: 320px;
+            line-height: 1.6;
+        }
+
+        .socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .socials a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(26, 18, 8, 0.15);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: var(--ink);
+            transition: all 0.3s ease;
+        }
+
+        .socials a:hover {
+            background: var(--saffron);
+            color: var(--ink);
+            border-color: var(--saffron);
+            transform: translateY(-3px);
+        }
+
+        .foot-col h5 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 15px;
+            margin-bottom: 24px;
+            color: var(--saffron);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .foot-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .foot-col li {
+            margin-bottom: 12px;
+        }
+
+        .foot-col a {
+            font-size: 14px;
+            color: rgba(26, 18, 8, 0.75);
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .foot-col a:hover {
+            color: var(--ink);
+        }
+
+        .foot-bot {
+            border-top: 1px solid rgba(26, 18, 8, 0.1);
+            padding-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(26, 18, 8, 0.5);
+            font-size: 13px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        @media (max-width: 1024px) {
+            .foot-top { grid-template-columns: repeat(3, 1fr); }
+            .foot-brand { grid-column: span 3; margin-bottom: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .foot-top { grid-template-columns: repeat(2, 1fr); }
+            .foot-brand { grid-column: span 2; }
         }
     </style>
 </head>
@@ -340,50 +448,147 @@
             </div>
         </section>
     </main>
-    <footer class="bg-[#1A1208] text-white pt-16 pb-8">
+    <footer id="footer">
         <div class="container mx-auto px-6">
-            <div
-                class="flex flex-col md:flex-row justify-between items-start border-b border-white/5 pb-12 mb-8 gap-12">
-                <div class="max-w-xs">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
-                            <span class="material-symbols-outlined text-[#D4AF37]">star</span>
-                        </div>
-                        <img src="dp.png" alt="The Painted Muse Logo" class="h-36 w-auto object-contain" />
+            <div class="foot-top">
+                <div class="foot-brand">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
                     </div>
-                    <p class="text-stone-500 font-sans text-sm leading-relaxed">
-                        Curating the subcontinent's most profound artistic expressions for a global audience of seekers
-                        and collectors.
-                    </p>
+                    <p>India's premier multi-art platform — celebrating the living traditions of every state through
+                        artisanal AI and human craft.</p>
+                    <div class="socials">
+                        <a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp"
+                            class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
+                        <a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram"
+                            class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
+                        <a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube"
+                            class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
+                        <a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn"
+                            class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
+                    </div>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-12">
-                    <div>
-                        <h5 class="font-serif italic text-[#D4AF37] mb-6">Navigation</h5>
-                        <ul class="space-y-4 font-sans text-[11px] uppercase tracking-widest text-stone-500">
-                            <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
-                            <li><a href="heritage.html" class="hover:text-white transition-colors">Heritage Registry</a>
-                            </li>
-                            <li><a href="#" class="hover:text-white transition-colors">Journal</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5 class="font-serif italic text-[#D4AF37] mb-6">Community</h5>
-                        <ul class="space-y-4 font-sans text-[11px] uppercase tracking-widest text-stone-500">
-                            <li><a href="#" class="hover:text-white transition-colors">Retreats</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Workshops</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Archive</a></li>
-                        </ul>
-                    </div>
+                <div class="foot-col">
+                    <h5>Related</h5>
+                    <ul>
+                        <li>
+                            <a href="heritage.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Heritage Guide
+                            </a>
+                        </li>
+                        <li>
+                            <a href="masterpieces.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Masterpieces
+                            </a>
+                        </li>
+                        <li>
+                            <a href="team.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Our Team
+                            </a>
+                        </li>
+                        <li>
+                            <a href="signin.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Artist Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h5>Platform</h5>
+                    <ul>
+                        <li>
+                            <a href="index.html#journal"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Art Forms
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#living-map-section"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Interactive Map
+                            </a>
+                        </li>
+                        <li>
+                            <a href="artists.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Meet the Makers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#journal"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                The Muse Journal
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h5>Navigations</h5>
+                    <ul>
+                        <li>
+                            <a href="index.html#living-map-section"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Live Map
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#yreel-hub"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Reels
+                            </a>
+                        </li>
+                        <li>
+                            <a href="artists.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Explore Artists
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                Art Retreats
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h5>Contact Us</h5>
+                    <ul>
+                        <li>
+                            <a href="mailto:painterdmuse_2k26@gmail.com"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                painterdmuse_2k26@gmail.com
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+917798345690"
+                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                                +91 7798345690
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div
-                class="flex flex-col md:flex-row justify-between items-center text-stone-600 font-sans text-[10px] uppercase tracking-[0.2em] gap-6">
-                <div>Â© 2025 The Painted Muse Â· India's Cultural Bastion</div>
-                <div class="flex gap-8">
-                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
-                    <a href="#" class="hover:text-white transition-colors">Terms</a>
-                    <a href="#" class="hover:text-white transition-colors">Artifacts</a>
-                </div>
+            <div class="foot-bot justify-center text-center">
+                <div>© 2025 The Painted Muse · Made with ❤️ for Indian Art</div>
             </div>
         </div>
     </footer>
