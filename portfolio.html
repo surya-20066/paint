@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Portfolio | The Painted Muse</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&amp;family=DM+Sans:wght@400;500;700&amp;family=Mrs+Saint+Delafield&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #B5451B;
+            --accent: #D4AF37;
+            --background: #FDFBF7;
+            --text: #1A1208;
+            --cream: #F5F0E8;
+            --warm: #FFF8F0;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            transition: background-color 0.5s ease;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-calligraphy {
+            font-family: 'Mrs Saint Delafield', cursive;
+        }
+
+        .ink-grain {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCRrEuwmrE10cxB2Oae845GDrP3kU-WyjvkShm1EQbrQg1J8AWwsnfTOa_Yd43-yDsPK-k7jiLPfPtwwOdYsTOwnMBabRznvfeo8h3bqtwD5gH2q4U30MBCCjJNiRgFbchZDN5lhWytQEYI5xTmEfIbnzuDLCKKDPl8_NyfmuWMuR86PhGc-JnOKloK4F3ni1MSTH5prPAgGGKWuf8SBOUfiXyBj35iXGC3XCEi91OQTXGj39Posri3UHGrcYXiOqWISXFGxeYn7Z7y);
+            opacity: 0.03;
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99;
+        }
+
+        .warli-border {
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+        }
+
+        .warli-border::before {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            pointer-events: none;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .sidebar-item.active {
+            color: var(--primary);
+            background: rgba(181, 69, 27, 0.05);
+            border-right: 3px solid var(--primary);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(26, 18, 8, 0.05);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .color-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .color-swatch.active {
+            border-color: var(--primary);
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex overflow-hidden">
+    <div class="ink-grain"></div>
+
+    <!-- Sidebar -->
+    <aside class="w-64 glass-panel border-r border-stone-200 hidden lg:flex flex-col z-50">
+        <div class="p-8 border-b border-stone-100">
+            <a href="index.html" class="font-serif italic font-bold text-xl tracking-tight text-[#1A1208]">The Painted Muse</a>
+        </div>
+        <nav class="flex-1 py-8 overflow-y-auto no-scrollbar">
+            <div class="px-8 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Account</div>
+            <a href="dashboard.html"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="text-sm font-medium">Dashboard</span>
+            </a>
+            <a href="#"
+                class="sidebar-item active flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">person</span>
+                <span class="text-sm font-medium">My Portfolio</span>
+            </a>
+            <a href="artist-gallery.html"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">palette</span>
+                <span class="text-sm font-medium">Art</span>
+            </a>
+            <a href="commissions.html"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">history_edu</span>
+                <span class="text-sm font-medium">My Commissions</span>
+            </a>
+            <a href="workshops.html"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">event_available</span>
+                <span class="text-sm font-medium">Workshops</span>
+            </a>
+            <div class="px-8 mt-12 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Discovery</div>
+            <a href="index.html#living-map-section"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">map</span>
+                <span class="text-sm font-medium">Interactive Map</span>
+            </a>
+            <a href="index.html#journal"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">auto_stories</span>
+                <span class="text-sm font-medium">Heritage Journal</span>
+            </a>
+        </nav>
+        <div class="p-8 border-t border-stone-100">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center overflow-hidden">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <div class="text-xs font-bold text-[#1A1208]">Sathwik Manoj</div>
+                    <div class="text-[10px] text-stone-500">Premium Member</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto custom-scrollbar relative">
+        <!-- Top Header -->
+        <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-stone-100 px-8 py-4 flex justify-between items-center">
+            <h1 class="font-serif text-2xl text-[#1A1208]">Portfolio <span class="italic text-[#D4AF37]">Settings</span></h1>
+            <div class="flex items-center gap-4">
+                <button onclick="window.location.href='artist-profile-preview.html'" class="text-stone-500 hover:text-[#B5451B] flex items-center gap-2 text-xs font-bold uppercase tracking-widest">
+                    <span class="material-symbols-outlined text-sm">visibility</span> Preview
+                </button>
+                <button onclick="saveChanges()" class="bg-[#B5451B] text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-[#D4AF37] transition-all">Save Changes</button>
+            </div>
+        </header>
+
+        <div class="p-8 max-w-6xl mx-auto w-full space-y-12">
+            <!-- Navigation Tabs -->
+            <div class="flex gap-8 border-b border-stone-200">
+                <button onclick="switchTab('profile')" id="tab-profile" class="tab-btn active pb-4 text-sm font-bold uppercase tracking-widest">General Profile</button>
+                <button onclick="switchTab('appearance')" id="tab-appearance" class="tab-btn pb-4 text-sm font-bold uppercase tracking-widest">Appearance</button>
+                <button onclick="switchTab('portfolio')" id="tab-portfolio" class="tab-btn pb-4 text-sm font-bold uppercase tracking-widest">Portfolio Section</button>
+                <button onclick="switchTab('liked')" id="tab-liked" class="tab-btn pb-4 text-sm font-bold uppercase tracking-widest">Liked Arts</button>
+            </div>
+
+            <!-- Profile Settings -->
+            <section id="section-profile" class="tab-content space-y-8 animate-fade-in-up">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="space-y-6">
+                        <h2 class="text-2xl font-serif text-[#1A1208]">Personal Information</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2">Display Name</label>
+                                <input type="text" value="Sathwik Manoj" class="w-full bg-stone-50 border-stone-200 rounded-lg px-4 py-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2">Bio / Description</label>
+                                <textarea rows="4" class="w-full bg-stone-50 border-stone-200 rounded-lg px-4 py-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]">Art enthusiast and collector of heritage Indian art forms. Always looking for new perspectives on traditional techniques.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <h2 class="text-2xl font-serif text-[#1A1208]">Website Links</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-stone-400">language</span>
+                                <input type="text" placeholder="Personal Website" class="flex-1 bg-stone-50 border-stone-200 rounded-lg px-4 py-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]">
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-stone-400">link</span>
+                                <input type="text" placeholder="Instagram Profile" value="https://instagram.com/sathwik_muse" class="flex-1 bg-stone-50 border-stone-200 rounded-lg px-4 py-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]">
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-stone-400">share</span>
+                                <input type="text" placeholder="Behance / Dribbble" class="flex-1 bg-stone-50 border-stone-200 rounded-lg px-4 py-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]">
+                            </div>
+                            <button class="text-[#B5451B] text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 hover:gap-2 transition-all">
+                                <span class="material-symbols-outlined text-sm">add</span> Add Another Link
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Appearance Settings -->
+            <section id="section-appearance" class="tab-content hidden space-y-8 animate-fade-in-up">
+                <div class="glass-panel p-8 rounded-3xl border border-stone-200">
+                    <h2 class="text-2xl font-serif text-[#1A1208] mb-8">Portfolio Theme</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-4">Background Color</label>
+                                <div class="flex gap-4 items-center">
+                                    <div class="color-swatch active bg-[#FDFBF7]" data-color="#FDFBF7" title="Classic Cream"></div>
+                                    <div class="color-swatch bg-[#F5F0E8]" data-color="#F5F0E8" title="Antique Paper"></div>
+                                    <div class="color-swatch bg-[#FFF8F0]" data-color="#FFF8F0" title="Warm Silk"></div>
+                                    <div class="color-swatch bg-[#E8E4D9]" data-color="#E8E4D9" title="Desert Sand"></div>
+                                    <div class="color-swatch bg-[#1A1208]" data-color="#1A1208" title="Midnight Ink"></div>
+                                    <div class="flex items-center gap-2 ml-4">
+                                        <input type="color" id="custom-color" class="w-8 h-8 rounded-full border-none cursor-pointer">
+                                        <span class="text-[10px] font-bold uppercase tracking-widest text-stone-400">Custom</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-4">Accent Pattern</label>
+                                <div class="grid grid-cols-3 gap-4">
+                                    <button data-pattern="warli_pattern_1778230295803.png" class="border-2 border-[#D4AF37] p-2 rounded-xl bg-stone-50 overflow-hidden transition-all">
+                                        <img src="pics/warli_pattern_1778230295803.png" class="w-full h-12 object-cover opacity-30" alt="Warli">
+                                        <span class="text-[8px] font-bold uppercase mt-1 block">Warli</span>
+                                    </button>
+                                    <button data-pattern="madhubani_pattern_1778230275283.png" class="border-2 border-stone-100 p-2 rounded-xl bg-stone-50 overflow-hidden hover:border-[#D4AF37]/50 transition-all">
+                                        <img src="pics/madhubani_pattern_1778230275283.png" class="w-full h-12 object-cover opacity-30" alt="Madhubani">
+                                        <span class="text-[8px] font-bold uppercase mt-1 block">Madhubani</span>
+                                    </button>
+                                    <button data-pattern="gond_pattern_1778230315090.png" class="border-2 border-stone-100 p-2 rounded-xl bg-stone-50 overflow-hidden hover:border-[#D4AF37]/50 transition-all">
+                                        <img src="pics/gond_pattern_1778230315090.png" class="w-full h-12 object-cover opacity-30" alt="Gond">
+                                        <span class="text-[8px] font-bold uppercase mt-1 block">Gond Art</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative rounded-2xl overflow-hidden border border-stone-200 aspect-video bg-white shadow-inner flex items-center justify-center">
+                            <div class="absolute inset-0 opacity-5 pointer-events-none" id="preview-pattern" style="background-image: url('pics/warli_pattern_1778230295803.png'); background-size: cover;"></div>
+                            <div class="text-center p-8 z-10">
+                                <p class="text-stone-400 text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Live Preview</p>
+                                <h3 class="font-serif text-xl mb-1">Your Portfolio Title</h3>
+                                <p class="font-calligraphy text-2xl text-[#D4AF37]">Artistic Excellence</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Portfolio Section Settings -->
+            <section id="section-portfolio" class="tab-content hidden space-y-8 animate-fade-in-up">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h2 class="text-2xl font-serif text-[#1A1208]">Manage Your Works</h2>
+                        <p class="text-stone-500 text-sm mt-2">Showcase your collection or personal creations.</p>
+                    </div>
+                    <button onclick="window.location.href='dashboard-artists.html'" class="bg-[#D4AF37] text-white px-6 py-2 rounded text-xs font-bold uppercase tracking-widest hover:bg-[#B5451B] transition-all flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">upload</span> Upload New
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Portfolio Items -->
+                    <div id="portfolio-item-1" class="warli-border group rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all">
+                        <div class="h-56 overflow-hidden relative">
+                            <img src="pics/pattachitra_pattern_1778230348344.png" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 flex gap-2">
+                                <button onclick="removeItem('portfolio-item-1')" class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-stone-600 hover:text-red-500 shadow"><span class="material-symbols-outlined text-sm">delete</span></button>
+                                <button onclick="editItem('portfolio-item-1')" class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-stone-600 hover:text-[#B5451B] shadow"><span class="material-symbols-outlined text-sm">edit</span></button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-serif text-lg">Pattachitra Landscape</h4>
+                            <p class="text-[10px] text-stone-400 uppercase tracking-widest font-bold">Odisha Heritage · Added 2 days ago</p>
+                        </div>
+                    </div>
+                    <div id="portfolio-item-2" class="warli-border group rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all">
+                        <div class="h-56 overflow-hidden relative">
+                            <img src="pics/kalamkari_pattern_1778230370773.png" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 flex gap-2">
+                                <button onclick="removeItem('portfolio-item-2')" class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-stone-600 hover:text-red-500 shadow"><span class="material-symbols-outlined text-sm">delete</span></button>
+                                <button onclick="editItem('portfolio-item-2')" class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-stone-600 hover:text-[#B5451B] shadow"><span class="material-symbols-outlined text-sm">edit</span></button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-serif text-lg">Kalamkari Floral Study</h4>
+                            <p class="text-[10px] text-stone-400 uppercase tracking-widest font-bold">Andhra Traditional · Added 1 week ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center border-2 border-dashed border-stone-200 rounded-xl h-72 group hover:border-[#D4AF37] transition-all cursor-pointer">
+                        <div class="text-center">
+                            <span class="material-symbols-outlined text-4xl text-stone-300 group-hover:text-[#D4AF37] transition-all">add_photo_alternate</span>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-stone-400 mt-4">Drop files here or click to upload</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Liked Arts Settings -->
+            <section id="section-liked" class="tab-content hidden space-y-8 animate-fade-in-up">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h2 class="text-2xl font-serif text-[#1A1208]">Arts You've Liked</h2>
+                        <p class="text-stone-500 text-sm mt-2">Your personal collection of inspirations.</p>
+                    </div>
+                    <a href="dashboard.html#artists-section" class="text-xs font-bold text-[#B5451B] uppercase tracking-widest border-b border-[#B5451B] pb-1">Discover More</a>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <!-- Liked Items -->
+                    <div class="relative group rounded-xl overflow-hidden aspect-square border border-stone-100 shadow-sm hover:shadow-xl transition-all">
+                        <img src="pics/madhubani_pattern_1778230275283.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                            <p class="text-white text-[10px] font-bold uppercase tracking-widest">Madhubani</p>
+                            <button onclick="unlikeItem(this)" class="text-[#D4AF37] text-[10px] font-bold uppercase mt-1 hover:text-white transition-colors">Unlike</button>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden aspect-square border border-stone-100 shadow-sm hover:shadow-xl transition-all">
+                        <img src="pics/warli_pattern_1778230295803.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                            <p class="text-white text-[10px] font-bold uppercase tracking-widest">Warli</p>
+                            <button onclick="unlikeItem(this)" class="text-[#D4AF37] text-[10px] font-bold uppercase mt-1 hover:text-white transition-colors">Unlike</button>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden aspect-square border border-stone-100 shadow-sm hover:shadow-xl transition-all">
+                        <img src="pics/gond_pattern_1778230315090.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                            <p class="text-white text-[10px] font-bold uppercase tracking-widest">Gond Art</p>
+                            <button onclick="unlikeItem(this)" class="text-[#D4AF37] text-[10px] font-bold uppercase mt-1 hover:text-white transition-colors">Unlike</button>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden aspect-square border border-stone-100 shadow-sm hover:shadow-xl transition-all">
+                        <img src="pics/pattachitra_pattern_1778230348344.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                            <p class="text-white text-[10px] font-bold uppercase tracking-widest">Pattachitra</p>
+                            <button onclick="unlikeItem(this)" class="text-[#D4AF37] text-[10px] font-bold uppercase mt-1 hover:text-white transition-colors">Unlike</button>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden aspect-square border border-stone-100 shadow-sm hover:shadow-xl transition-all">
+                        <img src="pics/kalamkari_pattern_1778230370773.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                            <p class="text-white text-[10px] font-bold uppercase tracking-widest">Kalamkari</p>
+                            <button onclick="unlikeItem(this)" class="text-[#D4AF37] text-[10px] font-bold uppercase mt-1 hover:text-white transition-colors">Unlike</button>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden aspect-square border border-stone-100 shadow-sm hover:shadow-xl transition-all">
+                        <img src="pics/thangka_pattern_1778230438584.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                            <p class="text-white text-[10px] font-bold uppercase tracking-widest">Thangka</p>
+                            <button onclick="unlikeItem(this)" class="text-[#D4AF37] text-[10px] font-bold uppercase mt-1 hover:text-white transition-colors">Unlike</button>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden aspect-square border border-stone-100 shadow-sm hover:shadow-xl transition-all">
+                        <img src="pics/tanjore_gold_pattern_1778230407842.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                            <p class="text-white text-[10px] font-bold uppercase tracking-widest">Tanjore Gold</p>
+                            <button onclick="unlikeItem(this)" class="text-[#D4AF37] text-[10px] font-bold uppercase mt-1 hover:text-white transition-colors">Unlike</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-auto border-t border-stone-100 p-8 text-center text-stone-400 text-[10px] uppercase tracking-widest font-bold">
+            &copy; 2026 The Painted Muse. Portfolio Management System.
+        </footer>
+    </main>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected content
+            document.getElementById('section-' + tabName).classList.remove('hidden');
+            // Set active button
+            document.getElementById('tab-' + tabName).classList.add('active');
+        }
+
+        function saveChanges() {
+            alert('Your changes have been saved successfully!');
+        }
+
+        function removeItem(id) {
+            if(confirm('Are you sure you want to remove this item?')) {
+                document.getElementById(id).remove();
+            }
+        }
+
+        function editItem(id) {
+            alert('Editing item: ' + id);
+        }
+
+        function unlikeItem(btn) {
+            const item = btn.closest('.relative');
+            item.style.opacity = '0';
+            setTimeout(() => item.remove(), 300);
+        }
+
+        // Background color switcher
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+            swatch.addEventListener('click', () => {
+                const color = swatch.getAttribute('data-color');
+                document.documentElement.style.setProperty('--background', color);
+                
+                // Update active state
+                document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+                swatch.classList.add('active');
+                
+                // Dynamic text color adjustment
+                if (color === '#1A1208') {
+                    document.documentElement.style.setProperty('--text', '#FDFBF7');
+                    document.querySelectorAll('.glass-panel').forEach(el => el.style.background = 'rgba(26, 18, 8, 0.7)');
+                } else {
+                    document.documentElement.style.setProperty('--text', '#1A1208');
+                    document.querySelectorAll('.glass-panel').forEach(el => el.style.background = 'rgba(255, 255, 255, 0.7)');
+                }
+            });
+        });
+
+        // Pattern switcher
+        document.querySelectorAll('[data-pattern]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const pattern = btn.getAttribute('data-pattern');
+                const preview = document.getElementById('preview-pattern');
+                preview.style.backgroundImage = `url('${pattern}')`;
+                
+                // Update border
+                document.querySelectorAll('[data-pattern]').forEach(b => b.classList.remove('border-[#D4AF37]'));
+                document.querySelectorAll('[data-pattern]').forEach(b => b.classList.add('border-stone-100'));
+                btn.classList.remove('border-stone-100');
+                btn.classList.add('border-[#D4AF37]');
+            });
+        });
+
+        const customColorInput = document.getElementById('custom-color');
+        customColorInput.addEventListener('input', (e) => {
+            const color = e.target.value;
+            document.body.style.backgroundColor = color;
+            document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+        });
+    </script>
+</body>
+
+</html>
+

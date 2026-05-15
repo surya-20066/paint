@@ -146,7 +146,7 @@
     <aside
       class="hidden lg:flex w-72 flex-col bg-surface-container border-r border-outline-variant h-screen sticky top-0">
       <div class="p-8 cursor-pointer flex items-center gap-3" onclick="window.location.href='index.html'">
-        <img src="dp.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" />
+        <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" />
         <span class="font-headline-md text-on-surface text-sm font-bold leading-tight">Artist<br>Dashboard</span>
       </div>
       <nav class="flex-1 px-4">
@@ -224,7 +224,7 @@
                 class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Profile Views</span>
             </div>
             <p class="font-headline-md text-4xl text-on-surface">1,248</p>
-            <p class="text-xs text-green-700 mt-1 font-bold">â†‘ 12% vs last month</p>
+            <p class="text-xs text-green-700 mt-1 font-bold">↑ 12% vs last month</p>
           </div>
           <div class="bg-surface-container-low border border-outline-variant p-6">
             <div class="flex items-center gap-2 mb-3"><span
@@ -239,50 +239,20 @@
                 class="material-symbols-outlined text-on-primary-container">payments</span><span
                 class="font-label-sm text-on-primary-container/70 uppercase tracking-widest text-[10px]">Total
                 Earnings</span></div>
-            <p class="font-headline-md text-4xl text-on-primary-container">â‚¹2.4L</p>
-            <p class="text-xs text-on-primary-container/70 mt-1 font-bold">â‚¹45K this month</p>
+            <p class="font-headline-md text-4xl text-on-primary-container">₹2.4L</p>
+            <p class="text-xs text-on-primary-container/70 mt-1 font-bold">₹45K this month</p>
           </div>
         </div>
         <section class="mb-12">
           <div class="flex items-center justify-between mb-6">
             <h2 class="font-headline-md text-2xl text-on-background">Recent Uploads</h2>
             <a href="artist-gallery.html"
-              class="font-label-sm text-primary uppercase tracking-widest text-xs hover:underline">View All â†’</a>
+              class="font-label-sm text-primary uppercase tracking-widest text-xs hover:underline">View All →</a>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div
-              class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow">
-              <div class="aspect-square bg-surface-variant overflow-hidden"><img
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtntfX-Ln9Zw1VZ0Hpkb2gPLxVGo-8i2HCOQq8MuDWfMJ2R8rgP_bq6LuBgIgo3JgCiAL1gf7XMnMQnarbhaXApQCbdgiH5J6IEDNWep-L2TYfsPvnDvypEd-aqOQD1Cja_lGLbojN9phmbZ6mwRBP9PEOFZcjvFm_WXH7XdrbwO0pOyT242yuLXNIchrOTtBgei5F4QraRKm3KIVqWxT6AX6MpcVZgTW8r293ODOFXu-5fLVr9dMl3bbcU4vwotycF13aX7JWcw0N" />
-              </div>
-              <div class="p-4">
-                <h4 class="font-headline-md text-lg mb-1">Eternal Echoes</h4>
-                <div class="flex justify-between"><span class="text-xs text-on-surface-variant">Madhubani</span><span
-                    class="text-sm text-primary font-bold">â‚¹18,000</span></div>
-              </div>
-            </div>
-            <div
-              class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow">
-              <div class="aspect-square bg-surface-variant overflow-hidden"><img
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE85tliyBtatM4Sf9CGMCkZrJLQbMkAvenwVo9STCUkhlAfIfFaU5PR6Y48rZ-4KuIoI4eJK09WtYLHNewz2WrIJDF7vSM-QmXbO-njNqxgped5JbFyOnwVHgsDWZQERAp-dpFK6R30NrvKIMYqnkpxBetfDPqAHpWry3YDm8YSkPQM-KnvLHPRK0yBW8Y4uRF9NOADCjtyLuP8ZjuNSGP2x2zmQmYzZS3FzJ2_Td2xvEs6udYptzb_3IbEQmsQO6uBrO3MZdbXeua" />
-              </div>
-              <div class="p-4">
-                <h4 class="font-headline-md text-lg mb-1">Tree of Life</h4>
-                <div class="flex justify-between"><span class="text-xs text-on-surface-variant">Madhubani</span><span
-                    class="text-sm text-primary font-bold">â‚¹24,500</span></div>
-              </div>
-            </div>
-            <div
-              class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow"
-              onclick="document.getElementById('reelUploadInput').click()">
-              <div class="aspect-square bg-surface-variant overflow-hidden flex items-center justify-center"><span
-                  class="material-symbols-outlined text-primary text-6xl">videocam</span></div>
-              <div class="p-4 text-center">
-                <h4 class="font-body-md text-on-surface-variant">Upload New Reel</h4>
-              </div>
-              <input type="file" id="reelUploadInput" accept="video/*" capture="environment" class="hidden">
+          <div id="recent-uploads-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Dynamic uploads will appear here -->
+            <div class="flex items-center justify-center h-48 col-span-full text-on-surface-variant font-body-md">
+              <span class="material-symbols-outlined animate-spin mr-2">sync</span> Loading your latest works...
             </div>
           </div>
         </section>
@@ -295,14 +265,14 @@
               <div class="flex-1">
                 <p class="font-body-md text-on-surface"><strong>Eternal Echoes</strong> was purchased by a collector</p>
                 <p class="text-xs text-on-surface-variant">2 hours ago</p>
-              </div><span class="text-primary font-bold">â‚¹18,000</span>
+              </div><span class="text-primary font-bold">₹18,000</span>
             </div>
             <div class="flex items-center gap-4 p-5"><span
                 class="material-symbols-outlined text-green-700">shopping_bag</span>
               <div class="flex-1">
                 <p class="font-body-md text-on-surface"><strong>Lotus Dreams</strong> was purchased by a collector</p>
                 <p class="text-xs text-on-surface-variant">3 days ago</p>
-              </div><span class="text-primary font-bold">â‚¹12,000</span>
+              </div><span class="text-primary font-bold">₹12,000</span>
             </div>
             <div class="flex items-center gap-4 p-5"><span
                 class="material-symbols-outlined text-secondary">event_available</span>
@@ -310,251 +280,142 @@
                 <p class="font-body-md text-on-surface"><strong>Sacred Rivers</strong> was booked for private viewing
                 </p>
                 <p class="text-xs text-on-surface-variant">5 days ago</p>
-              </div><span class="text-primary font-bold">â‚¹35,000</span>
+              </div><span class="text-primary font-bold">₹35,000</span>
             </div>
             <div class="flex items-center gap-4 p-5"><span
                 class="material-symbols-outlined text-green-700">shopping_bag</span>
               <div class="flex-1">
                 <p class="font-body-md text-on-surface"><strong>Morning Raaga</strong> was purchased by a collector</p>
                 <p class="text-xs text-on-surface-variant">1 week ago</p>
-              </div><span class="text-primary font-bold">â‚¹15,500</span>
+              </div><span class="text-primary font-bold">₹15,500</span>
             </div>
           </div>
         </section>
       </div>
-        <footer id="footer" class="mt-auto">
-            <div class="container mx-auto px-6">
-                <div class="foot-top">
-                    <div class="foot-brand">
-                        <div class="flex items-center gap-3 mb-6">
-                            <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
-                        </div>
-                        <p>India's premier multi-art platform — celebrating the living traditions of every state through
-                            artisanal AI and human craft.</p>
-                        <div class="socials">
-                            <a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp"
-                                class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
-                            <a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram"
-                                class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
-                            <a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube"
-                                class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
-                            <a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn"
-                                class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div class="foot-col">
-                        <h5>Related</h5>
-                        <ul>
-                            <li>
-                                <a href="heritage.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Heritage Guide
-                                </a>
-                            </li>
-                            <li>
-                                <a href="masterpieces.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Masterpieces
-                                </a>
-                            </li>
-                            <li>
-                                <a href="team.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Our Team
-                                </a>
-                            </li>
-                            <li>
-                                <a href="signin.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Artist Login
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="foot-col">
-                        <h5>Platform</h5>
-                        <ul>
-                            <li>
-                                <a href="index.html#journal"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Art Forms
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#living-map-section"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Interactive Map
-                                </a>
-                            </li>
-                            <li>
-                                <a href="artists.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Meet the Makers
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#journal"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    The Muse Journal
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="foot-col">
-                        <h5>Navigations</h5>
-                        <ul>
-                            <li>
-                                <a href="index.html#living-map-section"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Live Map
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#yreel-hub"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Reels
-                                </a>
-                            </li>
-                            <li>
-                                <a href="artists.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Explore Artists
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Art Retreats
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="foot-col">
-                        <h5>Contact Us</h5>
-                        <ul>
-                            <li>
-                                <a href="mailto:painterdmuse_2k26@gmail.com"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    painterdmuse_2k26@gmail.com
-                                </a>
-                            </li>
-                            <li>
-                                <a href="tel:+917798345690"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    +91 7798345690
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="foot-bot justify-center text-center">
-                    <div>© 2026 The Painted Muse · Made with ❤️ for Indian Art</div>
-                </div>
-            </div>
-        </footer>
+
     </main>
   </div>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const storedLinks = localStorage.getItem('artist_profile_links');
-      const linksContainer = document.getElementById('home-links');
-      let links = [];
-      if (storedLinks) {
-        links = JSON.parse(storedLinks);
-      } else {
-        links = [
-          { title: 'Personal Website', url: 'https://amritaart.com' },
-          { title: 'Instagram', url: 'https://instagram.com/amrita_madhubani' }
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Profile Loading
+      const loadProfile = () => {
+        const storedProfile = localStorage.getItem('artist_profile_data');
+        if (storedProfile) {
+          const profile = JSON.parse(storedProfile);
+          const welcomeHeader = document.querySelector('h1.font-headline-lg');
+          if (welcomeHeader) welcomeHeader.textContent = profile.fullName;
+          const sbImg = document.getElementById('sidebar-img');
+          const sbName = document.getElementById('sidebar-name');
+          const sbRole = document.getElementById('sidebar-role');
+          if (sbImg) sbImg.src = profile.photoUrl;
+          if (sbName) sbName.textContent = profile.displayName;
+          if (sbRole) sbRole.textContent = (profile.specialization || "Master Artist").toUpperCase();
+        }
+      };
+      loadProfile();
+
+      // 2. Links Loading
+      const loadLinks = () => {
+        const linksContainer = document.getElementById('home-links');
+        const storedLinks = localStorage.getItem('artist_profile_links');
+        let links = storedLinks ? JSON.parse(storedLinks) : [
+          { title: 'Personal Website', url: '#' },
+          { title: 'Instagram', url: '#' }
         ];
-      }
-      if (links.length > 0) {
-        linksContainer.innerHTML = links.map(link => `
-      <a href="${link.url}" target="_blank" class="text-xs text-primary font-bold uppercase tracking-wider flex items-center gap-1 hover:underline bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant transition-colors">
-        <span class="material-symbols-outlined text-xs">link</span>${link.title}
-      </a>
-    `).join('');
-      } else {
-        linksContainer.innerHTML = '';
-      }
-      const storedProfile = localStorage.getItem('artist_profile_data');
-      if (storedProfile) {
-        const profile = JSON.parse(storedProfile);
-        const welcomeHeader = document.querySelector('h1.font-headline-lg');
-        if (welcomeHeader) welcomeHeader.textContent = profile.fullName;
-        const sbImg = document.getElementById('sidebar-img');
-        const sbName = document.getElementById('sidebar-name');
-        const sbRole = document.getElementById('sidebar-role');
-        if (sbImg) sbImg.src = profile.photoUrl;
-        if (sbName) sbName.textContent = profile.displayName;
-        if (sbRole) sbRole.textContent = profile.specialization.toUpperCase();
-      }
-      const fileInput = document.getElementById('reelUploadInput');
-      const dbName = "ReelsDB";
-      const storeName = "videos";
-      let db;
-      const initDB = () => {
-        return new Promise((resolve, reject) => {
-          const request = indexedDB.open(dbName, 1);
-          request.onerror = event => reject(event.target.error);
-          request.onsuccess = event => {
-            db = event.target.result;
-            resolve(db);
-          };
-          request.onupgradeneeded = event => {
-            const db = event.target.result;
-            if (!db.objectStoreNames.contains(storeName)) {
-              db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
-            }
-          };
-        });
+        
+        if (linksContainer) {
+          linksContainer.innerHTML = links.map(link => `
+            <a href="${link.url}" target="_blank" class="text-xs text-primary font-bold uppercase tracking-wider flex items-center gap-1 hover:underline bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant transition-colors">
+              <span class="material-symbols-outlined text-xs">link</span>${link.title}
+            </a>
+          `).join('');
+        }
       };
-      const saveVideo = async (file) => {
-        const transaction = db.transaction([storeName], "readwrite");
-        const store = transaction.objectStore(storeName);
-        let artistName = "Amrita Devi";
-        let handle = "@amrita_art";
+      loadLinks();
+
+      // 3. Dynamic Recent Uploads (Posts + Reels)
+      const loadRecentUploads = async () => {
+        const grid = document.getElementById('recent-uploads-grid');
+        if (!grid) return;
+
+        // Get Posts
+        const posts = JSON.parse(localStorage.getItem('artist_posts') || '[]');
+        
+        // Get Reels from IndexedDB
+        const dbName = "ReelsDB";
+        const storeName = "videos";
+        let reels = [];
+        
         try {
-          const storedProfile = localStorage.getItem('artist_profile_data');
-          if (storedProfile) {
-            const profile = JSON.parse(storedProfile);
-            if (profile.fullName) artistName = profile.fullName;
-            if (profile.displayName) handle = "@" + profile.displayName.toLowerCase().replace(/\s+/g, '_');
-          }
-        } catch (e) {}
-        const record = { 
-          file: file, 
-          timestamp: Date.now(),
-          artistName: artistName,
-          handle: handle
-        };
-        store.add(record);
-      };
-      initDB().catch(err => console.error("IndexedDB initialization failed:", err));
-      if (fileInput) {
-        fileInput.addEventListener('change', (e) => {
-          const file = e.target.files[0];
-          if (file) {
-            if (db) saveVideo(file);
-            alert('Reel uploaded successfully!');
-            fileInput.value = '';
-          }
+          const db = await new Promise((resolve, reject) => {
+            const request = indexedDB.open(dbName, 1);
+            request.onerror = () => reject("IDB Error");
+            request.onsuccess = () => resolve(request.result);
+          });
+          const transaction = db.transaction([storeName], "readonly");
+          const store = transaction.objectStore(storeName);
+          reels = await new Promise((resolve) => {
+            const req = store.getAll();
+            req.onsuccess = () => resolve(req.result);
+          });
+        } catch(e) { console.error("IDB Error:", e); }
+
+        grid.innerHTML = '';
+        
+        // Show up to 2 newest posts and 1 newest reel (total 3 cards)
+        const recentPosts = posts.slice(0, 2);
+        const recentReels = reels.sort((a,b) => b.timestamp - a.timestamp).slice(0, 1);
+        
+        recentPosts.forEach(post => {
+          grid.innerHTML += `
+            <div class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow" onclick="window.location.href='artist-gallery.html'">
+              <div class="aspect-square bg-surface-variant overflow-hidden">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${post.imgUrl}" onerror="this.src='https://placehold.co/600x600/F5F0E8/B5451B?text=Artwork'"/>
+              </div>
+              <div class="p-4">
+                <h4 class="font-headline-md text-lg mb-1">${post.title}</h4>
+                <div class="flex justify-between"><span class="text-xs text-on-surface-variant">${post.category || 'Mithila'}</span><span class="text-sm text-primary font-bold">₹${Number(post.price).toLocaleString()}</span></div>
+              </div>
+            </div>
+          `;
         });
-      }
+        
+        recentReels.forEach(reel => {
+          const reelUrl = reel.file ? URL.createObjectURL(reel.file) : reel.videoUrl;
+          grid.innerHTML += `
+            <div class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow relative overflow-hidden" onclick="window.location.href='artist-gallery.html'">
+              <div class="aspect-square bg-surface-variant overflow-hidden relative">
+                ${reel.file ? `<video class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="${reelUrl}#t=0.1" muted></video>` : `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${reel.videoUrl}" />`}
+                <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-5xl opacity-80">play_circle</span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h4 class="font-headline-md text-lg mb-1">${reel.title}</h4>
+                <div class="flex justify-between"><span class="text-xs text-on-surface-variant">Reel</span><span class="text-sm text-primary font-bold text-green-700">New</span></div>
+              </div>
+            </div>
+          `;
+        });
+        
+        // Add "Upload More" card if space remains
+        if (recentPosts.length + recentReels.length < 3) {
+          grid.innerHTML += `
+            <div class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow" onclick="window.location.href='dashboard-artists.html'">
+              <div class="aspect-square bg-surface-variant overflow-hidden flex flex-col items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-primary text-5xl">add_circle</span>
+                <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Add New</span>
+              </div>
+              <div class="p-4 text-center">
+                <h4 class="font-body-md text-on-surface-variant">Upload More</h4>
+              </div>
+            </div>
+          `;
+        }
+      };
+      loadRecentUploads();
     });
   </script>
 </body>
 </html>
+

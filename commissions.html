@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Commissions | The Painted Muse</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&amp;family=DM+Sans:wght@400;500;700&amp;family=Mrs+Saint+Delafield&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #B5451B;
+            --accent: #D4AF37;
+            --background: #FDFBF7;
+            --text: #1A1208;
+            --cream: #F5F0E8;
+            --warm: #FFF8F0;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .ink-grain {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCRrEuwmrE10cxB2Oae845GDrP3kU-WyjvkShm1EQbrQg1J8AWwsnfTOa_Yd43-yDsPK-k7jiLPfPtwwOdYsTOwnMBabRznvfeo8h3bqtwD5gH2q4U30MBCCjJNiRgFbchZDN5lhWytQEYI5xTmEfIbnzuDLCKKDPl8_NyfmuWMuR86PhGc-JnOKloK4F3ni1MSTH5prPAgGGKWuf8SBOUfiXyBj35iXGC3XCEi91OQTXGj39Posri3UHGrcYXiOqWISXFGxeYn7Z7y);
+            opacity: 0.03;
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .sidebar-item.active {
+            color: var(--primary);
+            background: rgba(181, 69, 27, 0.05);
+            border-right: 3px solid var(--primary);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(26, 18, 8, 0.05);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .status-pill {
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-ongoing { background: #FEF3C7; color: #92400E; }
+        .status-completed { background: #D1FAE5; color: #065F46; }
+        .status-pending { background: #F3F4F6; color: #374151; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex overflow-hidden">
+    <div class="ink-grain"></div>
+
+    <!-- Sidebar -->
+    <aside class="w-64 glass-panel border-r border-stone-200 hidden lg:flex flex-col z-50">
+        <div class="p-8 border-b border-stone-100">
+            <a href="index.html" class="font-serif italic font-bold text-xl tracking-tight text-[#1A1208]">The Painted Muse</a>
+        </div>
+        <nav class="flex-1 py-8 overflow-y-auto no-scrollbar">
+            <div class="px-8 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Main Menu</div>
+            <a href="dashboard.html"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="text-sm font-medium">Overview</span>
+            </a>
+            <a href="artist-gallery.html"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">palette</span>
+                <span class="text-sm font-medium">Art</span>
+            </a>
+            <a href="commissions.html"
+                class="sidebar-item active flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">history_edu</span>
+                <span class="text-sm font-medium">My Commissions</span>
+            </a>
+            <a href="workshops.html" class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">event_available</span>
+                <span class="text-sm font-medium">Workshops</span>
+            </a>
+            <a href="portfolio.html" class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">person</span>
+                <span class="text-sm font-medium">My Portfolio</span>
+            </a>
+            <div class="px-8 mt-12 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Discovery</div>
+            <a href="index.html#living-map-section"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">map</span>
+                <span class="text-sm font-medium">Interactive Map</span>
+            </a>
+            <a href="index.html#journal"
+                class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+                <span class="material-symbols-outlined">auto_stories</span>
+                <span class="text-sm font-medium">Heritage Journal</span>
+            </a>
+
+        </nav>
+        <div class="p-8 border-t border-stone-100">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center overflow-hidden">
+                    <img src="pics/user_profile.png" alt="User" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <div class="text-xs font-bold text-[#1A1208]">Sathwik Manoj</div>
+                    <div class="text-[10px] text-stone-500">Premium Member</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto custom-scrollbar relative">
+        <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-stone-100 px-8 py-4 flex justify-between items-center">
+            <h1 class="font-serif text-2xl text-[#1A1208]">My <span class="italic text-[#D4AF37]">Commissions</span></h1>
+            <button class="bg-[#B5451B] text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-[#D4AF37] transition-all">New Request</button>
+        </header>
+
+        <div class="p-8 max-w-5xl mx-auto w-full space-y-12">
+            <!-- Active Commissions -->
+            <section class="space-y-6">
+                <h2 class="text-xl font-serif text-[#1A1208]">Active Tracking</h2>
+                <div class="space-y-4">
+                    <!-- Item 1 -->
+                    <div class="glass-panel p-6 rounded-2xl border border-stone-200 flex flex-col md:flex-row gap-6 animate-slide-in">
+                        <div class="w-24 h-24 bg-stone-100 rounded-xl overflow-hidden flex-shrink-0">
+                            <img src="pics/madhubani_pattern_1778230275283.png" class="w-full h-full object-cover" alt="Art">
+                        </div>
+                        <div class="flex-1 space-y-2">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-[#1A1208]">Madhubani Wall Mural</h3>
+                                    <p class="text-xs text-stone-500">Artist: Rameshwar Singh · Bihar</p>
+                                </div>
+                                <span class="status-pill status-ongoing">In Progress</span>
+                            </div>
+                            <div class="pt-4">
+                                <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">
+                                    <span>Progress</span>
+                                    <span>65%</span>
+                                </div>
+                                <div class="w-full h-2 bg-stone-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-orange-500 w-[65%] transition-all duration-1000"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:border-l border-stone-100 md:pl-6 flex flex-col justify-center">
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-stone-400">Est. Delivery</p>
+                            <p class="text-sm font-bold">June 12, 2026</p>
+                            <button class="mt-4 text-[#B5451B] text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 hover:gap-2 transition-all">Chat Artist <span class="material-symbols-outlined text-sm">chevron_right</span></button>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="glass-panel p-6 rounded-2xl border border-stone-200 flex flex-col md:flex-row gap-6 animate-slide-in" style="animation-delay: 0.1s;">
+                        <div class="w-24 h-24 bg-stone-100 rounded-xl overflow-hidden flex-shrink-0">
+                            <img src="pics/warli_pattern_1778230295803.png" class="w-full h-full object-cover" alt="Art">
+                        </div>
+                        <div class="flex-1 space-y-2">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-[#1A1208]">Warli Canvas Set</h3>
+                                    <p class="text-xs text-stone-500">Artist: Sarita Devi · Maharashtra</p>
+                                </div>
+                                <span class="status-pill status-ongoing">Final Touches</span>
+                            </div>
+                            <div class="pt-4">
+                                <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">
+                                    <span>Progress</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="w-full h-2 bg-stone-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-yellow-500 w-[90%] transition-all duration-1000"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:border-l border-stone-100 md:pl-6 flex flex-col justify-center">
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-stone-400">Est. Delivery</p>
+                            <p class="text-sm font-bold">May 25, 2026</p>
+                            <button class="mt-4 text-[#B5451B] text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 hover:gap-2 transition-all">Chat Artist <span class="material-symbols-outlined text-sm">chevron_right</span></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History -->
+            <section class="space-y-6">
+                <h2 class="text-xl font-serif text-[#1A1208]">Order History</h2>
+                <div class="bg-white rounded-2xl border border-stone-100 overflow-hidden">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-stone-50 border-b border-stone-100">
+                            <tr>
+                                <th class="px-6 py-4 font-bold uppercase tracking-widest text-[10px] text-stone-400">Art Form</th>
+                                <th class="px-6 py-4 font-bold uppercase tracking-widest text-[10px] text-stone-400">Date</th>
+                                <th class="px-6 py-4 font-bold uppercase tracking-widest text-[10px] text-stone-400">Price</th>
+                                <th class="px-6 py-4 font-bold uppercase tracking-widest text-[10px] text-stone-400">Status</th>
+                                <th class="px-6 py-4 font-bold uppercase tracking-widest text-[10px] text-stone-400"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-50">
+                            <tr>
+                                <td class="px-6 py-4 font-bold">Pattachitra Scroll</td>
+                                <td class="px-6 py-4 text-stone-500">March 15, 2026</td>
+                                <td class="px-6 py-4 text-stone-500">₹12,500</td>
+                                <td class="px-6 py-4"><span class="status-pill status-completed">Delivered</span></td>
+                                <td class="px-6 py-4 text-right"><button class="text-[#D4AF37] font-bold text-xs uppercase">View Receipt</button></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-bold">Gond Canvas</td>
+                                <td class="px-6 py-4 text-stone-500">Feb 20, 2026</td>
+                                <td class="px-6 py-4 text-stone-500">₹8,000</td>
+                                <td class="px-6 py-4"><span class="status-pill status-completed">Delivered</span></td>
+                                <td class="px-6 py-4 text-right"><button class="text-[#D4AF37] font-bold text-xs uppercase">View Receipt</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>
+
