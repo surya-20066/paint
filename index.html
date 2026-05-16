@@ -331,6 +331,22 @@
         }
 
         /* ADDED FROM ADD.CSS */
+        /* Full-page Reels Mode */
+        #yreel-hub.expanded {
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 10000 !important;
+            background: #FDFBF7 !important;
+            overflow-y: auto !important;
+            padding: 4rem 2rem !important;
+            height: 100vh !important;
+            width: 100vw !important;
+            margin: 0 !important;
+        }
+        #yreel-hub.expanded .max-w-screen-xl {
+            max-width: 100% !important;
+        }
+        
         .eyebrow {
             display: block;
             font-size: 14px;
@@ -1210,7 +1226,14 @@
         <!-- yReel Hub Section -->
         <section id="yreel-hub"
             class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-sans relative">
-            <div class="max-w-screen-xl mx-auto px-6 py-12 md:py-24 relative z-10">
+            
+            <!-- Close button for full-page mode -->
+            <button id="closeReelsBtn" onclick="toggleReelsExpansion(false)" 
+                class="hidden fixed top-8 right-8 z-[10001] bg-[#1A1208]/80 hover:bg-[#B5451B] backdrop-blur-xl border border-white/20 rounded-full p-4 text-white transition-all shadow-2xl group active:scale-95">
+                <span class="material-icons-outlined text-3xl group-hover:rotate-90 transition-transform duration-300">close</span>
+            </button>
+
+            <div id="recordedReelsContainer" class="max-w-screen-xl mx-auto px-6 py-12 md:py-24 relative z-10">
                 <header class="text-center mb-16">
                     <h2 class="font-display text-5xl md:text-6xl font-bold text-[#D4AF37] mb-4 tracking-tight">
                         The Artisan Reel
@@ -1346,7 +1369,7 @@
                 </div>
                 <!-- Fun Animated Show More Button -->
                 <div class="mt-20 text-center">
-                    <button onclick="window.location.href='masterpieces.html'" id="viewAllMasterpiecesBtn"
+                    <button id="viewAllMasterpiecesBtn"
                         class="group inline-flex flex-col items-center transition-all">
                         <div
                             class="bg-white dark:bg-slate-800 px-8 py-3 rounded-full border-2 border-accent text-accent font-bold tracking-widest uppercase text-xs shadow-md group-hover:bg-accent group-hover:text-white group-hover:scale-110 transition-all duration-300 flex items-center space-x-2">
@@ -2277,23 +2300,112 @@
                 }
             });
 
-            // Artisan Reel Story Upload Logic with IndexedDB Persistence
-            const uploadBtn = document.getElementById('uploadReelBtn');
-            const uploadCard = document.getElementById('uploadReelCard');
-            const fileInput = document.getElementById('reelUploadInput');
+            // Artisan Reel Expansion Logic with Full-Screen Support
             const viewAllBtn = document.getElementById('viewAllMasterpiecesBtn');
-            const reelsContainer = document.getElementById('recordedReelsContainer');
-
-            const triggerUpload = () => { if (fileInput) fileInput.click(); };
-
-            if (uploadBtn) uploadBtn.addEventListener('click', (e) => { e.stopPropagation(); triggerUpload(); });
-            if (uploadCard) uploadCard.addEventListener('click', triggerUpload);
+            const reelsHub = document.getElementById('yreel-hub');
+            const closeBtn = document.getElementById('closeReelsBtn');
 
             if (viewAllBtn) {
                 viewAllBtn.addEventListener('click', () => {
-                    reelsContainer.classList.toggle('hidden');
-                    if (!reelsContainer.classList.contains('hidden')) {
-                        reelsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    reelsHub.classList.add('expanded');
+                    document.body.style.overflow = 'hidden';
+                    if (closeBtn) closeBtn.classList.remove('hidden');
+                    reelsHub.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            window.toggleReelsExpansion = function(isExpand) {
+                if (!isExpand) {
+                    reelsHub.classList.remove('expanded');
+                    document.body.style.overflow = 'auto';
+                    if (closeBtn) closeBtn.classList.add('hidden');
+                    reelsHub.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            };
+
+            // IndexedDB Logic for Persistent Reels
+            let db;
+            const initDB = () => {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open('ReelsDB', 1);
+                    request.onupgradeneeded = (e) => {
+                        db = e.target.result;
+                        if (!db.objectStoreNames.contains('videos')) {
+                            db.createObjectStore('videos', { keyPath: 'id', autoIncrement: true });
+                        }
+                    };
+                    request.onsuccess = (e) => { db = e.target.result; resolve(); };
+                    request.onerror = (e) => reject(e);
+                });
+            };
+
+            const saveVideo = (file) => {
+                const transaction = db.transaction(['videos'], 'readwrite');
+                const store = transaction.objectStore('videos');
+                store.add({ file, timestamp: Date.now() });
+                transaction.oncomplete = () => loadVideos();
+            };
+
+            const loadVideos = () => {
+                if (!db) return;
+                const transaction = db.transaction(['videos'], 'readonly');
+                const store = transaction.objectStore('videos');
+                const request = store.getAll();
+                request.onsuccess = () => renderDynamicReels(request.result);
+            };
+
+            const renderDynamicReels = (videos) => {
+                const grid = document.querySelector('#recordedReelsContainer .grid');
+                if (!grid) return;
+                grid.querySelectorAll('.dynamic-reel').forEach(el => el.remove());
+                
+                videos.sort((a, b) => b.timestamp - a.timestamp).forEach(video => {
+                    const videoUrl = URL.createObjectURL(video.file);
+                    const card = document.createElement('div');
+                    card.className = "dynamic-reel group relative reel-aspect rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:-translate-y-2 border-accent/30 cursor-pointer";
+                    card.innerHTML = `
+                        <div class="absolute inset-0 z-0 bg-slate-900 flex items-center justify-center">
+                            <video class="w-full h-full object-cover" src="${videoUrl}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center z-15 opacity-0 group-hover:opacity-100 transition-opacity">
+                             <div class="w-14 h-14 rounded-full bg-[#B5451B] text-white flex items-center justify-center shadow-xl">
+                                <span class="material-icons-outlined text-3xl">play_circle</span>
+                             </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-4 w-full z-30 bg-gradient-to-t from-black/80 to-transparent">
+                            <p class="text-white/70 text-[10px] font-bold uppercase">Recorded Reel</p>
+                            <p class="text-white text-xs">${new Date(video.timestamp).toLocaleDateString()}</p>
+                        </div>
+                    `;
+                    grid.insertBefore(card, document.getElementById('uploadReelCard'));
+                });
+            };
+
+            initDB().then(() => loadVideos()).catch(console.error);
+
+            const uploadBtn = document.getElementById('uploadReelBtn');
+            const uploadCard = document.getElementById('uploadReelCard');
+            const fileInput = document.getElementById('reelUploadInput');
+
+            // Remove static redirects to allow JS handling
+            if (uploadBtn) uploadBtn.removeAttribute('onclick');
+            if (uploadCard) uploadCard.removeAttribute('onclick');
+
+            const triggerUpload = (e) => { 
+                if (e) e.stopPropagation();
+                if (fileInput) fileInput.click(); 
+            };
+
+            if (uploadBtn) uploadBtn.addEventListener('click', triggerUpload);
+            if (uploadCard) uploadCard.addEventListener('click', triggerUpload);
+
+            if (fileInput) {
+                fileInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file && db) {
+                        saveVideo(file);
+                        alert('Your masterpiece has been recorded!');
+                        fileInput.value = '';
                     }
                 });
             }

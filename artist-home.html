@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -21,9 +22,11 @@
       font-family: 'DM Sans', sans-serif;
       min-height: max(884px, 100dvh)
     }
+
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
     }
+
     .paper-grain {
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       opacity: .03;
@@ -32,114 +35,126 @@
 
     /* Standard Footer Styles */
     footer {
-        background: #FDFBF7;
-        color: var(--on-surface);
-        padding: 100px 0 40px;
-        position: relative;
-        width: 100%;
+      background: #FDFBF7;
+      color: var(--on-surface);
+      padding: 100px 0 40px;
+      position: relative;
+      width: 100%;
     }
 
     footer::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
     }
 
     .foot-top {
-        display: grid;
-        grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
-        gap: 48px;
-        margin-bottom: 60px;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 60px;
     }
 
     .foot-brand p {
-        color: rgba(26, 18, 8, 0.7);
-        font-size: 14px;
-        margin: 20px 0 24px;
-        max-width: 320px;
-        line-height: 1.6;
+      color: rgba(26, 18, 8, 0.7);
+      font-size: 14px;
+      margin: 20px 0 24px;
+      max-width: 320px;
+      line-height: 1.6;
     }
 
     .socials {
-        display: flex;
-        gap: 12px;
+      display: flex;
+      gap: 12px;
     }
 
     .socials a {
-        width: 40px;
-        height: 40px;
-        border: 1px solid rgba(26, 18, 8, 0.15);
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        color: var(--on-surface);
-        transition: all 0.3s ease;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(26, 18, 8, 0.15);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--on-surface);
+      transition: all 0.3s ease;
     }
 
     .socials a:hover {
-        background: var(--primary);
-        color: white;
-        border-color: var(--primary);
-        transform: translateY(-3px);
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-3px);
     }
 
     .foot-col h5 {
-        font-family: 'Playfair Display', serif;
-        font-style: italic;
-        font-size: 15px;
-        margin-bottom: 24px;
-        color: var(--primary);
-        font-weight: 700;
-        letter-spacing: 0.05em;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 15px;
+      margin-bottom: 24px;
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: 0.05em;
     }
 
     .foot-col ul {
-        list-style: none;
-        padding: 0;
+      list-style: none;
+      padding: 0;
     }
 
     .foot-col li {
-        margin-bottom: 12px;
+      margin-bottom: 12px;
     }
 
     .foot-col a {
-        font-size: 14px;
-        color: rgba(26, 18, 8, 0.75);
-        transition: color 0.3s ease;
-        text-decoration: none;
+      font-size: 14px;
+      color: rgba(26, 18, 8, 0.75);
+      transition: color 0.3s ease;
+      text-decoration: none;
     }
 
     .foot-col a:hover {
-        color: var(--primary);
+      color: var(--primary);
     }
 
     .foot-bot {
-        border-top: 1px solid rgba(26, 18, 8, 0.1);
-        padding-top: 32px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: rgba(26, 18, 8, 0.5);
-        font-size: 13px;
-        flex-wrap: wrap;
-        gap: 16px;
+      border-top: 1px solid rgba(26, 18, 8, 0.1);
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: rgba(26, 18, 8, 0.5);
+      font-size: 13px;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     @media (max-width: 1024px) {
-        .foot-top { grid-template-columns: repeat(3, 1fr); }
-        .foot-brand { grid-column: span 3; margin-bottom: 20px; }
+      .foot-top {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .foot-brand {
+        grid-column: span 3;
+        margin-bottom: 20px;
+      }
     }
 
     @media (max-width: 768px) {
-        .foot-top { grid-template-columns: repeat(2, 1fr); }
-        .foot-brand { grid-column: span 2; }
+      .foot-top {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .foot-brand {
+        grid-column: span 2;
+      }
     }
   </style>
 </head>
+
 <body class="bg-surface">
   <div class="fixed inset-0 paper-grain z-0"></div>
   <div class="relative flex h-screen w-full flex-row overflow-hidden z-10">
@@ -239,8 +254,8 @@
                 class="material-symbols-outlined text-on-primary-container">payments</span><span
                 class="font-label-sm text-on-primary-container/70 uppercase tracking-widest text-[10px]">Total
                 Earnings</span></div>
-            <p class="font-headline-md text-4xl text-on-primary-container">â‚¹2.4L</p>
-            <p class="text-xs text-on-primary-container/70 mt-1 font-bold">â‚¹45K this month</p>
+            <p class="font-headline-md text-4xl text-on-primary-container">2.4L</p>
+            <p class="text-xs text-on-primary-container/70 mt-1 font-bold">45K this month</p>
           </div>
         </div>
         <section class="mb-12">
@@ -249,33 +264,9 @@
             <a href="artist-gallery.html"
               class="font-label-sm text-primary uppercase tracking-widest text-xs hover:underline">View All â†’</a>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div id="recent-uploads-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div
-              class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow">
-              <div class="aspect-square bg-surface-variant overflow-hidden"><img
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtntfX-Ln9Zw1VZ0Hpkb2gPLxVGo-8i2HCOQq8MuDWfMJ2R8rgP_bq6LuBgIgo3JgCiAL1gf7XMnMQnarbhaXApQCbdgiH5J6IEDNWep-L2TYfsPvnDvypEd-aqOQD1Cja_lGLbojN9phmbZ6mwRBP9PEOFZcjvFm_WXH7XdrbwO0pOyT242yuLXNIchrOTtBgei5F4QraRKm3KIVqWxT6AX6MpcVZgTW8r293ODOFXu-5fLVr9dMl3bbcU4vwotycF13aX7JWcw0N" />
-              </div>
-              <div class="p-4">
-                <h4 class="font-headline-md text-lg mb-1">Eternal Echoes</h4>
-                <div class="flex justify-between"><span class="text-xs text-on-surface-variant">Madhubani</span><span
-                    class="text-sm text-primary font-bold">â‚¹18,000</span></div>
-              </div>
-            </div>
-            <div
-              class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow">
-              <div class="aspect-square bg-surface-variant overflow-hidden"><img
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE85tliyBtatM4Sf9CGMCkZrJLQbMkAvenwVo9STCUkhlAfIfFaU5PR6Y48rZ-4KuIoI4eJK09WtYLHNewz2WrIJDF7vSM-QmXbO-njNqxgped5JbFyOnwVHgsDWZQERAp-dpFK6R30NrvKIMYqnkpxBetfDPqAHpWry3YDm8YSkPQM-KnvLHPRK0yBW8Y4uRF9NOADCjtyLuP8ZjuNSGP2x2zmQmYzZS3FzJ2_Td2xvEs6udYptzb_3IbEQmsQO6uBrO3MZdbXeua" />
-              </div>
-              <div class="p-4">
-                <h4 class="font-headline-md text-lg mb-1">Tree of Life</h4>
-                <div class="flex justify-between"><span class="text-xs text-on-surface-variant">Madhubani</span><span
-                    class="text-sm text-primary font-bold">â‚¹24,500</span></div>
-              </div>
-            </div>
-            <div
-              class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow"
+              class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow upload-btn-card"
               onclick="document.getElementById('reelUploadInput').click()">
               <div class="aspect-square bg-surface-variant overflow-hidden flex items-center justify-center"><span
                   class="material-symbols-outlined text-primary text-6xl">videocam</span></div>
@@ -295,14 +286,14 @@
               <div class="flex-1">
                 <p class="font-body-md text-on-surface"><strong>Eternal Echoes</strong> was purchased by a collector</p>
                 <p class="text-xs text-on-surface-variant">2 hours ago</p>
-              </div><span class="text-primary font-bold">â‚¹18,000</span>
+              </div><span class="text-primary font-bold">18,000</span>
             </div>
             <div class="flex items-center gap-4 p-5"><span
                 class="material-symbols-outlined text-green-700">shopping_bag</span>
               <div class="flex-1">
                 <p class="font-body-md text-on-surface"><strong>Lotus Dreams</strong> was purchased by a collector</p>
                 <p class="text-xs text-on-surface-variant">3 days ago</p>
-              </div><span class="text-primary font-bold">â‚¹12,000</span>
+              </div><span class="text-primary font-bold">12,000</span>
             </div>
             <div class="flex items-center gap-4 p-5"><span
                 class="material-symbols-outlined text-secondary">event_available</span>
@@ -310,162 +301,162 @@
                 <p class="font-body-md text-on-surface"><strong>Sacred Rivers</strong> was booked for private viewing
                 </p>
                 <p class="text-xs text-on-surface-variant">5 days ago</p>
-              </div><span class="text-primary font-bold">â‚¹35,000</span>
+              </div><span class="text-primary font-bold">35,000</span>
             </div>
             <div class="flex items-center gap-4 p-5"><span
                 class="material-symbols-outlined text-green-700">shopping_bag</span>
               <div class="flex-1">
                 <p class="font-body-md text-on-surface"><strong>Morning Raaga</strong> was purchased by a collector</p>
                 <p class="text-xs text-on-surface-variant">1 week ago</p>
-              </div><span class="text-primary font-bold">â‚¹15,500</span>
+              </div><span class="text-primary font-bold">15,500</span>
             </div>
           </div>
         </section>
       </div>
-        <footer id="footer" class="mt-auto">
-            <div class="container mx-auto px-6">
-                <div class="foot-top">
-                    <div class="foot-brand">
-                        <div class="flex items-center gap-3 mb-6">
-                            <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
-                        </div>
-                        <p>India's premier multi-art platform — celebrating the living traditions of every state through
-                            artisanal AI and human craft.</p>
-                        <div class="socials">
-                            <a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp"
-                                class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
-                            <a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram"
-                                class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
-                            <a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube"
-                                class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
-                            <a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn"
-                                class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div class="foot-col">
-                        <h5>Related</h5>
-                        <ul>
-                            <li>
-                                <a href="heritage.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Heritage Guide
-                                </a>
-                            </li>
-                            <li>
-                                <a href="masterpieces.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Masterpieces
-                                </a>
-                            </li>
-                            <li>
-                                <a href="team.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Our Team
-                                </a>
-                            </li>
-                            <li>
-                                <a href="signin.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Artist Login
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="foot-col">
-                        <h5>Platform</h5>
-                        <ul>
-                            <li>
-                                <a href="index.html#journal"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Art Forms
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#living-map-section"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Interactive Map
-                                </a>
-                            </li>
-                            <li>
-                                <a href="artists.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Meet the Makers
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#journal"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    The Muse Journal
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="foot-col">
-                        <h5>Navigations</h5>
-                        <ul>
-                            <li>
-                                <a href="index.html#living-map-section"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Live Map
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html#yreel-hub"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Reels
-                                </a>
-                            </li>
-                            <li>
-                                <a href="artists.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Explore Artists
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    Art Retreats
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="foot-col">
-                        <h5>Contact Us</h5>
-                        <ul>
-                            <li>
-                                <a href="mailto:painterdmuse_2k26@gmail.com"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    painterdmuse_2k26@gmail.com
-                                </a>
-                            </li>
-                            <li>
-                                <a href="tel:+917798345690"
-                                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                    +91 7798345690
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="foot-bot justify-center text-center">
-                    <div>© 2026 The Painted Muse · Made with ❤️ for Indian Art</div>
-                </div>
+      <footer id="footer" class="mt-auto">
+        <div class="container mx-auto px-6">
+          <div class="foot-top">
+            <div class="foot-brand">
+              <div class="flex items-center gap-3 mb-6">
+                <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+              </div>
+              <p>India's premier multi-art platform — celebrating the living traditions of every state through
+                artisanal AI and human craft.</p>
+              <div class="socials">
+                <a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp"
+                  class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
+                <a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram"
+                  class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
+                <a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube"
+                  class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
+                <a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn"
+                  class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
+              </div>
             </div>
-        </footer>
+            <div class="foot-col">
+              <h5>Related</h5>
+              <ul>
+                <li>
+                  <a href="heritage.html"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    Heritage Guide
+                  </a>
+                </li>
+                <li>
+                  <a href="masterpieces.html"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    Masterpieces
+                  </a>
+                </li>
+                <li>
+                  <a href="team.html"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    Our Team
+                  </a>
+                </li>
+                <li>
+                  <a href="signin.html"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    Artist Login
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="foot-col">
+              <h5>Platform</h5>
+              <ul>
+                <li>
+                  <a href="index.html#journal"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    Art Forms
+                  </a>
+                </li>
+                <li>
+                  <a href="index.html#living-map-section"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    Interactive Map
+                  </a>
+                </li>
+                <li>
+                  <a href="artists.html"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    Meet the Makers
+                  </a>
+                </li>
+                <li>
+                  <a href="index.html#journal"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    The Muse Journal
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="foot-col">
+              <h5>Navigations</h5>
+              <ul>
+                <li>
+                  <a href="index.html#living-map-section"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    Live Map
+                  </a>
+                </li>
+                <li>
+                  <a href="index.html#yreel-hub"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    Reels
+                  </a>
+                </li>
+                <li>
+                  <a href="artists.html"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    Explore Artists
+                  </a>
+                </li>
+                <li>
+                  <a href="index.html"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    Art Retreats
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="foot-col">
+              <h5>Contact Us</h5>
+              <ul>
+                <li>
+                  <a href="mailto:painterdmuse_2k26@gmail.com"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    painterdmuse_2k26@gmail.com
+                  </a>
+                </li>
+                <li>
+                  <a href="tel:+917798345690"
+                    class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+                    +91 7798345690
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="foot-bot justify-center text-center">
+            <div>© 2026 The Painted Muse · Made with ❤️ for Indian Art</div>
+          </div>
+        </div>
+      </footer>
     </main>
   </div>
   <script>
@@ -534,27 +525,85 @@
             if (profile.fullName) artistName = profile.fullName;
             if (profile.displayName) handle = "@" + profile.displayName.toLowerCase().replace(/\s+/g, '_');
           }
-        } catch (e) {}
-        const record = { 
-          file: file, 
+        } catch (e) { }
+        const record = {
+          file: file,
           timestamp: Date.now(),
           artistName: artistName,
           handle: handle
         };
-        store.add(record);
+        const request = store.add(record);
+        request.onsuccess = () => {
+           loadVideos(); // Reload videos to show the new one
+        };
       };
-      initDB().catch(err => console.error("IndexedDB initialization failed:", err));
+      
+      const loadVideos = () => {
+        if (!db) return;
+        const transaction = db.transaction([storeName], "readonly");
+        const store = transaction.objectStore(storeName);
+        const request = store.getAll();
+        
+        request.onsuccess = (event) => {
+          const videos = event.target.result;
+          const grid = document.getElementById('recent-uploads-grid');
+          if (!grid) return;
+          
+          // Clear existing videos but keep the upload button
+          const uploadBtn = grid.querySelector('.upload-btn-card');
+          grid.innerHTML = '';
+          if (uploadBtn) grid.appendChild(uploadBtn);
+          
+          // Sort videos by timestamp descending
+          videos.sort((a, b) => b.timestamp - a.timestamp);
+          
+          videos.forEach(video => {
+            const videoUrl = URL.createObjectURL(video.file);
+            const card = document.createElement('div');
+            card.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow";
+            card.innerHTML = `
+              <div class="aspect-square bg-surface-variant overflow-hidden relative">
+                 <video class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${videoUrl}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>
+                 <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+                 </div>
+              </div>
+              <div class="p-4">
+                <h4 class="font-headline-md text-lg mb-1">Uploaded Reel</h4>
+                <div class="flex justify-between"><span class="text-xs text-on-surface-variant">${new Date(video.timestamp).toLocaleDateString()}</span></div>
+              </div>
+            `;
+            grid.insertBefore(card, uploadBtn); // Prepend before the upload button
+          });
+
+          // Update stats dynamically
+          const totalStats = document.querySelector('.grid.grid-cols-2.lg\\:grid-cols-4 p.text-4xl');
+          if (totalStats) {
+              totalStats.innerText = 47 + videos.length;
+          }
+        };
+      };
+
+      initDB().then(() => {
+         loadVideos();
+      }).catch(err => console.error("IndexedDB initialization failed:", err));
+      
       if (fileInput) {
         fileInput.addEventListener('change', (e) => {
           const file = e.target.files[0];
           if (file) {
-            if (db) saveVideo(file);
-            alert('Reel uploaded successfully!');
-            fileInput.value = '';
+            if (db) {
+               saveVideo(file);
+               alert('Reel uploaded successfully!');
+               fileInput.value = '';
+            } else {
+               alert('Database not ready');
+            }
           }
         });
       }
     });
   </script>
 </body>
+
 </html>

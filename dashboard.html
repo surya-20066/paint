@@ -300,9 +300,9 @@
                 <span class="material-symbols-outlined">dashboard</span>
                 <span class="text-sm font-medium">Overview</span>
             </a>
-            <a href="dashboard-artists.html" class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
+            <a href="explore.html" class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
                 <span class="material-symbols-outlined">palette</span>
-                <span class="text-sm font-medium">Artists</span>
+                <span class="text-sm font-medium">Arts</span>
             </a>
             <a href="dashboard-commissions.html" class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-[#B5451B] transition-all">
                 <span class="material-symbols-outlined">history_edu</span>
@@ -860,9 +860,6 @@
                     <div class="warli-border group artist-card rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 opacity-0 animate-fade-in" style="animation-delay: ${index * 100}ms; animation-fill-mode: forwards;">
                         <div class="h-48 overflow-hidden relative">
                             <img src="${artist.img}" alt="${artist.name}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-                            <div class="artist-overlay absolute inset-0 bg-gradient-to-t from-[#B5451B]/90 to-transparent opacity-0 transition-opacity duration-300 flex flex-col justify-end p-4">
-                                <button class="bg-white text-[#B5451B] text-[8px] font-bold uppercase tracking-widest py-2 rounded shadow-lg hover:bg-[#D4AF37] hover:text-white transition-all">View Portfolio</button>
-                            </div>
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-2">
@@ -893,6 +890,9 @@
             }
         `;
         document.head.appendChild(style);
+        
+        // Auto-request location on load
+        window.addEventListener('load', requestLocation);
     </script>
 
     <!-- Mobile Menu Overlay -->
@@ -905,7 +905,7 @@
         </div>
         <div class="flex flex-col p-12 gap-8 font-sans text-xl font-bold uppercase tracking-[0.2em]">
             <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard.html" class="text-[#B5451B] font-bold">Overview</a>
-            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard-artists.html">Artists</a>
+            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="explore.html">Arts</a>
             <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard-commissions.html">My Commissions</a>
             <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard-workshops.html">Workshops</a>
             <hr class="border-stone-100 my-2">
