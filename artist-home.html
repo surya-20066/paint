@@ -161,7 +161,7 @@
     <aside
       class="hidden lg:flex w-72 flex-col bg-surface-container border-r border-outline-variant h-screen sticky top-0">
       <div class="p-8 cursor-pointer flex items-center gap-3" onclick="window.location.href='index.html'">
-        <img src="dp.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" />
+        <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" />
         <span class="font-headline-md text-on-surface text-sm font-bold leading-tight">Artist<br>Dashboard</span>
       </div>
       <nav class="flex-1 px-4">
@@ -239,7 +239,7 @@
                 class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Profile Views</span>
             </div>
             <p class="font-headline-md text-4xl text-on-surface">1,248</p>
-            <p class="text-xs text-green-700 mt-1 font-bold">â†‘ 12% vs last month</p>
+            <p class="text-xs text-green-700 mt-1 font-bold">↑ 12% vs last month</p>
           </div>
           <div class="bg-surface-container-low border border-outline-variant p-6">
             <div class="flex items-center gap-2 mb-3"><span
@@ -254,15 +254,15 @@
                 class="material-symbols-outlined text-on-primary-container">payments</span><span
                 class="font-label-sm text-on-primary-container/70 uppercase tracking-widest text-[10px]">Total
                 Earnings</span></div>
-            <p class="font-headline-md text-4xl text-on-primary-container">2.4L</p>
-            <p class="text-xs text-on-primary-container/70 mt-1 font-bold">45K this month</p>
+            <p class="font-headline-md text-4xl text-on-primary-container">₹2.4L</p>
+            <p class="text-xs text-on-primary-container/70 mt-1 font-bold">₹45K this month</p>
           </div>
         </div>
         <section class="mb-12">
           <div class="flex items-center justify-between mb-6">
             <h2 class="font-headline-md text-2xl text-on-background">Recent Uploads</h2>
             <a href="artist-gallery.html"
-              class="font-label-sm text-primary uppercase tracking-widest text-xs hover:underline">View All â†’</a>
+              class="font-label-sm text-primary uppercase tracking-widest text-xs hover:underline">View All →</a>
           </div>
           <div id="recent-uploads-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div
@@ -275,6 +275,7 @@
               </div>
               <input type="file" id="reelUploadInput" accept="video/*" capture="environment" class="hidden">
             </div>
+            </div>
           </div>
         </section>
         <section class="mb-12">
@@ -286,14 +287,14 @@
               <div class="flex-1">
                 <p class="font-body-md text-on-surface"><strong>Eternal Echoes</strong> was purchased by a collector</p>
                 <p class="text-xs text-on-surface-variant">2 hours ago</p>
-              </div><span class="text-primary font-bold">18,000</span>
+              </div><span class="text-primary font-bold">₹18,000</span>
             </div>
             <div class="flex items-center gap-4 p-5"><span
                 class="material-symbols-outlined text-green-700">shopping_bag</span>
               <div class="flex-1">
                 <p class="font-body-md text-on-surface"><strong>Lotus Dreams</strong> was purchased by a collector</p>
                 <p class="text-xs text-on-surface-variant">3 days ago</p>
-              </div><span class="text-primary font-bold">12,000</span>
+              </div><span class="text-primary font-bold">₹12,000</span>
             </div>
             <div class="flex items-center gap-4 p-5"><span
                 class="material-symbols-outlined text-secondary">event_available</span>
@@ -301,14 +302,14 @@
                 <p class="font-body-md text-on-surface"><strong>Sacred Rivers</strong> was booked for private viewing
                 </p>
                 <p class="text-xs text-on-surface-variant">5 days ago</p>
-              </div><span class="text-primary font-bold">35,000</span>
+              </div><span class="text-primary font-bold">₹35,000</span>
             </div>
             <div class="flex items-center gap-4 p-5"><span
                 class="material-symbols-outlined text-green-700">shopping_bag</span>
               <div class="flex-1">
                 <p class="font-body-md text-on-surface"><strong>Morning Raaga</strong> was purchased by a collector</p>
                 <p class="text-xs text-on-surface-variant">1 week ago</p>
-              </div><span class="text-primary font-bold">15,500</span>
+              </div><span class="text-primary font-bold">₹15,500</span>
             </div>
           </div>
         </section>
@@ -318,7 +319,7 @@
           <div class="foot-top">
             <div class="foot-brand">
               <div class="flex items-center gap-3 mb-6">
-                <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+                <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
               </div>
               <p>India's premier multi-art platform — celebrating the living traditions of every state through
                 artisanal AI and human craft.</p>
@@ -460,63 +461,82 @@
     </main>
   </div>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const storedLinks = localStorage.getItem('artist_profile_links');
-      const linksContainer = document.getElementById('home-links');
-      let links = [];
-      if (storedLinks) {
-        links = JSON.parse(storedLinks);
-      } else {
-        links = [
-          { title: 'Personal Website', url: 'https://amritaart.com' },
-          { title: 'Instagram', url: 'https://instagram.com/amrita_madhubani' }
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Profile Loading
+      const loadProfile = () => {
+        const storedProfile = localStorage.getItem('artist_profile_data');
+        if (storedProfile) {
+          const profile = JSON.parse(storedProfile);
+          const welcomeHeader = document.querySelector('h1.font-headline-lg');
+          if (welcomeHeader) welcomeHeader.textContent = profile.fullName;
+          const sbImg = document.getElementById('sidebar-img');
+          const sbName = document.getElementById('sidebar-name');
+          const sbRole = document.getElementById('sidebar-role');
+          if (sbImg) sbImg.src = profile.photoUrl;
+          if (sbName) sbName.textContent = profile.displayName;
+          if (sbRole) sbRole.textContent = (profile.specialization || "Master Artist").toUpperCase();
+        }
+      };
+      loadProfile();
+
+      // 2. Links Loading
+      const loadLinks = () => {
+        const linksContainer = document.getElementById('home-links');
+        const storedLinks = localStorage.getItem('artist_profile_links');
+        let links = storedLinks ? JSON.parse(storedLinks) : [
+          { title: 'Personal Website', url: '#' },
+          { title: 'Instagram', url: '#' }
         ];
-      }
-      if (links.length > 0) {
-        linksContainer.innerHTML = links.map(link => `
-      <a href="${link.url}" target="_blank" class="text-xs text-primary font-bold uppercase tracking-wider flex items-center gap-1 hover:underline bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant transition-colors">
-        <span class="material-symbols-outlined text-xs">link</span>${link.title}
-      </a>
-    `).join('');
-      } else {
-        linksContainer.innerHTML = '';
-      }
-      const storedProfile = localStorage.getItem('artist_profile_data');
-      if (storedProfile) {
-        const profile = JSON.parse(storedProfile);
-        const welcomeHeader = document.querySelector('h1.font-headline-lg');
-        if (welcomeHeader) welcomeHeader.textContent = profile.fullName;
-        const sbImg = document.getElementById('sidebar-img');
-        const sbName = document.getElementById('sidebar-name');
-        const sbRole = document.getElementById('sidebar-role');
-        if (sbImg) sbImg.src = profile.photoUrl;
-        if (sbName) sbName.textContent = profile.displayName;
-        if (sbRole) sbRole.textContent = profile.specialization.toUpperCase();
-      }
-      const fileInput = document.getElementById('reelUploadInput');
+        
+        if (linksContainer) {
+          linksContainer.innerHTML = links.map(link => `
+            <a href="${link.url}" target="_blank" class="text-xs text-primary font-bold uppercase tracking-wider flex items-center gap-1 hover:underline bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant transition-colors">
+              <span class="material-symbols-outlined text-xs">link</span>${link.title}
+            </a>
+          `).join('');
+        }
+      };
+      loadLinks();
+
+      // 3. Dynamic Recent Uploads (Posts + Reels)
+      const loadRecentUploads = async () => {
+        const grid = document.getElementById('recent-uploads-grid');
+        if (!grid) return;
+
+        // Get Posts
+        const posts = JSON.parse(localStorage.getItem('artist_posts') || '[]');
+        
+        // Get Reels from IndexedDB
+        const dbName = "ReelsDB";
+        const storeName = "videos";
+        let reels = [];
+        // 3. Dynamic Recent Uploads (Posts + Reels)
       const dbName = "ReelsDB";
       const storeName = "videos";
       let db;
+
       const initDB = () => {
         return new Promise((resolve, reject) => {
           const request = indexedDB.open(dbName, 1);
-          request.onerror = event => reject(event.target.error);
-          request.onsuccess = event => {
-            db = event.target.result;
-            resolve(db);
-          };
-          request.onupgradeneeded = event => {
+          request.onupgradeneeded = (event) => {
             const db = event.target.result;
             if (!db.objectStoreNames.contains(storeName)) {
               db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
             }
           };
+          request.onsuccess = (event) => {
+            db = event.target.result;
+            resolve(db);
+          };
+          request.onerror = (event) => reject(event.target.error);
         });
       };
-      const saveVideo = async (file) => {
+
+      const saveVideo = (file) => {
+        if (!db) return;
         const transaction = db.transaction([storeName], "readwrite");
         const store = transaction.objectStore(storeName);
-        let artistName = "Amrita Devi";
+        let artistName = "Amrita Raghavan";
         let handle = "@amrita_art";
         try {
           const storedProfile = localStorage.getItem('artist_profile_data');
@@ -530,80 +550,173 @@
           file: file,
           timestamp: Date.now(),
           artistName: artistName,
-          handle: handle
+          handle: handle,
+          title: "Uploaded Reel"
         };
         const request = store.add(record);
         request.onsuccess = () => {
-           loadVideos(); // Reload videos to show the new one
+           loadRecentUploads(); // Reload to show the new one
         };
       };
-      
-      const loadVideos = () => {
-        if (!db) return;
-        const transaction = db.transaction([storeName], "readonly");
-        const store = transaction.objectStore(storeName);
-        const request = store.getAll();
+
+      const loadRecentUploads = async () => {
+        const grid = document.getElementById('recent-uploads-grid');
+        if (!grid) return;
+
+        // Get Posts from LocalStorage
+        const posts = JSON.parse(localStorage.getItem('artist_posts') || '[]');
         
-        request.onsuccess = (event) => {
-          const videos = event.target.result;
-          const grid = document.getElementById('recent-uploads-grid');
-          if (!grid) return;
-          
-          // Clear existing videos but keep the upload button
-          const uploadBtn = grid.querySelector('.upload-btn-card');
-          grid.innerHTML = '';
-          if (uploadBtn) grid.appendChild(uploadBtn);
-          
-          // Sort videos by timestamp descending
-          videos.sort((a, b) => b.timestamp - a.timestamp);
-          
-          videos.forEach(video => {
-            const videoUrl = URL.createObjectURL(video.file);
-            const card = document.createElement('div');
-            card.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow";
-            card.innerHTML = `
-              <div class="aspect-square bg-surface-variant overflow-hidden relative">
-                 <video class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${videoUrl}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>
-                 <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span class="material-symbols-outlined text-white text-4xl">play_circle</span>
-                 </div>
-              </div>
-              <div class="p-4">
-                <h4 class="font-headline-md text-lg mb-1">Uploaded Reel</h4>
-                <div class="flex justify-between"><span class="text-xs text-on-surface-variant">${new Date(video.timestamp).toLocaleDateString()}</span></div>
-              </div>
-            `;
-            grid.insertBefore(card, uploadBtn); // Prepend before the upload button
+        // Get Reels from IndexedDB
+        let reels = [];
+        if (db) {
+          const transaction = db.transaction([storeName], "readonly");
+          const store = transaction.objectStore(storeName);
+          reels = await new Promise((resolve) => {
+            const req = store.getAll();
+            req.onsuccess = () => resolve(req.result);
           });
+        }
 
-          // Update stats dynamically
-          const totalStats = document.querySelector('.grid.grid-cols-2.lg\\:grid-cols-4 p.text-4xl');
-          if (totalStats) {
-              totalStats.innerText = 47 + videos.length;
-          }
-        };
-      };
+        grid.innerHTML = '';
+        
+        // Show the upload button first
+        const uploadBtn = document.createElement('div');
+        uploadBtn.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow upload-btn-card";
+        uploadBtn.onclick = () => document.getElementById('reelUploadInput').click();
+        uploadBtn.innerHTML = `
+          <div class="aspect-square bg-surface-variant overflow-hidden flex items-center justify-center"><span
+              class="material-symbols-outlined text-primary text-6xl">videocam</span></div>
+          <div class="p-4 text-center">
+            <h4 class="font-body-md text-on-surface-variant">Upload New Reel</h4>
+          </div>
+          <input type="file" id="reelUploadInput" accept="video/*" capture="environment" class="hidden">
+        `;
+        grid.appendChild(uploadBtn);
 
-      initDB().then(() => {
-         loadVideos();
-      }).catch(err => console.error("IndexedDB initialization failed:", err));
-      
-      if (fileInput) {
+        const fileInput = uploadBtn.querySelector('#reelUploadInput');
         fileInput.addEventListener('change', (e) => {
           const file = e.target.files[0];
           if (file) {
-            if (db) {
-               saveVideo(file);
-               alert('Reel uploaded successfully!');
-               fileInput.value = '';
-            } else {
-               alert('Database not ready');
-            }
+            saveVideo(file);
+            alert('Reel uploaded successfully!');
           }
         });
-      }
-    });
+
+        // Combine and sort (newest first)
+        const combined = [
+          ...posts.map(p => ({...p, type: 'post'})),
+          ...reels.map(r => ({...r, type: 'reel'}))
+        ].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+        // Show up to 5 items (plus the upload button = 6 total)
+        combined.slice(0, 5).forEach(item => {
+          if (item.type === 'post') {
+            grid.appendChild(createPostCard(item));
+          } else {
+            grid.appendChild(createReelCard(item));
+          }
+        });
+
+        // Update stats
+        const totalStats = document.querySelector('.grid.grid-cols-2.lg\\:grid-cols-4 p.text-4xl');
+        if (totalStats) {
+            totalStats.innerText = 47 + reels.length;
+        }
+      };
+
+      const createPostCard = (post) => {
+        const div = document.createElement('div');
+        div.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow";
+        div.onclick = () => window.location.href='artist-gallery.html';
+        div.innerHTML = `
+          <div class="aspect-square bg-surface-variant overflow-hidden">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${post.imgUrl}" onerror="this.src='https://placehold.co/600x600/F5F0E8/B5451B?text=Artwork'"/>
+          </div>
+          <div class="p-4">
+            <h4 class="font-headline-md text-lg mb-1">${post.title}</h4>
+            <div class="flex justify-between"><span class="text-xs text-on-surface-variant">${post.category || 'Artwork'}</span><span class="text-sm text-primary font-bold">₹${Number(post.price).toLocaleString()}</span></div>
+          </div>
+        `;
+        return div;
+      };
+
+      const createReelCard = (reel) => {
+        const reelUrl = reel.file ? URL.createObjectURL(reel.file) : reel.videoUrl;
+        const div = document.createElement('div');
+        div.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow relative overflow-hidden";
+        div.onclick = () => window.location.href='artist-gallery.html';
+        div.innerHTML = `
+          <div class="aspect-square bg-surface-variant overflow-hidden relative">
+            ${reel.file ? `<video class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="${reelUrl}#t=0.1" muted></video>` : `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${reel.videoUrl}" />`}
+            <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+              <span class="material-symbols-outlined text-white text-5xl opacity-80">play_circle</span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-headline-md text-lg mb-1">${reel.title || 'Uploaded Reel'}</h4>
+            <div class="flex justify-between"><span class="text-xs text-on-surface-variant">Reel</span><span class="text-sm text-primary font-bold text-green-700">New</span></div>
+          </div>
+        `;
+        return div;
+      };
+
+      await initDB().catch(err => console.error("DB Init failed", err));
+      loadRecentUploads();905f4acea63b95440d364b7105
+        });
+        
+        recentReels.forEach(reel => {
+          const reelUrl = reel.file ? URL.createObjectURL(reel.file) : reel.videoUrl;
+          grid.innerHTML += `
+            <div class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow relative overflow-hidden" onclick="window.location.href='artist-gallery.html'">
+              <div class="aspect-square bg-surface-variant overflow-hidden relative">
+                ${reel.file ? `<video class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="${reelUrl}#t=0.1" muted></video>` : `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${reel.videoUrl}" />`}
+                <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-5xl opacity-80">play_circle</span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h4 class="font-headline-md text-lg mb-1">${reel.title}</h4>
+                <div class="flex justify-between"><span class="text-xs text-on-surface-variant">Reel</span><span class="text-sm text-primary font-bold text-green-700">New</span></div>
+              </div>
+            </div>
+          `;
+        });
+        
+        // Add "Upload More" card if space remains
+        if (recentPosts.length + recentReels.length < 3) {
+          grid.innerHTML += `
+            <div class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow" onclick="window.location.href='dashboard-artists.html'">
+              <div class="aspect-square bg-surface-variant overflow-hidden flex flex-col items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-primary text-5xl">add_circle</span>
+                <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Add New</span>
+              </div>
+              <div class="p-4 text-center">
+                <h4 class="font-body-md text-on-surface-variant">Upload More</h4>
+              </div>
+            </div>
+          `;
+        }
+          const div = document.createElement('div');
+          div.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow relative overflow-hidden";
+          div.onclick = () => window.location.href='artist-gallery.html';
+          div.innerHTML = `
+            <div class="aspect-square bg-surface-variant overflow-hidden relative">
+              ${reel.file ? `<video class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="${reelUrl}#t=0.1" muted></video>` : `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${reel.videoUrl}" />`}
+              <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                <span class="material-symbols-outlined text-white text-5xl opacity-80">play_circle</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h4 class="font-headline-md text-lg mb-1">${reel.title || 'Uploaded Reel'}</h4>
+              <div class="flex justify-between"><span class="text-xs text-on-surface-variant">Reel</span><span class="text-sm text-primary font-bold text-green-700">New</span></div>
+            </div>
+          `;
+          return div;
+        };
+
+        await initDB().catch(err => console.error("DB Init failed", err));
+        loadRecentUploads();
+      });
   </script>
 </body>
-
 </html>

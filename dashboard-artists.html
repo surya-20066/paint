@@ -134,7 +134,7 @@ footer::before {
 <div class="fixed inset-0 paper-grain z-0"></div>
 <div class="relative flex h-screen w-full flex-row overflow-hidden z-10">
 <aside class="hidden lg:flex w-72 flex-col bg-surface-container border-r border-outline-variant h-screen sticky top-0">
-<div class="p-8 cursor-pointer flex items-center gap-3" onclick="window.location.href='index.html'"><img src="dp.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" /><span class="font-headline-md text-on-surface text-sm font-bold leading-tight">Artist<br>Dashboard</span></div>
+<div class="p-8 cursor-pointer flex items-center gap-3" onclick="window.location.href='index.html'"><img src="pics/dp.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" /><span class="font-headline-md text-on-surface text-sm font-bold leading-tight">Artist<br>Dashboard</span></div>
 <nav class="flex-1 px-4"><ul class="flex flex-col gap-2">
 <li onclick="window.location.href='artist-home.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">home</span><p class="font-body-md font-medium">Home</p></li>
 <li onclick="window.location.href='artist-gallery.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">dashboard</span><p class="font-body-md font-medium">Gallery</p></li>
@@ -170,13 +170,13 @@ footer::before {
 </div>
 <div class="bg-surface-container-low border border-outline-variant p-8 rounded-xl grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 <div class="flex flex-col gap-2"><label class="font-label-sm text-on-surface uppercase tracking-widest text-[10px]">Title</label><input id="inp-title" oninput="updatePreview()" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-3 font-headline-md text-xl placeholder:text-outline-variant" placeholder="e.g. Eternal Echoes" type="text"/></div>
-<div class="flex flex-col gap-2"><label class="font-label-sm text-on-surface uppercase tracking-widest text-[10px]">Price (â‚¹)</label><div class="relative"><span class="absolute left-0 top-1/2 -translate-y-1/2 font-headline-md text-xl text-on-surface-variant">â‚¹</span><input id="inp-price" oninput="updatePreview()" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 pl-6 py-3 w-full font-headline-md text-xl placeholder:text-outline-variant" placeholder="0" type="number"/></div></div>
+<div class="flex flex-col gap-2"><label class="font-label-sm text-on-surface uppercase tracking-widest text-[10px]">Price (₹)</label><div class="relative"><span class="absolute left-0 top-1/2 -translate-y-1/2 font-headline-md text-xl text-on-surface-variant">₹</span><input id="inp-price" oninput="updatePreview()" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 pl-6 py-3 w-full font-headline-md text-xl placeholder:text-outline-variant" placeholder="0" type="number"/></div></div>
 <div class="flex flex-col gap-2"><label class="font-label-sm text-on-surface uppercase tracking-widest text-[10px]">Status</label><select id="inp-status" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-3 font-body-lg appearance-none cursor-pointer rounded-none"><option value="Available">Available for Sale</option><option value="Reserved">Reserved</option><option value="Sold">Sold / Not for Sale</option></select></div>
 <div class="flex flex-col gap-2"><label class="font-label-sm text-on-surface uppercase tracking-widest text-[10px]">Category</label><select id="inp-category" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-3 font-body-lg appearance-none cursor-pointer rounded-none"><option value="Madhubani">Madhubani</option><option value="Tanjore">Tanjore</option><option value="Warli">Warli</option><option value="Pattachitra">Pattachitra</option></select></div>
 <div class="md:col-span-2 flex flex-col gap-2"><label class="font-label-sm text-on-surface uppercase tracking-widest text-[10px]">Artisan's Note</label><textarea id="inp-desc" oninput="updatePreview()" class="bg-transparent border border-outline-variant text-on-surface focus:border-primary focus:ring-0 p-4 font-body-md placeholder:text-outline-variant resize-none rounded-lg" placeholder="Describe the medium, inspiration..." rows="3"></textarea></div>
 </div>
 <div class="flex flex-col sm:flex-row items-center justify-end gap-4 mb-12">
-<button class="font-label-sm text-on-surface-variant uppercase tracking-widest hover:text-primary transition-colors">Save Draft</button>
+
 <button onclick="publishItem()" class="h-14 px-10 bg-primary text-on-primary font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg rounded-lg flex items-center gap-2"><span class="material-symbols-outlined">publish</span>Publish to Gallery</button>
 </div>
 </div>
@@ -190,8 +190,8 @@ footer::before {
 <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center"><span class="material-symbols-outlined text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity">fullscreen</span></div>
 </div>
 <div class="p-5">
-<div class="flex justify-between items-start mb-2"><h4 class="font-headline-md text-lg" id="preview-title">Untitled Work</h4><span class="text-primary font-bold text-sm" id="preview-price">â‚¹0</span></div>
-<p class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-3 text-[10px]">Amrita R. â€¢ 2024</p>
+<div class="flex justify-between items-start mb-2"><h4 class="font-headline-md text-lg" id="preview-title">Untitled Work</h4><span class="text-primary font-bold text-sm" id="preview-price">₹0</span></div>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-3 text-[10px]">Amrita R. • 2024</p>
 <div class="h-[1px] w-full bg-outline-variant mb-3"></div>
 <p class="font-body-md text-on-surface-variant italic text-xs line-clamp-2" id="preview-desc">Your artwork's story will appear here.</p>
 </div>
@@ -209,156 +209,33 @@ footer::before {
 </div>
 </div>
 </div>
-            <footer id="footer" class="mt-auto">
-                <div class="container mx-auto px-6">
-                    <div class="foot-top">
-                        <div class="foot-brand">
-                            <div class="flex items-center gap-3 mb-6">
-                                <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
-                            </div>
-                            <p>India's premier multi-art platform — celebrating the living traditions of every state through
-                                artisanal AI and human craft.</p>
-                            <div class="socials">
-                                <a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp"
-                                    class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
-                                <a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram"
-                                    class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
-                                <a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube"
-                                    class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
-                                <a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn"
-                                    class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="foot-col">
-                            <h5>Related</h5>
-                            <ul>
-                                <li>
-                                    <a href="heritage.html"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        Heritage Guide
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="masterpieces.html"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        Masterpieces
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="team.html"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        Our Team
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="signin.html"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        Artist Login
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="foot-col">
-                            <h5>Platform</h5>
-                            <ul>
-                                <li>
-                                    <a href="index.html#journal"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        Art Forms
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="index.html#living-map-section"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        Interactive Map
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="artists.html"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        Meet the Makers
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="index.html#journal"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        The Muse Journal
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="foot-col">
-                            <h5>Navigations</h5>
-                            <ul>
-                                <li>
-                                    <a href="index.html#living-map-section"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        Live Map
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="index.html#yreel-hub"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        Reels
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="artists.html"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        Explore Artists
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="index.html"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        Art Retreats
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="foot-col">
-                            <h5>Contact Us</h5>
-                            <ul>
-                                <li>
-                                    <a href="mailto:painterdmuse_2k26@gmail.com"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        painterdmuse_2k26@gmail.com
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="tel:+917798345690"
-                                        class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                        +91 7798345690
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="foot-bot justify-center text-center">
-                        <div>© 2026 The Painted Muse · Made with ❤️ for Indian Art</div>
-                    </div>
-                </div>
-            </footer>
+
         </main>
 </div>
 <script>
 let currentFileUrl=null;
 let currentFileType='image'; 
-function setType(type){
+let currentFile=null;
+const dbName = "ReelsDB";
+const storeName = "videos";
+let db;
+
+function initDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(dbName, 1);
+    request.onerror = event => reject(event.target.error);
+    request.onsuccess = event => {
+      db = event.target.result;
+      resolve(db);
+    };
+    request.onupgradeneeded = event => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains(storeName)) {
+        db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
+      }
+    };
+  });
+}function setType(type){
 document.querySelectorAll('.upload-type').forEach(b=>b.classList.remove('active'));
 document.getElementById('type-'+type).classList.add('active');
 const icon=document.getElementById('dropzone-icon');
@@ -380,27 +257,34 @@ if(type==='reel'){
 }
 }
 function handleFileSelect(e){
-const file=e.target.files[0];
-if(!file)return;
-document.getElementById('file-name').textContent=file.name;
-document.getElementById('file-name').classList.remove('hidden');
-const prevImg=document.getElementById('preview-img');
-const prevVid=document.getElementById('preview-vid');
-const placeholder=document.getElementById('preview-placeholder');
-currentFileUrl=URL.createObjectURL(file);
-if(file.type.startsWith('image/')){
-currentFileType='image';
-prevImg.src=currentFileUrl;
-prevImg.classList.remove('hidden');
-prevVid.classList.add('hidden');
-placeholder.classList.add('hidden');
-}else if(file.type.startsWith('video/')){
-currentFileType='video';
-prevVid.src=currentFileUrl;
-prevVid.classList.remove('hidden');
-prevImg.classList.add('hidden');
-placeholder.classList.add('hidden');
-}
+  const file=e.target.files[0];
+  if(!file)return;
+  currentFile = file;
+  document.getElementById('file-name').textContent=file.name;
+  document.getElementById('file-name').classList.remove('hidden');
+  
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    currentFileUrl = event.target.result;
+    const prevImg=document.getElementById('preview-img');
+    const prevVid=document.getElementById('preview-vid');
+    const placeholder=document.getElementById('preview-placeholder');
+    
+    if(file.type.startsWith('image/')){
+      currentFileType='image';
+      prevImg.src=currentFileUrl;
+      prevImg.classList.remove('hidden');
+      prevVid.classList.add('hidden');
+      placeholder.classList.add('hidden');
+    }else if(file.type.startsWith('video/')){
+      currentFileType='video';
+      prevVid.src=currentFileUrl;
+      prevVid.classList.remove('hidden');
+      prevImg.classList.add('hidden');
+      placeholder.classList.add('hidden');
+    }
+  };
+  reader.readAsDataURL(file);
 }
 function openModal(){
 if(!currentFileUrl)return;
@@ -432,44 +316,72 @@ const t=document.getElementById('inp-title').value;
 const p=document.getElementById('inp-price').value;
 const d=document.getElementById('inp-desc').value;
 document.getElementById('preview-title').textContent=t||'Untitled Work';
-document.getElementById('preview-price').textContent=p?'â‚¹'+Number(p).toLocaleString('en-IN'):'â‚¹0';
+document.getElementById('preview-price').textContent=p?'₹'+Number(p).toLocaleString('en-IN'):'₹0';
 document.getElementById('preview-desc').textContent=d||"Your artwork's story will appear here.";
 }
-function publishItem() {
+async function publishItem() {
   const title = document.getElementById('inp-title').value.trim();
   const priceVal = document.getElementById('inp-price').value;
   const status = document.getElementById('inp-status').value;
   const category = document.getElementById('inp-category').value;
   const desc = document.getElementById('inp-desc').value.trim();
+  
   if (!title) {
     alert('Please enter a title for your masterwork.');
     return;
   }
+  if (!currentFile) {
+    alert('Please select a file to upload.');
+    return;
+  }
+
   if (currentFileType === 'image') {
     const storedPosts = localStorage.getItem('artist_posts');
     let posts = storedPosts ? JSON.parse(storedPosts) : [];
-    const imgUrl = currentFileUrl || 'https://lh3.googleusercontent.com/aida-public/AB6AXuCE85tliyBtatM4Sf9CGMCkZrJLQbMkAvenwVo9STCUkhlAfIfFaU5PR6Y48rZ-4KuIoI4eJK09WtYLHNewz2WrIJDF7vSM-QmXbO-njNqxgped5JbFyOnwVHgsDWZQERAp-dpFK6R30NrvKIMYqnkpxBetfDPqAHpWry3YDm8YSkPQM-KnvLHPRK0yBW8Y4uRF9NOADCjtyLuP8ZjuNSGP2x2zmQmYzZS3FzJ2_Td2xvEs6udYptzb_3IbEQmsQO6uBrO3MZdbXeua';
     posts.unshift({
       title: title,
       category: category,
-      dimensions: '24Ã—36 in',
+      dimensions: '24×36 in',
       price: parseFloat(priceVal) || 0,
       status: status,
-      imgUrl: imgUrl
+      imgUrl: currentFileUrl // Images are still DataURLs for now, usually fine
     });
     localStorage.setItem('artist_posts', JSON.stringify(posts));
+    alert('Successfully published to your Gallery!');
+    window.location.href = 'artist-gallery.html';
   } else {
-    const storedReels = localStorage.getItem('artist_reels');
-    let reels = storedReels ? JSON.parse(storedReels) : [];
-    const videoUrl = currentFileUrl || 'https://lh3.googleusercontent.com/aida-public/AB6AXuDtntfX-Ln9Zw1VZ0Hpkb2gPLxVGo-8i2HCOQq8MuDWfMJ2R8rgP_bq6LuBgIgo3JgCiAL1gf7XMnMQnarbhaXApQCbdgiH5J6IEDNWep-L2TYfsPvnDvypEd-aqOQD1Cja_lGLbojN9phmbZ6mwRBP9PEOFZcjvFm_WXH7XdrbwO0pOyT242yuLXNIchrOTtBgei5F4QraRKm3KIVqWxT6AX6MpcVZgTW8r293ODOFXu-5fLVr9dMl3bbcU4vwotycF13aX7JWcw0N';
-    reels.unshift({
-      title: title,
-      videoUrl: videoUrl
-    });
-    localStorage.setItem('artist_reels', JSON.stringify(reels));
+    // REELS/VIDEOS: Store in IndexedDB
+    try {
+      if (!db) await initDB();
+      
+      const profile = JSON.parse(localStorage.getItem('artist_profile_data') || '{}');
+      const artistName = profile.displayName || "Master Artist";
+      const handle = "@" + (profile.displayName ? profile.displayName.toLowerCase().replace(/\s+/g, '') : "artisan");
+
+      const transaction = db.transaction([storeName], "readwrite");
+      const store = transaction.objectStore(storeName);
+      
+      const newRecord = {
+        file: currentFile, // Blob!
+        title: title,
+        artistName: artistName,
+        handle: handle,
+        timestamp: Date.now()
+      };
+      
+      const request = store.add(newRecord);
+      request.onsuccess = () => {
+        alert('Reel successfully published! It will now appear in your Gallery and Masterpieces.');
+        window.location.href = 'artist-gallery.html';
+      };
+      request.onerror = () => {
+        alert('Error saving video. It might be too large for the browser to handle.');
+      };
+    } catch (err) {
+      console.error(err);
+      alert('Failed to connect to database.');
+    }
   }
-  alert('Successfully published to your Gallery!');
-  window.location.href = 'artist-gallery.html';
 }
 function loadSidebarProfile() {
   const storedProfile = localStorage.getItem('artist_profile_data');
@@ -486,6 +398,8 @@ function loadSidebarProfile() {
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 document.addEventListener('DOMContentLoaded', () => {
   loadSidebarProfile();
+  initDB().catch(console.error);
 });
 </script>
 </body></html>
+

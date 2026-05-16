@@ -59,11 +59,12 @@
 
         .artisan-card.active {
             opacity: 1;
-            transform: scale(1.05);
+            transform: scale(1.1);
             filter: blur(0);
-            box-shadow: 0 25px 60px rgba(26, 18, 8, 0.18);
+            box-shadow: 0 30px 70px rgba(26, 18, 8, 0.25);
             border-color: var(--saffron);
-            z-index: 20;
+            z-index: 30;
+            border-width: 2px;
         }
 
         .search-bar {
@@ -266,7 +267,7 @@
         <!-- Logo Area -->
         <div class="flex items-center gap-4">
             <a href="index.html" class="flex items-center gap-4">
-                <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+                <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
             </a>
         </div>
 
@@ -311,7 +312,7 @@
     <div id="mobile-menu"
         class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 md:hidden">
         <div class="flex justify-between items-center p-6 border-b border-stone-100">
-            <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+            <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
             <button id="close-menu-btn" class="text-stone-900 p-2">
                 <span class="material-symbols-outlined text-3xl">close</span>
             </button>
@@ -413,9 +414,9 @@
             </div>
 
             <div class="mt-16 text-center">
-                <a href="signup.html"
+                <a href="dashboard.html"
                     class="inline-block bg-[#1A1208] text-white px-8 py-4 font-sans text-sm font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#1A1208] transition-all shadow-lg hover:-translate-y-1">
-                    Create Portfolio →
+                    Explore more artists
                 </a>
             </div>
         </div>
@@ -427,7 +428,7 @@
             <div class="foot-top">
                 <div class="foot-brand">
                     <div class="flex items-center gap-3 mb-6">
-                        <img src="dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+                        <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
                     </div>
                     <p>India's premier multi-art platform — celebrating the living traditions of every state through
                         artisanal AI and human craft.</p>
@@ -655,7 +656,9 @@
             countLabel.textContent = `Showing ${data.length} master${data.length > 1 ? 's' : ''}`;
 
             grid.innerHTML = [...data, ...data, ...data].map((item, index) => `
-                <div class="artisan-card reveal w-[300px] md:w-[380px] flex-shrink-0 relative group/card" data-index="${index % data.length}">
+                <div class="artisan-card reveal w-[300px] md:w-[380px] flex-shrink-0 relative group/card cursor-pointer" 
+                     data-index="${index % data.length}"
+                      onclick="handleCardClick(${index})">
                     <div class="h-44 bg-stone-900 relative overflow-hidden">
                         <img src="${item.bgImg}" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-700" alt="${item.art}">
                         <img src="${item.profileImg}" class="w-20 h-20 rounded-full border-4 border-white absolute -bottom-10 left-6 object-cover shadow-lg z-10" alt="${item.name}">
@@ -857,6 +860,14 @@
                 mobileMenu.classList.add('translate-x-full');
             });
 
+            window.handleCardClick = function(index) {
+                stopAutoSlide();
+                currentIndex = index;
+                updateActiveCard();
+                // Resume auto-slide after 5 seconds of inactivity
+                clearTimeout(window.resumeTimer);
+                window.resumeTimer = setTimeout(startAutoSlide, 5000);
+            };
         });
 
         // Intersection Observer for Scroll Revealing
