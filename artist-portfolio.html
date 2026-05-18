@@ -121,6 +121,14 @@
             border: 1px solid rgba(148, 46, 2, 0.1);
             pointer-events: none;
         }
+        .tab-btn {
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+        .tab-btn.active {
+            border-color: var(--primary, #B5451B);
+            color: var(--primary, #B5451B) !important;
+        }
     </style>
 </head>
 <body class="bg-surface">
@@ -188,6 +196,14 @@
                 </div>
             </header>
 
+            <!-- Sub-Navigation Tabs -->
+            <div class="px-8 py-3 bg-surface-container-low border-b border-outline-variant flex gap-6 overflow-x-auto">
+                <button id="tab-profile" onclick="switchTab('profile')" class="tab-btn active px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all">Profile Info</button>
+                <button id="tab-appearance" onclick="switchTab('appearance')" class="tab-btn px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all">Appearance & Theme</button>
+                <button id="tab-portfolio" onclick="switchTab('portfolio')" class="tab-btn px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all">Manage Works</button>
+                <button id="tab-liked" onclick="switchTab('liked')" class="tab-btn px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all">Liked Inspirations</button>
+            </div>
+
             <div class="p-8 max-w-5xl mx-auto w-full space-y-12">
 
 
@@ -233,7 +249,7 @@
                 <div class="h-px w-full bg-outline-variant opacity-30 my-12"></div>
 
                 <!-- Appearance Settings -->
-                <section id="section-appearance" class="tab-content space-y-8 animate-fade-in-up">
+                <section id="section-appearance" class="tab-content hidden space-y-8 animate-fade-in-up">
                     <div class="bg-surface-container-low p-8 rounded-3xl border border-outline-variant">
                         <h2 class="font-headline-md text-2xl text-on-background mb-8">Portfolio Theme</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -270,12 +286,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="relative rounded-2xl overflow-hidden border border-outline-variant aspect-video bg-white shadow-inner flex items-center justify-center">
+                            <div id="preview-container" class="relative rounded-2xl overflow-hidden border border-outline-variant aspect-video shadow-inner flex items-center justify-center" style="background-color: var(--background, #fff8f6);">
                                 <div class="absolute inset-0 opacity-5 pointer-events-none" id="preview-pattern" style="background-image: url('pics/warli_pattern_1778230295803.png'); background-size: cover;"></div>
                                 <div class="text-center p-8 z-10">
                                     <p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Live Preview</p>
-                                    <h3 class="font-headline-md text-xl mb-1">Amrita's Portfolio</h3>
-                                    <p class="italic text-primary">Artistic Excellence</p>
+                                    <h3 id="preview-title" class="font-headline-md text-xl mb-1">Amrita's Portfolio</h3>
+                                    <p id="preview-subtitle" class="italic text-primary">Artistic Excellence</p>
                                 </div>
                             </div>
                         </div>
@@ -295,47 +311,15 @@
                     </button>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Portfolio Items -->
-                    <div id="portfolio-item-1" class="warli-border group rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all">
-                        <div class="h-56 overflow-hidden relative">
-                            <img src="pics/pattachitra_pattern_1778230348344.png" class="w-full h-full object-cover">
-                            <div class="absolute top-2 right-2 flex gap-2">
-                                <button onclick="removeItem('portfolio-item-1')" class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-on-surface-variant hover:text-error shadow"><span class="material-symbols-outlined text-sm">delete</span></button>
-                                <button onclick="editItem('portfolio-item-1')" class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary shadow"><span class="material-symbols-outlined text-sm">edit</span></button>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h4 class="font-headline-md text-lg">Pattachitra Landscape</h4>
-                            <p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Odisha Heritage · Added 2 days ago</p>
-                        </div>
-                    </div>
-                    <div id="portfolio-item-2" class="warli-border group rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all">
-                        <div class="h-56 overflow-hidden relative">
-                            <img src="pics/kalamkari_pattern_1778230370773.png" class="w-full h-full object-cover">
-                            <div class="absolute top-2 right-2 flex gap-2">
-                                <button onclick="removeItem('portfolio-item-2')" class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-on-surface-variant hover:text-error shadow"><span class="material-symbols-outlined text-sm">delete</span></button>
-                                <button onclick="editItem('portfolio-item-2')" class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary shadow"><span class="material-symbols-outlined text-sm">edit</span></button>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h4 class="font-headline-md text-lg">Kalamkari Floral Study</h4>
-                            <p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Andhra Traditional · Added 1 week ago</p>
-                        </div>
-                    </div>
-                        <div onclick="window.location.href='dashboard-artists.html'" class="flex items-center justify-center border-2 border-dashed border-outline-variant rounded-xl h-72 group hover:border-primary transition-all cursor-pointer">
-                            <div class="text-center">
-                                <span class="material-symbols-outlined text-4xl text-outline group-hover:text-primary transition-all">add_photo_alternate</span>
-                                <p class="text-[10px] font-bold uppercase tracking-widest text-outline mt-4">Drop files here or click to upload</p>
-                            </div>
-                        </div>
-                    </div>
+                <div id="works-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Portfolio Items will be dynamically loaded here -->
+                </div>
                 </section>
 
                 <div class="h-px w-full bg-outline-variant opacity-30 my-12"></div>
 
                 <!-- Liked Arts Settings -->
-                <section id="section-liked" class="tab-content space-y-8 animate-fade-in-up">
+                <section id="section-liked" class="tab-content hidden space-y-8 animate-fade-in-up">
                     <div class="flex justify-between items-end">
                         <div>
                             <h2 class="font-headline-md text-2xl text-on-background">Arts You've Liked</h2>
@@ -389,6 +373,8 @@
     </div>
 
     <script>
+        let artistPosts = [];
+
         function switchTab(tabName) {
             // Hide all contents
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
@@ -398,28 +384,37 @@
             // Show selected content
             document.getElementById('section-' + tabName).classList.remove('hidden');
             // Set active button
-            document.getElementById('tab-' + tabName).classList.add('active');
+            const activeBtn = document.getElementById('tab-' + tabName);
+            if (activeBtn) activeBtn.classList.add('active');
         }
 
         function saveChanges() {
             const user = JSON.parse(localStorage.getItem('currentUser'));
             if (!user) return;
             
-            const nameInput = document.querySelector('input[value="Amrita Raghavan"]') || document.querySelector('input[type="text"]');
+            const nameInput = document.querySelector('input[placeholder="Display Name"]') || document.querySelector('input[type="text"]');
             const bioInput = document.querySelector('textarea');
             const webInput = document.querySelector('input[placeholder="Personal Website"]');
             const instaInput = document.querySelector('input[placeholder="Instagram Profile"]');
             const behanceInput = document.querySelector('input[placeholder="Behance / Dribbble"]');
             const sbImg = document.getElementById('sidebar-img');
             
+            const activeSwatch = document.querySelector('.color-swatch.active');
+            const themeBgColor = activeSwatch ? activeSwatch.getAttribute('data-color') : '#fff8f6';
+            
+            const activePatternBtn = document.querySelector('[data-pattern].border-primary');
+            const themePattern = activePatternBtn ? activePatternBtn.getAttribute('data-pattern') : 'pics/warli_pattern_1778230295803.png';
+
             const profileData = {
                 displayName: nameInput ? nameInput.value : user.fullName,
                 bio: bioInput ? bioInput.value : '',
                 website: webInput ? webInput.value : '',
                 instagram: instaInput ? instaInput.value : '',
                 behance: behanceInput ? behanceInput.value : '',
-                specialization: user.spec,
-                photoUrl: sbImg ? sbImg.src : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100'
+                specialization: user.spec || 'Traditional',
+                photoUrl: sbImg ? sbImg.src : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100',
+                themeBgColor: themeBgColor,
+                themePattern: themePattern
             };
             
             localStorage.setItem('artist_profile_' + user.email, JSON.stringify(profileData));
@@ -428,14 +423,16 @@
             const sbName = document.getElementById('sidebar-name');
             const sbRole = document.getElementById('sidebar-role');
             if (sbName) sbName.textContent = profileData.displayName.toUpperCase();
-            if (sbRole) sbRole.textContent = (profileData.specialization || 'MASTER').toUpperCase() + ' ARTIST';
+            if (sbRole) sbRole.textContent = (profileData.specialization).toUpperCase() + ' ARTIST';
             
-            alert('Your changes have been saved successfully!');
+            alert('Your custom profile theme and details have been saved successfully!');
         }
 
+        // Mock removeItem function for back-compat
         function removeItem(id) {
             if(confirm('Are you sure you want to remove this item?')) {
-                document.getElementById(id).remove();
+                const el = document.getElementById(id);
+                if (el) el.remove();
             }
         }
 
@@ -445,15 +442,99 @@
 
         function unlikeItem(btn) {
             const item = btn.closest('.relative');
-            item.style.opacity = '0';
-            setTimeout(() => item.remove(), 300);
+            if (item) {
+                item.style.opacity = '0';
+                setTimeout(() => item.remove(), 300);
+            }
         }
 
-        // Background color switcher
+        // Dynamic Artwork CRUD for "Manage Your Works"
+        function renderWorksGrid() {
+            const grid = document.getElementById('works-grid');
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            
+            if (artistPosts.length === 0) {
+                const empty = document.createElement('div');
+                empty.className = "col-span-full text-center py-12 bg-surface-container-low rounded-2xl border border-dashed border-outline-variant";
+                empty.innerHTML = `
+                    <span class="material-symbols-outlined text-4xl text-outline mb-2">folder_open</span>
+                    <p class="text-sm text-on-surface-variant">No works added to your portfolio yet. Click "Upload New" above to add your creations!</p>
+                `;
+                grid.appendChild(empty);
+            } else {
+                artistPosts.forEach((post, idx) => {
+                    const card = document.createElement('div');
+                    card.className = "warli-border group rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all";
+                    card.innerHTML = `
+                        <div class="h-56 overflow-hidden relative">
+                            <img src="${post.imgUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500" onerror="this.src='pics/madhubani_pattern_1778230275283.png'">
+                            <div class="absolute top-2 right-2 flex gap-2">
+                                <button onclick="removeWorkItem(${idx})" class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-on-surface-variant hover:text-error shadow transition-all"><span class="material-symbols-outlined text-sm">delete</span></button>
+                                <button onclick="editWorkItem(${idx})" class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary shadow transition-all"><span class="material-symbols-outlined text-sm">edit</span></button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-headline-md text-lg">${post.title}</h4>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">${post.category || 'Artwork'}</span>
+                                <span class="text-sm font-bold text-primary">₹${Number(post.price || 0).toLocaleString()}</span>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+            
+            // Add the upload action card at the end
+            const addCard = document.createElement('div');
+            addCard.onclick = () => window.location.href = 'dashboard-artists.html';
+            addCard.className = "flex items-center justify-center border-2 border-dashed border-outline-variant rounded-xl h-72 group hover:border-primary transition-all cursor-pointer bg-surface-container-lowest";
+            addCard.innerHTML = `
+                <div class="text-center">
+                    <span class="material-symbols-outlined text-4xl text-outline group-hover:text-primary transition-all">add_photo_alternate</span>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-outline mt-4">Drop files here or click to upload</p>
+                </div>
+            `;
+            grid.appendChild(addCard);
+        }
+
+        function removeWorkItem(idx) {
+            if (confirm('Are you sure you want to delete this artwork from your portfolio?')) {
+                artistPosts.splice(idx, 1);
+                const user = JSON.parse(localStorage.getItem('currentUser'));
+                if (user) {
+                    localStorage.setItem('artist_posts_' + user.email, JSON.stringify(artistPosts));
+                }
+                renderWorksGrid();
+            }
+        }
+        
+        function editWorkItem(idx) {
+            const newTitle = prompt('Enter new title for this artwork:', artistPosts[idx].title);
+            if (newTitle === null) return;
+            const newPrice = prompt('Enter new price (₹):', artistPosts[idx].price);
+            if (newPrice === null) return;
+            
+            artistPosts[idx].title = newTitle;
+            artistPosts[idx].price = parseFloat(newPrice) || 0;
+            
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (user) {
+                localStorage.setItem('artist_posts_' + user.email, JSON.stringify(artistPosts));
+            }
+            renderWorksGrid();
+        }
+
+        // Color swatches & background color switcher
         document.querySelectorAll('.color-swatch').forEach(swatch => {
             swatch.addEventListener('click', () => {
                 const color = swatch.getAttribute('data-color');
                 document.documentElement.style.setProperty('--background', color);
+                
+                const previewContainer = document.getElementById('preview-container');
+                if (previewContainer) previewContainer.style.backgroundColor = color;
                 
                 // Update active state
                 document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
@@ -473,26 +554,32 @@
             btn.addEventListener('click', () => {
                 const pattern = btn.getAttribute('data-pattern');
                 const preview = document.getElementById('preview-pattern');
-                preview.style.backgroundImage = `url('${pattern}')`;
+                if (preview) preview.style.backgroundImage = `url('${pattern}')`;
                 
-                // Update border
-                document.querySelectorAll('[data-pattern]').forEach(b => b.classList.remove('border-primary'));
-                document.querySelectorAll('[data-pattern]').forEach(b => b.classList.add('border-outline-variant'));
+                // Update border highlight
+                document.querySelectorAll('[data-pattern]').forEach(b => {
+                    b.classList.remove('border-primary');
+                    b.classList.add('border-outline-variant');
+                });
                 btn.classList.remove('border-outline-variant');
                 btn.classList.add('border-primary');
             });
         });
 
+        // Custom hex color input picker
         const customColorInput = document.getElementById('custom-color');
         if (customColorInput) {
             customColorInput.addEventListener('input', (e) => {
                 const color = e.target.value;
-                document.body.style.backgroundColor = color;
+                document.documentElement.style.setProperty('--background', color);
+                const previewContainer = document.getElementById('preview-container');
+                if (previewContainer) previewContainer.style.backgroundColor = color;
+                
                 document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
             });
         }
 
-        // Sync with LocalStorage
+        // Live synchronizations
         document.addEventListener('DOMContentLoaded', () => {
             const user = JSON.parse(localStorage.getItem('currentUser'));
             if (!user) {
@@ -500,11 +587,27 @@
                 return;
             }
             
+            // Set up Display Name dynamic placeholder
+            const nameInput = document.querySelector('input[placeholder="Display Name"]') || document.querySelector('input[type="text"]');
+            if (nameInput) {
+                nameInput.placeholder = "Display Name";
+                nameInput.addEventListener('input', (e) => {
+                    const pTitle = document.getElementById('preview-title');
+                    if (pTitle) pTitle.textContent = e.target.value ? e.target.value + "'s Portfolio" : user.fullName + "'s Portfolio";
+                });
+            }
+
+            const bioInput = document.querySelector('textarea');
+            if (bioInput) {
+                bioInput.addEventListener('input', (e) => {
+                    const pSub = document.getElementById('preview-subtitle');
+                    if (pSub) pSub.textContent = e.target.value ? e.target.value.substring(0, 40) + '...' : "Artistic Excellence";
+                });
+            }
+
             const profileKey = 'artist_profile_' + user.email;
             const storedProfile = localStorage.getItem(profileKey);
             
-            const nameInput = document.querySelector('input[value="Amrita Raghavan"]') || document.querySelector('input[type="text"]');
-            const bioInput = document.querySelector('textarea');
             const webInput = document.querySelector('input[placeholder="Personal Website"]');
             const instaInput = document.querySelector('input[placeholder="Instagram Profile"]');
             const behanceInput = document.querySelector('input[placeholder="Behance / Dribbble"]');
@@ -514,6 +617,22 @@
             const sbName = document.getElementById('sidebar-name');
             const sbRole = document.getElementById('sidebar-role');
             
+            // Load and initialize dynamic portfolio posts
+            const postsKey = 'artist_posts_' + user.email;
+            const storedPosts = localStorage.getItem(postsKey);
+            if (storedPosts) {
+                artistPosts = JSON.parse(storedPosts);
+            } else if (!user.isNewUser) {
+                // Seed mock default posts for standard users
+                artistPosts = [
+                    { title: 'Pattachitra Landscape', price: 18000, imgUrl: 'pics/pattachitra_pattern_1778230348344.png', category: 'Odisha Traditional' },
+                    { title: 'Kalamkari Floral Study', price: 24000, imgUrl: 'pics/kalamkari_pattern_1778230370773.png', category: 'Andhra traditional' }
+                ];
+            } else {
+                artistPosts = [];
+            }
+            renderWorksGrid();
+
             if (storedProfile) {
                 const profile = JSON.parse(storedProfile);
                 if (nameInput) nameInput.value = profile.displayName || '';
@@ -524,33 +643,74 @@
                 if (sbImg && profile.photoUrl) sbImg.src = profile.photoUrl;
                 if (sbName) sbName.textContent = (profile.displayName || user.fullName).toUpperCase();
                 if (sbRole) sbRole.textContent = (profile.specialization || user.spec || 'MASTER').toUpperCase() + ' ARTIST';
-            } else if (user.isNewUser) {
-                // Blank out all details for a new signup!
+                
+                // Live preview load updates
+                const pTitle = document.getElementById('preview-title');
+                if (pTitle) pTitle.textContent = (profile.displayName || user.fullName) + "'s Portfolio";
+                const pSub = document.getElementById('preview-subtitle');
+                if (pSub && profile.bio) pSub.textContent = profile.bio.substring(0, 40) + '...';
+
+                // Load custom theme
+                if (profile.themeBgColor) {
+                    document.documentElement.style.setProperty('--background', profile.themeBgColor);
+                    const previewContainer = document.getElementById('preview-container');
+                    if (previewContainer) previewContainer.style.backgroundColor = profile.themeBgColor;
+                    
+                    document.querySelectorAll('.color-swatch').forEach(s => {
+                        if (s.getAttribute('data-color') === profile.themeBgColor) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                }
+                
+                if (profile.themePattern) {
+                    const preview = document.getElementById('preview-pattern');
+                    if (preview) preview.style.backgroundImage = `url('${profile.themePattern}')`;
+                    
+                    document.querySelectorAll('[data-pattern]').forEach(b => {
+                        if (b.getAttribute('data-pattern') === profile.themePattern) {
+                            b.classList.remove('border-outline-variant');
+                            b.classList.add('border-primary');
+                        } else {
+                            b.classList.remove('border-primary');
+                            b.classList.add('border-outline-variant');
+                        }
+                    });
+                }
+            } else {
+                // New user empty state
                 if (nameInput) nameInput.value = user.fullName;
                 if (bioInput) bioInput.value = '';
                 if (webInput) webInput.value = '';
                 if (instaInput) instaInput.value = '';
                 if (behanceInput) behanceInput.value = '';
                 
-                // Show a generic placeholder avatar for the profile photo
                 if (sbImg) sbImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
                 if (sbName) sbName.textContent = user.fullName.toUpperCase();
                 if (sbRole) sbRole.textContent = (user.spec || 'MASTER').toUpperCase() + ' ARTIST';
                 
-                // Clear any default mock works shown in the grid of "Manage Your Works"
-                const portfolioGrid = document.querySelector('#section-portfolio .grid');
-                if (portfolioGrid) {
-                    portfolioGrid.innerHTML = `
-                        <div class="col-span-full text-center py-12 bg-surface-container-low rounded-2xl border border-dashed border-outline-variant">
-                            <span class="material-symbols-outlined text-4xl text-outline mb-2">folder_open</span>
-                            <p class="text-sm text-on-surface-variant">No works added to your portfolio yet. Click "Upload New" above to add your creations!</p>
-                        </div>
-                    `;
-                }
-            } else {
-                // Fallback to legacy default Amrita profile
-                if (sbName) sbName.textContent = user.fullName.toUpperCase();
-                if (sbRole) sbRole.textContent = (user.spec || 'MASTER').toUpperCase() + ' ARTIST';
+                const pTitle = document.getElementById('preview-title');
+                if (pTitle) pTitle.textContent = user.fullName + "'s Portfolio";
+            }
+
+            // Mobile menu drawer toggle
+            const menuBtn = document.querySelector('.lg:hidden span.material-symbols-outlined');
+            if (menuBtn) {
+                menuBtn.classList.add('cursor-pointer');
+                menuBtn.addEventListener('click', () => {
+                    const aside = document.querySelector('aside');
+                    if (aside) {
+                        aside.classList.toggle('hidden');
+                        aside.classList.toggle('flex');
+                        aside.classList.toggle('fixed');
+                        aside.classList.toggle('inset-y-0');
+                        aside.classList.toggle('left-0');
+                        aside.classList.toggle('z-50');
+                        aside.classList.toggle('w-72');
+                    }
+                });
             }
         });
     </script>

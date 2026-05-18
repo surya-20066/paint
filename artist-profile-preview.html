@@ -87,6 +87,163 @@ body{background:#fff8f6;color:#241915;font-family:'DM Sans',sans-serif;min-heigh
 </div>
 </main>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (!user) {
+        window.location.href = 'signin.html';
+        return;
+    }
+    
+    const profileKey = 'artist_profile_' + user.email;
+    const storedProfile = localStorage.getItem(profileKey);
+    
+    // Sidebar elements
+    const sbImg = document.querySelector('aside img');
+    const sbName = document.querySelector('aside p.font-label-sm') || document.querySelector('aside p');
+    const sbRole = document.querySelector('aside p.text-\\[10px\\]') || document.querySelectorAll('aside p')[1];
+    
+    // Main preview elements
+    const previewImg = document.querySelector('main .size-32 img');
+    const previewName = document.querySelector('main h2.font-headline-md');
+    const previewRole = document.querySelector('main p.font-label-sm');
+    const previewBio = document.querySelector('main p.text-sm.text-on-surface-variant');
+    
+    // Links container buttons
+    const linkButtons = document.querySelectorAll('main .flex.justify-center.gap-4 button');
+    
+    // Exhibition highlights container
+    const exhibitionContainer = document.querySelector('main .lg\\:col-span-2 .grid');
+    
+    // Default fallback values
+    let displayName = user.fullName;
+    let specialization = user.spec || 'Traditional';
+    let bio = "Award-winning artist bridging tradition with contemporary themes.";
+    let photoUrl = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
+    let website = '';
+    let instagram = '';
+    let behance = '';
+    let themeBgColor = '#fff8f6';
+    let themePattern = 'pics/warli_pattern_1778230295803.png';
+    
+    if (storedProfile) {
+        const profile = JSON.parse(storedProfile);
+        displayName = profile.displayName || displayName;
+        specialization = profile.specialization || specialization;
+        bio = profile.bio || bio;
+        photoUrl = profile.photoUrl || photoUrl;
+        website = profile.website || website;
+        instagram = profile.instagram || instagram;
+        behance = profile.behance || behance;
+        themeBgColor = profile.themeBgColor || themeBgColor;
+        themePattern = profile.themePattern || themePattern;
+    }
+    
+    // Apply dynamic texts
+    if (sbImg) sbImg.src = photoUrl;
+    if (sbName) sbName.textContent = displayName.toUpperCase();
+    if (sbRole) sbRole.textContent = specialization.toUpperCase() + ' ARTIST';
+    
+    if (previewImg) previewImg.src = photoUrl;
+    if (previewName) previewName.textContent = displayName;
+    if (previewRole) previewRole.textContent = specialization + ' • Verified';
+    if (previewBio) previewBio.textContent = bio;
+    
+    // Setup social link action buttons
+    if (linkButtons[0]) {
+        linkButtons[0].onclick = () => {
+            if (website) window.open(website, '_blank');
+            else alert('No personal website provided.');
+        };
+    }
+    if (linkButtons[1]) {
+        linkButtons[1].onclick = () => {
+            if (instagram) window.open(instagram, '_blank');
+            else alert('No Instagram profile provided.');
+        };
+    }
+    if (linkButtons[2]) {
+        linkButtons[2].onclick = () => {
+            if (behance) window.open(behance, '_blank');
+            else alert('No Behance/Dribbble profile provided.');
+        };
+    }
+    
+    // Apply theme styles to public page background & watermark patterns
+    document.body.style.backgroundColor = themeBgColor;
+    const mainContainer = document.querySelector('main');
+    if (mainContainer) mainContainer.style.backgroundColor = themeBgColor;
+    
+    const grain = document.querySelector('.paper-grain');
+    if (grain) {
+        grain.style.backgroundImage = `url('${themePattern}')`;
+        grain.style.opacity = '0.04';
+        grain.style.backgroundSize = 'cover';
+    }
+    
+    // Load and render custom uploaded artworks in "Exhibition Highlights"
+    const postsKey = 'artist_posts_' + user.email;
+    const storedPosts = localStorage.getItem(postsKey);
+    let artistPosts = [];
+    
+    if (storedPosts) {
+        artistPosts = JSON.parse(storedPosts);
+    } else if (!user.isNewUser) {
+        // Seed default ones if not new user
+        artistPosts = [
+            { title: 'Tree of Life', price: 45000, imgUrl: 'pics/pattachitra_pattern_1778230348344.png', category: 'Madhubani' },
+            { title: 'Lotus Dreams', price: 32000, imgUrl: 'pics/kalamkari_pattern_1778230370773.png', category: 'Madhubani' }
+        ];
+    }
+    
+    if (exhibitionContainer) {
+        exhibitionContainer.innerHTML = '';
+        if (artistPosts.length === 0) {
+            exhibitionContainer.className = "col-span-full text-center py-12 bg-surface-container-low rounded-xl border border-dashed border-outline-variant";
+            exhibitionContainer.innerHTML = `
+                <div class="py-12">
+                    <span class="material-symbols-outlined text-4xl text-outline mb-2">folder_open</span>
+                    <p class="text-sm text-on-surface-variant">No works added to exhibition yet.</p>
+                </div>
+            `;
+        } else {
+            exhibitionContainer.className = "grid grid-cols-1 sm:grid-cols-2 gap-6";
+            artistPosts.forEach(post => {
+                const item = document.createElement('div');
+                item.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-all rounded-xl overflow-hidden";
+                item.innerHTML = `
+                    <div class="aspect-[4/5] bg-surface-variant overflow-hidden">
+                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${post.imgUrl}" onerror="this.src='pics/madhubani_pattern_1778230275283.png'"/>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-headline-md text-lg">${post.title}</h4>
+                        <p class="text-xs text-on-surface-variant">${post.category || 'Artwork'} • ₹${Number(post.price || 0).toLocaleString()}</p>
+                    </div>
+                `;
+                exhibitionContainer.appendChild(item);
+            });
+        }
+    }
+    
+    // Add mobile menu toggle support
+    const menuBtn = document.querySelector('.lg\\:hidden span.material-symbols-outlined');
+    if (menuBtn) {
+        menuBtn.classList.add('cursor-pointer');
+        menuBtn.addEventListener('click', () => {
+            const aside = document.querySelector('aside');
+            if (aside) {
+                aside.classList.toggle('hidden');
+                aside.classList.toggle('flex');
+                aside.classList.toggle('fixed');
+                aside.classList.toggle('inset-y-0');
+                aside.classList.toggle('left-0');
+                aside.classList.toggle('z-50');
+                aside.classList.toggle('w-72');
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>
 
