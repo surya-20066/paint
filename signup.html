@@ -153,7 +153,7 @@
                 </div>
             </div>
             <div class="w-full">
-                <form class="space-y-6" onsubmit="event.preventDefault(); window.location.href='artist-home.html';">
+                <form id="signup-form" class="space-y-6">
                     <div class="space-y-1 text-left">
                         <label class="block text-on-surface-variant font-label-sm uppercase tracking-widest text-[10px]" for="full-name">Full Name</label>
                         <div class="relative group">
@@ -196,6 +196,35 @@
                         </button>
                     </div>
                 </form>
+
+                <script>
+                    document.getElementById('signup-form').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        const fullName = document.getElementById('full-name').value;
+                        const spec = document.getElementById('specialization').value;
+                        const email = document.getElementById('email').value;
+                        const password = document.getElementById('password').value;
+                        
+                        let users = JSON.parse(localStorage.getItem('users') || '{}');
+                        
+                        if (users[email]) {
+                            alert('Email already registered! Please login.');
+                            return;
+                        }
+                        
+                        users[email] = { fullName: fullName, spec: spec, password: password, isNewUser: true };
+                        localStorage.setItem('users', JSON.stringify(users));
+                        
+                        localStorage.setItem('currentUser', JSON.stringify({
+                            email: email,
+                            fullName: fullName,
+                            spec: spec,
+                            isNewUser: true
+                        }));
+                        
+                        window.location.href = 'artist-home.html';
+                    });
+                </script>
                 <div class="mt-8">
                     <div class="relative flex items-center mb-8">
                         <div class="flex-grow border-t border-outline-variant/30"></div>

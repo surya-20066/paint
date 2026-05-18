@@ -61,7 +61,8 @@
             background: #fff8f6;
             color: #241915;
             font-family: 'DM Sans', sans-serif;
-            min-height: max(884px, 100dvh);
+            height: 100vh;
+            overflow: hidden;
         }
 
         .material-symbols-outlined {
@@ -148,6 +149,10 @@
                     <li class="flex h-14 items-center gap-4 px-4 rounded-lg bg-primary text-on-primary shadow-sm cursor-default">
                         <span class="material-symbols-outlined">account_circle</span>
                         <p class="font-body-md font-bold">Portfolio</p>
+                    </li>
+                    <li onclick="window.location.href='artist-settings.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+                        <span class="material-symbols-outlined">settings</span>
+                        <p class="font-body-md font-medium">Settings</p>
                     </li>
                 </ul>
             </nav>
@@ -397,6 +402,34 @@
         }
 
         function saveChanges() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (!user) return;
+            
+            const nameInput = document.querySelector('input[value="Amrita Raghavan"]') || document.querySelector('input[type="text"]');
+            const bioInput = document.querySelector('textarea');
+            const webInput = document.querySelector('input[placeholder="Personal Website"]');
+            const instaInput = document.querySelector('input[placeholder="Instagram Profile"]');
+            const behanceInput = document.querySelector('input[placeholder="Behance / Dribbble"]');
+            const sbImg = document.getElementById('sidebar-img');
+            
+            const profileData = {
+                displayName: nameInput ? nameInput.value : user.fullName,
+                bio: bioInput ? bioInput.value : '',
+                website: webInput ? webInput.value : '',
+                instagram: instaInput ? instaInput.value : '',
+                behance: behanceInput ? behanceInput.value : '',
+                specialization: user.spec,
+                photoUrl: sbImg ? sbImg.src : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100'
+            };
+            
+            localStorage.setItem('artist_profile_' + user.email, JSON.stringify(profileData));
+            
+            // Also update sidebar on save
+            const sbName = document.getElementById('sidebar-name');
+            const sbRole = document.getElementById('sidebar-role');
+            if (sbName) sbName.textContent = profileData.displayName.toUpperCase();
+            if (sbRole) sbRole.textContent = (profileData.specialization || 'MASTER').toUpperCase() + ' ARTIST';
+            
             alert('Your changes have been saved successfully!');
         }
 
@@ -461,18 +494,67 @@
 
         // Sync with LocalStorage
         document.addEventListener('DOMContentLoaded', () => {
-            const storedProfile = localStorage.getItem('artist_profile_data');
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (!user) {
+                window.location.href = 'signin.html';
+                return;
+            }
+            
+            const profileKey = 'artist_profile_' + user.email;
+            const storedProfile = localStorage.getItem(profileKey);
+            
+            const nameInput = document.querySelector('input[value="Amrita Raghavan"]') || document.querySelector('input[type="text"]');
+            const bioInput = document.querySelector('textarea');
+            const webInput = document.querySelector('input[placeholder="Personal Website"]');
+            const instaInput = document.querySelector('input[placeholder="Instagram Profile"]');
+            const behanceInput = document.querySelector('input[placeholder="Behance / Dribbble"]');
+            
+            // Sidebar elements
+            const sbImg = document.getElementById('sidebar-img');
+            const sbName = document.getElementById('sidebar-name');
+            const sbRole = document.getElementById('sidebar-role');
+            
             if (storedProfile) {
                 const profile = JSON.parse(storedProfile);
-                const sbImg = document.getElementById('sidebar-img');
-                const sbName = document.getElementById('sidebar-name');
-                const sbRole = document.getElementById('sidebar-role');
-                if (sbImg) sbImg.src = profile.photoUrl;
-                if (sbName) sbName.textContent = profile.displayName;
-                if (sbRole) sbRole.textContent = profile.specialization.toUpperCase();
+                if (nameInput) nameInput.value = profile.displayName || '';
+                if (bioInput) bioInput.value = profile.bio || '';
+                if (webInput) webInput.value = profile.website || '';
+                if (instaInput) instaInput.value = profile.instagram || '';
+                if (behanceInput) behanceInput.value = profile.behance || '';
+                if (sbImg && profile.photoUrl) sbImg.src = profile.photoUrl;
+                if (sbName) sbName.textContent = (profile.displayName || user.fullName).toUpperCase();
+                if (sbRole) sbRole.textContent = (profile.specialization || user.spec || 'MASTER').toUpperCase() + ' ARTIST';
+            } else if (user.isNewUser) {
+                // Blank out all details for a new signup!
+                if (nameInput) nameInput.value = user.fullName;
+                if (bioInput) bioInput.value = '';
+                if (webInput) webInput.value = '';
+                if (instaInput) instaInput.value = '';
+                if (behanceInput) behanceInput.value = '';
+                
+                // Show a generic placeholder avatar for the profile photo
+                if (sbImg) sbImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
+                if (sbName) sbName.textContent = user.fullName.toUpperCase();
+                if (sbRole) sbRole.textContent = (user.spec || 'MASTER').toUpperCase() + ' ARTIST';
+                
+                // Clear any default mock works shown in the grid of "Manage Your Works"
+                const portfolioGrid = document.querySelector('#section-portfolio .grid');
+                if (portfolioGrid) {
+                    portfolioGrid.innerHTML = `
+                        <div class="col-span-full text-center py-12 bg-surface-container-low rounded-2xl border border-dashed border-outline-variant">
+                            <span class="material-symbols-outlined text-4xl text-outline mb-2">folder_open</span>
+                            <p class="text-sm text-on-surface-variant">No works added to your portfolio yet. Click "Upload New" above to add your creations!</p>
+                        </div>
+                    `;
+                }
+            } else {
+                // Fallback to legacy default Amrita profile
+                if (sbName) sbName.textContent = user.fullName.toUpperCase();
+                if (sbRole) sbRole.textContent = (user.spec || 'MASTER').toUpperCase() + ' ARTIST';
             }
         });
     </script>
 </body>
 </html>
+
 

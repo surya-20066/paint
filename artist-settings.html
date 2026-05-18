@@ -10,7 +10,7 @@
 tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-background":"#241915",outline:"#8b7169","outline-variant":"#dfc0b6","on-error":"#ffffff","surface-bright":"#fff8f6",surface:"#fff8f6","surface-container-low":"#fff1ed",primary:"#942e02",background:"#fff8f6","on-surface":"#241915","surface-container":"#ffe9e3","on-primary":"#ffffff",secondary:"#795900","primary-container":"#b5451b","surface-dim":"#ebd5cf","surface-variant":"#f4ded7","on-primary-container":"#ffe4dc",error:"#ba1a1a","surface-container-highest":"#f4ded7","secondary-container":"#ffc641","on-surface-variant":"#58423b","surface-container-high":"#fae3dd","surface-container-lowest":"#ffffff","secondary-fixed":"#ffdfa0","primary-fixed":"#ffdbd0"},borderRadius:{DEFAULT:"12px",lg:"16px",xl:"20px",full:"9999px"},fontFamily:{"label-sm":["DM Sans"],"headline-lg":["Playfair Display"],"headline-md":["Playfair Display"],"body-lg":["DM Sans"],"body-md":["DM Sans"]}}}}
 </script>
 <style>
-body{background:#fff8f6;color:#241915;font-family:'DM Sans',sans-serif;min-height:max(884px,100dvh)}
+body{background:#fff8f6;color:#241915;font-family:'DM Sans',sans-serif;height:100vh;overflow:hidden}
 .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
 .paper-grain{background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.03;pointer-events:none}
 .tab-btn{transition:all .3s ease}
@@ -138,7 +138,7 @@ footer::before {
 <li onclick="window.location.href='artist-home.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">home</span><p class="font-body-md font-medium">Home</p></li>
 <li onclick="window.location.href='artist-gallery.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">dashboard</span><p class="font-body-md font-medium">Gallery</p></li>
 <li onclick="window.location.href='dashboard-artists.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">cloud_upload</span><p class="font-body-md font-medium">Upload Artwork</p></li>
-<li onclick="window.location.href='artist-portfolio.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">account_circle</span><p class="font-body-md font-medium">Portfolio</p></li>
+
 <li class="flex h-14 items-center gap-4 px-4 rounded-lg bg-primary text-on-primary shadow-sm cursor-default"><span class="material-symbols-outlined">settings</span><p class="font-body-md font-bold">Settings</p></li>
 </ul></nav>
 <div class="p-8 border-t border-outline-variant"><div class="flex items-center gap-3"><div class="size-10 bg-surface-dim overflow-hidden border border-outline rounded-full"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T"/></div><div><p class="font-label-sm text-on-surface">AMRITA R.</p><p class="text-[10px] text-on-surface-variant">MASTER ARTIST</p></div></div></div>
@@ -373,5 +373,71 @@ document.addEventListener('DOMContentLoaded', () => {
   loadProfile();
 });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuBtn = document.querySelector('.lg\\:hidden .material-symbols-outlined');
+        const sidebar = document.querySelector('aside');
+        
+        if (menuBtn && sidebar) {
+            // Add close button to sidebar for mobile
+            const closeBtn = document.createElement('div');
+            closeBtn.className = 'lg:hidden absolute top-4 right-4 text-on-surface cursor-pointer z-50 bg-surface-container-high rounded-full p-1';
+            closeBtn.innerHTML = '<span class="material-symbols-outlined text-2xl">close</span>';
+            sidebar.appendChild(closeBtn);
+            
+            // Add mobile styles to sidebar
+            sidebar.classList.add('transition-transform', 'duration-300');
+            
+            menuBtn.parentElement.addEventListener('click', () => {
+                sidebar.classList.remove('hidden');
+                sidebar.classList.add('fixed', 'inset-y-0', 'left-0', 'z-[100]', 'shadow-2xl');
+            });
+            
+            closeBtn.addEventListener('click', () => {
+                sidebar.classList.add('hidden');
+                sidebar.classList.remove('fixed', 'inset-y-0', 'left-0', 'z-[100]', 'shadow-2xl');
+            });
+        }
+    });
+</script>
+<script>
+    function logout() {
+        localStorage.removeItem('currentUser');
+        window.location.href = 'signin.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (!user) {
+            window.location.href = 'signin.html';
+            return;
+        }
+        
+        // Update Sidebar
+        const sidebarName = document.getElementById('sidebar-name');
+        if (sidebarName) sidebarName.textContent = user.fullName.toUpperCase();
+        
+        const sidebarRole = document.getElementById('sidebar-role');
+        if (sidebarRole && user.spec) {
+            sidebarRole.textContent = user.spec.toUpperCase() + ' ARTIST';
+        }
+
+        const profileKey = 'artist_profile_' + user.email;
+        const storedProfile = localStorage.getItem(profileKey);
+        if (storedProfile) {
+            const profile = JSON.parse(storedProfile);
+            const sbImg = document.getElementById('sidebar-img');
+            if (sbImg && profile.photoUrl) sbImg.src = profile.photoUrl;
+            if (sidebarName && profile.displayName) sidebarName.textContent = profile.displayName.toUpperCase();
+            if (sidebarRole && profile.specialization) sidebarRole.textContent = profile.specialization.toUpperCase() + ' ARTIST';
+        } else if (user.isNewUser) {
+            const sbImg = document.getElementById('sidebar-img');
+            if (sbImg) sbImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
+        }
+    });
+</script>
 </body></html>
+
+
+
 

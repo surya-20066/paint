@@ -265,6 +265,24 @@
 
 <body class="min-h-screen flex flex-col overflow-hidden">
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#FDFBF7] translate-x-full transition-transform duration-500 lg:hidden" style="z-index: 9999 !important;">
+        <div class="flex justify-between items-center p-6 border-b border-stone-100">
+            <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-28 w-auto object-contain" />
+            <button id="close-menu-btn" class="text-stone-900 p-2">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col p-12 gap-8 font-sans text-xl font-bold uppercase tracking-[0.2em]">
+            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard.html" class="text-[#B5451B] font-bold">Overview</a>
+            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="explore.html">Arts</a>
+            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="commissions.html">My Commissions</a>
+            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="workshops.html">Workshops</a>
+            <hr class="border-stone-100 my-2">
+            <a class="mobile-nav-item text-stone-400 text-sm hover:text-stone-600 transition-colors" href="index.html">Main Website</a>
+        </div>
+    </div>
+
     <!-- Top Nav Bar -->
     <nav class="w-full z-[100] bg-[#FDFBF7] border-b border-stone-200 flex justify-between items-center px-6 md:px-12 py-2 shrink-0 shadow-sm relative">
         <div class="flex items-center gap-4">
@@ -276,7 +294,7 @@
             <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html">Home</a>
             <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#about-india">About</a>
             <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#journal">Stories</a>
-            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="artists.html">Be an Artist</a>
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="signin.html">Be an Artist</a>
         </div>
         <div class="flex items-center gap-4 md:gap-6">
             <button class="mobile-menu-btn-toggle md:hidden text-stone-900 p-2">
@@ -679,7 +697,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="artists.html"
+                                <a href="signin.html"
                                     class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                     <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                     Meet the Makers
@@ -712,7 +730,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="artists.html"
+                                <a href="signin.html"
                                     class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                     <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                     Explore Artists
@@ -811,8 +829,8 @@
                             if (matchedRegion) {
                                 updateDashboard(matchedRegion, false, state);
                             } else {
-                                // If no direct artist match for the state, show state name but use fallback data
-                                updateDashboard(fallbackRegion, false, state);
+                                // Dynamically generate artists for this state!
+                                updateDashboard(state, false, state);
                             }
                         } catch (error) {
                             console.error("Geocoding error:", error);
@@ -832,6 +850,56 @@
             }
         }
 
+        function generateArtistsForState(state) {
+            const stateArtStyles = {
+                "Karnataka": [
+                    { name: "S. K. Venkatappa", style: "Mysore Painting", experience: "32 Years", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400", rating: 4.9 },
+                    { name: "Gowramma Raju", style: "Tanjore Painting", experience: "25 Years", img: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&q=80&w=400", rating: 4.8 },
+                    { name: "Manjunatha Acharya", style: "Sandalwood Carving", experience: "40 Years", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400", rating: 5.0 },
+                    { name: "Kavitha Rao", style: "Kasuti Embroidery", experience: "18 Years", img: "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&q=80&w=400", rating: 4.7 }
+                ],
+                "Tamil Nadu": [
+                    { name: "Ramanathan Swamy", style: "Tanjore Painting", experience: "38 Years", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400", rating: 4.9 },
+                    { name: "Meenakshi Subramanian", style: "Kanchipuram Silk", experience: "30 Years", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400", rating: 4.8 },
+                    { name: "Karthikeyan Shilpi", style: "Bronze Casting", experience: "42 Years", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400", rating: 5.0 },
+                    { name: "Soundarya Rajan", style: "Toda Embroidery", experience: "15 Years", img: "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&q=80&w=400", rating: 4.6 }
+                ],
+                "Uttar Pradesh": [
+                    { name: "Mohammad Mushtaq", style: "Chikankari", experience: "35 Years", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400", rating: 4.9 },
+                    { name: "Ram Prasad Maurya", style: "Sanjhi Art", experience: "28 Years", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400", rating: 4.8 },
+                    { name: "Amit Banarasi", style: "Zardozi", experience: "22 Years", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400", rating: 4.7 },
+                    { name: "Sushma Devi", style: "Terracotta", experience: "20 Years", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400", rating: 4.6 }
+                ]
+            };
+
+            if (stateArtStyles[state]) {
+                return stateArtStyles[state];
+            }
+
+            // Fallback dynamically generated localized artisans for any state
+            const genericFirstNames = ["Ramesh", "Sita", "Arjun", "Radha", "Rajesh", "Gita", "Sanjay", "Anjali"];
+            const genericLastNames = ["Kumar", "Devi", "Singh", "Sharma", "Patel", "Reddy", "Nair", "Das"];
+            const genericStyles = ["Traditional Painting", "Terracotta Craft", "Clay Sculpting", "Handloom Weaving", "Wood Carving", "Metal Art"];
+            
+            const artists = [];
+            for (let i = 0; i < 4; i++) {
+                const name = `${genericFirstNames[(i + state.length) % genericFirstNames.length]} ${genericLastNames[(i * 3) % genericLastNames.length]}`;
+                const style = `${state} ${genericStyles[(i + 2) % genericStyles.length]}`;
+                const exp = `${15 + (i * 7)} Years`;
+                const rating = (4.5 + (i * 0.15)).toFixed(1);
+                
+                const imgs = [
+                    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400",
+                    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+                    "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&q=80&w=400",
+                    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400"
+                ];
+                
+                artists.push({ name, style, experience: exp, img: imgs[i], rating: parseFloat(rating) });
+            }
+            return artists;
+        }
+
         function updateDashboard(region, isFallback = false, realStateName = "") {
             const regionSpan = document.getElementById('current-region');
             const locationText = document.getElementById('location-text');
@@ -847,7 +915,7 @@
             locationBtn.classList.add('hidden');
 
             // Render Artists
-            const artists = artistsData[region] || artistsData[fallbackRegion];
+            const artists = artistsData[region] || generateArtistsForState(region);
             grid.innerHTML = '';
 
             artists.forEach((artist, index) => {
@@ -887,26 +955,32 @@
         document.head.appendChild(style);
         // Auto-request location on load
         window.addEventListener('load', requestLocation);
+
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtns = document.querySelectorAll('.mobile-menu-btn-toggle');
+            const closeBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            toggleBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (mobileMenu) {
+                        mobileMenu.classList.remove('translate-x-full');
+                    }
+                });
+            });
+
+            if (closeBtn && mobileMenu) {
+                closeBtn.addEventListener('click', () => {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+            }
+        });
     </script>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-[#FDFBF7] translate-x-full transition-transform duration-500 lg:hidden">
-        <div class="flex justify-between items-center p-6 border-b border-stone-100">
-            <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-28 w-auto object-contain" />
-            <button id="close-menu-btn" class="text-stone-900 p-2">
-                <span class="material-symbols-outlined text-3xl">close</span>
-            </button>
-        </div>
-        <div class="flex flex-col p-12 gap-8 font-sans text-xl font-bold uppercase tracking-[0.2em]">
-            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard.html" class="text-[#B5451B] font-bold">Overview</a>
-            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="explore.html">Arts</a>
-            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="commissions.html">My Commissions</a>
-            <a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="workshops.html">Workshops</a>
-            <hr class="border-stone-100 my-2">
-            <a class="mobile-nav-item text-stone-400 text-sm hover:text-stone-600 transition-colors" href="index.html">Main Website</a>
-        </div>
-    </div>
+
 
 </body>
 
 </html>
+

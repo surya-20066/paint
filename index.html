@@ -347,6 +347,11 @@
             max-width: 100% !important;
         }
         
+        /* Uploaded reels are only visible when Reels Hub is expanded */
+        #yreel-hub:not(.expanded) .dynamic-reel {
+            display: none !important;
+        }
+        
         .eyebrow {
             display: block;
             font-size: 14px;
@@ -646,12 +651,12 @@
 <body class="bg-background font-body-md selection:bg-[#D4AF37]/30" style="color:#1A1208">
 
     <!-- TopAppBar -->
-    <nav class="fixed top-0 w-full z-50 bg-[#FDFBF7] backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-2 border-b border-stone-200/30 shadow-sm -translate-y-full transition-all duration-500 opacity-0"
+    <nav class="fixed top-0 w-full z-50 bg-[#FDFBF7] backdrop-blur-xl flex justify-between items-center px-4 md:px-12 py-3 md:py-4 border-b border-stone-200/30 shadow-sm -translate-y-full transition-all duration-500 opacity-0"
         id="main-nav">
         <!-- Logo Area -->
-        <div class="flex items-center gap-4">
-            <a href="index.html" class="flex items-center gap-4">
-                <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+        <div class="flex items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-12 md:h-16 w-auto object-contain" />
             </a>
         </div>
 
@@ -668,15 +673,14 @@
                 href="art-retreats.html" data-section="art-forms">Art Retreats</a>
             <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="team.html"
                 data-section="team">Our Team</a>
-            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="artists.html"
+            <a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="signin.html"
                 data-section="artisans">Be an Artist</a>
             <div id="nav-indicator"></div>
         </div>
 
-
         <!-- Right Side Actions -->
-        <div class="flex items-center gap-4 md:gap-6">
-            <button class="text-stone-900 hover:text-[#B5451B] transition-colors flex items-center justify-center">
+        <div class="flex items-center gap-2 md:gap-6">
+            <button class="text-stone-900 hover:text-[#B5451B] transition-colors flex items-center justify-center p-2">
                 <span class="material-symbols-outlined text-xl md:text-2xl">search</span>
             </button>
             <button onclick="window.location.href='signin.html'"
@@ -698,9 +702,9 @@
 
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu"
-        class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 md:hidden">
-        <div class="flex justify-between items-center p-6 border-b border-stone-100">
-            <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+        class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 md:hidden flex flex-col">
+        <div class="flex justify-between items-center p-4 border-b border-stone-100">
+            <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-10 w-auto object-contain" />
             <button id="close-menu-btn" class="text-stone-900 p-2">
                 <span class="material-symbols-outlined text-3xl">close</span>
             </button>
@@ -711,7 +715,7 @@
             <a class="mobile-nav-item" href="index.html#journal">Stories</a>
             <a class="mobile-nav-item" href="explore.html">Art Retreats</a>
             <a class="mobile-nav-item" href="team.html">Our Team</a>
-            <a class="mobile-nav-item" href="artists.html">Be an Artist</a>
+            <a class="mobile-nav-item" href="signin.html">Be an Artist</a>
         </div>
         <div class="absolute bottom-12 left-12 right-12 flex flex-col gap-4">
             <button onclick="window.location.href='signin.html'"
@@ -753,7 +757,7 @@
                     living traditions of the subcontinent.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-start items-start">
-                    <a href="artists.html"
+                    <a href="signin.html"
                         class="bg-[#D4AF37] text-stone-950 px-8 py-4 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-stone-950 transition-all duration-500 shadow-lg inline-block text-center">
                         Explore Artists
                     </a>
@@ -962,11 +966,11 @@
                             </button>
                         </div>
 
-                        <!-- View Heritage Guide button placed on the bottom-right of the map box -->
-                        <a class="absolute bottom-6 right-6 h-12 bg-[#1A1208]/90 backdrop-blur-sm text-white hover:bg-[#D4AF37] hover:text-[#1A1208] border border-[#D4AF37]/30 rounded-full flex items-center justify-center px-6 transition-all shadow-xl hover:scale-105 font-sans text-[10px] font-bold uppercase tracking-widest gap-2 z-20"
+                        <a class="absolute bottom-4 right-4 md:bottom-6 md:right-6 h-10 md:h-12 bg-[#1A1208]/90 backdrop-blur-sm text-white hover:bg-[#D4AF37] hover:text-[#1A1208] border border-[#D4AF37]/30 rounded-full flex items-center justify-center px-4 md:px-6 transition-all shadow-xl hover:scale-105 font-sans text-[8px] md:text-[10px] font-bold uppercase tracking-widest gap-1.5 md:gap-2 z-20"
                             href="heritage.html">
-                            <span class="material-symbols-outlined text-sm">menu_book</span>
-                            View Heritage Guide
+                            <span class="material-symbols-outlined text-xs md:text-sm">menu_book</span>
+                            <span class="hidden sm:inline">View Heritage Guide</span>
+                            <span class="sm:hidden">Heritage Guide</span>
                         </a>
                     </div>
 
@@ -985,9 +989,9 @@
                             <p class="text-stone-500 font-sans max-w-md text-lg mb-8">Click on any state on the map to
                                 discover its unique living art traditions, techniques, and the master artisans who
                                 preserve them.</p>
-                            <a class="bg-[#1A1208] text-white px-8 py-3.5 rounded font-sans text-[10px] font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#1A1208] transition-all flex items-center gap-2 shadow-lg hover:scale-105"
+                            <a class="bg-[#1A1208] text-white px-6 py-2.5 md:px-8 md:py-3.5 rounded font-sans text-[8px] md:text-[10px] font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#1A1208] transition-all flex items-center gap-1.5 md:gap-2 shadow-lg hover:scale-105"
                                 href="heritage.html">
-                                <span class="material-symbols-outlined text-sm">menu_book</span>
+                                <span class="material-symbols-outlined text-xs md:text-sm">menu_book</span>
                                 View Heritage Guide
                             </a>
                         </div>
@@ -1757,7 +1761,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="artists.html"
+                            <a href="signin.html"
                                 class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                 Meet the Makers
@@ -1790,7 +1794,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="artists.html"
+                            <a href="signin.html"
                                 class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
                                 Explore Artists
@@ -2385,30 +2389,18 @@
 
             const uploadBtn = document.getElementById('uploadReelBtn');
             const uploadCard = document.getElementById('uploadReelCard');
-            const fileInput = document.getElementById('reelUploadInput');
 
-            // Remove static redirects to allow JS handling
+            // Remove static redirects and replace with JavaScript redirect to signin.html
             if (uploadBtn) uploadBtn.removeAttribute('onclick');
             if (uploadCard) uploadCard.removeAttribute('onclick');
 
-            const triggerUpload = (e) => { 
+            const handleMagicClick = (e) => {
                 if (e) e.stopPropagation();
-                if (fileInput) fileInput.click(); 
+                window.location.href = 'signin.html';
             };
 
-            if (uploadBtn) uploadBtn.addEventListener('click', triggerUpload);
-            if (uploadCard) uploadCard.addEventListener('click', triggerUpload);
-
-            if (fileInput) {
-                fileInput.addEventListener('change', (e) => {
-                    const file = e.target.files[0];
-                    if (file && db) {
-                        saveVideo(file);
-                        alert('Your masterpiece has been recorded!');
-                        fileInput.value = '';
-                    }
-                });
-            }
+            if (uploadBtn) uploadBtn.addEventListener('click', handleMagicClick);
+            if (uploadCard) uploadCard.addEventListener('click', handleMagicClick);
         });
 
         // Global function to play standard reels dynamically with custom cover fade-outs
@@ -2435,3 +2427,4 @@
 </body>
 
 </html>
+

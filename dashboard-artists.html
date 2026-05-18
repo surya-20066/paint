@@ -336,7 +336,9 @@ async function publishItem() {
   }
 
   if (currentFileType === 'image') {
-    const storedPosts = localStorage.getItem('artist_posts');
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    const postsKey = user ? 'artist_posts_' + user.email : 'artist_posts';
+    const storedPosts = localStorage.getItem(postsKey);
     let posts = storedPosts ? JSON.parse(storedPosts) : [];
     posts.unshift({
       title: title,
@@ -346,17 +348,25 @@ async function publishItem() {
       status: status,
       imgUrl: currentFileUrl // Images are still DataURLs for now, usually fine
     });
-    localStorage.setItem('artist_posts', JSON.stringify(posts));
+    localStorage.setItem(postsKey, JSON.stringify(posts));
     alert('Successfully published to your Gallery!');
     window.location.href = 'artist-gallery.html';
   } else {
     // REELS/VIDEOS: Store in IndexedDB
     try {
       if (!db) await initDB();
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      let artistName = user ? user.fullName : "Master Artist";
+      let handle = "@" + (user ? user.fullName.toLowerCase().replace(/\s+/g, '') : "artisan");
       
-      const profile = JSON.parse(localStorage.getItem('artist_profile_data') || '{}');
-      const artistName = profile.displayName || "Master Artist";
-      const handle = "@" + (profile.displayName ? profile.displayName.toLowerCase().replace(/\s+/g, '') : "artisan");
+      if (user) {
+        const profileKey = 'artist_profile_' + user.email;
+        const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
+        if (profile.displayName) {
+          artistName = profile.displayName;
+          handle = "@" + profile.displayName.toLowerCase().replace(/\s+/g, '');
+        }
+      }
 
       const transaction = db.transaction([storeName], "readwrite");
       const store = transaction.objectStore(storeName);
@@ -366,7 +376,8 @@ async function publishItem() {
         title: title,
         artistName: artistName,
         handle: handle,
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        userEmail: user ? user.email : ''
       };
       
       const request = store.add(newRecord);
@@ -384,15 +395,28 @@ async function publishItem() {
   }
 }
 function loadSidebarProfile() {
-  const storedProfile = localStorage.getItem('artist_profile_data');
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+  if (!user) {
+    window.location.href = 'signin.html';
+    return;
+  }
+  
+  const sbImg = document.getElementById('sidebar-img');
+  const sbName = document.getElementById('sidebar-name');
+  const sbRole = document.getElementById('sidebar-role');
+  
+  if (sbName) sbName.textContent = user.fullName.toUpperCase();
+  if (sbRole && user.spec) sbRole.textContent = user.spec.toUpperCase() + ' ARTIST';
+
+  const profileKey = 'artist_profile_' + user.email;
+  const storedProfile = localStorage.getItem(profileKey);
   if (storedProfile) {
     const profile = JSON.parse(storedProfile);
-    const sbImg = document.getElementById('sidebar-img');
-    const sbName = document.getElementById('sidebar-name');
-    const sbRole = document.getElementById('sidebar-role');
-    if (sbImg) sbImg.src = profile.photoUrl;
-    if (sbName) sbName.textContent = profile.displayName;
-    if (sbRole) sbRole.textContent = profile.specialization.toUpperCase();
+    if (sbImg && profile.photoUrl) sbImg.src = profile.photoUrl;
+    if (sbName && profile.displayName) sbName.textContent = profile.displayName.toUpperCase();
+    if (sbRole && profile.specialization) sbRole.textContent = profile.specialization.toUpperCase() + ' ARTIST';
+  } else if (user.isNewUser) {
+    if (sbImg) sbImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
   }
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});

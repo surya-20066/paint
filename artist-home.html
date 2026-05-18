@@ -230,32 +230,32 @@
                 class="material-symbols-outlined text-primary">palette</span><span
                 class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Total
                 Artworks</span></div>
-            <p class="font-headline-md text-4xl text-on-surface">47</p>
-            <p class="text-xs text-green-700 mt-1 font-bold">+3 this month</p>
+            <p id="stat-artworks" class="font-headline-md text-4xl text-on-surface">47</p>
+            <p id="stat-artworks-sub" class="text-xs text-green-700 mt-1 font-bold">+3 this month</p>
           </div>
           <div class="bg-surface-container-low border border-outline-variant p-6">
             <div class="flex items-center gap-2 mb-3"><span
                 class="material-symbols-outlined text-primary">visibility</span><span
                 class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Profile Views</span>
             </div>
-            <p class="font-headline-md text-4xl text-on-surface">1,248</p>
-            <p class="text-xs text-green-700 mt-1 font-bold">↑ 12% vs last month</p>
+            <p id="stat-views" class="font-headline-md text-4xl text-on-surface">1,248</p>
+            <p id="stat-views-sub" class="text-xs text-green-700 mt-1 font-bold">↑ 12% vs last month</p>
           </div>
           <div class="bg-surface-container-low border border-outline-variant p-6">
             <div class="flex items-center gap-2 mb-3"><span
                 class="material-symbols-outlined text-primary">shopping_bag</span><span
                 class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Artworks Sold</span>
             </div>
-            <p class="font-headline-md text-4xl text-on-surface">34</p>
-            <p class="text-xs text-green-700 mt-1 font-bold">+5 this month</p>
+            <p id="stat-sold" class="font-headline-md text-4xl text-on-surface">34</p>
+            <p id="stat-sold-sub" class="text-xs text-green-700 mt-1 font-bold">+5 this month</p>
           </div>
           <div class="bg-primary-container border border-outline-variant p-6">
             <div class="flex items-center gap-2 mb-3"><span
                 class="material-symbols-outlined text-on-primary-container">payments</span><span
                 class="font-label-sm text-on-primary-container/70 uppercase tracking-widest text-[10px]">Total
                 Earnings</span></div>
-            <p class="font-headline-md text-4xl text-on-primary-container">₹2.4L</p>
-            <p class="text-xs text-on-primary-container/70 mt-1 font-bold">₹45K this month</p>
+            <p id="stat-earnings" class="font-headline-md text-4xl text-on-primary-container">₹2.4L</p>
+            <p id="stat-earnings-sub" class="text-xs text-on-primary-container/70 mt-1 font-bold">₹45K this month</p>
           </div>
         </div>
         <section class="mb-12">
@@ -518,16 +518,23 @@
 
       const saveVideo = (file) => {
         if (!db) return;
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (!user) return;
+
         const transaction = db.transaction([storeName], "readwrite");
         const store = transaction.objectStore(storeName);
-        let artistName = "Amrita Raghavan";
-        let handle = "@amrita_art";
+        let artistName = user.fullName;
+        let handle = "@" + user.fullName.toLowerCase().replace(/\s+/g, '_');
+        
         try {
-          const storedProfile = localStorage.getItem('artist_profile_data');
+          const profileKey = 'artist_profile_' + user.email;
+          const storedProfile = localStorage.getItem(profileKey);
           if (storedProfile) {
             const profile = JSON.parse(storedProfile);
-            if (profile.fullName) artistName = profile.fullName;
-            if (profile.displayName) handle = "@" + profile.displayName.toLowerCase().replace(/\s+/g, '_');
+            if (profile.displayName) {
+              artistName = profile.displayName;
+              handle = "@" + profile.displayName.toLowerCase().replace(/\s+/g, '_');
+            }
           }
         } catch (e) { }
         const record = {
@@ -535,7 +542,8 @@
           timestamp: Date.now(),
           artistName: artistName,
           handle: handle,
-          title: "Uploaded Reel"
+          title: "Uploaded Reel",
+          userEmail: user.email
         };
         const request = store.add(record);
         request.onsuccess = () => {
@@ -583,15 +591,19 @@
         const grid = document.getElementById('recent-uploads-grid');
         if (!grid) return;
 
-        const posts = JSON.parse(localStorage.getItem('artist_posts') || '[]');
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (!user) return;
+
+        const posts = JSON.parse(localStorage.getItem('artist_posts_' + user.email) || '[]');
         let reels = [];
         if (db) {
           const transaction = db.transaction([storeName], "readonly");
           const store = transaction.objectStore(storeName);
-          reels = await new Promise((resolve) => {
+          const allReels = await new Promise((resolve) => {
             const req = store.getAll();
-            req.onsuccess = () => resolve(req.result);
+            req.onsuccess = () => resolve(req.result || []);
           });
+          reels = allReels.filter(r => r.userEmail === user.email);
         }
 
         grid.innerHTML = '';
@@ -618,6 +630,12 @@
           }
         });
 
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (!user) {
+            window.location.href = 'signin.html';
+            return;
+        }
+
         const combined = [
           ...posts.map(p => ({...p, type: 'post'})),
           ...reels.map(r => ({...r, type: 'reel'}))
@@ -631,14 +649,77 @@
           }
         });
 
-        const totalStats = document.querySelector('.grid.grid-cols-2.lg\\:grid-cols-4 p.text-4xl');
-        if (totalStats) {
-            totalStats.innerText = 47 + reels.length;
+        // Initialize Dynamic Sidebar and Headers
+        const sidebarName = document.getElementById('sidebar-name');
+        const sidebarRole = document.getElementById('sidebar-role');
+        const sbImg = document.getElementById('sidebar-img');
+        const headers = document.querySelectorAll('header h1.text-4xl');
+
+        if (sidebarName) sidebarName.textContent = user.fullName.toUpperCase();
+        if (sidebarRole && user.spec) {
+            sidebarRole.textContent = user.spec.toUpperCase() + ' ARTIST';
+        }
+        headers.forEach(h => {
+            if (h.textContent.includes('Amrita') || h.textContent.includes('Raghavan')) {
+                h.textContent = user.fullName;
+            }
+        });
+
+        // Load Custom Profile Settings if saved
+        const profileKey = 'artist_profile_' + user.email;
+        const storedProfile = localStorage.getItem(profileKey);
+        
+        if (storedProfile) {
+            const profile = JSON.parse(storedProfile);
+            if (sidebarName && profile.displayName) sidebarName.textContent = profile.displayName.toUpperCase();
+            if (sidebarRole && profile.specialization) {
+                sidebarRole.textContent = profile.specialization.toUpperCase() + ' ARTIST';
+            }
+            if (sbImg && profile.photoUrl) sbImg.src = profile.photoUrl;
+            
+            const mainImg = document.querySelector('aside img') || document.querySelector('.bg-surface-dim img');
+            if (mainImg && profile.photoUrl) mainImg.src = profile.photoUrl;
+            
+            headers.forEach(h => {
+                h.textContent = profile.displayName;
+            });
+        } else if (user.isNewUser) {
+            if (sbImg) sbImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
+            const mainImg = document.querySelector('aside img') || document.querySelector('.bg-surface-dim img');
+            if (mainImg) mainImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
+        }
+
+        if (user.isNewUser) {
+            // Setup blank stats for newly signed up artist
+            const statArtworks = document.getElementById('stat-artworks');
+            const statArtworksSub = document.getElementById('stat-artworks-sub');
+            const statViews = document.getElementById('stat-views');
+            const statViewsSub = document.getElementById('stat-views-sub');
+            const statSold = document.getElementById('stat-sold');
+            const statSoldSub = document.getElementById('stat-sold-sub');
+            const statEarnings = document.getElementById('stat-earnings');
+            const statEarningsSub = document.getElementById('stat-earnings-sub');
+            
+            if (statArtworks) statArtworks.textContent = reels.length + posts.length;
+            if (statArtworksSub) statArtworksSub.textContent = 'Uploaded by you';
+            if (statViews) statViews.textContent = '0';
+            if (statViewsSub) statViewsSub.textContent = 'No views yet';
+            if (statSold) statSold.textContent = '0';
+            if (statSoldSub) statSoldSub.textContent = 'No sales yet';
+            if (statEarnings) statEarnings.textContent = '₹0';
+            if (statEarningsSub) statEarningsSub.textContent = '₹0 this month';
         }
       };
 
       initDB().then(() => loadRecentUploads()).catch(err => console.error("DB Init failed", err));
     });
+  </script>
+  
+  <script>
+    function logout() {
+        localStorage.removeItem('currentUser');
+        window.location.href = 'signin.html';
+    }
   </script>
 </body>
 
