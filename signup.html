@@ -212,7 +212,7 @@
                             return;
                         }
                         
-                        users[email] = { fullName: fullName, spec: spec, password: password, isNewUser: true };
+                        users[email] = { fullName: fullName, spec: spec, password: password, isNewUser: true, isApproved: false, isRejected: false };
                         localStorage.setItem('users', JSON.stringify(users));
                         
                         localStorage.setItem('currentUser', JSON.stringify({

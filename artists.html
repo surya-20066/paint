@@ -638,6 +638,101 @@
             }
         ];
 
+        // Load dynamic approved artists from admin_artists
+        try {
+            const adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+            adminArtists.forEach(artist => {
+                if (artist.status === 'APPROVED') {
+                    // Check if they are not already in artistsData to avoid duplicates
+                    if (!artistsData.some(a => a.name.toLowerCase() === artist.name.toLowerCase() || a.email === artist.email)) {
+                        // Load bio and image from custom profile if present
+                        let bio = "Traditional master artist specializing in " + artist.spec;
+                        let profileImg = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150";
+                        const profileKey = 'artist_profile_' + artist.email;
+                        const storedProfile = localStorage.getItem(profileKey);
+                        if (storedProfile) {
+                            const profile = JSON.parse(storedProfile);
+                            if (profile.bio) bio = profile.bio;
+                            if (profile.photoUrl) profileImg = profile.photoUrl;
+                        }
+                        
+                        // Map state to region
+                        const stateMap = {
+                            bihar: "East",
+                            odisha: "East",
+                            west_bengal: "East",
+                            maharashtra: "West",
+                            gujarat: "West",
+                            rajasthan: "West",
+                            goa: "West",
+                            tamil_nadu: "South",
+                            karnataka: "South",
+                            kerala: "South",
+                            andhra_pradesh: "South",
+                            telangana: "South",
+                            madhya_pradesh: "Central",
+                            chhattisgarh: "Central",
+                            uttar_pradesh: "North",
+                            delhi: "North",
+                            punjab: "North",
+                            haryana: "North",
+                            himachal_pradesh: "North",
+                            jammu_kashmir: "North",
+                            uttarakhand: "North"
+                        };
+                        const stateClean = (artist.state || '').toLowerCase().trim();
+                        let region = "East";
+                        for (let s in stateMap) {
+                            if (stateClean.includes(s)) {
+                                region = stateMap[s];
+                                break;
+                            }
+                        }
+
+                        // Map spec to background art banner
+                        const specBgs = {
+                            madhubani: "pics/madhubani_bg.png",
+                            mithila: "pics/madhubani_bg.png",
+                            pattachitra: "pics/pattachitra_art.png",
+                            warli: "pics/warli_bg.png",
+                            tanjore: "pics/tanjore_art.png"
+                        };
+                        const specClean = (artist.spec || '').toLowerCase().trim();
+                        let bgImg = "pics/madhubani_bg.png";
+                        for (let spec in specBgs) {
+                            if (specClean.includes(spec)) {
+                                bgImg = specBgs[spec];
+                                break;
+                            }
+                        }
+
+                        const artSpecNames = {
+                            tanjore: "Tanjore Painting",
+                            mithila: "Mithila (Madhubani)",
+                            warli: "Warli Art",
+                            pattachitra: "Pattachitra"
+                        };
+                        const artName = artSpecNames[specClean] || artist.spec;
+
+                        artistsData.push({
+                            name: artist.name,
+                            art: artName,
+                            state: artist.state || "India",
+                            region: region,
+                            desc: bio,
+                            rating: "5.0",
+                            bookings: "0",
+                            bgImg: bgImg,
+                            profileImg: profileImg,
+                            email: artist.email
+                        });
+                    }
+                }
+            });
+        } catch (e) {
+            console.error("Failed to load dynamic artists in public roster", e);
+        }
+
         let activeRegion = "all";
 
         function renderRoster(data) {

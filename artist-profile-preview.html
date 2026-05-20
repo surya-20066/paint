@@ -25,7 +25,7 @@ body{background:#fff8f6;color:#241915;font-family:'DM Sans',sans-serif;min-heigh
 <li onclick="window.location.href='artist-home.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">home</span><p class="font-body-md font-medium">Home</p></li>
 <li onclick="window.location.href='artist-gallery.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">dashboard</span><p class="font-body-md font-medium">Gallery</p></li>
 <li onclick="window.location.href='dashboard-artists.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">cloud_upload</span><p class="font-body-md font-medium">Upload Artwork</p></li>
-<li onclick="window.location.href='artist-portfolio.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">account_circle</span><p class="font-body-md font-medium">Portfolio</p></li>
+<li onclick="window.location.href='artist-settings.html?tab=portfolio'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">account_circle</span><p class="font-body-md font-medium">Portfolio</p></li>
 <li onclick="window.location.href='artist-settings.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">settings</span><p class="font-body-md font-medium">Settings</p></li>
 </ul></nav>
 <div class="p-8 border-t border-outline-variant"><div class="flex items-center gap-3"><div class="size-10 bg-surface-dim overflow-hidden border border-outline rounded-full"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T"/></div><div><p class="font-label-sm text-on-surface">AMRITA R.</p><p class="text-[10px] text-on-surface-variant">MASTER ARTIST</p></div></div></div>
@@ -36,7 +36,7 @@ body{background:#fff8f6;color:#241915;font-family:'DM Sans',sans-serif;min-heigh
 <header class="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
 <div><p class="font-label-sm text-primary uppercase tracking-widest mb-2">Public Profile Preview</p><h1 class="font-headline-lg text-on-background text-4xl">My Portfolio</h1></div>
 <div class="flex gap-4">
-<button onclick="window.location.href='artist-portfolio.html'" class="h-12 px-6 border border-outline-variant text-on-surface font-body-md font-bold uppercase tracking-widest hover:bg-surface-container-high transition-all rounded-lg flex items-center gap-2"><span class="material-symbols-outlined text-lg">edit</span>Edit Portfolio</button>
+<button onclick="window.location.href='artist-settings.html?tab=portfolio'" class="h-12 px-6 border border-outline-variant text-on-surface font-body-md font-bold uppercase tracking-widest hover:bg-surface-container-high transition-all rounded-lg flex items-center gap-2"><span class="material-symbols-outlined text-lg">edit</span>Edit Portfolio</button>
 <button class="h-12 px-8 bg-primary text-on-primary font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg rounded-lg flex items-center gap-2"><span class="material-symbols-outlined text-lg">share</span>Share Profile</button>
 </div>
 </header>
@@ -92,6 +92,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = JSON.parse(localStorage.getItem('currentUser'));
     if (!user) {
         window.location.href = 'signin.html';
+        return;
+    }
+    
+    const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+    const userInDb = usersDb[user.email];
+    if (!userInDb || !userInDb.isApproved) {
+        window.location.href = 'signin.html?error=pending';
         return;
     }
     

@@ -139,7 +139,7 @@ footer::before {
 <li onclick="window.location.href='artist-home.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">home</span><p class="font-body-md font-medium">Home</p></li>
 <li onclick="window.location.href='artist-gallery.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">dashboard</span><p class="font-body-md font-medium">Gallery</p></li>
 <li class="flex h-14 items-center gap-4 px-4 rounded-lg bg-primary text-on-primary shadow-sm cursor-default"><span class="material-symbols-outlined">cloud_upload</span><p class="font-body-md font-bold">Upload Artwork</p></li>
-<li onclick="window.location.href='artist-portfolio.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">account_circle</span><p class="font-body-md font-medium">Portfolio</p></li>
+<li onclick="window.location.href='artist-settings.html?tab=portfolio'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">account_circle</span><p class="font-body-md font-medium">Portfolio</p></li>
 <li onclick="window.location.href='artist-settings.html'" class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"><span class="material-symbols-outlined">settings</span><p class="font-body-md font-medium">Settings</p></li>
 </ul></nav>
 <div class="p-8 border-t border-outline-variant"><div class="flex items-center gap-3"><div class="size-10 bg-surface-dim overflow-hidden border border-outline rounded-full"><img id="sidebar-img" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T"/></div><div><p id="sidebar-name" class="font-label-sm text-on-surface">AMRITA R.</p><p id="sidebar-role" class="text-[10px] text-on-surface-variant">MASTER ARTIST</p></div></div></div>
@@ -398,6 +398,13 @@ function loadSidebarProfile() {
   const user = JSON.parse(localStorage.getItem('currentUser'));
   if (!user) {
     window.location.href = 'signin.html';
+    return;
+  }
+  
+  const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+  const userInDb = usersDb[user.email];
+  if (!userInDb || !userInDb.isApproved) {
+    window.location.href = 'signin.html?error=pending';
     return;
   }
   

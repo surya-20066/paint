@@ -180,7 +180,7 @@
             <span class="material-symbols-outlined">cloud_upload</span>
             <p class="font-body-md font-medium">Upload Artwork</p>
           </li>
-          <li onclick="window.location.href='artist-portfolio.html'"
+          <li onclick="window.location.href='artist-settings.html?tab=portfolio'"
             class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
             <span class="material-symbols-outlined">account_circle</span>
             <p class="font-body-md font-medium">Portfolio</p>
@@ -212,6 +212,14 @@
         <div class="size-10"></div>
       </div>
       <div class="max-w-5xl mx-auto w-full px-6 md:px-10 py-12">
+        <!-- Approval Status Banner -->
+        <div id="approval-status-banner" class="hidden mb-6 p-4 rounded-lg flex items-center gap-3">
+          <span class="material-symbols-outlined text-2xl" id="approval-banner-icon"></span>
+          <div>
+            <p class="font-bold text-sm" id="approval-banner-title"></p>
+            <p class="text-xs" id="approval-banner-desc"></p>
+          </div>
+        </div>
         <header class="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
             <p class="font-label-sm text-primary uppercase tracking-widest mb-2">Welcome back</p>
@@ -458,9 +466,22 @@
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      if (!user) {
+          window.location.href = 'signin.html';
+          return;
+      }
+      
+      const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+      const userInDb = usersDb[user.email];
+      if (!userInDb || !userInDb.isApproved) {
+          window.location.href = 'signin.html?error=pending';
+          return;
+      }
+
       // 1. Profile Loading
       const loadProfile = () => {
-        const storedProfile = localStorage.getItem('artist_profile_data');
+        const storedProfile = localStorage.getItem('artist_profile_' + user.email);
         if (storedProfile) {
           const profile = JSON.parse(storedProfile);
           const welcomeHeader = document.querySelector('h1.font-headline-lg');
@@ -478,7 +499,7 @@
       // 2. Links Loading
       const loadLinks = () => {
         const linksContainer = document.getElementById('home-links');
-        const storedLinks = localStorage.getItem('artist_profile_links');
+        const storedLinks = localStorage.getItem('artist_profile_links_' + user.email);
         let links = storedLinks ? JSON.parse(storedLinks) : [
           { title: 'Personal Website', url: '#' },
           { title: 'Instagram', url: '#' }
@@ -591,9 +612,6 @@
         const grid = document.getElementById('recent-uploads-grid');
         if (!grid) return;
 
-        const user = JSON.parse(localStorage.getItem('currentUser'));
-        if (!user) return;
-
         const posts = JSON.parse(localStorage.getItem('artist_posts_' + user.email) || '[]');
         let reels = [];
         if (db) {
@@ -630,10 +648,39 @@
           }
         });
 
-        const user = JSON.parse(localStorage.getItem('currentUser'));
-        if (!user) {
-            window.location.href = 'signin.html';
-            return;
+        // Setup Approval Warning Banner based on the status in users database
+        const approvalBanner = document.getElementById('approval-status-banner');
+        if (approvalBanner) {
+            let usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+            const userInDb = usersDb[user.email];
+            if (userInDb) {
+                const approvalIcon = document.getElementById('approval-banner-icon');
+                const approvalTitle = document.getElementById('approval-banner-title');
+                const approvalDesc = document.getElementById('approval-banner-desc');
+                
+                if (userInDb.isApproved) {
+                    // Approved
+                    approvalBanner.className = "mb-6 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800 flex items-center gap-3";
+                    if (approvalIcon) approvalIcon.textContent = "check_circle";
+                    if (approvalTitle) approvalTitle.textContent = "Profile Approved";
+                    if (approvalDesc) approvalDesc.textContent = "Your profile is verified and active! Your artworks are visible to the public.";
+                    approvalBanner.classList.remove('hidden');
+                } else if (userInDb.isRejected) {
+                    // Rejected
+                    approvalBanner.className = "mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800 flex items-center gap-3";
+                    if (approvalIcon) approvalIcon.textContent = "error";
+                    if (approvalTitle) approvalTitle.textContent = "Profile Rejected";
+                    if (approvalDesc) approvalDesc.textContent = "Your profile did not pass verification. Please contact support or update your settings.";
+                    approvalBanner.classList.remove('hidden');
+                } else {
+                    // Pending
+                    approvalBanner.className = "mb-6 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 flex items-center gap-3";
+                    if (approvalIcon) approvalIcon.textContent = "pending";
+                    if (approvalTitle) approvalTitle.textContent = "Pending Verification";
+                    if (approvalDesc) approvalDesc.textContent = "Your artist registration is currently being reviewed. You can upload artwork, but your profile will only be visible publicly after approval.";
+                    approvalBanner.classList.remove('hidden');
+                }
+            }
         }
 
         const combined = [

@@ -174,6 +174,7 @@
                             Forgot Password?
                         </a>
                     </div>
+                    <div id="signin-error" class="hidden p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg text-xs font-medium mb-2 text-left"></div>
                     <div class="pt-4">
                         <button class="w-full terracotta-gradient text-on-primary py-4 px-8 rounded-lg font-label-sm uppercase tracking-[0.2em] hover:shadow-lg hover:brightness-110 transition-all flex items-center justify-center gap-3 active:scale-[0.98] text-xs font-bold" type="submit">
                             <span class="">Sign In To Your Legacy</span>
@@ -187,21 +188,46 @@
                         e.preventDefault();
                         const email = document.getElementById('email').value;
                         const password = document.getElementById('password').value;
+                        const errorEl = document.getElementById('signin-error');
+                        
+                        errorEl.classList.add('hidden');
                         
                         let users = JSON.parse(localStorage.getItem('users') || '{}');
                         
                         if (!users[email] || users[email].password !== password) {
-                            alert('Invalid email or password!');
+                            errorEl.textContent = 'Invalid email or password!';
+                            errorEl.classList.remove('hidden');
+                            return;
+                        }
+                        
+                        const userRecord = users[email];
+                        if (!userRecord.isApproved) {
+                            if (userRecord.isRejected) {
+                                errorEl.textContent = 'Your registration has been rejected by the administrator.';
+                            } else {
+                                errorEl.textContent = 'Your profile is pending admin approval. Please wait until it gets accepted.';
+                            }
+                            errorEl.classList.remove('hidden');
                             return;
                         }
                         
                         localStorage.setItem('currentUser', JSON.stringify({
                             email: email,
-                            fullName: users[email].fullName,
-                            spec: users[email].spec
+                            fullName: userRecord.fullName,
+                            spec: userRecord.spec
                         }));
                         
                         window.location.href = 'artist-home.html';
+                    });
+                    
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const error = urlParams.get('error');
+                        const errorEl = document.getElementById('signin-error');
+                        if (error === 'pending') {
+                            errorEl.textContent = 'Your profile is pending admin approval. Please wait until it gets accepted.';
+                            errorEl.classList.remove('hidden');
+                        }
                     });
                 </script>
                 <div class="mt-8">

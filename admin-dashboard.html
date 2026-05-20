@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin Dashboard | The Painted Muse</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <!-- Tailwind Config to match Paint aesthetic -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: {
+                            DEFAULT: '#1A1208',
+                            muted: '#4A4238',
+                            light: '#8A8278'
+                        },
+                        bg: '#FDFBF7',
+                        cream: '#F5F0E8',
+                        saffron: {
+                            DEFAULT: '#D4AF37',
+                            light: '#F4E8C1',
+                            dark: '#B5451B'
+                        },
+                        border: 'rgba(26, 18, 8, 0.1)',
+                        success: '#2A9D8F',
+                        warning: '#F4A261',
+                        destructive: '#E63946'
+                    },
+                    fontFamily: {
+                        serif: ["Playfair Display", "serif"],
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    boxShadow: {
+                        soft: '0 4px 20px -2px rgba(26, 18, 8, 0.05)',
+                        medium: '0 8px 30px -4px rgba(26, 18, 8, 0.08)',
+                        large: '0 12px 40px -6px rgba(26, 18, 8, 0.12)',
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        body {
+            background-color: #F5F0E8;
+            color: #1A1208;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .transition-smooth {
+            transition: all 0.3s ease;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(26, 18, 8, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 4px;
+        }
+
+        .sidebar {
+            transition: width 0.3s ease;
+        }
+
+        .sidebar.collapsed {
+            width: 80px;
+        }
+
+        .sidebar.expanded {
+            width: 260px;
+        }
+
+        .sidebar.collapsed .hide-on-collapse {
+            display: none;
+            opacity: 0;
+        }
+
+        .main-content {
+            transition: margin-left 0.3s ease;
+        }
+        
+        .main-content.expanded {
+            margin-left: 260px;
+        }
+        
+        .main-content.collapsed {
+            margin-left: 80px;
+        }
+
+        .nav-item.active {
+            background-color: rgba(212, 175, 55, 0.15); /* saffron-light */
+            color: #B5451B; /* saffron-dark */
+            border-color: rgba(212, 175, 55, 0.4);
+            font-weight: 600;
+        }
+
+        .nav-item.active .nav-icon {
+            color: #B5451B;
+        }
+
+        .view-section {
+            display: none;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* MedBud inspired badge */
+        .pulse-badge {
+            animation: pulse-soft 2s infinite;
+        }
+
+        @keyframes pulse-soft {
+            0% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.4); }
+            70% { box-shadow: 0 0 0 4px rgba(230, 57, 70, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0); }
+        }
+
+        /* Shake animation for invalid password entry */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen">
+
+    <!-- Admin Login Screen -->
+    <div id="admin-login-container" class="min-h-screen w-full flex items-center justify-center bg-[#F5F0E8] px-4 relative overflow-hidden hidden">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
+            <img src="pics/madhubani_pattern_1778230275283.png" class="w-full h-full object-cover animate-pulse" alt="pattern">
+        </div>
+        
+        <!-- Blurred glow effects -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-saffron-light/20 rounded-full blur-3xl" id="glow-1"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-saffron/10 rounded-full blur-3xl" id="glow-2"></div>
+        
+        <div class="w-full max-w-md relative z-10">
+            <div id="login-card" class="bg-[#FDFBF7] rounded-2xl shadow-large p-10 border border-ink/10">
+                <div class="flex flex-col items-center mb-8">
+                    <div class="w-20 h-20 rounded-2xl bg-ink flex items-center justify-center mb-6 shadow-medium transition-transform hover:rotate-12 duration-300">
+                        <i data-lucide="shield-check" class="w-11 h-11 text-saffron"></i>
+                    </div>
+                    <h1 class="text-3xl font-serif font-bold text-ink tracking-tight">Admin Control</h1>
+                    <p class="text-ink-muted text-sm mt-2 flex items-center gap-2">
+                        <i data-lucide="lock" class="w-4 h-4"></i> Restricted Access — Painted Muse
+                    </p>
+                </div>
+
+                <form id="login-form" class="space-y-6">
+                    <div class="relative">
+                        <i data-lucide="key-round" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-muted"></i>
+                        <input
+                            id="password-input"
+                            type="password"
+                            placeholder="Enter master password"
+                            class="w-full h-14 pl-12 pr-4 bg-bg border border-ink/20 rounded-xl focus:outline-none focus:border-saffron-dark focus:ring-1 focus:ring-saffron-dark text-lg"
+                            required
+                            autofocus
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        class="w-full h-14 text-lg font-bold bg-ink text-[#FDFBF7] hover:bg-stone-800 rounded-xl shadow-medium hover:shadow-large transition-smooth hover:scale-[1.02] flex items-center justify-center gap-2"
+                    >
+                        Authorize Access
+                    </button>
+                </form>
+                
+                <div class="text-center mt-4">
+                    <a href="index.html" class="text-ink-muted hover:text-ink text-sm font-medium transition-smooth inline-flex items-center gap-1.5">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Website
+                    </a>
+                </div>
+                
+                <div id="login-error" class="hidden mt-4 text-destructive text-sm text-center font-medium bg-destructive/10 py-2.5 px-3 rounded-lg border border-destructive/20">
+                    Invalid administrator password.
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-ink/10 text-center">
+                    <p class="text-ink-muted text-xs">Painted Muse Admin Console v1.0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Container -->
+    <div id="admin-panel-container" class="min-h-screen flex w-full hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar expanded fixed left-0 top-0 bottom-0 z-50 bg-bg border-r border-ink/10 flex flex-col shadow-medium">
+            <!-- Logo -->
+            <div class="p-4 flex items-center gap-3 border-b border-ink/10 min-h-[72px]">
+                <div class="w-10 h-10 rounded-xl bg-ink flex items-center justify-center flex-shrink-0 shadow-soft">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-saffron"></i>
+                </div>
+                <div class="hide-on-collapse whitespace-nowrap overflow-hidden transition-opacity duration-300">
+                    <p class="text-ink font-serif font-bold text-lg leading-none">The Painted Muse</p>
+                    <p class="text-ink-muted text-[10px] uppercase tracking-widest mt-1">ADMIN</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 p-3 space-y-1 overflow-y-auto">
+                <button onclick="switchView('overview')" class="nav-item active w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-smooth relative group text-ink-muted hover:text-ink hover:bg-cream border border-transparent">
+                    <i data-lucide="layout-dashboard" class="nav-icon w-5 h-5 flex-shrink-0"></i>
+                    <span class="hide-on-collapse whitespace-nowrap">Overview</span>
+                </button>
+                <button onclick="switchView('artists')" class="nav-item w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-smooth relative group text-ink-muted hover:text-ink hover:bg-cream border border-transparent">
+                    <i data-lucide="palette" class="nav-icon w-5 h-5 flex-shrink-0"></i>
+                    <span class="hide-on-collapse whitespace-nowrap">Artists</span>
+                    <span id="sidebar-pending-badge" class="hide-on-collapse ml-auto bg-destructive text-white text-[10px] font-bold rounded-full min-w-[20px] h-5 flex items-center justify-center px-1.5 shadow-soft pulse-badge">3</span>
+                </button>
+                <button onclick="switchView('users')" class="nav-item w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-smooth relative group text-ink-muted hover:text-ink hover:bg-cream border border-transparent">
+                    <i data-lucide="users" class="nav-icon w-5 h-5 flex-shrink-0"></i>
+                    <span class="hide-on-collapse whitespace-nowrap">Users</span>
+                </button>
+                <button onclick="switchView('payments')" class="nav-item w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-smooth relative group text-ink-muted hover:text-ink hover:bg-cream border border-transparent">
+                    <i data-lucide="indian-rupee" class="nav-icon w-5 h-5 flex-shrink-0"></i>
+                    <span class="hide-on-collapse whitespace-nowrap">Payments</span>
+                </button>
+                <button onclick="switchView('settings')" class="nav-item w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-smooth relative group text-ink-muted hover:text-ink hover:bg-cream border border-transparent">
+                    <i data-lucide="settings" class="nav-icon w-5 h-5 flex-shrink-0"></i>
+                    <span class="hide-on-collapse whitespace-nowrap">Settings</span>
+                </button>
+            </nav>
+
+            <!-- Footer -->
+            <div class="p-3 border-t border-ink/10 space-y-2">
+                <button id="toggleSidebar" class="w-full flex items-center justify-center gap-2 px-3 py-2 text-ink-muted hover:text-ink text-xs rounded-lg hover:bg-cream transition-smooth">
+                    <i data-lucide="chevron-left" id="toggleIcon" class="w-4 h-4"></i>
+                    <span class="hide-on-collapse">Collapse</span>
+                </button>
+                <button onclick="handleSignOut()" class="w-full flex items-center gap-2 px-3 py-2 text-ink-muted hover:text-destructive hover:bg-destructive/10 text-xs rounded-lg transition-smooth">
+                    <i data-lucide="log-out" class="w-4 h-4 flex-shrink-0"></i>
+                    <span class="hide-on-collapse whitespace-nowrap">Sign Out</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="main-content expanded flex-1 min-h-screen bg-[#F5F0E8]">
+            <div class="p-6 md:p-8 max-w-[1600px] mx-auto">
+                
+                <!-- OVERVIEW SECTION -->
+                <div id="view-overview" class="view-section active space-y-8">
+                    <div>
+                        <h1 class="text-3xl font-serif font-bold text-ink">Command Center</h1>
+                        <p class="text-ink-muted mt-1 text-sm" id="current-date"></p>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                        <div class="bg-bg rounded-2xl p-6 border border-ink/10 hover:border-saffron/50 transition-smooth cursor-pointer group shadow-soft hover:shadow-medium" onclick="switchView('artists')">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-saffron-light/50 flex items-center justify-center group-hover:scale-110 transition-smooth">
+                                    <i data-lucide="palette" class="w-6 h-6 text-saffron-dark"></i>
+                                </div>
+                            </div>
+                            <p class="text-3xl font-bold text-ink mb-1 font-serif" id="stat-total-artists">124</p>
+                            <p class="text-ink-muted text-sm">Total Artists</p>
+                        </div>
+
+                        <div class="bg-bg rounded-2xl p-6 border border-ink/10 hover:border-saffron/50 transition-smooth cursor-pointer group shadow-soft hover:shadow-medium" onclick="switchView('users')">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center group-hover:scale-110 transition-smooth">
+                                    <i data-lucide="users" class="w-6 h-6 text-blue-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-3xl font-bold text-ink mb-1 font-serif" id="stat-total-users">4,290</p>
+                            <p class="text-ink-muted text-sm">Total Users</p>
+                        </div>
+
+                        <div class="bg-bg rounded-2xl p-6 border border-ink/10 hover:border-saffron/50 transition-smooth cursor-pointer group shadow-soft hover:shadow-medium">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-success/10 flex items-center justify-center group-hover:scale-110 transition-smooth">
+                                    <i data-lucide="check-circle" class="w-6 h-6 text-success"></i>
+                                </div>
+                            </div>
+                            <p class="text-3xl font-bold text-ink mb-1 font-serif">85</p>
+                            <p class="text-ink-muted text-sm">Active Commissions</p>
+                        </div>
+
+                        <div class="bg-bg rounded-2xl p-6 border border-ink/10 hover:border-saffron/50 transition-smooth cursor-pointer group shadow-soft hover:shadow-medium" onclick="switchView('payments')">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-warning/10 flex items-center justify-center group-hover:scale-110 transition-smooth">
+                                    <i data-lucide="indian-rupee" class="w-6 h-6 text-warning"></i>
+                                </div>
+                            </div>
+                            <p class="text-3xl font-bold text-ink mb-1 font-serif">₹4,25,000</p>
+                            <p class="text-ink-muted text-sm">Est. Monthly Revenue</p>
+                        </div>
+                    </div>
+
+                    <!-- Secondary Stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-warning/10 border border-warning/20 rounded-xl p-4 cursor-pointer hover:bg-warning/20 transition-smooth" onclick="switchView('artists')">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="clock" class="w-4 h-4 text-warning"></i>
+                                <span class="text-warning text-xs font-semibold uppercase tracking-wider">Pending</span>
+                            </div>
+                            <p class="text-2xl font-bold text-ink font-serif" id="stat-pending-approvals">3</p>
+                            <p class="text-ink-muted text-xs mt-1">Artist Approvals</p>
+                        </div>
+
+                        <div class="bg-success/10 border border-success/20 rounded-xl p-4">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="user-check" class="w-4 h-4 text-success"></i>
+                                <span class="text-success text-xs font-semibold uppercase tracking-wider">Active</span>
+                            </div>
+                            <p class="text-2xl font-bold text-ink font-serif" id="stat-verified-artists">118</p>
+                            <p class="text-ink-muted text-xs mt-1">Verified Artists</p>
+                        </div>
+
+                        <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="calendar" class="w-4 h-4 text-blue-600"></i>
+                                <span class="text-blue-600 text-xs font-semibold uppercase tracking-wider">Today</span>
+                            </div>
+                            <p class="text-2xl font-bold text-ink font-serif" id="stat-new-signups">12</p>
+                            <p class="text-ink-muted text-xs mt-1">New Signups</p>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Recent Artists -->
+                        <div class="bg-bg rounded-2xl border border-ink/10 overflow-hidden shadow-soft">
+                            <div class="p-5 border-b border-ink/10 flex items-center justify-between">
+                                <h3 class="text-ink font-semibold flex items-center gap-2 font-serif">
+                                    <i data-lucide="palette" class="w-4 h-4 text-saffron-dark"></i> Recent Artists
+                                </h3>
+                                <button onclick="switchView('artists')" class="text-saffron-dark text-xs hover:underline font-medium">View all →</button>
+                            </div>
+                            <div class="divide-y divide-ink/5" id="recent-artists-container">
+                                <!-- Will be rendered dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Recent Users -->
+                        <div class="bg-bg rounded-2xl border border-ink/10 overflow-hidden shadow-soft">
+                            <div class="p-5 border-b border-ink/10 flex items-center justify-between">
+                                <h3 class="text-ink font-semibold flex items-center gap-2 font-serif">
+                                    <i data-lucide="users" class="w-4 h-4 text-blue-600"></i> Recent Users
+                                </h3>
+                                <button onclick="switchView('users')" class="text-blue-600 text-xs hover:underline font-medium">View all →</button>
+                            </div>
+                            <div class="divide-y divide-ink/5" id="recent-users-container">
+                                <!-- Will be rendered dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ARTISTS SECTION -->
+                <div id="view-artists" class="view-section space-y-6">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h1 class="text-3xl font-serif font-bold text-ink flex items-center gap-3">
+                                <i data-lucide="palette" class="w-7 h-7 text-saffron-dark"></i> Artist Management
+                            </h1>
+                            <p class="text-ink-muted text-sm mt-1">Approve, manage, and control all registered artisans</p>
+                        </div>
+                        <div class="relative w-full md:w-80">
+                            <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-muted"></i>
+                            <input type="text" id="artist-search-input" placeholder="Search name, art form..." class="w-full pl-10 pr-4 py-2 bg-bg border border-ink/20 rounded-xl focus:outline-none focus:border-saffron-dark focus:ring-1 focus:ring-saffron-dark" />
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 flex-wrap" id="artist-filter-buttons">
+                        <button onclick="filterArtists('ALL')" class="px-4 py-2 rounded-xl text-sm font-medium transition-smooth bg-saffron-light/50 text-saffron-dark border border-saffron-dark/20 filter-btn active">
+                            All <span class="ml-2 text-xs opacity-60" id="filter-count-all">0</span>
+                        </button>
+                        <button onclick="filterArtists('PENDING')" class="px-4 py-2 rounded-xl text-sm font-medium transition-smooth text-ink-muted hover:text-ink hover:bg-cream border border-transparent filter-btn">
+                            Pending <span class="ml-2 text-xs opacity-60" id="filter-count-pending">0</span>
+                        </button>
+                        <button onclick="filterArtists('APPROVED')" class="px-4 py-2 rounded-xl text-sm font-medium transition-smooth text-ink-muted hover:text-ink hover:bg-cream border border-transparent filter-btn">
+                            Approved <span class="ml-2 text-xs opacity-60" id="filter-count-approved">0</span>
+                        </button>
+                        <button onclick="filterArtists('REJECTED')" class="px-4 py-2 rounded-xl text-sm font-medium transition-smooth text-ink-muted hover:text-ink hover:bg-cream border border-transparent filter-btn">
+                            Rejected <span class="ml-2 text-xs opacity-60" id="filter-count-rejected">0</span>
+                        </button>
+                    </div>
+
+                    <!-- Artist List -->
+                    <div class="space-y-3" id="artist-list-container">
+                        <!-- Dynamic list of artists will go here -->
+                    </div>
+                </div>
+
+                <!-- USERS SECTION -->
+                <div id="view-users" class="view-section space-y-6">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h1 class="text-3xl font-serif font-bold text-ink flex items-center gap-3">
+                                <i data-lucide="users" class="w-7 h-7 text-blue-600"></i> User Management
+                            </h1>
+                            <p class="text-ink-muted text-sm mt-1">Manage registered customers and art enthusiasts</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-bg rounded-2xl border border-ink/10 shadow-soft overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-cream/50 text-ink-muted text-xs uppercase tracking-wider border-b border-ink/10">
+                                    <th class="p-4 font-semibold">User Name</th>
+                                    <th class="p-4 font-semibold">Email</th>
+                                    <th class="p-4 font-semibold">Joined Date</th>
+                                    <th class="p-4 font-semibold text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-ink/5" id="user-table-body">
+                                <!-- Dynamic users will go here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- PAYMENTS SECTION -->
+                <div id="view-payments" class="view-section space-y-6">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h1 class="text-3xl font-serif font-bold text-ink flex items-center gap-3">
+                                <i data-lucide="indian-rupee" class="w-7 h-7 text-warning-dark"></i> Payments
+                            </h1>
+                            <p class="text-ink-muted text-sm mt-1">Track commissions and payouts</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-bg rounded-2xl border border-ink/10 shadow-soft overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-cream/50 text-ink-muted text-xs uppercase tracking-wider border-b border-ink/10">
+                                    <th class="p-4 font-semibold">Transaction ID</th>
+                                    <th class="p-4 font-semibold">Amount</th>
+                                    <th class="p-4 font-semibold">Artist</th>
+                                    <th class="p-4 font-semibold">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-ink/5">
+                                <tr class="hover:bg-cream/30 transition-colors">
+                                    <td class="p-4 text-sm font-mono text-ink-muted">TXN-72819</td>
+                                    <td class="p-4 text-sm font-medium text-ink">₹12,500</td>
+                                    <td class="p-4 text-sm text-ink">Sita Devi</td>
+                                    <td class="p-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-success/20 text-success">Completed</span></td>
+                                </tr>
+                                <tr class="hover:bg-cream/30 transition-colors">
+                                    <td class="p-4 text-sm font-mono text-ink-muted">TXN-72820</td>
+                                    <td class="p-4 text-sm font-medium text-ink">₹4,000</td>
+                                    <td class="p-4 text-sm text-ink">Ravi Varma</td>
+                                    <td class="p-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-warning/20 text-[#d97706]">Processing</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- SETTINGS SECTION -->
+                <div id="view-settings" class="view-section space-y-6 hidden">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h1 class="text-3xl font-serif font-bold text-ink flex items-center gap-3">
+                                <i data-lucide="settings" class="w-7 h-7 text-ink-muted"></i> Settings
+                            </h1>
+                            <p class="text-ink-muted text-sm mt-1">Platform configuration and system info</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Security Card -->
+                        <div class="bg-white rounded-2xl border border-ink/10 p-6 shadow-sm hover:shadow-md transition-shadow">
+                            <h3 class="text-ink font-semibold mb-4 flex items-center gap-2">
+                                <i data-lucide="shield" class="w-4 h-4 text-primary"></i> Security
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-cream/40 rounded-xl">
+                                    <p class="text-ink-muted text-[10px] uppercase font-bold tracking-wider mb-1">Auth Method</p>
+                                    <p class="text-sm font-semibold text-ink">Master Password</p>
+                                </div>
+                                <div class="p-3 bg-cream/40 rounded-xl">
+                                    <p class="text-ink-muted text-[10px] uppercase font-bold tracking-wider mb-1">Session</p>
+                                    <p class="text-sm font-semibold text-ink">Browser Session (sessionStorage)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Database Card -->
+                        <div class="bg-white rounded-2xl border border-ink/10 p-6 shadow-sm hover:shadow-md transition-shadow">
+                            <h3 class="text-ink font-semibold mb-4 flex items-center gap-2">
+                                <i data-lucide="database" class="w-4 h-4 text-blue-600"></i> Database
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-cream/40 rounded-xl">
+                                    <p class="text-ink-muted text-[10px] uppercase font-bold tracking-wider mb-1">Provider</p>
+                                    <p class="text-sm font-semibold text-ink">Local Storage (HTML5 Web Storage)</p>
+                                </div>
+                                <div class="p-3 bg-cream/40 rounded-xl">
+                                    <p class="text-ink-muted text-[10px] uppercase font-bold tracking-wider mb-1">Real-Time Sync</p>
+                                    <p class="text-sm font-semibold text-green-600 flex items-center gap-1.5">
+                                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span> Enabled
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Platform Card -->
+                        <div class="bg-white rounded-2xl border border-ink/10 p-6 shadow-sm hover:shadow-md transition-shadow">
+                            <h3 class="text-ink font-semibold mb-4 flex items-center gap-2">
+                                <i data-lucide="server" class="w-4 h-4 text-green-600"></i> Platform
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-cream/40 rounded-xl">
+                                    <p class="text-ink-muted text-[10px] uppercase font-bold tracking-wider mb-1">Version</p>
+                                    <p class="text-sm font-semibold text-ink">Painted Muse Admin v2.0</p>
+                                </div>
+                                <div class="p-3 bg-cream/40 rounded-xl">
+                                    <p class="text-ink-muted text-[10px] uppercase font-bold tracking-wider mb-1">Framework</p>
+                                    <p class="text-sm font-semibold text-ink">Vanilla HTML5 + JS + Tailwind CSS</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Deployment Card -->
+                        <div class="bg-white rounded-2xl border border-ink/10 p-6 shadow-sm hover:shadow-md transition-shadow">
+                            <h3 class="text-ink font-semibold mb-4 flex items-center gap-2">
+                                <i data-lucide="globe" class="w-4 h-4 text-amber-500"></i> Deployment
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-cream/40 rounded-xl">
+                                    <p class="text-ink-muted text-[10px] uppercase font-bold tracking-wider mb-1">Host</p>
+                                    <p class="text-sm font-semibold text-ink">Local / Web Host</p>
+                                </div>
+                                <div class="p-3 bg-cream/40 rounded-xl">
+                                    <p class="text-ink-muted text-[10px] uppercase font-bold tracking-wider mb-1">Status</p>
+                                    <p class="text-sm font-semibold text-green-600 flex items-center gap-1.5">
+                                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-green-500"></span> Operational
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Change Password Card -->
+                    <div class="bg-white rounded-2xl border border-ink/10 p-6 shadow-sm mt-8 max-w-xl">
+                        <h3 class="text-ink font-semibold mb-4 flex items-center gap-2">
+                            <i data-lucide="key-round" class="w-4 h-4 text-primary"></i> Change Admin Password
+                        </h3>
+                        <p class="text-sm text-ink-muted mb-4">Update the master password used to access this administration panel on this device.</p>
+                        <form id="admin-change-pwd-form" onsubmit="updateAdminPassword(event)" class="space-y-4">
+                            <div>
+                                <input
+                                    type="password"
+                                    id="new-admin-password"
+                                    placeholder="Enter new admin password"
+                                    required
+                                    minlength="6"
+                                    class="w-full bg-cream/30 border border-ink/10 focus:border-primary focus:ring-0 rounded-xl px-4 py-3 text-sm text-ink"
+                                />
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <button type="submit" class="px-6 py-3 bg-primary hover:bg-primary-container text-white font-medium text-sm rounded-xl transition-all shadow-md">
+                                    Update Password
+                                </button>
+                                <span id="pwd-change-msg" class="text-sm font-semibold text-green-600 opacity-0 transition-opacity">Password updated successfully!</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Check Authentication Status
+        function checkAuth() {
+            const isAuthenticated = sessionStorage.getItem("admin_authenticated") === "true";
+            const loginContainer = document.getElementById('admin-login-container');
+            const panelContainer = document.getElementById('admin-panel-container');
+            
+            if (isAuthenticated) {
+                loginContainer.classList.add('hidden');
+                panelContainer.classList.remove('hidden');
+                document.body.classList.remove('bg-[#F5F0E8]');
+                document.body.classList.add('bg-[#F5F0E8]', 'flex'); // Flex layout for sidebar + main content
+                lucide.createIcons();
+                initDashboardData();
+            } else {
+                loginContainer.classList.remove('hidden');
+                panelContainer.classList.add('hidden');
+                document.body.classList.remove('flex'); // Normal flow for centered login screen
+            }
+        }
+
+        // Initialize Authentication on load
+        checkAuth();
+
+        // Handle Login Submission
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const passwordInput = document.getElementById('password-input');
+            const password = passwordInput.value;
+            const errorEl = document.getElementById('login-error');
+            const loginCard = document.getElementById('login-card');
+            
+            const expectedPassword = localStorage.getItem("admin_override_password") || 'paintedMuse@2026';
+            if (password === expectedPassword) {
+                sessionStorage.setItem("admin_authenticated", "true");
+                errorEl.classList.add('hidden');
+                passwordInput.value = '';
+                checkAuth();
+            } else {
+                errorEl.classList.remove('hidden');
+                // Shake card animation
+                loginCard.classList.add('animate-shake');
+                setTimeout(() => {
+                    loginCard.classList.remove('animate-shake');
+                }, 400);
+            }
+        });
+
+        // Update Admin Password
+        function updateAdminPassword(e) {
+            e.preventDefault();
+            const newPwd = document.getElementById('new-admin-password').value.trim();
+            const msgEl = document.getElementById('pwd-change-msg');
+            
+            if (newPwd.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                return;
+            }
+            
+            localStorage.setItem("admin_override_password", newPwd);
+            document.getElementById('new-admin-password').value = '';
+            
+            msgEl.classList.remove('opacity-0');
+            msgEl.classList.add('opacity-100');
+            setTimeout(() => {
+                msgEl.classList.remove('opacity-100');
+                msgEl.classList.add('opacity-0');
+            }, 3000);
+        }
+
+        // Handle Sign Out Action
+        function handleSignOut() {
+            sessionStorage.removeItem("admin_authenticated");
+            checkAuth();
+        }
+
+        // Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+        const toggleBtn = document.getElementById('toggleSidebar');
+        const toggleIcon = document.getElementById('toggleIcon');
+        let isCollapsed = false;
+
+        toggleBtn.addEventListener('click', () => {
+            isCollapsed = !isCollapsed;
+            
+            if(isCollapsed) {
+                sidebar.classList.remove('expanded');
+                sidebar.classList.add('collapsed');
+                mainContent.classList.remove('expanded');
+                mainContent.classList.add('collapsed');
+                toggleIcon.setAttribute('data-lucide', 'chevron-right');
+            } else {
+                sidebar.classList.remove('collapsed');
+                sidebar.classList.add('expanded');
+                mainContent.classList.remove('collapsed');
+                mainContent.classList.add('expanded');
+                toggleIcon.setAttribute('data-lucide', 'chevron-left');
+            }
+            lucide.createIcons();
+        });
+
+        // View Switching
+        function switchView(viewId) {
+            // Update Navigation state
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.remove('bg-saffron-light/15');
+                item.classList.remove('text-saffron-dark');
+                item.classList.remove('border-saffron-dark/40');
+                item.classList.add('text-ink-muted', 'hover:text-ink', 'hover:bg-cream', 'border-transparent');
+            });
+            
+            const activeBtn = window.event ? (window.event.currentTarget || document.querySelector(`.nav-item[onclick="switchView('${viewId}')"]`)) : document.querySelector(`.nav-item[onclick="switchView('${viewId}')"]`);
+            if(activeBtn) {
+                activeBtn.classList.add('active');
+                activeBtn.classList.remove('text-ink-muted', 'hover:text-ink', 'hover:bg-cream', 'border-transparent');
+            }
+
+            // Update Views
+            document.querySelectorAll('.view-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('view-' + viewId).classList.add('active');
+        }
+
+        // Dynamic Dashboard Data Logic
+        let currentFilter = 'ALL';
+        
+        function initDashboardData() {
+            // Set Current Date
+            const dateOptions = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+            document.getElementById('current-date').textContent = "Platform-wide overview • " + new Date().toLocaleDateString("en-IN", dateOptions);
+
+            const initialArtists = [
+                { id: "ART-9281", name: "Sita Devi", email: "sita@example.com", spec: "mithila", status: "APPROVED", exp: "20 yrs exp", state: "Bihar", joined: "May 19, 2026" },
+                { id: "ART-9282", name: "Ravi Varma", email: "ravi@example.com", spec: "pattachitra", status: "PENDING", exp: "15 yrs exp", state: "Odisha", joined: "May 18, 2026" },
+                { id: "ART-9283", name: "Jivya Soma Mashe", email: "jivya@example.com", spec: "warli", status: "APPROVED", exp: "30 yrs exp", state: "Maharashtra", joined: "May 15, 2026" },
+                { id: "ART-9284", name: "Anjali Pichai", email: "anjali@example.com", spec: "tanjore", status: "APPROVED", exp: "12 yrs exp", state: "Tamil Nadu", joined: "May 12, 2026" }
+            ];
+
+            const initialUsers = [
+                { name: "Ananya Sharma", email: "ananya@example.com", joined: "May 19, 2026" },
+                { name: "Vikram Singh", email: "vikram@example.com", joined: "May 18, 2026" },
+                { name: "Sathwik Manoj", email: "sathwik@example.com", joined: "May 15, 2026" }
+            ];
+
+            let adminArtists = JSON.parse(localStorage.getItem('admin_artists'));
+            if (!adminArtists) {
+                adminArtists = initialArtists;
+                localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
+            }
+
+            let adminUsers = JSON.parse(localStorage.getItem('admin_users'));
+            if (!adminUsers) {
+                adminUsers = initialUsers;
+                localStorage.setItem('admin_users', JSON.stringify(adminUsers));
+            }
+
+            // Sync from registered users ('users' key in localStorage)
+            let users = JSON.parse(localStorage.getItem('users') || '{}');
+            let updated = false;
+            
+            for (let email in users) {
+                // If they are not already in adminArtists, add them!
+                if (!adminArtists.some(a => a.email === email)) {
+                    const u = users[email];
+                    const id = "ART-" + Math.floor(1000 + Math.random() * 9000);
+                    adminArtists.push({
+                        id: id,
+                        name: u.fullName,
+                        email: email,
+                        spec: u.spec || "mithila",
+                        status: u.isApproved ? "APPROVED" : (u.isRejected ? "REJECTED" : "PENDING"),
+                        exp: "1 yr exp",
+                        state: "India",
+                        joined: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+                    });
+                    updated = true;
+                }
+                
+                // Add to adminUsers as well if not already there
+                if (!adminUsers.some(usr => usr.email === email)) {
+                    const u = users[email];
+                    adminUsers.push({
+                        name: u.fullName,
+                        email: email,
+                        joined: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+                    });
+                    updated = true;
+                }
+            }
+
+            if (updated) {
+                localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
+                localStorage.setItem('admin_users', JSON.stringify(adminUsers));
+            }
+
+            // Bind search filter
+            const searchInput = document.getElementById('artist-search-input');
+            if (searchInput) {
+                // Remove previous listener to avoid duplicates
+                const newSearchInput = searchInput.cloneNode(true);
+                searchInput.parentNode.replaceChild(newSearchInput, searchInput);
+                newSearchInput.addEventListener('keyup', () => {
+                    renderArtists(currentFilter, newSearchInput.value);
+                });
+            }
+
+            // Render stats and items
+            refreshDashboard();
+        }
+
+        function refreshDashboard() {
+            renderStats();
+            renderArtists(currentFilter);
+            renderUsers();
+            renderRecentActivity();
+            lucide.createIcons();
+        }
+
+        function renderStats() {
+            const adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+            const adminUsers = JSON.parse(localStorage.getItem('admin_users') || '[]');
+
+            const totalArtists = adminArtists.length;
+            const pendingCount = adminArtists.filter(a => a.status === 'PENDING').length;
+            const approvedCount = adminArtists.filter(a => a.status === 'APPROVED').length;
+            const rejectedCount = adminArtists.filter(a => a.status === 'REJECTED').length;
+            const totalUsers = adminUsers.length;
+
+            // Update stats grid cards
+            document.getElementById('stat-total-artists').textContent = totalArtists;
+            document.getElementById('stat-total-users').textContent = totalUsers;
+            document.getElementById('stat-pending-approvals').textContent = pendingCount;
+            document.getElementById('stat-verified-artists').textContent = approvedCount;
+
+            // Update filters counts
+            document.getElementById('filter-count-all').textContent = totalArtists;
+            document.getElementById('filter-count-pending').textContent = pendingCount;
+            document.getElementById('filter-count-approved').textContent = approvedCount;
+            document.getElementById('filter-count-rejected').textContent = rejectedCount;
+
+            // Sidebar pending notification badge
+            const sidebarBadge = document.getElementById('sidebar-pending-badge');
+            if (sidebarBadge) {
+                if (pendingCount > 0) {
+                    sidebarBadge.textContent = pendingCount;
+                    sidebarBadge.classList.remove('hidden');
+                } else {
+                    sidebarBadge.classList.add('hidden');
+                }
+            }
+        }
+
+        function filterArtists(filter) {
+            currentFilter = filter;
+            
+            // Toggle active class on filter buttons
+            document.querySelectorAll('#artist-filter-buttons button').forEach(btn => {
+                btn.classList.remove('bg-saffron-light/50', 'text-saffron-dark', 'border-saffron-dark/20');
+                btn.classList.add('text-ink-muted', 'hover:text-ink', 'hover:bg-cream', 'border-transparent');
+            });
+            
+            const activeBtn = window.event ? (window.event.currentTarget || document.querySelector(`#artist-filter-buttons button[onclick="filterArtists('${filter}')"]`)) : document.querySelector(`#artist-filter-buttons button[onclick="filterArtists('${filter}')"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-saffron-light/50', 'text-saffron-dark', 'border-saffron-dark/20');
+                activeBtn.classList.remove('text-ink-muted', 'hover:text-ink', 'hover:bg-cream', 'border-transparent');
+            }
+
+            const searchInput = document.getElementById('artist-search-input');
+            renderArtists(filter, searchInput ? searchInput.value : '');
+        }
+
+        const artSpecNames = {
+            tanjore: "Tanjore Painting",
+            mithila: "Mithila (Madhubani)",
+            warli: "Warli Art",
+            pattachitra: "Pattachitra"
+        };
+
+        function getSpecDisplayName(spec) {
+            return artSpecNames[spec.toLowerCase()] || spec;
+        }
+
+        function renderArtists(filter, query = '') {
+            const adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+            const container = document.getElementById('artist-list-container');
+            if (!container) return;
+
+            container.innerHTML = '';
+            
+            let filtered = adminArtists;
+            if (filter !== 'ALL') {
+                filtered = filtered.filter(a => a.status === filter);
+            }
+
+            if (query.trim()) {
+                const q = query.toLowerCase();
+                filtered = filtered.filter(a => 
+                    a.name.toLowerCase().includes(q) || 
+                    a.spec.toLowerCase().includes(q) || 
+                    getSpecDisplayName(a.spec).toLowerCase().includes(q)
+                );
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-bg rounded-2xl border border-ink/10 p-8 text-center shadow-soft w-full">
+                        <p class="text-ink-muted">No artists found matching the criteria.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(artist => {
+                const initial = artist.name.charAt(0).toUpperCase();
+                let cardClass = "bg-bg rounded-2xl border transition-smooth shadow-soft w-full ";
+                let statusBadge = "";
+
+                if (artist.status === 'PENDING') {
+                    cardClass += "border-warning/30";
+                    statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-warning/20 text-[#d97706]">PENDING</span>`;
+                } else if (artist.status === 'APPROVED') {
+                    cardClass += "border-ink/10 hover:border-saffron-dark/20";
+                    statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-success/20 text-success">APPROVED</span>`;
+                } else {
+                    cardClass += "border-destructive/30";
+                    statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-destructive/10 text-destructive">REJECTED</span>`;
+                }
+
+                let actionButtons = "";
+                if (artist.status === 'PENDING') {
+                    actionButtons = `
+                        <button onclick="approveArtist('${artist.email}')" class="flex-1 md:flex-none flex items-center justify-center gap-1 px-4 py-2 rounded-lg text-sm font-medium bg-success/10 text-success hover:bg-success/20 border border-success/20 transition-colors">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i> Approve
+                        </button>
+                        <button onclick="rejectArtist('${artist.email}')" class="flex-1 md:flex-none flex items-center justify-center gap-1 px-4 py-2 rounded-lg text-sm font-medium bg-destructive/10 text-destructive hover:bg-destructive/20 border border-destructive/20 transition-colors">
+                            <i data-lucide="x-circle" class="w-4 h-4"></i> Reject
+                        </button>
+                    `;
+                } else if (artist.status === 'APPROVED') {
+                    actionButtons = `
+                        <button onclick="rejectArtist('${artist.email}')" class="flex-1 md:flex-none flex items-center justify-center gap-1 px-4 py-2 rounded-lg text-sm font-medium bg-destructive/10 text-destructive hover:bg-destructive/20 border border-destructive/20 transition-colors">
+                            <i data-lucide="x-circle" class="w-4 h-4"></i> Reject
+                        </button>
+                    `;
+                } else {
+                    actionButtons = `
+                        <button onclick="approveArtist('${artist.email}')" class="flex-1 md:flex-none flex items-center justify-center gap-1 px-4 py-2 rounded-lg text-sm font-medium bg-success/10 text-success hover:bg-success/20 border border-success/20 transition-colors">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i> Approve
+                        </button>
+                    `;
+                }
+
+                const item = document.createElement('div');
+                item.className = cardClass;
+                item.innerHTML = `
+                    <div class="p-5 flex flex-col md:flex-row items-start md:items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl ${artist.status === 'PENDING' ? 'bg-warning/20 text-[#d97706]' : artist.status === 'APPROVED' ? 'bg-success/20 text-success' : 'bg-destructive/10 text-destructive'} flex items-center justify-center font-bold text-lg flex-shrink-0">
+                            ${initial}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <p class="text-ink font-semibold truncate text-lg">${artist.name}</p>
+                                ${statusBadge}
+                            </div>
+                            <p class="text-ink-muted text-sm">${getSpecDisplayName(artist.spec)} • ${artist.exp} • ${artist.state}</p>
+                            <p class="text-ink-muted/60 text-xs mt-1">Email: ${artist.email} | Joined: ${artist.joined}</p>
+                        </div>
+                        <div class="flex items-center gap-2 flex-shrink-0 flex-wrap w-full md:w-auto mt-4 md:mt-0">
+                            ${actionButtons}
+                            <button onclick="deleteArtist('${artist.email}')" class="w-9 h-9 rounded-lg flex items-center justify-center text-destructive/50 hover:text-destructive hover:bg-destructive/10 transition-colors" title="Delete Artist">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+            lucide.createIcons();
+        }
+
+        function renderUsers() {
+            const adminUsers = JSON.parse(localStorage.getItem('admin_users') || '[]');
+            const tableBody = document.getElementById('user-table-body');
+            if (!tableBody) return;
+
+            tableBody.innerHTML = '';
+
+            if (adminUsers.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="p-8 text-center text-ink-muted text-sm">No registered users found.</td>
+                    </tr>
+                `;
+                return;
+            }
+
+            adminUsers.forEach(user => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-cream/30 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-4 text-sm font-medium text-ink">${user.name}</td>
+                    <td class="p-4 text-sm text-ink-muted">${user.email}</td>
+                    <td class="p-4 text-sm text-ink-muted">${user.joined}</td>
+                    <td class="p-4 text-right">
+                        <button onclick="deleteUser('${user.email}')" class="text-destructive/50 hover:text-destructive transition-colors" title="Delete User">
+                            <i data-lucide="trash-2" class="w-4 h-4 inline"></i>
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+            lucide.createIcons();
+        }
+
+        function renderRecentActivity() {
+            const adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+            const adminUsers = JSON.parse(localStorage.getItem('admin_users') || '[]');
+
+            // Recent Artists List
+            const recentArtistsContainer = document.getElementById('recent-artists-container');
+            if (recentArtistsContainer) {
+                recentArtistsContainer.innerHTML = '';
+                const latestArtists = [...adminArtists].reverse().slice(0, 3);
+                latestArtists.forEach(artist => {
+                    const initial = artist.name.charAt(0).toUpperCase();
+                    const div = document.createElement('div');
+                    div.className = "p-4 flex items-center justify-between hover:bg-cream/50 transition-colors";
+                    div.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-saffron-light flex items-center justify-center text-saffron-dark font-bold text-sm">
+                                ${initial}
+                            </div>
+                            <div>
+                                <p class="text-ink text-sm font-medium">${artist.name}</p>
+                                <p class="text-ink-muted text-xs">${getSpecDisplayName(artist.spec)}</p>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${artist.status === 'PENDING' ? 'bg-warning/20 text-[#d97706]' : artist.status === 'APPROVED' ? 'bg-success/20 text-success' : 'bg-destructive/10 text-destructive'}">
+                            ${artist.status.toLowerCase()}
+                        </span>
+                    `;
+                    recentArtistsContainer.appendChild(div);
+                });
+            }
+
+            // Recent Users List
+            const recentUsersContainer = document.getElementById('recent-users-container');
+            if (recentUsersContainer) {
+                recentUsersContainer.innerHTML = '';
+                const latestUsers = [...adminUsers].reverse().slice(0, 3);
+                latestUsers.forEach(user => {
+                    const initial = user.name.charAt(0).toUpperCase();
+                    const div = document.createElement('div');
+                    div.className = "p-4 flex items-center justify-between hover:bg-cream/50 transition-colors";
+                    div.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-sm">
+                                ${initial}
+                            </div>
+                            <div>
+                                <p class="text-ink text-sm font-medium">${user.name}</p>
+                                <p class="text-ink-muted text-xs">${user.email}</p>
+                            </div>
+                        </div>
+                        <span class="text-ink-muted text-xs">${user.joined}</span>
+                    `;
+                    recentUsersContainer.appendChild(div);
+                });
+            }
+        }
+
+        // Approve Artist Handler
+        function approveArtist(email) {
+            let adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+            const index = adminArtists.findIndex(a => a.email === email);
+            if (index !== -1) {
+                adminArtists[index].status = 'APPROVED';
+                localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
+
+                // Sync status back to users DB
+                let users = JSON.parse(localStorage.getItem('users') || '{}');
+                if (users[email]) {
+                    users[email].isApproved = true;
+                    users[email].isRejected = false;
+                    localStorage.setItem('users', JSON.stringify(users));
+                }
+                
+                refreshDashboard();
+            }
+        }
+
+        // Reject Artist Handler
+        function rejectArtist(email) {
+            let adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+            const index = adminArtists.findIndex(a => a.email === email);
+            if (index !== -1) {
+                adminArtists[index].status = 'REJECTED';
+                localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
+
+                // Sync status back to users DB
+                let users = JSON.parse(localStorage.getItem('users') || '{}');
+                if (users[email]) {
+                    users[email].isApproved = false;
+                    users[email].isRejected = true;
+                    localStorage.setItem('users', JSON.stringify(users));
+                }
+                
+                refreshDashboard();
+            }
+        }
+
+        // Delete Artist Handler
+        function deleteArtist(email) {
+            if (confirm(`Are you sure you want to delete the artist with email: ${email}?`)) {
+                let adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+                adminArtists = adminArtists.filter(a => a.email !== email);
+                localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
+
+                // Sync back to users DB by deleting
+                let users = JSON.parse(localStorage.getItem('users') || '{}');
+                if (users[email]) {
+                    delete users[email];
+                    localStorage.setItem('users', JSON.stringify(users));
+                }
+
+                refreshDashboard();
+            }
+        }
+
+        // Delete User Handler
+        function deleteUser(email) {
+            if (confirm(`Are you sure you want to delete the user with email: ${email}?`)) {
+                let adminUsers = JSON.parse(localStorage.getItem('admin_users') || '[]');
+                adminUsers = adminUsers.filter(u => u.email !== email);
+                localStorage.setItem('admin_users', JSON.stringify(adminUsers));
+
+                // Sync back to users DB by deleting
+                let users = JSON.parse(localStorage.getItem('users') || '{}');
+                if (users[email]) {
+                    delete users[email];
+                    localStorage.setItem('users', JSON.stringify(users));
+                }
+
+                // Also delete from artists if there
+                let adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+                adminArtists = adminArtists.filter(a => a.email !== email);
+                localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
+
+                refreshDashboard();
+            }
+        }
+    </script>
+</body>
+</html>

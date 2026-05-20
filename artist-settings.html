@@ -150,10 +150,14 @@ footer::before {
 <h1 class="font-headline-lg text-on-background text-4xl mb-2">Settings</h1>
 <p class="font-body-lg text-on-surface-variant">Manage your artist profile, sales & account.</p>
 </header>
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+<div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-10">
 <button onclick="showTab('profile')" id="btn-profile" class="tab-btn active flex items-center gap-4 p-6 rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:shadow-lg">
 <span class="material-symbols-outlined text-3xl">person</span>
 <div class="text-left"><h3 class="font-headline-md text-lg">Profile</h3><p class="text-xs opacity-70">Edit your details</p></div>
+</button>
+<button onclick="showTab('portfolio')" id="btn-portfolio" class="tab-btn flex items-center gap-4 p-6 rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:shadow-lg">
+<span class="material-symbols-outlined text-3xl">account_circle</span>
+<div class="text-left"><h3 class="font-headline-md text-lg">Portfolio</h3><p class="text-xs opacity-70">Showcase your works</p></div>
 </button>
 <button onclick="showTab('sales')" id="btn-sales" class="tab-btn flex items-center gap-4 p-6 rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:shadow-lg">
 <span class="material-symbols-outlined text-3xl">payments</span>
@@ -212,6 +216,127 @@ footer::before {
 </div>
 </div>
 </div>
+
+<div id="panel-portfolio" class="section-panel hidden">
+<div class="bg-surface-container-low border border-outline-variant p-8 rounded-xl relative">
+  <!-- View Mode Container -->
+  <div id="portfolio-view-mode" class="relative">
+    <div class="flex justify-between items-center mb-6 pb-6 border-b border-outline-variant">
+      <h2 class="font-headline-md text-2xl text-on-surface">Your Artist Portfolio</h2>
+      <button onclick="setPortfolioMode('edit')" class="flex items-center gap-2 px-5 py-2.5 bg-primary text-on-primary hover:brightness-110 shadow-lg transition-all rounded-lg text-xs font-bold uppercase tracking-wider">
+        <span class="material-symbols-outlined text-sm">edit</span> Edit Portfolio
+      </button>
+    </div>
+    
+    <div id="portfolio-view-content" class="space-y-8">
+      <!-- Dynamically Rendered Portfolio -->
+    </div>
+  </div>
+
+  <!-- Edit Mode Container -->
+  <div id="portfolio-edit-mode" class="hidden space-y-8">
+    <div class="flex justify-between items-center pb-6 border-b border-outline-variant">
+      <h2 class="font-headline-md text-2xl text-on-surface">Edit Portfolio Profile</h2>
+      <div class="flex gap-3">
+        <button onclick="setPortfolioMode('view')" class="px-5 py-2.5 border border-outline-variant text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg text-xs font-bold uppercase tracking-wider">Cancel</button>
+        <button onclick="savePortfolioData()" class="px-5 py-2.5 bg-primary text-on-primary hover:brightness-110 shadow-lg transition-all rounded-lg text-xs font-bold uppercase tracking-wider">Save Portfolio</button>
+      </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Achievements Info -->
+      <div class="flex flex-col gap-4 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant">
+        <h3 class="font-label-sm text-on-surface uppercase tracking-widest text-[11px] font-bold border-b border-outline-variant/30 pb-2">Achievements & Biography</h3>
+        <div class="flex flex-col gap-1">
+          <label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Exhibitions & Key Milestones</label>
+          <textarea id="port-achievements" class="bg-transparent border border-outline-variant text-on-surface focus:border-primary focus:ring-0 p-4 font-body-md resize-none rounded-lg" rows="5" placeholder="List your key exhibitions, galleries, and milestone awards..."></textarea>
+        </div>
+      </div>
+      
+      <!-- Theme Setting -->
+      <div class="flex flex-col gap-4 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant">
+        <h3 class="font-label-sm text-on-surface uppercase tracking-widest text-[11px] font-bold border-b border-outline-variant/30 pb-2">Portfolio Visuals</h3>
+        <div class="flex flex-col gap-3">
+          <label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Portfolio Theme Background Color</label>
+          <div class="flex gap-3 items-center flex-wrap" id="port-bg-options">
+            <button onclick="setPortBg('#fff8f6', this)" class="port-color-btn active size-8 rounded-full border-2 border-primary bg-[#fff8f6] shadow-sm hover:scale-105 transition-transform" data-color="#fff8f6" title="Classic Cream"></button>
+            <button onclick="setPortBg('#F5F0E8', this)" class="port-color-btn size-8 rounded-full border-2 border-transparent bg-[#F5F0E8] shadow-sm hover:scale-105 transition-transform" data-color="#F5F0E8" title="Antique Paper"></button>
+            <button onclick="setPortBg('#FFF8F0', this)" class="port-color-btn size-8 rounded-full border-2 border-transparent bg-[#FFF8F0] shadow-sm hover:scale-105 transition-transform" data-color="#FFF8F0" title="Warm Silk"></button>
+            <button onclick="setPortBg('#F2EFE9', this)" class="port-color-btn size-8 rounded-full border-2 border-transparent bg-[#F2EFE9] shadow-sm hover:scale-105 transition-transform" data-color="#F2EFE9" title="Natural Canvas"></button>
+          </div>
+          <div class="flex items-center gap-3 mt-2">
+            <input type="color" id="port-custom-bg" oninput="setPortBg(this.value)" class="w-8 h-8 rounded-md border border-outline-variant cursor-pointer">
+            <span class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Choose Custom Accent / Background Color</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Artworks Manager -->
+    <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant">
+      <h3 class="font-label-sm text-on-surface uppercase tracking-widest text-[11px] font-bold border-b border-outline-variant/30 pb-2 mb-6">Portfolio Artworks Showcase</h3>
+      
+      <!-- Current works list -->
+      <div id="port-artworks-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
+        <!-- Rendered items in edit mode -->
+      </div>
+      
+      <!-- Add artwork inputs -->
+      <div class="bg-surface-container-low border border-outline-variant p-6 rounded-xl space-y-4">
+        <h4 class="font-headline-md text-lg text-primary">Add Artwork to Portfolio</h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="flex flex-col gap-1">
+            <label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Title</label>
+            <input id="add-art-title" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 py-2 text-sm font-body-md" placeholder="e.g. Eternal Echoes" type="text">
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Price (₹)</label>
+            <input id="add-art-price" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 py-2 text-sm font-body-md" placeholder="0" type="number">
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Category / Medium</label>
+            <input id="add-art-category" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 py-2 text-sm font-body-md" placeholder="e.g. Traditional Folk Art" type="text">
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1">
+            <label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Image Option</label>
+            <select id="add-art-img-select" onchange="toggleArtImageInput()" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 py-2 text-sm font-body-md appearance-none">
+              <option value="preset">Choose Premium Preset Image</option>
+              <option value="url">Provide Custom Image URL</option>
+              <option value="file">Upload Local File</option>
+            </select>
+          </div>
+          
+          <div id="add-art-preset-container" class="flex flex-col gap-1">
+            <label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Preset Image</label>
+            <select id="add-art-preset" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 py-2 text-sm font-body-md appearance-none">
+              <option value="pics/madhubani_bg.png">Madhubani Design</option>
+              <option value="pics/pattachitra_art.png">Pattachitra Landscape</option>
+              <option value="pics/tanjore_art.png">Tanjore Gilded Masterpiece</option>
+              <option value="pics/warli_bg.png">Warli Folk Art</option>
+            </select>
+          </div>
+          <div id="add-art-url-container" class="hidden flex flex-col gap-1">
+            <label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Custom Image URL</label>
+            <input id="add-art-url" class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 py-2 text-sm font-body-md" placeholder="https://images.unsplash.com/..." type="text">
+          </div>
+          <div id="add-art-file-container" class="hidden flex flex-col gap-1">
+            <label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Select Local File</label>
+            <input id="add-art-file" class="py-2 text-sm font-body-md text-on-surface" type="file" accept="image/*">
+          </div>
+        </div>
+        
+        <button onclick="addArtworkToPortfolio()" class="h-10 px-6 bg-primary text-on-primary font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all rounded-lg flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm font-bold">add</span> Add Artwork to Portfolio
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
 <div id="panel-sales" class="section-panel">
 <div class="bg-surface-container-low border border-outline-variant p-8 rounded-xl">
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 pb-8 border-b border-outline-variant">
@@ -236,7 +361,7 @@ footer::before {
 <h2 class="font-headline-md text-2xl text-on-surface mb-3">Sign Out?</h2>
 <p class="font-body-md text-on-surface-variant mb-8">You will be redirected to the homepage. Your data is safely saved.</p>
 <div class="flex flex-col gap-3">
-<button onclick="window.location.href='index.html'" class="w-full h-14 bg-error text-on-error font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all rounded-lg flex items-center justify-center gap-2"><span class="material-symbols-outlined">logout</span>Logout</button>
+<button onclick="logout()" class="w-full h-14 bg-error text-on-error font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all rounded-lg flex items-center justify-center gap-2"><span class="material-symbols-outlined">logout</span>Logout</button>
 <button onclick="showTab('profile')" class="w-full h-14 border border-outline-variant text-on-surface font-body-md font-bold uppercase tracking-widest hover:bg-surface-container-high transition-all rounded-lg">Cancel</button>
 </div>
 </div>
@@ -254,7 +379,9 @@ document.getElementById('btn-'+tab).classList.add('active');
 }
 let profileLinks = [];
 function loadLinks() {
-  const stored = localStorage.getItem('artist_profile_links');
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+  if (!user) return;
+  const stored = localStorage.getItem('artist_profile_links_' + user.email);
   if (stored) {
     profileLinks = JSON.parse(stored);
   } else {
@@ -262,12 +389,13 @@ function loadLinks() {
       { title: 'Personal Website', url: 'https://amritaart.com' },
       { title: 'Instagram', url: 'https://instagram.com/amrita_madhubani' }
     ];
-    localStorage.setItem('artist_profile_links', JSON.stringify(profileLinks));
+    localStorage.setItem('artist_profile_links_' + user.email, JSON.stringify(profileLinks));
   }
   renderLinks();
 }
 function renderLinks() {
   const container = document.getElementById('links-container');
+  if (!container) return;
   container.innerHTML = '';
   if (profileLinks.length === 0) {
     container.innerHTML = `<p class="text-sm text-on-surface-variant italic py-2">No custom links added yet.</p>`;
@@ -291,6 +419,7 @@ function renderLinks() {
 function addUrl() {
   const titleInp = document.getElementById('new-link-title');
   const urlInp = document.getElementById('new-link-url');
+  if (!titleInp || !urlInp) return;
   const title = titleInp.value.trim();
   const url = urlInp.value.trim();
   if (!title || !url) {
@@ -324,11 +453,24 @@ let profileData = {
   photoUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T"
 };
 function loadProfile() {
-  const stored = localStorage.getItem('artist_profile_data');
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+  if (!user) return;
+  const profileKey = 'artist_profile_' + user.email;
+  const stored = localStorage.getItem(profileKey);
   if (stored) {
     profileData = JSON.parse(stored);
   } else {
-    localStorage.setItem('artist_profile_data', JSON.stringify(profileData));
+    profileData = {
+      fullName: user.fullName || "Amrita Raghavan",
+      displayName: user.fullName ? user.fullName.split(' ')[0] : "Amrita R.",
+      email: user.email || "amrita@paintedmuse.com",
+      phone: "+91 98765 43210",
+      specialization: user.spec || "Mithila (Madhubani)",
+      cityState: "Madhubani, Bihar",
+      bio: "Award-winning traditional artist with years of experience.",
+      photoUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T"
+    };
+    localStorage.setItem(profileKey, JSON.stringify(profileData));
   }
   document.getElementById('inp-full-name').value = profileData.fullName;
   document.getElementById('inp-display-name').value = profileData.displayName;
@@ -349,7 +491,11 @@ function updateProfilePic(event) {
   profileData.photoUrl = url;
 }
 function saveProfile() {
-  localStorage.setItem('artist_profile_links', JSON.stringify(profileLinks));
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+  if (!user) return;
+  const profileKey = 'artist_profile_' + user.email;
+
+  localStorage.setItem('artist_profile_links_' + user.email, JSON.stringify(profileLinks));
   profileData.fullName = document.getElementById('inp-full-name').value;
   profileData.displayName = document.getElementById('inp-display-name').value;
   profileData.email = document.getElementById('inp-email').value;
@@ -357,7 +503,31 @@ function saveProfile() {
   profileData.specialization = document.getElementById('inp-specialization').value;
   profileData.cityState = document.getElementById('inp-city-state').value;
   profileData.bio = document.getElementById('inp-bio').value;
-  localStorage.setItem('artist_profile_data', JSON.stringify(profileData));
+  localStorage.setItem(profileKey, JSON.stringify(profileData));
+
+  // Sync user info back to currentUser in localStorage
+  user.fullName = profileData.fullName;
+  user.spec = profileData.specialization;
+  localStorage.setItem('currentUser', JSON.stringify(user));
+
+  // Sync back to users database
+  let users = JSON.parse(localStorage.getItem('users') || '{}');
+  if (users[user.email]) {
+      users[user.email].fullName = profileData.fullName;
+      users[user.email].spec = profileData.specialization;
+      localStorage.setItem('users', JSON.stringify(users));
+  }
+
+  // Update admin_artists list if present
+  let adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+  const idx = adminArtists.findIndex(a => a.email === user.email);
+  if (idx !== -1) {
+      adminArtists[idx].name = profileData.fullName;
+      adminArtists[idx].spec = profileData.specialization;
+      adminArtists[idx].state = profileData.cityState.split(',').pop().trim();
+      localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
+  }
+
   document.getElementById('profile-header-name').textContent = profileData.fullName;
   document.getElementById('profile-header-role').textContent = profileData.specialization + " • Verified";
   const feedback = document.getElementById('save-feedback');
@@ -368,9 +538,314 @@ function saveProfile() {
     feedback.classList.add('opacity-0');
   }, 3000);
 }
+
+// Portfolio tab dynamic scripts
+let portfolioBgColor = '#fff8f6';
+let portfolioArtworks = [];
+let portfolioAchievements = '';
+let portfolioLinkFileBase64 = null;
+
+function toggleArtImageInput() {
+    const choice = document.getElementById('add-art-img-select').value;
+    document.getElementById('add-art-preset-container').classList.add('hidden');
+    document.getElementById('add-art-url-container').classList.add('hidden');
+    document.getElementById('add-art-file-container').classList.add('hidden');
+    
+    if (choice === 'preset') {
+        document.getElementById('add-art-preset-container').classList.remove('hidden');
+    } else if (choice === 'url') {
+        document.getElementById('add-art-url-container').classList.remove('hidden');
+    } else if (choice === 'file') {
+        document.getElementById('add-art-file-container').classList.remove('hidden');
+    }
+}
+
+function setPortfolioMode(mode) {
+    if (mode === 'edit') {
+        document.getElementById('portfolio-view-mode').classList.add('hidden');
+        document.getElementById('portfolio-edit-mode').classList.remove('hidden');
+        document.getElementById('port-achievements').value = portfolioAchievements;
+        renderEditArtworks();
+    } else {
+        document.getElementById('portfolio-view-mode').classList.remove('hidden');
+        document.getElementById('portfolio-edit-mode').classList.add('hidden');
+        renderPortfolioView();
+    }
+}
+
+function setPortBg(color, btn) {
+    portfolioBgColor = color;
+    document.querySelectorAll('.port-color-btn').forEach(b => {
+        b.classList.remove('border-primary');
+        b.classList.add('border-transparent');
+    });
+    if (btn) {
+        btn.classList.remove('border-transparent');
+        btn.classList.add('border-primary');
+    } else {
+        const customInput = document.getElementById('port-custom-bg');
+        if (customInput) customInput.value = color;
+    }
+}
+
+function addArtworkToPortfolio() {
+    const title = document.getElementById('add-art-title').value.trim();
+    const price = parseFloat(document.getElementById('add-art-price').value) || 0;
+    const category = document.getElementById('add-art-category').value.trim();
+    const choice = document.getElementById('add-art-img-select').value;
+    
+    let imgUrl = 'pics/madhubani_bg.png';
+    if (choice === 'preset') {
+        imgUrl = document.getElementById('add-art-preset').value;
+    } else if (choice === 'url') {
+        imgUrl = document.getElementById('add-art-url').value.trim() || 'pics/madhubani_bg.png';
+    } else if (choice === 'file') {
+        imgUrl = portfolioLinkFileBase64 || 'pics/madhubani_bg.png';
+    }
+    
+    if (!title) {
+        alert("Please enter a title for the artwork.");
+        return;
+    }
+    
+    portfolioArtworks.push({
+        title,
+        price,
+        category: category || 'General Art',
+        imgUrl,
+        status: 'Available'
+    });
+    
+    // Clear inputs
+    document.getElementById('add-art-title').value = '';
+    document.getElementById('add-art-price').value = '';
+    document.getElementById('add-art-category').value = '';
+    document.getElementById('add-art-url').value = '';
+    document.getElementById('add-art-file').value = '';
+    portfolioLinkFileBase64 = null;
+    
+    renderEditArtworks();
+}
+
+function removePortArtwork(idx) {
+    portfolioArtworks.splice(idx, 1);
+    renderEditArtworks();
+}
+
+function renderEditArtworks() {
+    const container = document.getElementById('port-artworks-list');
+    if (!container) return;
+    container.innerHTML = '';
+    
+    if (portfolioArtworks.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-on-surface-variant italic text-sm">No artworks in portfolio. Use the form below to add.</div>`;
+        return;
+    }
+    
+    portfolioArtworks.forEach((art, idx) => {
+        const card = document.createElement('div');
+        card.className = 'border border-outline-variant bg-surface-container-low rounded-xl overflow-hidden shadow-sm flex flex-col relative group';
+        card.innerHTML = `
+            <div class="aspect-video bg-surface-dim overflow-hidden relative">
+                <img class="w-full h-full object-cover" src="${art.imgUrl}">
+                <button onclick="removePortArtwork(${idx})" class="absolute top-2 right-2 bg-error hover:brightness-110 text-on-error p-1.5 rounded-full shadow-md flex items-center justify-center transition-all z-10" title="Delete from Portfolio">
+                    <span class="material-symbols-outlined text-sm">delete</span>
+                </button>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                    <h4 class="font-bold text-on-surface text-sm truncate">${art.title}</h4>
+                    <p class="text-xs text-on-surface-variant">${art.category}</p>
+                </div>
+                <div class="mt-2 text-primary font-bold text-sm">
+                    ₹${Number(art.price).toLocaleString('en-IN')}
+                </div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function loadPortfolioData() {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (!user) return;
+    
+    const profileKey = 'artist_profile_' + user.email;
+    const storedProfile = localStorage.getItem(profileKey);
+    if (storedProfile) {
+        const profile = JSON.parse(storedProfile);
+        portfolioAchievements = profile.achievements || "• Solo Exhibition, Visual Arts Gallery, New Delhi (2023)\n• State Award for Traditional Crafts, Government of Bihar (2021)\n• National Traditional Artists Conclave Participant (2020)";
+        portfolioBgColor = profile.themeBgColor || '#fff8f6';
+    } else {
+        portfolioAchievements = "• Solo Exhibition, Visual Arts Gallery, New Delhi (2023)\n• State Award for Traditional Crafts, Government of Bihar (2021)\n• National Traditional Artists Conclave Participant (2020)";
+        portfolioBgColor = '#fff8f6';
+    }
+    
+    document.querySelectorAll('.port-color-btn').forEach(btn => {
+        if (btn.getAttribute('data-color') === portfolioBgColor) {
+            btn.classList.add('border-primary');
+            btn.classList.remove('border-transparent');
+        } else {
+            btn.classList.remove('border-primary');
+            btn.classList.add('border-transparent');
+        }
+    });
+    const customInput = document.getElementById('port-custom-bg');
+    if (customInput) customInput.value = portfolioBgColor;
+    
+    const postsKey = 'artist_posts_' + user.email;
+    const storedPosts = localStorage.getItem(postsKey);
+    if (storedPosts) {
+        portfolioArtworks = JSON.parse(storedPosts);
+    } else {
+        portfolioArtworks = [
+            { title: 'Madhubani Lotus Pond', price: 18000, category: 'Mithila Traditional', imgUrl: 'pics/madhubani_bg.png', status: 'Available' },
+            { title: 'Tree of Life', price: 24000, category: 'Warli Folk Art', imgUrl: 'pics/warli_bg.png', status: 'Available' }
+        ];
+        localStorage.setItem(postsKey, JSON.stringify(portfolioArtworks));
+    }
+    
+    renderPortfolioView();
+    
+    // Add event listener for custom image upload file input
+    const fileInp = document.getElementById('add-art-file');
+    if (fileInp) {
+        fileInp.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    portfolioLinkFileBase64 = evt.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+}
+
+function savePortfolioData() {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (!user) return;
+    
+    const profileKey = 'artist_profile_' + user.email;
+    const storedProfile = localStorage.getItem(profileKey);
+    let profile = storedProfile ? JSON.parse(storedProfile) : {};
+    
+    profile.achievements = document.getElementById('port-achievements').value;
+    profile.themeBgColor = portfolioBgColor;
+    localStorage.setItem(profileKey, JSON.stringify(profile));
+    
+    const postsKey = 'artist_posts_' + user.email;
+    localStorage.setItem(postsKey, JSON.stringify(portfolioArtworks));
+    
+    portfolioAchievements = profile.achievements;
+    
+    alert('Portfolio saved successfully!');
+    setPortfolioMode('view');
+}
+
+function renderPortfolioView() {
+    const container = document.getElementById('portfolio-view-content');
+    if (!container) return;
+    
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (!user) return;
+    
+    const profileKey = 'artist_profile_' + user.email;
+    const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
+    
+    const achListHTML = portfolioAchievements.split('\n')
+        .filter(line => line.trim() !== '')
+        .map(line => `<li class="flex items-start gap-2.5"><span class="text-primary mt-1">•</span><span class="text-on-surface font-body-md text-sm">${line.replace(/^[•\-\*\s]+/, '')}</span></li>`)
+        .join('');
+        
+    let artGridHTML = '';
+    if (portfolioArtworks.length === 0) {
+        artGridHTML = `<div class="col-span-full py-12 text-center text-on-surface-variant italic font-body-lg">No artworks showcase added yet.</div>`;
+    } else {
+        portfolioArtworks.forEach(art => {
+            artGridHTML += `
+                <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="aspect-square bg-surface-dim relative overflow-hidden group">
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="${art.imgUrl}">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                    </div>
+                    <div class="p-5">
+                        <span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-primary/10 text-primary">${art.category}</span>
+                        <h4 class="font-headline-md text-base mt-2.5 text-on-surface">${art.title}</h4>
+                        <div class="h-[1px] w-full bg-outline-variant my-3"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-on-surface-variant uppercase tracking-wider font-medium">${art.status || 'Available'}</span>
+                            <span class="text-primary font-bold text-sm">₹${Number(art.price).toLocaleString('en-IN')}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    
+    container.innerHTML = `
+        <div class="rounded-2xl p-8 border border-outline-variant shadow-soft transition-all" style="background-color: ${portfolioBgColor};">
+            <div class="flex flex-col md:flex-row gap-8 items-center md:items-start border-b border-outline-variant/30 pb-8 mb-8">
+                <div class="size-32 rounded-full overflow-hidden border-2 border-primary/20 shadow-md flex-shrink-0">
+                    <img class="w-full h-full object-cover" src="${profile.photoUrl || 'pics/dp.png'}">
+                </div>
+                <div class="text-center md:text-left flex-1">
+                    <h3 class="font-headline-lg text-3xl text-on-surface font-bold">${profile.fullName || user.fullName}</h3>
+                    <p class="text-primary font-medium tracking-wide text-sm mt-1 uppercase">${profile.specialization || user.spec || 'Traditional Artist'}</p>
+                    <p class="text-on-surface-variant text-xs mt-1 flex items-center justify-center md:justify-start gap-1">
+                        <span class="material-symbols-outlined text-sm">location_on</span> ${profile.cityState || 'India'}
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 justify-center md:justify-start mt-4">
+                        <a href="${profile.website || '#'}" target="_blank" class="flex items-center gap-1.5 text-xs text-primary font-bold tracking-wide uppercase hover:underline">
+                            <span class="material-symbols-outlined text-sm">language</span> Website
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="flex items-center gap-1.5 text-xs text-primary font-bold tracking-wide uppercase hover:underline">
+                            <span class="material-symbols-outlined text-sm">link</span> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-6">
+                    <div>
+                        <h4 class="font-headline-md text-lg text-on-surface border-b border-outline-variant/30 pb-2 mb-3">Artist Bio</h4>
+                        <p class="font-body-md text-sm text-on-surface-variant leading-relaxed italic">
+                            "${profile.bio || 'Crafting heritage art forms with meticulous devotion.'}"
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-headline-md text-lg text-on-surface border-b border-outline-variant/30 pb-2 mb-3">Exhibitions & Awards</h4>
+                        <ul class="space-y-3">
+                            ${achListHTML || '<li class="text-xs text-on-surface-variant italic">No achievements listed yet.</li>'}
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-2">
+                    <h4 class="font-headline-md text-lg text-on-surface border-b border-outline-variant/30 pb-2 mb-6">Masterpieces Collection</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        ${artGridHTML}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   loadLinks();
   loadProfile();
+  loadPortfolioData();
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const targetTab = urlParams.get('tab');
+  if (targetTab === 'portfolio') {
+      showTab('portfolio');
+  }
 });
 </script>
 <script>
@@ -410,6 +885,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const user = JSON.parse(localStorage.getItem('currentUser'));
         if (!user) {
             window.location.href = 'signin.html';
+            return;
+        }
+        
+        const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+        const userInDb = usersDb[user.email];
+        if (!userInDb || !userInDb.isApproved) {
+            window.location.href = 'signin.html?error=pending';
             return;
         }
         
