@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Secure Checkout | PaymentGate</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#7a7582",
+                        "on-secondary-container": "#645a7d",
+                        "on-tertiary-fixed": "#241a00",
+                        "surface-container": "#f2ecf4",
+                        "secondary": "#63597c",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#fdf7ff",
+                        "secondary-fixed": "#e9ddff",
+                        "on-primary-fixed": "#22005d",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "primary-container": "#6750a4",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#503d00",
+                        "primary-fixed": "#e9ddff",
+                        "outline-variant": "#cbc4d2",
+                        "on-surface-variant": "#494551",
+                        "on-surface": "#1d1b20",
+                        "surface": "#ffffff",
+                        "primary-fixed-dim": "#cfbcff",
+                        "surface-dim": "#ded8e0",
+                        "tertiary-fixed": "#ffdf93",
+                        "surface-container-highest": "#e6e0e9",
+                        "inverse-on-surface": "#f5eff7",
+                        "surface-tint": "#6750a4",
+                        "primary": "#4f378a",
+                        "secondary-container": "#e1d4fd",
+                        "tertiary": "#765b00",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "surface-container-low": "#f8f2fa",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "on-primary-container": "#e0d2ff",
+                        "background": "#f8f9fc",
+                        "on-background": "#1d1b20",
+                        "inverse-primary": "#cfbcff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e6e0e9",
+                        "inverse-surface": "#322f35",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#ece6ee",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "on-secondary-fixed": "#1f1635"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "xxl": "48px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8f9fc;
+            background-image:
+                radial-gradient(circle at 50% 50%, rgba(79, 55, 138, 0.03), transparent),
+                radial-gradient(1px 1px at 20px 30px, #4f378a11, transparent),
+                radial-gradient(1px 1px at 40px 70px, #4f378a05, transparent),
+                radial-gradient(1.5px 1.5px at 100px 150px, #4f378a11, transparent);
+            background-size: 100% 100%, 300px 300px, 200px 200px, 400px 400px;
+            background-repeat: repeat;
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #4f378a 0%, #6750a4 100%);
+        }
+
+        .glass-summary {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(79, 55, 138, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(79, 55, 138, 0.08);
+        }
+
+        .input-glow:focus {
+            box-shadow: 0 0 0 4px rgba(79, 55, 138, 0.1);
+            border-color: #4f378a;
+        }
+
+        .shimmer-text {
+            background: linear-gradient(90deg, #4f378a, #6750a4, #4f378a);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: 200% center;
+            }
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="font-body-md text-on-surface antialiased min-h-screen flex flex-col">
+    <!-- TopAppBar -->
+    <header class="fixed top-0 w-full border-b border-outline-variant/30 bg-white/80 backdrop-blur-xl z-50">
+        <div class="flex items-center justify-between px-md py-sm max-w-container-max mx-auto h-16">
+            <div class="flex items-center gap-sm">
+                <span class="material-symbols-outlined text-primary"
+                    style="font-variation-settings: 'FILL' 1;">lock</span>
+                <h1 class="font-headline-sm text-headline-sm font-bold text-primary">Secure Checkout</h1>
+            </div>
+            <button
+                class="hover:bg-primary/5 transition-colors px-md py-xs rounded-full font-label-md text-label-md text-on-surface-variant scale-95 active:scale-90 transition-transform">
+                Help
+            </button>
+        </div>
+    </header>
+    <main class="flex-grow pt-24 pb-12 px-md">
+        <div class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+            <!-- Left: Transaction Details -->
+            <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-md">
+                <!-- Payment Methods Card -->
+                <section class="md:col-span-2 bg-surface rounded-xl p-lg border border-outline-variant/30 shadow-sm">
+                    <h2 class="font-headline-md text-headline-md mb-lg text-on-surface">Payment Method</h2>
+                    <div class="grid grid-cols-2 gap-md">
+                        <!-- Card Option -->
+                        <div id="tab-credit-card"
+                            class="cursor-pointer border-2 border-primary bg-primary/5 rounded-lg p-md flex flex-col items-center gap-sm transition-all">
+                            <span class="material-symbols-outlined text-primary scale-125">credit_card</span>
+                            <span class="font-label-md text-label-md text-primary font-semibold">Credit Card</span>
+                        </div>
+                        <!-- UPI Option -->
+                        <div id="tab-digital-wallet"
+                            class="cursor-pointer border border-outline-variant/50 hover:border-primary/50 rounded-lg p-md flex flex-col items-center gap-sm transition-all group">
+                            <span
+                                class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">qr_code_2</span>
+                            <span
+                                class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary font-semibold">UPI</span>
+                        </div>
+                    </div>
+                    <!-- Error Alert Banner -->
+                    <div id="error-alert"
+                        class="mt-lg p-md bg-red-50 border border-red-200 text-red-700 rounded-xl font-body-sm text-body-sm hidden flex gap-sm items-start">
+                        <span class="material-symbols-outlined text-red-600 text-[18px]">gpp_maybe</span>
+                        <div class="flex-grow">
+                            <p class="font-semibold" id="error-title">Payment failed</p>
+                            <p class="opacity-90 text-[12px]" id="error-desc">Please check details or try another card.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="payment-form-container" class="mt-xl">
+                        <!-- Card Form (Default) -->
+                        <form id="form-credit-card" class="space-y-lg">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                                <div class="md:col-span-2">
+                                    <label
+                                        class="block font-label-sm text-label-sm mb-xs text-on-surface-variant">Cardholder
+                                        Name</label>
+                                    <input id="cardholder-name"
+                                        class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-lg p-md font-body-md text-body-md focus:outline-none input-glow transition-all uppercase tracking-widest text-on-surface"
+                                        placeholder="ALEXANDRA VANCE" type="text" required />
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block font-label-sm text-label-sm mb-xs text-on-surface-variant">Card
+                                        Number</label>
+                                    <div class="relative">
+                                        <input id="card-number"
+                                            class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-lg p-md font-body-md text-body-md focus:outline-none input-glow transition-all text-on-surface"
+                                            placeholder="•••• •••• •••• 4242" type="text" required />
+                                        <div class="absolute right-md top-1/2 -translate-y-1/2 flex gap-xs">
+                                            <div id="badge-visa"
+                                                class="w-8 h-5 bg-on-surface/5 border border-outline-variant/30 rounded flex items-center justify-center text-[8px] font-bold text-on-surface-variant transition-colors">
+                                                VISA</div>
+                                            <div id="badge-mastercard"
+                                                class="w-8 h-5 bg-on-surface/5 border border-outline-variant/30 rounded flex items-center justify-center text-[8px] font-bold text-on-surface-variant transition-colors">
+                                                MC</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label
+                                        class="block font-label-sm text-label-sm mb-xs text-on-surface-variant">Expiry
+                                        Date</label>
+                                    <input id="card-expiry"
+                                        class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-lg p-md font-body-md text-body-md focus:outline-none input-glow transition-all text-on-surface"
+                                        placeholder="MM/YY" type="text" required />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block font-label-sm text-label-sm mb-xs text-on-surface-variant">CVV</label>
+                                    <input id="card-cvv"
+                                        class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-lg p-md font-body-md text-body-md focus:outline-none input-glow transition-all text-on-surface"
+                                        placeholder="•••" type="password" required />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                <!-- Security Trust Badges -->
+                <div class="md:col-span-2 flex flex-wrap justify-between items-center gap-md opacity-80 px-sm">
+                    <div class="flex items-center gap-xs text-on-surface-variant">
+                        <span class="material-symbols-outlined text-[18px]">verified_user</span>
+                        <span class="font-label-sm text-label-sm">End-to-End Encryption</span>
+                    </div>
+                    <div class="flex items-center gap-xs text-on-surface-variant">
+                        <span class="material-symbols-outlined text-[18px]">shield</span>
+                        <span class="font-label-sm text-label-sm">Fraud Detection Active</span>
+                    </div>
+                    <div class="flex items-center gap-xs text-on-surface-variant">
+                        <span class="material-symbols-outlined text-[18px]">gpp_good</span>
+                        <span class="font-label-sm text-label-sm">Secure Server Protocol</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Right: Order Summary -->
+            <aside class="lg:col-span-5 sticky top-24">
+                <div class="glass-summary rounded-xl p-xl overflow-hidden relative">
+                    <h2 class="font-headline-md text-headline-md mb-xl shimmer-text">Your Selection</h2>
+                    <div class="space-y-lg">
+                        <div class="flex gap-md">
+                            <div
+                                class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 border border-outline-variant/20">
+                                <img alt="Item Preview" class="w-full h-full object-cover"
+                                    data-alt="A high-end, contemporary abstract art piece featuring deep midnight indigo swirls and metallic silver veins, presented in a minimalist gallery setting with dramatic spotlighting. The composition evokes a sense of mystery and architectural depth."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3oaAqkpu5b2M5gbl2pE3-ZdPsUWXBTNMuAuxKG5a2ezhf8NcaIY_7cDTj0zWr_X0TKjTY1SDjCRMQvlItnyDyfbpeYAS5SxU-JKHftC2DW69Yd_lnHrotqF0hsXIisEdbptP0kAnihy30vDKNFKZHqttn7wGN0oQNIyu9V1NEN7aMzCxY2WbPlNxWB91YmLISBU-LY3YZyFeq8VGjYznykqvBQm3ry4JEipsKlaTQqvPKkvXPA0TzBhYmigVtnxLJscyEb1xtjX8h" />
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <p class="font-headline-sm text-headline-sm text-on-surface">Celestial Membership</p>
+                                <p class="font-label-md text-label-md text-on-surface-variant">Annual Premium Tier</p>
+                            </div>
+                        </div>
+                        <hr class="border-outline-variant/20" />
+                        <div class="space-y-md">
+                            <div class="flex justify-between font-body-md text-body-md">
+                                <span class="text-on-surface-variant">Subtotal</span>
+                                <span class="text-on-surface font-medium">$1,200.00</span>
+                            </div>
+                            <div class="flex justify-between font-body-md text-body-md">
+                                <span class="text-on-surface-variant">Platform Fee</span>
+                                <span class="text-on-surface font-medium">$12.50</span>
+                            </div>
+                            <div class="flex justify-between font-body-md text-body-md">
+                                <span class="text-on-surface-variant">Secured Tax</span>
+                                <span class="text-on-surface font-medium">$96.00</span>
+                            </div>
+                        </div>
+                        <div class="pt-lg border-t border-outline-variant/30 flex justify-between items-end">
+                            <div>
+                                <p
+                                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">
+                                    Total Amount</p>
+                                <p class="font-display-lg text-display-lg shimmer-text">$1,308.50</p>
+                            </div>
+                            <span class="material-symbols-outlined text-primary scale-150 mb-sm">task_alt</span>
+                        </div>
+                        <button id="btn-submit-payment"
+                            class="w-full primary-gradient text-white font-headline-sm text-headline-sm py-lg rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-sm">
+                            <span id="btn-icon" class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">lock</span>
+                            <span id="btn-text">Complete Secure Payment</span>
+                        </button>
+                    </div>
+                </div>
+                <div
+                    class="mt-lg p-md rounded-lg bg-surface border border-outline-variant/30 flex items-center gap-md shadow-sm">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-primary">support_agent</span>
+                    </div>
+                    <div>
+                        <p class="font-label-md text-label-md text-on-surface font-semibold">Concierge Support Available
+                        </p>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">Our agents are online to assist
+                            with your transaction.</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full py-lg mt-auto bg-white border-t border-outline-variant/30">
+        <div class="flex flex-col items-center gap-sm text-center px-lg">
+            <div class="font-label-md text-label-md font-semibold text-on-surface">PaymentGate</div>
+            <div class="font-label-sm text-label-sm text-primary font-medium">PCI DSS Certified • SSL Secured</div>
+            <div class="flex gap-md mt-xs">
+                <a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors"
+                    href="#">Terms</a>
+                <a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors"
+                    href="#">Privacy</a>
+                <a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors"
+                    href="#">Powered by PaymentGate</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Modal for 3DS authentication challenge -->
+    <div id="challenge-modal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] hidden items-center justify-center p-md">
+        <div class="bg-white rounded-2xl w-full max-w-lg h-[650px] overflow-hidden flex flex-col shadow-2xl relative">
+            <div class="absolute right-4 top-4 z-[101]">
+                <button id="close-challenge"
+                    class="bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 p-2 rounded-full flex items-center justify-center transition-colors">
+                    <span class="material-symbols-outlined text-[16px] font-bold">close</span>
+                </button>
+            </div>
+            <iframe id="challenge-frame" src="" class="w-full h-full border-none"></iframe>
+        </div>
+    </div>
+
+    <!-- Modal for UPI App Launch Redirect -->
+    <div id="upi-modal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] hidden items-center justify-center p-md text-center">
+        <div
+            class="bg-white rounded-3xl p-xl max-w-sm w-full shadow-2xl border border-slate-100 flex flex-col items-center gap-lg">
+            <div
+                class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary animate-bounce">
+                <span class="material-symbols-outlined text-3xl">qr_code_2</span>
+            </div>
+            <div class="space-y-sm">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface text-lg font-bold" id="upi-modal-title">
+                    Launching Google Pay...</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant text-[14px]">Please authorize the payment of
+                    <span class="font-bold text-primary">$1,308.50</span> on your app. Desktop simulation auto-resolves
+                    in a few seconds.</p>
+            </div>
+            <div class="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+        </div>
+    </div>
+
+    <script>
+        // API Base endpoint determination (handles file:// or external dev servers)
+        const API_BASE = window.location.origin.includes(':3000') ? '' : 'http://localhost:3000';
+
+        // Redirection helper resolving file:// protocol directory paths properly
+        function navigateTo(url) {
+            let targetUrl = url;
+            if (window.location.protocol === 'file:') {
+                if (targetUrl.startsWith('/')) {
+                    const currentDir = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+                    targetUrl = currentDir + targetUrl.substring(1);
+                }
+            }
+            window.location.href = targetUrl;
+        }
+
+        // Payment Workflow States
+        let currentMethod = 'credit_card'; // credit_card, digital_wallet (representing UPI)
+        let sessionToken = null;
+        let checkoutSessionId = null;
+        let currentProvider = 'google_pay'; // Default UPI provider
+
+        const pricingData = {
+            productId: "membership_celestial_annual",
+            productName: "Celestial Membership",
+            productTier: "Annual Premium Tier",
+            pricing: {
+                subtotal: 1200.00,
+                platformFee: 12.50,
+                tax: 96.00,
+                total: 1308.50,
+                currency: "USD"
+            }
+        };
+
+        // Form Templates for UPI payment methods
+        const walletTemplate = `
+            <div id="form-digital-wallet" class="space-y-lg animate-fade-in">
+                <p class="block font-label-sm text-label-sm mb-xs text-on-surface-variant font-medium">Select UPI App</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-md">
+                    <div onclick="selectWalletProvider('google_pay', this)" id="wallet-google"
+                        class="cursor-pointer border-2 border-primary bg-primary/5 rounded-lg p-md flex flex-col items-center gap-sm transition-all wallet-btn text-center">
+                        <span class="material-symbols-outlined text-primary scale-110">phone_iphone</span>
+                        <span class="font-label-md text-label-md text-primary font-semibold">Google Pay</span>
+                    </div>
+                    <div onclick="selectWalletProvider('phonepe', this)" id="wallet-phonepe"
+                        class="cursor-pointer border border-outline-variant/50 hover:border-primary/55 rounded-lg p-md flex flex-col items-center gap-sm transition-all wallet-btn text-on-surface-variant text-center">
+                        <span class="material-symbols-outlined">payments</span>
+                        <span class="font-label-md text-label-md">PhonePe</span>
+                    </div>
+                    <div onclick="selectWalletProvider('paytm', this)" id="wallet-paytm"
+                        class="cursor-pointer border border-outline-variant/50 hover:border-primary/55 rounded-lg p-md flex flex-col items-center gap-sm transition-all wallet-btn text-on-surface-variant text-center">
+                        <span class="material-symbols-outlined">account_balance_wallet</span>
+                        <span class="font-label-md text-label-md">Paytm</span>
+                    </div>
+                    <div onclick="selectWalletProvider('amazon_pay', this)" id="wallet-amazon"
+                        class="cursor-pointer border border-outline-variant/50 hover:border-primary/55 rounded-lg p-md flex flex-col items-center gap-sm transition-all wallet-btn text-on-surface-variant text-center">
+                        <span class="material-symbols-outlined">shopping_bag</span>
+                        <span class="font-label-md text-label-md">Amazon Pay</span>
+                    </div>
+                    <div onclick="selectWalletProvider('bhim', this)" id="wallet-bhim"
+                        class="cursor-pointer border border-outline-variant/50 hover:border-primary/55 rounded-lg p-md flex flex-col items-center gap-sm transition-all wallet-btn text-on-surface-variant text-center">
+                        <span class="material-symbols-outlined">qr_code_scanner</span>
+                        <span class="font-label-md text-label-md">BHIM UPI</span>
+                    </div>
+                </div>
+                <div class="mt-lg">
+                    <label class="block font-label-sm text-label-sm mb-xs text-on-surface-variant">Virtual Payment Address (UPI ID)</label>
+                    <input id="wallet-contact" type="text" value="alexandra.vance@okaxis"
+                        class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-lg p-md font-body-md text-body-md focus:outline-none input-glow transition-all text-on-surface"
+                        placeholder="username@bank" required />
+                </div>
+            </div>
+        `;
+
+        const cardTemplate = `
+            <form id="form-credit-card" class="space-y-lg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                    <div class="md:col-span-2">
+                        <label class="block font-label-sm text-label-sm mb-xs text-on-surface-variant">Cardholder Name</label>
+                        <input id="cardholder-name"
+                            class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-lg p-md font-body-md text-body-md focus:outline-none input-glow transition-all uppercase tracking-widest text-on-surface"
+                            placeholder="ALEXANDRA VANCE" type="text" required />
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block font-label-sm text-label-sm mb-xs text-on-surface-variant">Card Number</label>
+                        <div class="relative">
+                            <input id="card-number"
+                                class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-lg p-md font-body-md text-body-md focus:outline-none input-glow transition-all text-on-surface"
+                                placeholder="•••• •••• •••• 4242" type="text" required />
+                            <div class="absolute right-md top-1/2 -translate-y-1/2 flex gap-xs">
+                                <div id="badge-visa"
+                                    class="w-8 h-5 bg-on-surface/5 border border-outline-variant/30 rounded flex items-center justify-center text-[8px] font-bold text-on-surface-variant transition-colors">
+                                    VISA</div>
+                                <div id="badge-mastercard"
+                                    class="w-8 h-5 bg-on-surface/5 border border-outline-variant/30 rounded flex items-center justify-center text-[8px] font-bold text-on-surface-variant transition-colors">
+                                    MC</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-label-sm text-label-sm mb-xs text-on-surface-variant">Expiry Date</label>
+                        <input id="card-expiry"
+                            class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-lg p-md font-body-md text-body-md focus:outline-none input-glow transition-all text-on-surface"
+                            placeholder="MM/YY" type="text" required />
+                    </div>
+                    <div>
+                        <label class="block font-label-sm text-label-sm mb-xs text-on-surface-variant">CVV</label>
+                        <input id="card-cvv"
+                            class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded-lg p-md font-body-md text-body-md focus:outline-none input-glow transition-all text-on-surface"
+                            placeholder="•••" type="password" required />
+                    </div>
+                </div>
+            </form>
+        `;
+
+        // 1. Initialize Checkout Session
+        async function initializeCheckout() {
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/checkout/initialize`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(pricingData)
+                });
+                const data = await response.json();
+                if (data.success) {
+                    checkoutSessionId = data.checkoutSessionId;
+                    sessionToken = data.sessionToken;
+                    console.log('Session initialized:', checkoutSessionId);
+                } else {
+                    showError('Session Error', 'Unable to initialize secure checkout. Please refresh.');
+                }
+            } catch (err) {
+                console.error(err);
+                showError('Network Connection Error', 'Cannot reach the secure server. Ensure your backend is running.');
+            }
+        }
+
+        // Apply input element focus styling dynamically
+        function applyFocusScaling() {
+            const inputs = document.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    const wrap = input.closest('.grid > div') || input.parentElement;
+                    wrap.classList.add('scale-[1.01]', 'transition-all');
+                });
+                input.addEventListener('blur', () => {
+                    const wrap = input.closest('.grid > div') || input.parentElement;
+                    wrap.classList.remove('scale-[1.01]');
+                });
+            });
+        }
+
+        // Live formatting for Credit Card inputs
+        function setupCardFormatting() {
+            const nameInp = document.getElementById('cardholder-name');
+            const numInp = document.getElementById('card-number');
+            const expInp = document.getElementById('card-expiry');
+            const cvvInp = document.getElementById('card-cvv');
+
+            if (!numInp) return;
+
+            // Name: uppercase formatting
+            nameInp.addEventListener('input', (e) => {
+                e.target.value = e.target.value.toUpperCase();
+            });
+
+            // Card Number spacing & Brand light up
+            numInp.addEventListener('input', (e) => {
+                let val = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/g, '');
+
+                // Card brand detection
+                const badgeVisa = document.getElementById('badge-visa');
+                const badgeMc = document.getElementById('badge-mastercard');
+                badgeVisa.className = "w-8 h-5 bg-on-surface/5 border border-outline-variant/30 rounded flex items-center justify-center text-[8px] font-bold text-on-surface-variant transition-colors";
+                badgeMc.className = "w-8 h-5 bg-on-surface/5 border border-outline-variant/30 rounded flex items-center justify-center text-[8px] font-bold text-on-surface-variant transition-colors";
+
+                if (val.startsWith('4')) {
+                    badgeVisa.className = "w-8 h-5 bg-indigo-50 border-2 border-indigo-600 rounded flex items-center justify-center text-[8px] font-extrabold text-indigo-700 transition-colors";
+                } else if (/^5[1-5]/.test(val) || /^2(22[1-9]|2[3-9]|[3-6]|7[0-1]|720)/.test(val)) {
+                    badgeMc.className = "w-8 h-5 bg-indigo-50 border-2 border-indigo-600 rounded flex items-center justify-center text-[8px] font-extrabold text-indigo-700 transition-colors";
+                }
+
+                // Chunk to 4 digits
+                let formatted = val.match(/.{1,4}/g);
+                e.target.value = formatted ? formatted.join(' ') : '';
+            });
+
+            // Expiry MM/YY formatting
+            expInp.addEventListener('input', (e) => {
+                let val = e.target.value.replace(/\D/g, '');
+                if (val.length >= 2) {
+                    e.target.value = val.slice(0, 2) + '/' + val.slice(2, 4);
+                } else {
+                    e.target.value = val;
+                }
+            });
+
+            // CVV numbers only
+            cvvInp.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4);
+            });
+        }
+
+        // Show Decline/Error Banner
+        function showError(title, desc) {
+            const banner = document.getElementById('error-alert');
+            document.getElementById('error-title').innerText = title;
+            document.getElementById('error-desc').innerText = desc;
+            banner.classList.remove('hidden');
+            banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function hideError() {
+            document.getElementById('error-alert').classList.add('hidden');
+        }
+
+        // Tab selection actions
+        const tabCard = document.getElementById('tab-credit-card');
+        const tabWallet = document.getElementById('tab-digital-wallet');
+        const container = document.getElementById('payment-form-container');
+
+        function clearTabs() {
+            [tabCard, tabWallet].forEach(tab => {
+                tab.className = "cursor-pointer border border-outline-variant/50 hover:border-primary/55 rounded-lg p-md flex flex-col items-center gap-sm transition-all group text-on-surface-variant";
+                const icon = tab.querySelector('.material-symbols-outlined');
+                const label = tab.querySelector('.font-label-md');
+                icon.className = "material-symbols-outlined text-on-surface-variant group-hover:text-primary";
+                label.className = "font-label-md text-label-md text-on-surface-variant group-hover:text-primary";
+            });
+        }
+
+        function setTabActive(tab) {
+            clearTabs();
+            tab.className = "cursor-pointer border-2 border-primary bg-primary/5 rounded-lg p-md flex flex-col items-center gap-sm transition-all";
+            const icon = tab.querySelector('.material-symbols-outlined');
+            const label = tab.querySelector('.font-label-md');
+            icon.className = "material-symbols-outlined text-primary scale-125";
+            label.className = "font-label-md text-label-md text-primary font-semibold";
+            hideError();
+        }
+
+        tabCard.addEventListener('click', () => {
+            currentMethod = 'credit_card';
+            setTabActive(tabCard);
+            container.innerHTML = cardTemplate;
+            setupCardFormatting();
+            applyFocusScaling();
+        });
+
+        tabWallet.addEventListener('click', () => {
+            currentMethod = 'digital_wallet';
+            setTabActive(tabWallet);
+            container.innerHTML = walletTemplate;
+            applyFocusScaling();
+        });
+
+        function selectWalletProvider(provider, element) {
+            currentProvider = provider;
+            document.querySelectorAll('.wallet-btn').forEach(btn => {
+                btn.className = "cursor-pointer border border-outline-variant/50 hover:border-primary/55 rounded-lg p-md flex flex-col items-center gap-sm transition-all wallet-btn text-on-surface-variant text-center";
+                btn.querySelector('.material-symbols-outlined').className = "material-symbols-outlined";
+                btn.querySelector('.font-label-md').className = "font-label-md text-label-md";
+            });
+            element.className = "cursor-pointer border-2 border-primary bg-primary/5 rounded-lg p-md flex flex-col items-center gap-sm transition-all wallet-btn text-center";
+            element.querySelector('.material-symbols-outlined').className = "material-symbols-outlined text-primary scale-110";
+            element.querySelector('.font-label-md').className = "font-label-md text-label-md text-primary font-semibold";
+        }
+
+        // 3. Complete Secure Payment Click
+        const btnSubmit = document.getElementById('btn-submit-payment');
+        const btnText = document.getElementById('btn-text');
+        const btnIcon = document.getElementById('btn-icon');
+
+        function setSubmitting(submitting) {
+            if (submitting) {
+                btnSubmit.disabled = true;
+                btnText.innerText = "Processing Secure Transaction...";
+                btnIcon.innerText = "sync";
+                btnIcon.classList.add('animate-spin');
+                hideError();
+            } else {
+                btnSubmit.disabled = false;
+                btnText.innerText = "Complete Secure Payment";
+                btnIcon.innerText = "lock";
+                btnIcon.classList.remove('animate-spin');
+            }
+        }
+
+        btnSubmit.addEventListener('click', async () => {
+            if (!checkoutSessionId || !sessionToken) {
+                showError('Session expired', 'No active checkout session. Refreshing details...');
+                await initializeCheckout();
+                return;
+            }
+
+            setSubmitting(true);
+
+            try {
+                if (currentMethod === 'credit_card') {
+                    await handleCardPayment();
+                } else if (currentMethod === 'digital_wallet') {
+                    await handleWalletPayment();
+                }
+            } catch (err) {
+                console.error(err);
+                showError('Connection Error', 'Failed to communicate with gateway APIs.');
+                setSubmitting(false);
+            }
+        });
+
+        // CREDIT CARD API WORKFLOW
+        async function handleCardPayment() {
+            const name = document.getElementById('cardholder-name').value;
+            const num = document.getElementById('card-number').value.replace(/\s+/g, '');
+            const expiry = document.getElementById('card-expiry').value;
+            const cvv = document.getElementById('card-cvv').value;
+
+            if (!name || num.length < 13 || expiry.length < 5 || cvv.length < 3) {
+                showError('Validation Failed', 'Please populate all credit card fields correctly.');
+                setSubmitting(false);
+                return;
+            }
+
+            let cardToken = 'tok_visa';
+            if (num.endsWith('4200') || cvv === '000') {
+                cardToken = 'tok_chargeDeclined';
+            } else if (num.endsWith('3000') || cvv === '300') {
+                cardToken = 'tok_3ds'; // Triggers simulated 3DS modal challenge
+            }
+
+            const idempotencyKey = `idem_${Math.random().toString(36).substring(2, 15)}`;
+
+            const response = await fetch(`${API_BASE}/api/v1/checkout/payment/card`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionToken}`,
+                    'X-Session-Id': checkoutSessionId,
+                    'X-Idempotency-Key': idempotencyKey
+                },
+                body: JSON.stringify({
+                    checkoutSessionId,
+                    paymentMethod: 'credit_card',
+                    cardToken,
+                    cardholderName: name,
+                    deviceFingerprint: `fp_${Math.random().toString(36).substring(2, 12)}`,
+                    billingAddress: {
+                        line1: "123 Main Street",
+                        city: "New York",
+                        state: "NY",
+                        postalCode: "10001",
+                        country: "US"
+                    }
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                if (data.status === 'succeeded') {
+                    navigateTo(data.redirectUrl);
+                } else if (data.status === 'requires_authentication') {
+                    open3dsChallenge(data.authentication);
+                } else {
+                    pollPaymentStatus(data.paymentId);
+                }
+            } else {
+                showError(data.error?.message || 'Payment Declined', data.error?.details || 'Your transaction request was rejected.');
+                setSubmitting(false);
+            }
+        }
+
+        // UPI WALLET API WORKFLOW
+        async function handleWalletPayment() {
+            const vpa = document.getElementById('wallet-contact').value;
+            if (!vpa || !vpa.includes('@')) {
+                showError('Input Required', 'Please specify a valid Virtual Payment Address (UPI ID) containing @.');
+                setSubmitting(false);
+                return;
+            }
+
+            // Map provider to its friendly app name and custom app deep link scheme
+            let appName = 'Google Pay';
+            let deepLinkScheme = 'gpay://upi/pay';
+            if (currentProvider === 'phonepe') {
+                appName = 'PhonePe';
+                deepLinkScheme = 'phonepe://pay';
+            } else if (currentProvider === 'paytm') {
+                appName = 'Paytm';
+                deepLinkScheme = 'paytmmp://pay';
+            } else if (currentProvider === 'amazon_pay') {
+                appName = 'Amazon Pay';
+                deepLinkScheme = 'amazonpay://upi/pay';
+            } else if (currentProvider === 'bhim') {
+                appName = 'BHIM UPI';
+                deepLinkScheme = 'upi://pay';
+            }
+
+            // Construct standard UPI deep link containing payment parameters (amount $1,308.50)
+            const amountStr = '1308.50';
+            const upiLink = `${deepLinkScheme}?pa=paymentgate@icici&pn=PaymentGate&am=${amountStr}&cu=USD&tn=Celestial%20Membership`;
+
+            // Display dynamic launch redirect modal
+            document.getElementById('upi-modal-title').innerText = `Launching ${appName}...`;
+            const upiModal = document.getElementById('upi-modal');
+            upiModal.classList.remove('hidden');
+            upiModal.classList.add('flex');
+
+            console.log('Constructed UPI URI Scheme:', upiLink);
+
+            // Attempt to trigger the deep link redirect
+            try {
+                window.location.href = upiLink;
+            } catch (err) {
+                console.warn('Unable to launch custom URI scheme on this environment:', err);
+            }
+
+            // Call backend API to record the transaction details
+            const response = await fetch(`${API_BASE}/api/v1/checkout/payment/wallet`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    checkoutSessionId,
+                    paymentMethod: 'digital_wallet',
+                    walletType: currentProvider,
+                    walletToken: `upi_tok_${Math.random().toString(36).substring(2, 10)}`,
+                    billingContact: {
+                        name: "Alexandra Vance",
+                        email: `${currentProvider}@sim.upi`
+                    }
+                })
+            });
+
+            const data = await response.json();
+
+            // Wait 1.5 seconds to mock transaction validation on the client app before proceeding
+            setTimeout(() => {
+                upiModal.classList.remove('flex');
+                upiModal.classList.add('hidden');
+
+                if (data.success && data.status === 'succeeded') {
+                    navigateTo(data.redirectUrl);
+                } else {
+                    showError('UPI checkout failed', data.error?.message || 'Transaction could not be completed.');
+                    setSubmitting(false);
+                }
+            }, 1500);
+        }
+
+        // Realtime Polling Fallback
+        async function pollPaymentStatus(paymentId) {
+            let polls = 0;
+            const maxPolls = 15;
+            const interval = setInterval(async () => {
+                polls++;
+                try {
+                    const res = await fetch(`${API_BASE}/api/v1/checkout/payment/status/${paymentId}`);
+                    const data = await res.json();
+                    if (data.success) {
+                        if (data.status === 'succeeded') {
+                            clearInterval(interval);
+                            navigateTo(`/checkout-success.html?session=${checkoutSessionId}&payment=${paymentId}`);
+                        } else if (data.status === 'failed') {
+                            clearInterval(interval);
+                            showError(data.error?.message || 'Payment Declined', 'The transaction was rejected by your issuer.');
+                            setSubmitting(false);
+                        } else if (data.status === 'requires_authentication') {
+                            clearInterval(interval);
+                            open3dsChallenge({
+                                authenticationUrl: data.nextAction.authenticationUrl,
+                                challengeToken: data.nextAction.challengeToken
+                            });
+                        }
+                    }
+                } catch (e) {
+                    console.error(e);
+                }
+
+                if (polls >= maxPolls) {
+                    clearInterval(interval);
+                    showError('Timeout', 'The gateway did not reply in a timely manner. Please check your banking dashboard.');
+                    setSubmitting(false);
+                }
+            }, 1000);
+        }
+
+        // Open 3DS Challenge dialog
+        const modal = document.getElementById('challenge-modal');
+        const frame = document.getElementById('challenge-frame');
+        const closeBtn = document.getElementById('close-challenge');
+
+        function open3dsChallenge(authContext) {
+            frame.src = authContext.authenticationUrl;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        closeBtn.addEventListener('click', () => {
+            if (confirm('Cancel payment authentication challenge? Your payment will fail.')) {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                frame.src = '';
+                showError('Authentication Cancelled', '3DS card authorization process was interrupted by the cardholder.');
+                setSubmitting(false);
+            }
+        });
+
+        // Initialize session on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeCheckout();
+            setupCardFormatting();
+            applyFocusScaling();
+        });
+    </script>
+</body>
+
+</html>
