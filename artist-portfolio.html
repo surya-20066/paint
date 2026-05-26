@@ -243,7 +243,7 @@
                 </div>
 
                 <!-- Showcase Profile Info -->
-                <div class="max-w-5xl mx-auto px-8 -mt-24 relative z-10 space-y-12">
+                <div class="max-w-5xl mx-auto px-8 -mt-56 relative z-10 space-y-12">
                     <div class="glass-panel p-8 rounded-2xl flex flex-col md:flex-row gap-8 items-center md:items-start shadow-xl">
                         <div class="size-32 rounded-2xl overflow-hidden border-4 border-[#D4AF37]/45 shadow-md flex-shrink-0 bg-white">
                             <img id="showcase-avatar" class="w-full h-full object-cover" src="pics/dp.png" />
@@ -279,15 +279,17 @@
 
                     <!-- Biography & Achievements Row -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="glass-panel p-8 rounded-2xl shadow-md space-y-4">
-                            <h3 class="font-serif text-xl font-bold border-b border-border/30 pb-2 text-text">Artist Biography</h3>
-                            <p id="showcase-bio" class="text-sm text-text/80 leading-relaxed italic">
+                        <div class="glass-panel p-8 rounded-2xl shadow-md space-y-4 relative overflow-hidden">
+                            <div class="bio-pattern absolute inset-0 opacity-[0.08] pointer-events-none bg-cover bg-center"></div>
+                            <h3 class="font-serif text-xl font-bold border-b border-border/30 pb-2 text-text relative z-10">Artist Biography</h3>
+                            <p id="showcase-bio" class="text-sm text-text/80 leading-relaxed italic relative z-10">
                                 "Crafting heritage art forms with meticulous devotion."
                             </p>
                         </div>
-                        <div class="glass-panel p-8 rounded-2xl shadow-md space-y-4">
-                            <h3 class="font-serif text-xl font-bold border-b border-border/30 pb-2 text-text">Exhibitions & Milestones</h3>
-                            <ul id="showcase-achievements" class="space-y-3 text-sm text-text/80 leading-relaxed">
+                        <div class="glass-panel p-8 rounded-2xl shadow-md space-y-4 relative overflow-hidden">
+                            <div class="ach-pattern absolute inset-0 opacity-[0.08] pointer-events-none bg-cover bg-center"></div>
+                            <h3 class="font-serif text-xl font-bold border-b border-border/30 pb-2 text-text relative z-10">Exhibitions & Milestones</h3>
+                            <ul id="showcase-achievements" class="space-y-3 text-sm text-text/80 leading-relaxed relative z-10">
                                 <!-- Achievements will load dynamically -->
                             </ul>
                         </div>
@@ -295,7 +297,22 @@
 
                     <!-- Featured Latest Uploads (Image and Video) -->
                     <div class="space-y-6">
-                        <h3 class="font-serif text-2xl font-bold border-b border-border/30 pb-3 text-text">Latest Featured Uploads</h3>
+
+                        <!-- Masterpieces Collection Section -->
+                        <div class="space-y-4 pt-2">
+                            <div class="flex items-center justify-between border-b border-border/30 pb-3">
+                                <h3 class="font-serif text-2xl font-bold text-text">Masterpieces Collection</h3>
+                                <button onclick="window.location.href='gallery-immersive.html'"
+                                    class="text-xs font-bold text-primary uppercase tracking-widest hover:underline flex items-center gap-1 group">
+                                    View More <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+                                </button>
+                            </div>
+                            <p class="text-sm text-text/60 italic leading-relaxed">
+                                Click "View More" above to explore the artist's full collection of paintings, sketches, and cinematic tribal process videos in our immersive fullscreen exhibition gallery.
+                            </p>
+                        </div>
+
+                        <!-- Featured Cards -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="featured-uploads-grid">
                             <!-- Image card -->
                             <div id="featured-image-card" class="warli-border bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group cursor-pointer" onclick="openLightbox('img')">
@@ -327,20 +344,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Masterpieces Collection Section -->
-                    <div class="space-y-6 pt-4">
-                        <div class="flex items-center justify-between border-b border-border/30 pb-3">
-                            <h3 class="font-serif text-2xl font-bold text-text">Masterpieces Collection</h3>
-                            <button onclick="window.location.href='gallery-immersive.html'"
-                                class="text-xs font-bold text-primary uppercase tracking-widest hover:underline flex items-center gap-1 group">
-                                View More <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
-                            </button>
-                        </div>
-                        <p class="text-sm text-text/60 italic leading-relaxed">
-                            Click "View More" above to explore the artist's full collection of paintings, sketches, and cinematic tribal process videos in our immersive fullscreen exhibition gallery.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -568,6 +571,15 @@
             
             document.getElementById('portfolio-showcase-container').style.backgroundColor = bgColor;
             document.getElementById('showcase-cover-pattern').style.backgroundImage = `url('${pattern}')`;
+            document.body.style.backgroundColor = bgColor;
+            const mainEl = document.querySelector('main');
+            if (mainEl) mainEl.style.backgroundColor = bgColor;
+
+            // Apply selected pattern to the two cards below details card
+            const bioPattern = document.querySelector('.bio-pattern');
+            const achPattern = document.querySelector('.ach-pattern');
+            if (bioPattern) bioPattern.style.backgroundImage = `url('${pattern}')`;
+            if (achPattern) achPattern.style.backgroundImage = `url('${pattern}')`;
 
             // Update UI texts
             document.getElementById('showcase-avatar').src = photoUrl;
@@ -705,7 +717,7 @@
 
         // Share intents
         function shareAction(platform) {
-            const shareUrl = window.location.origin + '/portfolio.html?artist=' + encodeURIComponent(currentUser.email);
+            const shareUrl = window.location.origin + '/artist-portfolio.html?artist=' + encodeURIComponent(currentUser.email);
             const title = "Exquisite Heritage Art Portfolio by " + currentUser.fullName;
             const message = "Explore my portfolio and masterpieces collection at The Painted Muse: " + shareUrl;
 

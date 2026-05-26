@@ -136,8 +136,8 @@
             </p>
         </div>
 
-        <!-- Masonry / Columns Grid Layout -->
-        <div id="masonry-grid" class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-6 space-y-6 w-full">
+        <!-- Uniform Grid Layout -->
+        <div id="masonry-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
             <!-- Cards will be populated dynamically -->
         </div>
 
@@ -218,12 +218,12 @@
                 const currentUser = JSON.parse(localStorage.getItem('currentUser'));
                 if (artistParam) {
                     // Public view back
-                    window.location.href = 'portfolio.html?artist=' + encodeURIComponent(artistParam);
+                    window.location.href = 'artist-portfolio.html?artist=' + encodeURIComponent(artistParam);
                 } else if (currentUser) {
                     // Private dashboard back
                     window.location.href = 'artist-portfolio.html';
                 } else {
-                    window.location.href = 'portfolio.html';
+                    window.location.href = 'artist-portfolio.html';
                 }
             };
         }
@@ -355,22 +355,22 @@
 
             items.forEach((item, index) => {
                 const card = document.createElement('div');
-                card.className = "break-inside-avoid mb-6 bg-white/70 backdrop-blur-md warli-border rounded-xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group";
+                card.className = "bg-white/70 backdrop-blur-md warli-border rounded-xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group flex flex-col";
                 
                 // Content loading
                 let mediaHtml = '';
                 if (item.type === 'painting') {
                     mediaHtml = `
-                        <div class="relative overflow-hidden bg-cream">
-                            <img class="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500" src="${item.mediaUrl}" loading="lazy" />
+                        <div class="relative overflow-hidden bg-cream aspect-square">
+                            <img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500" src="${item.mediaUrl}" loading="lazy" />
                             <span class="absolute top-3 left-3 bg-[#B5451B] text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Painting</span>
                             ${item.status === 'Sold' ? `<span class="absolute top-3 right-3 bg-stone-900 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Sold</span>` : ''}
                         </div>
                     `;
                 } else {
                     mediaHtml = `
-                        <div class="relative overflow-hidden bg-cream">
-                            <video class="w-full h-auto object-cover" src="${item.mediaUrl}" loop muted playsinline loading="lazy"></video>
+                        <div class="relative overflow-hidden bg-cream aspect-square">
+                            <video class="w-full h-full object-cover" src="${item.mediaUrl}" loop muted playsinline loading="lazy"></video>
                             <div class="absolute inset-0 bg-black/25 flex items-center justify-center group-hover:bg-black/35 transition-colors">
                                 <span class="material-symbols-outlined text-white text-5xl opacity-85 group-hover:scale-110 transition-transform">play_circle</span>
                             </div>
