@@ -19,14 +19,14 @@ const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'super_secret_jwt_key_paymentgate_32_chars_long';
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET || 'super_secret_webhook_signature_key';
 
-// CORS Configuration
+
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Session-Id', 'X-Idempotency-Key']
 }));
 
-// Express Security headers, customized to allow Tailwind, Google Fonts, and images
+
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -42,19 +42,19 @@ app.use(helmet({
 
 app.use(morgan('dev'));
 
-// Webhook endpoint needs raw body parser for signature verification
+
 app.post('/api/v1/webhooks/payment-gateway', express.raw({ type: 'application/json' }), handleWebhook);
 
-// Body parser for other endpoints
+
 app.use(express.json());
 
-// Serve static frontend files from workspace root
+
 app.use(express.static(path.resolve(__dirname, '../')));
 
-// Global rate limiting
+
 const globalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000, 
+  max: 100, 
   message: {
     success: false,
     error: {
@@ -66,10 +66,10 @@ const globalLimiter = rateLimit({
 });
 app.use('/api/', globalLimiter);
 
-// Strict rate limit for payments
+
 const paymentLimiter = rateLimit({
-  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000', 10), // 15 mins
-  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '10', 10), // 10 attempts
+  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000', 10), 
+  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '10', 10), 
   message: {
     success: false,
     error: {
@@ -83,9 +83,7 @@ const paymentLimiter = rateLimit({
   legacyHeaders: false
 });
 
-/**
- * Middleware: Verify JWT Session Token
- */
+
 function verifySessionToken(req, res, next) {
   const token = req.headers.authorization?.replace('Bearer ', '');
 
@@ -116,10 +114,7 @@ function verifySessionToken(req, res, next) {
   }
 }
 
-/**
- * 1. INITIALIZE CHECKOUT SESSION
- * POST /api/v1/checkout/initialize
- */
+
 app.post('/api/v1/checkout/initialize', async (req, res) => {
   try {
     const {
@@ -134,7 +129,7 @@ app.post('/api/v1/checkout/initialize', async (req, res) => {
       redirectUrls = {}
     } = req.body;
 
-    // Validation
+    
     if (!productId || !pricing || !pricing.total) {
       return res.status(400).json({
         success: false,
@@ -236,10 +231,7 @@ app.post('/api/v1/checkout/initialize', async (req, res) => {
   }
 });
 
-/**
- * 2. PROCESS CREDIT CARD PAYMENT
- * POST /api/v1/checkout/payment/card
- */
+
 app.post('/api/v1/checkout/payment/card', verifySessionToken, paymentLimiter, async (req, res) => {
   try {
     const {
@@ -267,7 +259,7 @@ app.post('/api/v1/checkout/payment/card', verifySessionToken, paymentLimiter, as
       });
     }
 
-    // 1. Verify Idempotency
+    
     if (idempotencyKey) {
       const existingPayment = await db.query('SELECT * FROM payments WHERE idempotency_key = $1', [idempotencyKey]);
       if (existingPayment.rows.length > 0) {
@@ -277,7 +269,7 @@ app.post('/api/v1/checkout/payment/card', verifySessionToken, paymentLimiter, as
       }
     }
 
-    // 2. Load Checkout Session
+    
     const sessionRes = await db.query('SELECT * FROM checkout_sessions WHERE session_id = $1', [headerSessionId]);
     if (sessionRes.rows.length === 0) {
       return res.status(404).json({
@@ -292,7 +284,7 @@ app.post('/api/v1/checkout/payment/card', verifySessionToken, paymentLimiter, as
 
     const session = sessionRes.rows[0];
 
-    // Verify session state & expiration
+    
     if (session.status === 'completed') {
       return res.status(400).json({
         success: false,
@@ -315,7 +307,7 @@ app.post('/api/v1/checkout/payment/card', verifySessionToken, paymentLimiter, as
       });
     }
 
-    // 3. Initiate payment records
+    
     const paymentId = `pay_${crypto.randomBytes(8).toString('hex')}`;
     const orderId = `ORD_${new Date().toISOString().slice(0, 10).replace(/-/g, '_')}_${crypto.randomBytes(3).toString('hex').toUpperCase()}`;
 
@@ -335,13 +327,13 @@ app.post('/api/v1/checkout/payment/card', verifySessionToken, paymentLimiter, as
 
     await db.query(insertPaymentQuery, paymentParams);
 
-    // Write payment timeline event
+    
     await db.query(`
       INSERT INTO payment_events (payment_id, event_type, status, message, timestamp)
       VALUES ($1, 'payment_initiated', 'initiated', 'Payment request received from client', CURRENT_TIMESTAMP)
     `, [paymentId]);
 
-    // 4. Dispatch to background process queue
+    
     const queuePayload = {
       paymentId,
       checkoutSessionId: session.session_id,
@@ -357,10 +349,10 @@ app.post('/api/v1/checkout/payment/card', verifySessionToken, paymentLimiter, as
 
     await queue.queuePaymentProcessing(queuePayload);
 
-    // 5. Poll database for status updates (simulate sync-wait-with-async-fallback)
+    
     let processedPayment = null;
-    const pollInterval = 200; // ms
-    const maxAttempts = 15;    // 3.0 seconds max
+    const pollInterval = 200; 
+    const maxAttempts = 15;    
 
     for (let attempts = 0; attempts < maxAttempts; attempts++) {
       await new Promise(resolve => setTimeout(resolve, pollInterval));
@@ -373,7 +365,7 @@ app.post('/api/v1/checkout/payment/card', verifySessionToken, paymentLimiter, as
       }
     }
 
-    // 6. Return response based on outcome (or processing status if queue is backed up)
+    
     return returnPaymentResponse(processedPayment, res);
 
   } catch (error) {
@@ -389,10 +381,7 @@ app.post('/api/v1/checkout/payment/card', verifySessionToken, paymentLimiter, as
   }
 });
 
-/**
- * 3. COMPLETE 3DS AUTHENTICATION
- * POST /api/v1/checkout/payment/card/complete-3ds
- */
+
 app.post('/api/v1/checkout/payment/card/complete-3ds', async (req, res) => {
   try {
     const { paymentId, challengeToken, authenticationResult } = req.body;
@@ -408,7 +397,7 @@ app.post('/api/v1/checkout/payment/card/complete-3ds', async (req, res) => {
       });
     }
 
-    // Fetch payment record
+    
     const paymentRes = await db.query('SELECT * FROM payments WHERE payment_id = $1', [paymentId]);
     if (paymentRes.rows.length === 0) {
       return res.status(404).json({
@@ -428,7 +417,7 @@ app.post('/api/v1/checkout/payment/card/complete-3ds', async (req, res) => {
     }
 
     if (authenticationResult === 'authenticated') {
-      // Complete checkout session and payment success
+      
       await db.query(`
         UPDATE payments 
         SET status = 'succeeded', three_ds_authenticated = 1, authenticated_at = CURRENT_TIMESTAMP, succeeded_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP
@@ -446,12 +435,12 @@ app.post('/api/v1/checkout/payment/card/complete-3ds', async (req, res) => {
         VALUES ($1, '3ds_authentication_success', 'succeeded', '3D Secure authentication successful. Payment captured.', CURRENT_TIMESTAMP)
       `, [paymentId]);
 
-      // Reload payment row
+      
       const updatedRes = await db.query('SELECT * FROM payments WHERE payment_id = $1', [paymentId]);
       return returnPaymentResponse(updatedRes.rows[0], res);
 
     } else {
-      // 3DS Authentication Failed
+      
       await db.query(`
         UPDATE payments 
         SET status = 'failed', failure_code = 'authentication_failed', failure_message = '3D Secure authentication failed.', failed_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP
@@ -480,10 +469,7 @@ app.post('/api/v1/checkout/payment/card/complete-3ds', async (req, res) => {
   }
 });
 
-/**
- * 4. PROCESS DIGITAL WALLET PAYMENT
- * POST /api/v1/checkout/payment/wallet
- */
+
 app.post('/api/v1/checkout/payment/wallet', async (req, res) => {
   try {
     const { checkoutSessionId, paymentMethod, walletType, walletToken, billingContact = {}, shippingContact = {} } = req.body;
@@ -517,7 +503,7 @@ app.post('/api/v1/checkout/payment/wallet', async (req, res) => {
     const orderId = `ORD_${new Date().toISOString().slice(0, 10).replace(/-/g, '_')}_${crypto.randomBytes(3).toString('hex').toUpperCase()}`;
     const walletDetails = { walletType, walletToken, billingContact, shippingContact };
 
-    // Digital wallet is captured immediately for demo/simulated gateway
+    
     const insertQuery = `
       INSERT INTO payments (
         payment_id, checkout_session_id, order_id, amount, currency,
@@ -559,10 +545,7 @@ app.post('/api/v1/checkout/payment/wallet', async (req, res) => {
   }
 });
 
-/**
- * 5. PROCESS NET BANKING PAYMENT
- * POST /api/v1/checkout/payment/netbanking
- */
+
 app.post('/api/v1/checkout/payment/netbanking', async (req, res) => {
   try {
     const { checkoutSessionId, paymentMethod, bankCode, accountHolderName } = req.body;
@@ -595,7 +578,7 @@ app.post('/api/v1/checkout/payment/netbanking', async (req, res) => {
     const orderId = `ORD_${new Date().toISOString().slice(0, 10).replace(/-/g, '_')}_${crypto.randomBytes(3).toString('hex').toUpperCase()}`;
     const bankDetails = { bankCode, accountHolderName };
 
-    // Net Banking starts in 'initiated' / 'processing' status
+    
     const insertQuery = `
       INSERT INTO payments (
         payment_id, checkout_session_id, order_id, amount, currency,
@@ -639,11 +622,7 @@ app.post('/api/v1/checkout/payment/netbanking', async (req, res) => {
   }
 });
 
-/**
- * 5b. NET BANKING CALLBACK
- * GET /api/v1/checkout/payment/netbanking/callback
- * Simulated callback page redirecting after payment submission at mock bank
- */
+
 app.get('/api/v1/checkout/payment/netbanking/callback', async (req, res) => {
   try {
     const { paymentId, status } = req.query;
@@ -677,7 +656,7 @@ app.get('/api/v1/checkout/payment/netbanking/callback', async (req, res) => {
         VALUES ($1, 'net_banking_success', 'succeeded', 'Net banking callback processed successfully.', CURRENT_TIMESTAMP)
       `, [paymentId]);
 
-      // Redirect to frontend success page
+      
       res.redirect(`/checkout-success.html?session=${payment.checkout_session_id}&payment=${paymentId}`);
     } else {
       await db.query(`
@@ -700,10 +679,7 @@ app.get('/api/v1/checkout/payment/netbanking/callback', async (req, res) => {
   }
 });
 
-/**
- * 6. GET PAYMENT STATUS
- * GET /api/v1/checkout/payment/status/:paymentId
- */
+
 app.get('/api/v1/checkout/payment/status/:paymentId', async (req, res) => {
   try {
     const { paymentId } = req.params;
@@ -722,7 +698,7 @@ app.get('/api/v1/checkout/payment/status/:paymentId', async (req, res) => {
 
     const payment = paymentRes.rows[0];
 
-    // Fetch timeline events for this payment
+    
     const eventsRes = await db.query(`
       SELECT status, event_type, message, timestamp 
       FROM payment_events 
@@ -736,7 +712,7 @@ app.get('/api/v1/checkout/payment/status/:paymentId', async (req, res) => {
       message: evt.message
     }));
 
-    // Formulate polling response
+    
     let nextAction = null;
     if (payment.status === 'requires_authentication') {
       nextAction = {
@@ -779,16 +755,13 @@ app.get('/api/v1/checkout/payment/status/:paymentId', async (req, res) => {
   }
 });
 
-/**
- * 7. WEBHOOK RECEIVER (FROM PAYMENT GATEWAY)
- * POST /api/v1/webhooks/payment-gateway
- */
+
 async function handleWebhook(req, res) {
   try {
     const signature = req.headers['stripe-signature'] || req.headers['x-webhook-signature'];
     const webhookId = `wh_${crypto.randomBytes(8).toString('hex')}`;
 
-    // Convert body to string if Buffer, or use text
+    
     let payloadString = '';
     if (Buffer.isBuffer(req.body)) {
       payloadString = req.body.toString('utf8');
@@ -805,14 +778,14 @@ async function handleWebhook(req, res) {
       return res.status(400).json({ error: 'Invalid JSON body' });
     }
 
-    // 1. Verify Webhook Signature (Stripe or Mock)
+    
     const isMockWebhook = !signature || signature === 'mock' || process.env.STRIPE_SECRET_KEY === 'mock';
     let signatureValid = false;
 
     if (isMockWebhook) {
-      signatureValid = true; // Automatically trusted in mock mode
+      signatureValid = true; 
     } else {
-      // Real Stripe signature check
+      
       try {
         const stripeInstance = require('stripe')(process.env.STRIPE_SECRET_KEY);
         stripeInstance.webhooks.constructEvent(payloadString, signature, process.env.STRIPE_WEBHOOK_SECRET);
@@ -826,7 +799,7 @@ async function handleWebhook(req, res) {
     const eventType = payloadJson.type || 'payment_intent.succeeded';
     const source = isMockWebhook ? 'mock_gateway' : 'stripe';
 
-    // 2. Log Webhook entry in db
+    
     await db.query(`
       INSERT INTO webhook_logs (
         webhook_id, source, event_type, payload, signature, signature_valid, processed, received_at
@@ -837,7 +810,7 @@ async function handleWebhook(req, res) {
       return res.status(401).json({ error: 'Signature verification failed' });
     }
 
-    // 3. Process webhook events (async, return status 200 immediately)
+    
     process.nextTick(async () => {
       try {
         console.log(`Webhook: Processing event ${eventType} async...`);
@@ -851,7 +824,7 @@ async function handleWebhook(req, res) {
           paymentIntentId = pi.id;
           metadata = pi.metadata || {};
 
-          // Update associated payment status to succeeded if not already updated
+          
           const paymentId = metadata.paymentId;
           if (paymentId) {
             const paymentCheck = await db.query('SELECT status, checkout_session_id FROM payments WHERE payment_id = $1', [paymentId]);
@@ -876,7 +849,7 @@ async function handleWebhook(req, res) {
           }
         }
 
-        // Mark webhook log as processed
+        
         await db.query(`
           UPDATE webhook_logs 
           SET processed = 1, processing_status = 'success', processed_at = CURRENT_TIMESTAMP
@@ -901,10 +874,7 @@ async function handleWebhook(req, res) {
   }
 }
 
-/**
- * 8. VALIDATE CARD DETAILS (CLIENT-SIDE HELPER)
- * POST /api/v1/checkout/validate/card
- */
+
 app.post('/api/v1/checkout/validate/card', (req, res) => {
   try {
     const { cardNumber, expiryMonth, expiryYear, cvv } = req.body;
@@ -916,13 +886,13 @@ app.post('/api/v1/checkout/validate/card', (req, res) => {
       });
     }
 
-    // Clean input
+    
     const cleanNum = cardNumber.replace(/\s+/g, '').trim();
     const cleanMonth = (expiryMonth || '').trim();
     const cleanYear = (expiryYear || '').trim();
     const cleanCvv = (cvv || '').trim();
 
-    // 1. Luhn Check
+    
     let sum = 0;
     let shouldDouble = false;
     for (let i = cleanNum.length - 1; i >= 0; i--) {
@@ -936,7 +906,7 @@ app.post('/api/v1/checkout/validate/card', (req, res) => {
     }
     const luhnCheck = sum % 10 === 0 && cleanNum.length >= 13 && cleanNum.length <= 19;
 
-    // 2. Card Brand Detection
+    
     let cardBrand = 'unknown';
     let cardType = 'credit';
     if (/^4/.test(cleanNum)) cardBrand = 'visa';
@@ -944,11 +914,11 @@ app.post('/api/v1/checkout/validate/card', (req, res) => {
     else if (/^3[47]/.test(cleanNum)) cardBrand = 'amex';
     else if (/^6(?:011|5[0-9]{2})/.test(cleanNum)) cardBrand = 'discover';
 
-    // 3. Expiration Check
+    
     let expiryValid = false;
     if (cleanMonth && cleanYear) {
       const month = parseInt(cleanMonth, 10);
-      // Parse YY to YYYY
+      
       let year = parseInt(cleanYear, 10);
       if (year < 100) year += 2000;
 
@@ -963,7 +933,7 @@ app.post('/api/v1/checkout/validate/card', (req, res) => {
       }
     }
 
-    // 4. CVV Validation
+    
     let cvvValid = false;
     if (cleanCvv) {
       const expectedLength = cardBrand === 'amex' ? 4 : 3;
@@ -996,10 +966,7 @@ app.post('/api/v1/checkout/validate/card', (req, res) => {
   }
 });
 
-/**
- * 9. GET CHECKOUT SESSION
- * GET /api/v1/checkout/session/:sessionId
- */
+
 app.get('/api/v1/checkout/session/:sessionId', async (req, res) => {
   try {
     const { sessionId } = req.params;
@@ -1068,10 +1035,7 @@ app.get('/api/v1/checkout/session/:sessionId', async (req, res) => {
   }
 });
 
-/**
- * 10. CANCEL CHECKOUT
- * POST /api/v1/checkout/cancel
- */
+
 app.post('/api/v1/checkout/cancel', async (req, res) => {
   try {
     const { checkoutSessionId, reason } = req.body;
@@ -1125,9 +1089,7 @@ app.post('/api/v1/checkout/cancel', async (req, res) => {
   }
 });
 
-/**
- * Helper function to formulate payment responses
- */
+
 function returnPaymentResponse(payment, res) {
   if (!payment) {
     return res.status(202).json({
@@ -1137,7 +1099,7 @@ function returnPaymentResponse(payment, res) {
     });
   }
 
-  // 1. SUCCESS
+  
   if (payment.status === 'succeeded') {
     return res.status(200).json({
       success: true,
@@ -1165,7 +1127,7 @@ function returnPaymentResponse(payment, res) {
     });
   }
 
-  // 2. 3DS CHALLENGE REQUIRED
+  
   if (payment.status === 'requires_authentication') {
     return res.status(200).json({
       success: true,
@@ -1183,7 +1145,7 @@ function returnPaymentResponse(payment, res) {
     });
   }
 
-  // 3. FAILED
+  
   if (payment.status === 'failed') {
     return res.status(200).json({
       success: false,
@@ -1206,7 +1168,7 @@ function returnPaymentResponse(payment, res) {
     });
   }
 
-  // 4. PENDING (e.g. Net Banking redirection state)
+  
   if (payment.status === 'initiated' || payment.status === 'processing') {
     return res.status(202).json({
       success: true,
@@ -1225,7 +1187,7 @@ function returnPaymentResponse(payment, res) {
   });
 }
 
-// Global Exception handler
+
 app.use((err, req, res, next) => {
   console.error('Unhandled System Error:', err);
   res.status(500).json({
@@ -1238,7 +1200,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start Express Listener and Init DB
+
 db.initializeDatabase()
   .then(() => {
     app.listen(PORT, () => {

@@ -1,481 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Immersive Exhibition | The Painted Muse</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;700&family=Mrs+Saint+Delafield&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#B5451B",
-                        accent: "#D4AF37",
-                        background: "#FDFBF7",
-                        text: "#1A1208",
-                        cream: "#F5F0E8",
-                        border: "rgba(212, 175, 55, 0.2)"
-                    },
-                    fontFamily: {
-                        serif: ["Playfair Display", "serif"],
-                        sans: ["DM Sans", "sans-serif"],
-                        calligraphy: ["Mrs Saint Delafield", "cursive"]
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #FDFBF7;
-            color: #1A1208;
-            font-family: 'DM Sans', sans-serif;
-            transition: background-color 0.5s ease;
-        }
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Immersive Exhibition | The Painted Muse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;700&family=Mrs+Saint+Delafield&display=swap"
+rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+rel="stylesheet" />
+<script>
+tailwind.config = {
+darkMode: "class",
+theme: {
+extend: {
+colors: {
+primary: "#B5451B",
+accent: "#D4AF37",
+background: "#FDFBF7",
+text: "#1A1208",
+cream: "#F5F0E8",
+border: "rgba(212, 175, 55, 0.2)"
+},
+fontFamily: {
+serif: ["Playfair Display", "serif"],
+sans: ["DM Sans", "sans-serif"],
+calligraphy: ["Mrs Saint Delafield", "cursive"]
+}
+}
+}
+}
+</script>
+<style>
+body {
+background-color: #FDFBF7;
+color: #1A1208;
+font-family: 'DM Sans', sans-serif;
+transition: background-color 0.5s ease;
+}
+.paper-grain {
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+opacity: 0.035;
+pointer-events: none;
+}
 
-        .paper-grain {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            opacity: 0.035;
-            pointer-events: none;
-        }
+.custom-scrollbar::-webkit-scrollbar {
+width: 6px;
+height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+background: rgba(26, 18, 8, 0.05);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+background: #D4AF37;
+border-radius: 9999px;
+}
 
-        /* Gold Custom Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(26, 18, 8, 0.05);
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #D4AF37;
-            border-radius: 9999px;
-        }
-
-        /* Warli-style double border for card */
-        .warli-border {
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            position: relative;
-        }
-
-        .warli-border::before {
-            content: "";
-            position: absolute;
-            inset: 4px;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            pointer-events: none;
-        }
-
-        .filter-btn {
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn.active {
-            background-color: #B5451B;
-            color: white;
-            border-color: #B5451B;
-            box-shadow: 0 4px 12px rgba(181, 69, 27, 0.2);
-        }
-    </style>
+.warli-border {
+border: 1px solid rgba(212, 175, 55, 0.35);
+position: relative;
+}
+.warli-border::before {
+content: "";
+position: absolute;
+inset: 4px;
+border: 1px solid rgba(212, 175, 55, 0.15);
+pointer-events: none;
+}
+.filter-btn {
+transition: all 0.3s ease;
+}
+.filter-btn.active {
+background-color: #B5451B;
+color: white;
+border-color: #B5451B;
+box-shadow: 0 4px 12px rgba(181, 69, 27, 0.2);
+}
+</style>
 </head>
-
 <body class="bg-background min-h-screen flex flex-col custom-scrollbar overflow-x-hidden">
-    <!-- Grain Overlay -->
-    <div class="fixed inset-0 paper-grain z-50 pointer-events-none"></div>
+<div class="fixed inset-0 paper-grain z-50 pointer-events-none"></div>
+<nav class="sticky top-0 w-full z-40 bg-white/70 backdrop-blur-md flex justify-between items-center px-6 md:px-12 py-4 border-b border-border/20">
+<button id="back-btn" class="flex items-center gap-2 text-xs font-bold text-[#B5451B] uppercase tracking-wider hover:translate-x-[-4px] transition-transform">
+<span class="material-symbols-outlined text-sm font-bold">arrow_back</span> Back
+</button>
+<div class="text-center">
+<h1 class="font-serif text-lg md:text-xl font-bold tracking-tight text-text flex items-center gap-2 justify-center">
+<span id="artist-title-name">Amrita Raghavan</span>
+<span class="font-calligraphy text-2xl text-[#D4AF37] transform translate-y-0.5" id="artist-title-cal">Solo Exhibition</span>
+</h1>
+</div>
+<a href="index.html" class="flex items-center">
+<img src="pics/dp.png" alt="Logo" class="h-10 w-auto object-contain" />
+</a>
+</nav>
+<main class="flex-grow max-w-7xl mx-auto px-6 md:px-12 py-10 w-full flex flex-col gap-8">
+<div class="flex justify-center gap-3 md:gap-4 flex-wrap border-b border-border/10 pb-6">
+<button onclick="filterExhibition('all', this)" class="filter-btn active px-6 py-2.5 rounded-full border border-border text-xs font-bold uppercase tracking-wider hover:bg-cream">
+All Works
+</button>
+<button onclick="filterExhibition('painting', this)" class="filter-btn px-6 py-2.5 rounded-full border border-border text-xs font-bold uppercase tracking-wider hover:bg-cream">
+Paintings / Sketches
+</button>
+<button onclick="filterExhibition('video', this)" class="filter-btn px-6 py-2.5 rounded-full border border-border text-xs font-bold uppercase tracking-wider hover:bg-cream">
+Process Videos
+</button>
+</div>
+<div class="text-center md:text-left">
+<p id="exhibition-stats" class="text-xs text-text/60 italic uppercase tracking-wider">
+Loading works...
+</p>
+</div>
+<div id="masonry-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
+</div>
+<div id="empty-state" class="hidden flex flex-col items-center justify-center p-20 text-center space-y-4">
+<span class="material-symbols-outlined text-stone-300 text-6xl">photo_library</span>
+<h3 class="font-serif text-2xl text-text font-bold">No Artworks Found</h3>
+<p class="text-sm text-text/60 max-w-sm">This artist hasn't uploaded any media in this category yet.</p>
+</div>
+</main>
+<footer class="border-t border-border/20 bg-[#FDFBF7]/40 py-8 px-6 text-center text-stone-500 text-xs tracking-wider">
+<p>&copy; 2026 The Painted Muse Immersive Exhibition Gallery.</p>
+</footer>
+<div id="lightbox-modal" class="fixed inset-0 z-[130] bg-black/95 hidden items-center justify-center p-8 transition-all duration-300" onclick="closeLightbox()">
+<button class="absolute top-6 right-6 text-white/60 hover:text-white transition-colors cursor-pointer" onclick="closeLightbox()">
+<span class="material-symbols-outlined text-4xl">close</span>
+</button>
+<div class="max-w-4xl max-h-[85vh] w-full flex flex-col items-center justify-center space-y-4" onclick="event.stopPropagation()">
+<img id="lightbox-img" class="max-w-full max-h-[75vh] object-contain hidden rounded-lg shadow-2xl" src="" />
+<video id="lightbox-vid" class="max-w-full max-h-[75vh] object-contain hidden rounded-lg shadow-2xl" controls autoplay></video>
+<h4 id="lightbox-title" class="text-white font-serif text-xl font-bold">Artwork Title</h4>
+<p id="lightbox-desc" class="text-stone-300 text-xs max-w-lg text-center leading-relaxed">Description text</p>
+</div>
+</div>
+<script>
+let artistEmail = '';
+let allItems = [];
+let db;
+const dbName = "ReelsDB";
+const storeName = "videos";
+function initDB() {
+return new Promise((resolve, reject) => {
+const request = indexedDB.open(dbName, 1);
+request.onerror = event => reject(event.target.error);
+request.onsuccess = event => {
+db = event.target.result;
+resolve(db);
+};
+request.onupgradeneeded = event => {
+const db = event.target.result;
+if (!db.objectStoreNames.contains(storeName)) {
+db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
+}
+};
+});
+}
 
-    <!-- Immersive Minimal Header -->
-    <nav class="sticky top-0 w-full z-40 bg-white/70 backdrop-blur-md flex justify-between items-center px-6 md:px-12 py-4 border-b border-border/20">
-        <!-- Back Button -->
-        <button id="back-btn" class="flex items-center gap-2 text-xs font-bold text-[#B5451B] uppercase tracking-wider hover:translate-x-[-4px] transition-transform">
-            <span class="material-symbols-outlined text-sm font-bold">arrow_back</span> Back
-        </button>
+function resolveArtistEmail() {
+const urlParams = new URLSearchParams(window.location.search);
+const artistParam = urlParams.get('artist');
+if (artistParam) {
+return artistParam;
+}
+const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+if (currentUser) {
+return currentUser.email;
+}
+return 'amrita@paintedmuse.com'; 
+}
 
-        <!-- Center: Exhibition Title -->
-        <div class="text-center">
-            <h1 class="font-serif text-lg md:text-xl font-bold tracking-tight text-text flex items-center gap-2 justify-center">
-                <span id="artist-title-name">Amrita Raghavan</span>
-                <span class="font-calligraphy text-2xl text-[#D4AF37] transform translate-y-0.5" id="artist-title-cal">Solo Exhibition</span>
-            </h1>
-        </div>
+function setupBackButton() {
+const urlParams = new URLSearchParams(window.location.search);
+const artistParam = urlParams.get('artist');
+const backBtn = document.getElementById('back-btn');
+backBtn.onclick = () => {
+const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+if (artistParam) {
 
-        <!-- Right Side: Logo -->
-        <a href="index.html" class="flex items-center">
-            <img src="pics/dp.png" alt="Logo" class="h-10 w-auto object-contain" />
-        </a>
-    </nav>
+window.location.href = 'artist-portfolio.html?artist=' + encodeURIComponent(artistParam);
+} else if (currentUser) {
 
-    <!-- Main Content Container -->
-    <main class="flex-grow max-w-7xl mx-auto px-6 md:px-12 py-10 w-full flex flex-col gap-8">
-        <!-- Interactive Category Filters -->
-        <div class="flex justify-center gap-3 md:gap-4 flex-wrap border-b border-border/10 pb-6">
-            <button onclick="filterExhibition('all', this)" class="filter-btn active px-6 py-2.5 rounded-full border border-border text-xs font-bold uppercase tracking-wider hover:bg-cream">
-                All Works
-            </button>
-            <button onclick="filterExhibition('painting', this)" class="filter-btn px-6 py-2.5 rounded-full border border-border text-xs font-bold uppercase tracking-wider hover:bg-cream">
-                Paintings / Sketches
-            </button>
-            <button onclick="filterExhibition('video', this)" class="filter-btn px-6 py-2.5 rounded-full border border-border text-xs font-bold uppercase tracking-wider hover:bg-cream">
-                Process Videos
-            </button>
-        </div>
+window.location.href = 'artist-portfolio.html';
+} else {
+window.location.href = 'artist-portfolio.html';
+}
+};
+}
 
-        <!-- Exhibition Stats Banner -->
-        <div class="text-center md:text-left">
-            <p id="exhibition-stats" class="text-xs text-text/60 italic uppercase tracking-wider">
-                Loading works...
-            </p>
-        </div>
+async function loadExhibition() {
+artistEmail = resolveArtistEmail();
+setupBackButton();
+const profileKey = 'artist_profile_' + artistEmail;
+const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
 
-        <!-- Uniform Grid Layout -->
-        <div id="masonry-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
-            <!-- Cards will be populated dynamically -->
-        </div>
+const themeBgColor = profile.themeBgColor || '#FDFBF7';
+document.body.style.backgroundColor = themeBgColor;
 
-        <!-- Empty State Container -->
-        <div id="empty-state" class="hidden flex flex-col items-center justify-center p-20 text-center space-y-4">
-            <span class="material-symbols-outlined text-stone-300 text-6xl">photo_library</span>
-            <h3 class="font-serif text-2xl text-text font-bold">No Artworks Found</h3>
-            <p class="text-sm text-text/60 max-w-sm">This artist hasn't uploaded any media in this category yet.</p>
-        </div>
-    </main>
+let defaultName = "Amrita Raghavan";
+if (artistEmail !== 'amrita@paintedmuse.com') {
+const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+const userInDb = usersDb[artistEmail];
+defaultName = userInDb ? userInDb.fullName : artistEmail.split('@')[0].toUpperCase();
+}
+document.getElementById('artist-title-name').textContent = profile.displayName || defaultName;
+document.getElementById('artist-title-cal').textContent = profile.calligraphy || "Solo Exhibition";
 
-    <!-- Footer -->
-    <footer class="border-t border-border/20 bg-[#FDFBF7]/40 py-8 px-6 text-center text-stone-500 text-xs tracking-wider">
-        <p>&copy; 2026 The Painted Muse Immersive Exhibition Gallery.</p>
-    </footer>
+const postsKey = 'artist_posts_' + artistEmail;
+let posts = JSON.parse(localStorage.getItem(postsKey) || '[]');
 
-    <!-- Cinematic Fullscreen Lightbox Modal -->
-    <div id="lightbox-modal" class="fixed inset-0 z-[130] bg-black/95 hidden items-center justify-center p-8 transition-all duration-300" onclick="closeLightbox()">
-        <button class="absolute top-6 right-6 text-white/60 hover:text-white transition-colors cursor-pointer" onclick="closeLightbox()">
-            <span class="material-symbols-outlined text-4xl">close</span>
-        </button>
-        <div class="max-w-4xl max-h-[85vh] w-full flex flex-col items-center justify-center space-y-4" onclick="event.stopPropagation()">
-            <img id="lightbox-img" class="max-w-full max-h-[75vh] object-contain hidden rounded-lg shadow-2xl" src="" />
-            <video id="lightbox-vid" class="max-w-full max-h-[75vh] object-contain hidden rounded-lg shadow-2xl" controls autoplay></video>
-            <h4 id="lightbox-title" class="text-white font-serif text-xl font-bold">Artwork Title</h4>
-            <p id="lightbox-desc" class="text-stone-300 text-xs max-w-lg text-center leading-relaxed">Description text</p>
-        </div>
-    </div>
+if (posts.length === 0 && artistEmail === 'amrita@paintedmuse.com') {
+posts = [
+{
+title: 'Eternal Echoes',
+category: 'Madhubani Painting',
+dimensions: '24×36 in',
+price: 18000,
+status: 'Available',
+imgUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDtntfX-Ln9Zw1VZ0Hpkb2gPLxVGo-8i2HCOQq8MuDWfMJ2R8rgP_bq6LuBgIgo3JgCiAL1gf7XMnMQnarbhaXApQCbdgiH5J6IEDNWep-L2TYfsPvnDvypEd-aqOQD1Cja_lGLbojN9phmbZ6mwRBP9PEOFZcjvFm_WXH7XdrbwO0pOyT242yuLXNIchrOTtBgei5F4QraRKm3KIVqWxT6AX6MpcVZgTW8r293ODOFXu-5fLVr9dMl3bbcU4vwotycF13aX7JWcw0N'
+},
+{
+title: 'Tree of Life',
+category: 'Madhubani Painting',
+dimensions: '30×40 in',
+price: 24500,
+status: 'Available',
+imgUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCE85tliyBtatM4Sf9CGMCkZrJLQbMkAvenwVo9STCUkhlAfIfFaU5PR6Y48rZ-4KuIoI4eJK09WtYLHNewz2WrIJDF7vSM-QmXbO-njNqxgped5JbFyOnwVHgsDWZQERAp-dpFK6R30NrvKIMYqnkpxBetfDPqAHpWry3YDm8YSkPQM-KnvLHPRK0yBW8Y4uRF9NOADCjtyLuP8ZjuNSGP2x2zmQmYzZS3FzJ2_Td2xvEs6udYptzb_3IbEQmsQO6uBrO3MZdbXeua'
+},
+{
+title: 'Lotus Dreams',
+category: 'Madhubani Painting',
+dimensions: '18×24 in',
+price: 12000,
+status: 'Sold',
+imgUrl: 'pics/madhubani_bg.png'
+}
+];
+}
 
-    <script>
-        let artistEmail = '';
-        let allItems = [];
-        let db;
+let reels = [];
+if (db) {
+const transaction = db.transaction([storeName], "readonly");
+const store = transaction.objectStore(storeName);
+const request = store.getAll();
+await new Promise((resolve) => {
+request.onsuccess = () => {
+const allReels = request.result || [];
+reels = allReels.filter(r => r.userEmail === artistEmail);
+resolve();
+};
+});
+}
 
-        const dbName = "ReelsDB";
-        const storeName = "videos";
+if (reels.length === 0 && artistEmail === 'amrita@paintedmuse.com') {
+reels = [
+{
+title: 'Mithila Clay Painting Demo',
+videoUrl: 'pics/video.mp4',
+artistName: 'Amrita Raghavan'
+}
+];
+}
 
-        function initDB() {
-            return new Promise((resolve, reject) => {
-                const request = indexedDB.open(dbName, 1);
-                request.onerror = event => reject(event.target.error);
-                request.onsuccess = event => {
-                    db = event.target.result;
-                    resolve(db);
-                };
-                request.onupgradeneeded = event => {
-                    const db = event.target.result;
-                    if (!db.objectStoreNames.contains(storeName)) {
-                        db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
-                    }
-                };
-            });
-        }
+allItems = [
+...posts.map(p => ({
+...p,
+type: 'painting',
+mediaUrl: p.imgUrl,
+description: p.dimensions + " original hand-painted masterpiece on handmade paper."
+})),
+...reels.map(r => ({
+title: r.title || 'Process Video',
+category: 'Traditional Process Reel',
+type: 'video',
+mediaUrl: r.file ? URL.createObjectURL(r.file) : r.videoUrl,
+description: "Watch the creation process and traditional strokes of this master heritage work."
+}))
+];
 
-        // Parse query parameter or resolve logged-in user
-        function resolveArtistEmail() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const artistParam = urlParams.get('artist');
-            if (artistParam) {
-                return artistParam;
-            }
+renderItems(allItems);
+}
 
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            if (currentUser) {
-                return currentUser.email;
-            }
+function renderItems(items) {
+const grid = document.getElementById('masonry-grid');
+const stats = document.getElementById('exhibition-stats');
+const empty = document.getElementById('empty-state');
+grid.innerHTML = '';
+const paintingCount = items.filter(i => i.type === 'painting').length;
+const videoCount = items.filter(i => i.type === 'video').length;
+stats.textContent = `Displaying ${items.length} works (${paintingCount} paintings, ${videoCount} videos)`;
+if (items.length === 0) {
+grid.classList.add('hidden');
+empty.classList.remove('hidden');
+return;
+}
+grid.classList.remove('hidden');
+empty.classList.add('hidden');
+items.forEach((item, index) => {
+const card = document.createElement('div');
+card.className = "bg-white/70 backdrop-blur-md warli-border rounded-xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group flex flex-col";
 
-            return 'amrita@paintedmuse.com'; // Default fallback artist
-        }
-
-        // Setup the back button destination dynamically
-        function setupBackButton() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const artistParam = urlParams.get('artist');
-            const backBtn = document.getElementById('back-btn');
-            
-            backBtn.onclick = () => {
-                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-                if (artistParam) {
-                    // Public view back
-                    window.location.href = 'artist-portfolio.html?artist=' + encodeURIComponent(artistParam);
-                } else if (currentUser) {
-                    // Private dashboard back
-                    window.location.href = 'artist-portfolio.html';
-                } else {
-                    window.location.href = 'artist-portfolio.html';
-                }
-            };
-        }
-
-        // Load media files and render exhibition
-        async function loadExhibition() {
-            artistEmail = resolveArtistEmail();
-            setupBackButton();
-
-            const profileKey = 'artist_profile_' + artistEmail;
-            const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
-
-            // Apply custom theme colors & patterns to exhibition body
-            const themeBgColor = profile.themeBgColor || '#FDFBF7';
-            document.body.style.backgroundColor = themeBgColor;
-
-            // Title info setup
-            let defaultName = "Amrita Raghavan";
-            if (artistEmail !== 'amrita@paintedmuse.com') {
-                const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
-                const userInDb = usersDb[artistEmail];
-                defaultName = userInDb ? userInDb.fullName : artistEmail.split('@')[0].toUpperCase();
-            }
-            document.getElementById('artist-title-name').textContent = profile.displayName || defaultName;
-            document.getElementById('artist-title-cal').textContent = profile.calligraphy || "Solo Exhibition";
-
-            // Load images from LocalStorage
-            const postsKey = 'artist_posts_' + artistEmail;
-            let posts = JSON.parse(localStorage.getItem(postsKey) || '[]');
-            
-            // Default demo items if Amrita has no uploads
-            if (posts.length === 0 && artistEmail === 'amrita@paintedmuse.com') {
-                posts = [
-                    {
-                        title: 'Eternal Echoes',
-                        category: 'Madhubani Painting',
-                        dimensions: '24×36 in',
-                        price: 18000,
-                        status: 'Available',
-                        imgUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDtntfX-Ln9Zw1VZ0Hpkb2gPLxVGo-8i2HCOQq8MuDWfMJ2R8rgP_bq6LuBgIgo3JgCiAL1gf7XMnMQnarbhaXApQCbdgiH5J6IEDNWep-L2TYfsPvnDvypEd-aqOQD1Cja_lGLbojN9phmbZ6mwRBP9PEOFZcjvFm_WXH7XdrbwO0pOyT242yuLXNIchrOTtBgei5F4QraRKm3KIVqWxT6AX6MpcVZgTW8r293ODOFXu-5fLVr9dMl3bbcU4vwotycF13aX7JWcw0N'
-                    },
-                    {
-                        title: 'Tree of Life',
-                        category: 'Madhubani Painting',
-                        dimensions: '30×40 in',
-                        price: 24500,
-                        status: 'Available',
-                        imgUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCE85tliyBtatM4Sf9CGMCkZrJLQbMkAvenwVo9STCUkhlAfIfFaU5PR6Y48rZ-4KuIoI4eJK09WtYLHNewz2WrIJDF7vSM-QmXbO-njNqxgped5JbFyOnwVHgsDWZQERAp-dpFK6R30NrvKIMYqnkpxBetfDPqAHpWry3YDm8YSkPQM-KnvLHPRK0yBW8Y4uRF9NOADCjtyLuP8ZjuNSGP2x2zmQmYzZS3FzJ2_Td2xvEs6udYptzb_3IbEQmsQO6uBrO3MZdbXeua'
-                    },
-                    {
-                        title: 'Lotus Dreams',
-                        category: 'Madhubani Painting',
-                        dimensions: '18×24 in',
-                        price: 12000,
-                        status: 'Sold',
-                        imgUrl: 'pics/madhubani_bg.png'
-                    }
-                ];
-            }
-
-            // Load reels from IndexedDB
-            let reels = [];
-            if (db) {
-                const transaction = db.transaction([storeName], "readonly");
-                const store = transaction.objectStore(storeName);
-                const request = store.getAll();
-                await new Promise((resolve) => {
-                    request.onsuccess = () => {
-                        const allReels = request.result || [];
-                        reels = allReels.filter(r => r.userEmail === artistEmail);
-                        resolve();
-                    };
-                });
-            }
-
-            // Default fallback reels if Amrita
-            if (reels.length === 0 && artistEmail === 'amrita@paintedmuse.com') {
-                reels = [
-                    {
-                        title: 'Mithila Clay Painting Demo',
-                        videoUrl: 'pics/video.mp4',
-                        artistName: 'Amrita Raghavan'
-                    }
-                ];
-            }
-
-            // Combine both items into a single exhibition array
-            allItems = [
-                ...posts.map(p => ({
-                    ...p,
-                    type: 'painting',
-                    mediaUrl: p.imgUrl,
-                    description: p.dimensions + " original hand-painted masterpiece on handmade paper."
-                })),
-                ...reels.map(r => ({
-                    title: r.title || 'Process Video',
-                    category: 'Traditional Process Reel',
-                    type: 'video',
-                    mediaUrl: r.file ? URL.createObjectURL(r.file) : r.videoUrl,
-                    description: "Watch the creation process and traditional strokes of this master heritage work."
-                }))
-            ];
-
-            // Render the items
-            renderItems(allItems);
-        }
-
-        // Render Masonry Cards
-        function renderItems(items) {
-            const grid = document.getElementById('masonry-grid');
-            const stats = document.getElementById('exhibition-stats');
-            const empty = document.getElementById('empty-state');
-            
-            grid.innerHTML = '';
-            
-            const paintingCount = items.filter(i => i.type === 'painting').length;
-            const videoCount = items.filter(i => i.type === 'video').length;
-            
-            stats.textContent = `Displaying ${items.length} works (${paintingCount} paintings, ${videoCount} videos)`;
-
-            if (items.length === 0) {
-                grid.classList.add('hidden');
-                empty.classList.remove('hidden');
-                return;
-            }
-
-            grid.classList.remove('hidden');
-            empty.classList.add('hidden');
-
-            items.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = "bg-white/70 backdrop-blur-md warli-border rounded-xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group flex flex-col";
-                
-                // Content loading
-                let mediaHtml = '';
-                if (item.type === 'painting') {
-                    mediaHtml = `
-                        <div class="relative overflow-hidden bg-cream aspect-square">
-                            <img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500" src="${item.mediaUrl}" loading="lazy" />
-                            <span class="absolute top-3 left-3 bg-[#B5451B] text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Painting</span>
-                            ${item.status === 'Sold' ? `<span class="absolute top-3 right-3 bg-stone-900 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Sold</span>` : ''}
-                        </div>
-                    `;
-                } else {
-                    mediaHtml = `
-                        <div class="relative overflow-hidden bg-cream aspect-square">
-                            <video class="w-full h-full object-cover" src="${item.mediaUrl}" loop muted playsinline loading="lazy"></video>
-                            <div class="absolute inset-0 bg-black/25 flex items-center justify-center group-hover:bg-black/35 transition-colors">
-                                <span class="material-symbols-outlined text-white text-5xl opacity-85 group-hover:scale-110 transition-transform">play_circle</span>
-                            </div>
-                            <span class="absolute top-3 left-3 bg-secondary text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Process Reel</span>
-                        </div>
-                    `;
-                }
-
-                card.innerHTML = `
-                    ${mediaHtml}
-                    <div class="p-5 space-y-2">
-                        <h3 class="font-serif text-lg font-bold text-text truncate">${item.title}</h3>
-                        <p class="text-[9px] text-[#B5451B] font-bold uppercase tracking-widest">${item.category}</p>
-                        <p class="text-xs text-text/70 italic leading-relaxed pt-1">${item.description}</p>
-                        ${item.price ? `
-                        <div class="flex justify-between items-center pt-3 border-t border-border/20 mt-2">
-                            <span class="text-primary font-bold text-sm">₹${Number(item.price).toLocaleString()}</span>
-                            <span class="text-[10px] font-bold tracking-wider ${item.status === 'Sold' ? 'text-stone-500' : 'text-green-700'} uppercase">${item.status || 'Available'}</span>
-                        </div>
-                        ` : ''}
-                    </div>
-                `;
-
-                // Add card click listener
-                card.onclick = () => openLightbox(item.mediaUrl, item.type, item.title, item.description);
-
-                // For video cards, play/pause on hover
-                if (item.type === 'video') {
-                    card.addEventListener('mouseenter', () => {
-                        const video = card.querySelector('video');
-                        if (video) video.play().catch(console.error);
-                    });
-                    card.addEventListener('mouseleave', () => {
-                        const video = card.querySelector('video');
-                        if (video) {
-                            video.pause();
-                            video.currentTime = 0;
-                        }
-                    });
-                }
-
-                grid.appendChild(card);
-            });
-        }
-
-        // Filter exhibition items
-        function filterExhibition(type, btn) {
-            // Update active button state
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            if (type === 'all') {
-                renderItems(allItems);
-            } else {
-                const filtered = allItems.filter(i => i.type === type);
-                renderItems(filtered);
-            }
-        }
-
-        // Lightbox Exhibition Preview
-        function openLightbox(url, type, title, desc) {
-            const modal = document.getElementById('lightbox-modal');
-            const img = document.getElementById('lightbox-img');
-            const vid = document.getElementById('lightbox-vid');
-            
-            document.getElementById('lightbox-title').textContent = title;
-            document.getElementById('lightbox-desc').textContent = desc || '';
-
-            if (type === 'painting') {
-                img.src = url;
-                img.classList.remove('hidden');
-                vid.classList.add('hidden');
-                vid.pause();
-            } else {
-                vid.src = url;
-                vid.classList.remove('hidden');
-                img.classList.add('hidden');
-            }
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeLightbox() {
-            const modal = document.getElementById('lightbox-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            
-            const vid = document.getElementById('lightbox-vid');
-            vid.pause();
-        }
-
-        // Close on escape key
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') closeLightbox();
-        });
-
-        // Initialize on DOM load
-        document.addEventListener('DOMContentLoaded', () => {
-            initDB().then(() => loadExhibition()).catch(err => {
-                console.error("DB Init failed", err);
-                loadExhibition();
-            });
-        });
-    </script>
+let mediaHtml = '';
+if (item.type === 'painting') {
+mediaHtml = `
+<div class="relative overflow-hidden bg-cream aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500" src="${item.mediaUrl}" loading="lazy" />
+<span class="absolute top-3 left-3 bg-[#B5451B] text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Painting</span>
+${item.status === 'Sold' ? `<span class="absolute top-3 right-3 bg-stone-900 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Sold</span>` : ''}
+</div>
+`;
+} else {
+mediaHtml = `
+<div class="relative overflow-hidden bg-cream aspect-square">
+<video class="w-full h-full object-cover" src="${item.mediaUrl}" loop muted playsinline loading="lazy"></video>
+<div class="absolute inset-0 bg-black/25 flex items-center justify-center group-hover:bg-black/35 transition-colors">
+<span class="material-symbols-outlined text-white text-5xl opacity-85 group-hover:scale-110 transition-transform">play_circle</span>
+</div>
+<span class="absolute top-3 left-3 bg-secondary text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Process Reel</span>
+</div>
+`;
+}
+card.innerHTML = `
+${mediaHtml}
+<div class="p-5 space-y-2">
+<h3 class="font-serif text-lg font-bold text-text truncate">${item.title}</h3>
+<p class="text-[9px] text-[#B5451B] font-bold uppercase tracking-widest">${item.category}</p>
+<p class="text-xs text-text/70 italic leading-relaxed pt-1">${item.description}</p>
+${item.price ? `
+<div class="flex justify-between items-center pt-3 border-t border-border/20 mt-2">
+<span class="text-primary font-bold text-sm">₹${Number(item.price).toLocaleString()}</span>
+<span class="text-[10px] font-bold tracking-wider ${item.status === 'Sold' ? 'text-stone-500' : 'text-green-700'} uppercase">${item.status || 'Available'}</span>
+</div>
+` : ''}
+</div>
+`;
+// Add card click listener
+card.onclick = () => openLightbox(item.mediaUrl, item.type, item.title, item.description);
+// For video cards, play/pause on hover
+if (item.type === 'video') {
+card.addEventListener('mouseenter', () => {
+const video = card.querySelector('video');
+if (video) video.play().catch(console.error);
+});
+card.addEventListener('mouseleave', () => {
+const video = card.querySelector('video');
+if (video) {
+video.pause();
+video.currentTime = 0;
+}
+});
+}
+grid.appendChild(card);
+});
+}
+// Filter exhibition items
+function filterExhibition(type, btn) {
+// Update active button state
+document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+if (type === 'all') {
+renderItems(allItems);
+} else {
+const filtered = allItems.filter(i => i.type === type);
+renderItems(filtered);
+}
+}
+// Lightbox Exhibition Preview
+function openLightbox(url, type, title, desc) {
+const modal = document.getElementById('lightbox-modal');
+const img = document.getElementById('lightbox-img');
+const vid = document.getElementById('lightbox-vid');
+document.getElementById('lightbox-title').textContent = title;
+document.getElementById('lightbox-desc').textContent = desc || '';
+if (type === 'painting') {
+img.src = url;
+img.classList.remove('hidden');
+vid.classList.add('hidden');
+vid.pause();
+} else {
+vid.src = url;
+vid.classList.remove('hidden');
+img.classList.add('hidden');
+}
+modal.classList.remove('hidden');
+modal.classList.add('flex');
+}
+function closeLightbox() {
+const modal = document.getElementById('lightbox-modal');
+modal.classList.add('hidden');
+modal.classList.remove('flex');
+const vid = document.getElementById('lightbox-vid');
+vid.pause();
+}
+// Close on escape key
+document.addEventListener('keydown', e => {
+if (e.key === 'Escape') closeLightbox();
+});
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', () => {
+initDB().then(() => loadExhibition()).catch(err => {
+console.error("DB Init failed", err);
+loadExhibition();
+});
+});
+</script>
 </body>
-
 </html>

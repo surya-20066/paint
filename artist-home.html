@@ -1,773 +1,727 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Home | The Painted Muse Studio</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <script>
-    tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-background": "#241915", outline: "#8b7169", "outline-variant": "#dfc0b6", "on-error": "#ffffff", "surface-bright": "#fff8f6", surface: "#fff8f6", "surface-container-low": "#fff1ed", primary: "#942e02", background: "#fff8f6", "on-surface": "#241915", "surface-container": "#ffe9e3", "on-primary": "#ffffff", secondary: "#795900", "primary-container": "#b5451b", "surface-dim": "#ebd5cf", "surface-variant": "#f4ded7", "on-primary-container": "#ffe4dc", error: "#ba1a1a", "surface-container-highest": "#f4ded7", "secondary-container": "#ffc641", "on-surface-variant": "#58423b", "surface-container-high": "#fae3dd", "surface-container-lowest": "#ffffff", "secondary-fixed": "#ffdfa0", "primary-fixed": "#ffdbd0" }, borderRadius: { DEFAULT: "12px", lg: "16px", xl: "20px", full: "9999px" }, fontFamily: { "label-sm": ["DM Sans"], "headline-lg": ["Playfair Display"], "headline-md": ["Playfair Display"], "body-lg": ["DM Sans"], "body-md": ["DM Sans"] } } } }
-  </script>
-  <style>
-    body {
-      background: #fff8f6;
-      color: #241915;
-      font-family: 'DM Sans', sans-serif;
-      min-height: max(884px, 100dvh)
-    }
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Home | The Painted Muse Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap"
+rel="stylesheet" />
+<link
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+rel="stylesheet" />
+<script>
+(function checkArtistAuth() {
+if (localStorage.getItem('artistLoggedIn') !== 'true') {
+window.location.href = 'signin.html?error=auth';
+}
+})();
+tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-background": "#241915", outline: "#8b7169", "outline-variant": "#dfc0b6", "on-error": "#ffffff", "surface-bright": "#fff8f6", surface: "#fff8f6", "surface-container-low": "#fff1ed", primary: "#942e02", background: "#fff8f6", "on-surface": "#241915", "surface-container": "#ffe9e3", "on-primary": "#ffffff", secondary: "#795900", "primary-container": "#b5451b", "surface-dim": "#ebd5cf", "surface-variant": "#f4ded7", "on-primary-container": "#ffe4dc", error: "#ba1a1a", "surface-container-highest": "#f4ded7", "secondary-container": "#ffc641", "on-surface-variant": "#58423b", "surface-container-high": "#fae3dd", "surface-container-lowest": "#ffffff", "secondary-fixed": "#ffdfa0", "primary-fixed": "#ffdbd0" }, borderRadius: { DEFAULT: "12px", lg: "16px", xl: "20px", full: "9999px" }, fontFamily: { "label-sm": ["DM Sans"], "headline-lg": ["Playfair Display"], "headline-md": ["Playfair Display"], "body-lg": ["DM Sans"], "body-md": ["DM Sans"] } } } }
+</script>
+<style>
+body {
+background: #fff8f6;
+color: #241915;
+font-family: 'DM Sans', sans-serif;
+min-height: max(884px, 100dvh)
+}
+.material-symbols-outlined {
+font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+}
+.paper-grain {
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+opacity: .03;
+pointer-events: none
+}
 
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
-    }
-
-    .paper-grain {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      opacity: .03;
-      pointer-events: none
-    }
-
-    /* Standard Footer Styles */
-    footer {
-      background: #FDFBF7;
-      color: var(--on-surface);
-      padding: 100px 0 40px;
-      position: relative;
-      width: 100%;
-    }
-
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--primary), transparent);
-    }
-
-    .foot-top {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 60px;
-    }
-
-    .foot-brand p {
-      color: rgba(26, 18, 8, 0.7);
-      font-size: 14px;
-      margin: 20px 0 24px;
-      max-width: 320px;
-      line-height: 1.6;
-    }
-
-    .socials {
-      display: flex;
-      gap: 12px;
-    }
-
-    .socials a {
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(26, 18, 8, 0.15);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: var(--on-surface);
-      transition: all 0.3s ease;
-    }
-
-    .socials a:hover {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-      transform: translateY(-3px);
-    }
-
-    .foot-col h5 {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 15px;
-      margin-bottom: 24px;
-      color: var(--primary);
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-
-    .foot-col ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .foot-col li {
-      margin-bottom: 12px;
-    }
-
-    .foot-col a {
-      font-size: 14px;
-      color: rgba(26, 18, 8, 0.75);
-      transition: color 0.3s ease;
-      text-decoration: none;
-    }
-
-    .foot-col a:hover {
-      color: var(--primary);
-    }
-
-    .foot-bot {
-      border-top: 1px solid rgba(26, 18, 8, 0.1);
-      padding-top: 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: rgba(26, 18, 8, 0.5);
-      font-size: 13px;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    @media (max-width: 1024px) {
-      .foot-top {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .foot-brand {
-        grid-column: span 3;
-        margin-bottom: 20px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .foot-top {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .foot-brand {
-        grid-column: span 2;
-      }
-    }
-  </style>
+footer {
+background: #FDFBF7;
+color: var(--on-surface);
+padding: 100px 0 40px;
+position: relative;
+width: 100%;
+}
+footer::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+.foot-top {
+display: grid;
+grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+gap: 48px;
+margin-bottom: 60px;
+}
+.foot-brand p {
+color: rgba(26, 18, 8, 0.7);
+font-size: 14px;
+margin: 20px 0 24px;
+max-width: 320px;
+line-height: 1.6;
+}
+.socials {
+display: flex;
+gap: 12px;
+}
+.socials a {
+width: 40px;
+height: 40px;
+border: 1px solid rgba(26, 18, 8, 0.15);
+border-radius: 50%;
+display: grid;
+place-items: center;
+color: var(--on-surface);
+transition: all 0.3s ease;
+}
+.socials a:hover {
+background: var(--primary);
+color: white;
+border-color: var(--primary);
+transform: translateY(-3px);
+}
+.foot-col h5 {
+font-family: 'Playfair Display', serif;
+font-style: italic;
+font-size: 15px;
+margin-bottom: 24px;
+color: var(--primary);
+font-weight: 700;
+letter-spacing: 0.05em;
+}
+.foot-col ul {
+list-style: none;
+padding: 0;
+}
+.foot-col li {
+margin-bottom: 12px;
+}
+.foot-col a {
+font-size: 14px;
+color: rgba(26, 18, 8, 0.75);
+transition: color 0.3s ease;
+text-decoration: none;
+}
+.foot-col a:hover {
+color: var(--primary);
+}
+.foot-bot {
+border-top: 1px solid rgba(26, 18, 8, 0.1);
+padding-top: 32px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: rgba(26, 18, 8, 0.5);
+font-size: 13px;
+flex-wrap: wrap;
+gap: 16px;
+}
+@media (max-width: 1024px) {
+.foot-top {
+grid-template-columns: repeat(3, 1fr);
+}
+.foot-brand {
+grid-column: span 3;
+margin-bottom: 20px;
+}
+}
+@media (max-width: 768px) {
+.foot-top {
+grid-template-columns: repeat(2, 1fr);
+}
+.foot-brand {
+grid-column: span 2;
+}
+}
+</style>
 </head>
-
 <body class="bg-surface">
-  <div class="fixed inset-0 paper-grain z-0"></div>
-  <div class="relative flex h-screen w-full flex-row overflow-hidden z-10">
-    <aside
-      class="hidden lg:flex w-72 flex-col bg-surface-container border-r border-outline-variant h-screen sticky top-0">
-      <div class="p-8 cursor-pointer flex items-center gap-3" onclick="window.location.href='index.html'">
-        <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" />
-        <span class="font-headline-md text-on-surface text-sm font-bold leading-tight">Artist<br>Dashboard</span>
-      </div>
-      <nav class="flex-1 px-4">
-        <ul class="flex flex-col gap-2">
-          <li class="flex h-14 items-center gap-4 px-4 rounded-lg bg-primary text-on-primary shadow-sm cursor-default">
-            <span class="material-symbols-outlined">home</span>
-            <p class="font-body-md font-bold">Home</p>
-          </li>
-          <li onclick="window.location.href='artist-gallery.html'"
-            class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
-            <span class="material-symbols-outlined">dashboard</span>
-            <p class="font-body-md font-medium">Gallery</p>
-          </li>
-          <li onclick="window.location.href='dashboard-artists.html'"
-            class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
-            <span class="material-symbols-outlined">cloud_upload</span>
-            <p class="font-body-md font-medium">Upload Artwork</p>
-          </li>
-          <li onclick="window.location.href='artist-portfolio.html'"
-            class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
-            <span class="material-symbols-outlined">account_circle</span>
-            <p class="font-body-md font-medium">Portfolio</p>
-          </li>
-          <li onclick="window.location.href='artist-settings.html'"
-            class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
-            <span class="material-symbols-outlined">settings</span>
-            <p class="font-body-md font-medium">Settings</p>
-          </li>
-        </ul>
-      </nav>
-      <div class="p-8 border-t border-outline-variant">
-        <div class="flex items-center gap-3">
-          <div class="size-10 bg-surface-dim overflow-hidden border border-outline rounded-full"><img id="sidebar-img"
-              class="w-full h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T" />
-          </div>
-          <div>
-            <p id="sidebar-name" class="font-label-sm text-on-surface">AMRITA R.</p>
-            <p id="sidebar-role" class="text-[10px] text-on-surface-variant">MASTER ARTIST</p>
-          </div>
-        </div>
-      </div>
-    </aside>
-    <main class="flex-1 flex flex-col min-w-0 bg-surface-bright h-screen overflow-y-auto">
-      <div class="lg:hidden flex items-center bg-surface p-4 border-b border-outline-variant justify-between">
-        <span class="material-symbols-outlined text-on-surface">menu</span>
-        <h2 class="text-on-surface font-headline-md text-xl font-bold flex-1 text-center">Home</h2>
-        <div class="size-10"></div>
-      </div>
-      <div class="max-w-5xl mx-auto w-full px-6 md:px-10 py-12">
-        <!-- Approval Status Banner -->
-        <div id="approval-status-banner" class="hidden mb-6 p-4 rounded-lg flex items-center gap-3">
-          <span class="material-symbols-outlined text-2xl" id="approval-banner-icon"></span>
-          <div>
-            <p class="font-bold text-sm" id="approval-banner-title"></p>
-            <p class="text-xs" id="approval-banner-desc"></p>
-          </div>
-        </div>
-        <header class="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <div>
-            <p class="font-label-sm text-primary uppercase tracking-widest mb-2">Welcome back</p>
-            <h1 class="font-headline-lg text-on-background text-4xl">Amrita Raghavan</h1>
-            <div id="home-links" class="flex flex-wrap gap-3 mt-2"></div>
-            <p class="font-body-lg text-on-surface-variant mt-2">Here's how your art is performing today.</p>
-          </div>
-          <button onclick="window.location.href='dashboard-artists.html'"
-            class="h-12 px-8 bg-primary text-on-primary font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg rounded-lg flex items-center gap-2">
-            <span class="material-symbols-outlined text-lg">add</span> New Artwork
-          </button>
-        </header>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-          <div class="bg-surface-container-low border border-outline-variant p-6">
-            <div class="flex items-center gap-2 mb-3"><span
-                class="material-symbols-outlined text-primary">palette</span><span
-                class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Total
-                Artworks</span></div>
-            <p id="stat-artworks" class="font-headline-md text-4xl text-on-surface">47</p>
-            <p id="stat-artworks-sub" class="text-xs text-green-700 mt-1 font-bold">+3 this month</p>
-          </div>
-          <div class="bg-surface-container-low border border-outline-variant p-6">
-            <div class="flex items-center gap-2 mb-3"><span
-                class="material-symbols-outlined text-primary">visibility</span><span
-                class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Profile Views</span>
-            </div>
-            <p id="stat-views" class="font-headline-md text-4xl text-on-surface">1,248</p>
-            <p id="stat-views-sub" class="text-xs text-green-700 mt-1 font-bold">↑ 12% vs last month</p>
-          </div>
-          <div class="bg-surface-container-low border border-outline-variant p-6">
-            <div class="flex items-center gap-2 mb-3"><span
-                class="material-symbols-outlined text-primary">shopping_bag</span><span
-                class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Artworks Sold</span>
-            </div>
-            <p id="stat-sold" class="font-headline-md text-4xl text-on-surface">34</p>
-            <p id="stat-sold-sub" class="text-xs text-green-700 mt-1 font-bold">+5 this month</p>
-          </div>
-          <div class="bg-primary-container border border-outline-variant p-6">
-            <div class="flex items-center gap-2 mb-3"><span
-                class="material-symbols-outlined text-on-primary-container">payments</span><span
-                class="font-label-sm text-on-primary-container/70 uppercase tracking-widest text-[10px]">Total
-                Earnings</span></div>
-            <p id="stat-earnings" class="font-headline-md text-4xl text-on-primary-container">₹2.4L</p>
-            <p id="stat-earnings-sub" class="text-xs text-on-primary-container/70 mt-1 font-bold">₹45K this month</p>
-          </div>
-        </div>
-        <section class="mb-12">
-          <div class="flex items-center justify-between mb-6">
-            <h2 class="font-headline-md text-2xl text-on-background">Recent Uploads</h2>
-            <a href="artist-gallery.html"
-              class="font-label-sm text-primary uppercase tracking-widest text-xs hover:underline">View All →</a>
-          </div>
-          <div id="recent-uploads-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div
-              class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow upload-btn-card"
-              onclick="document.getElementById('reelUploadInput').click()">
-              <div class="aspect-square bg-surface-variant overflow-hidden flex items-center justify-center"><span
-                  class="material-symbols-outlined text-primary text-6xl">videocam</span></div>
-              <div class="p-4 text-center">
-                <h4 class="font-body-md text-on-surface-variant">Upload New Reel</h4>
-              </div>
-              <input type="file" id="reelUploadInput" accept="video/*" capture="environment" class="hidden">
-            </div>
-          </div>
-      </div>
-      </section>
-      <section class="mb-12">
-        <h2 class="font-headline-md text-2xl text-on-background mb-6">Recent Activity</h2>
-        <div class="bg-surface-container-low border border-outline-variant divide-y divide-outline-variant rounded-xl">
-          <div class="flex items-center gap-4 p-5"><span
-              class="material-symbols-outlined text-green-700">shopping_bag</span>
-            <div class="flex-1">
-              <p class="font-body-md text-on-surface"><strong>Eternal Echoes</strong> was purchased by a collector</p>
-              <p class="text-xs text-on-surface-variant">2 hours ago</p>
-            </div><span class="text-primary font-bold">₹18,000</span>
-          </div>
-          <div class="flex items-center gap-4 p-5"><span
-              class="material-symbols-outlined text-green-700">shopping_bag</span>
-            <div class="flex-1">
-              <p class="font-body-md text-on-surface"><strong>Lotus Dreams</strong> was purchased by a collector</p>
-              <p class="text-xs text-on-surface-variant">3 days ago</p>
-            </div><span class="text-primary font-bold">₹12,000</span>
-          </div>
-          <div class="flex items-center gap-4 p-5"><span
-              class="material-symbols-outlined text-secondary">event_available</span>
-            <div class="flex-1">
-              <p class="font-body-md text-on-surface"><strong>Sacred Rivers</strong> was booked for private viewing
-              </p>
-              <p class="text-xs text-on-surface-variant">5 days ago</p>
-            </div><span class="text-primary font-bold">₹35,000</span>
-          </div>
-          <div class="flex items-center gap-4 p-5"><span
-              class="material-symbols-outlined text-green-700">shopping_bag</span>
-            <div class="flex-1">
-              <p class="font-body-md text-on-surface"><strong>Morning Raaga</strong> was purchased by a collector</p>
-              <p class="text-xs text-on-surface-variant">1 week ago</p>
-            </div><span class="text-primary font-bold">₹15,500</span>
-          </div>
-        </div>
-      </section>
-  </div>
-  <footer id="footer" class="mt-auto">
-    <div class="container mx-auto px-6">
-      <div class="foot-top">
-        <div class="foot-brand">
-          <div class="flex items-center gap-3 mb-6">
-            <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
-          </div>
-          <p>India's premier multi-art platform — celebrating the living traditions of every state through
-            artisanal AI and human craft.</p>
-          <div class="socials">
-            <a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp" class="hover:text-[#25D366]"><i
-                data-lucide="message-circle"></i></a>
-            <a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram"
-              class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
-            <a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube"
-              class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
-            <a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn"
-              class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
-          </div>
-        </div>
-        <div class="foot-col">
-          <h5>Related</h5>
-          <ul>
-            <li>
-              <a href="heritage.html"
-                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                Heritage Guide
-              </a>
-            </li>
-            <li>
-              <a href="masterpieces.html"
-                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                Masterpieces
-              </a>
-            </li>
-            <li>
-              <a href="team.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                Our Team
-              </a>
-            </li>
-            <li>
-              <a href="signin.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                Artist Login
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="foot-col">
-          <h5>Platform</h5>
-          <ul>
-            <li>
-              <a href="index.html#journal"
-                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                Art Forms
-              </a>
-            </li>
-            <li>
-              <a href="index.html#living-map-section"
-                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                Interactive Map
-              </a>
-            </li>
-            <li>
-              <a href="artists.html"
-                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                Meet the Makers
-              </a>
-            </li>
-            <li>
-              <a href="index.html#journal"
-                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                The Muse Journal
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="foot-col">
-          <h5>Navigations</h5>
-          <ul>
-            <li>
-              <a href="index.html#living-map-section"
-                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                Live Map
-              </a>
-            </li>
-            <li>
-              <a href="index.html#yreel-hub"
-                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                Reels
-              </a>
-            </li>
-            <li>
-              <a href="artists.html"
-                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                Explore Artists
-              </a>
-            </li>
-            <li>
-              <a href="index.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                Art Retreats
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="foot-col">
-          <h5>Contact Us</h5>
-          <ul>
-            <li>
-              <a href="mailto:painterdmuse_2k26@gmail.com"
-                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                painterdmuse_2k26@gmail.com
-              </a>
-            </li>
-            <li>
-              <a href="tel:+917798345690"
-                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                +91 7798345690
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="foot-bot justify-center text-center">
-        <div>© 2026 The Painted Muse · Made with ❤️ for Indian Art</div>
-      </div>
-    </div>
-  </footer>
-  </main>
-  </div>
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      const user = JSON.parse(localStorage.getItem('currentUser'));
-      if (!user) {
-        window.location.href = 'signin.html';
-        return;
-      }
+<div class="fixed inset-0 paper-grain z-0"></div>
+<div class="relative flex h-screen w-full flex-row overflow-hidden z-10">
+<aside
+class="hidden lg:flex w-72 flex-col bg-surface-container border-r border-outline-variant h-screen sticky top-0">
+<div class="p-8 cursor-pointer flex items-center gap-3" onclick="window.location.href='index.html'">
+<img src="pics/dp.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" />
+<span class="font-headline-md text-on-surface text-sm font-bold leading-tight">Artist<br>Dashboard</span>
+</div>
+<nav class="flex-1 px-4">
+<ul class="flex flex-col gap-2">
+<li class="flex h-14 items-center gap-4 px-4 rounded-lg bg-primary text-on-primary shadow-sm cursor-default">
+<span class="material-symbols-outlined">home</span>
+<p class="font-body-md font-bold">Home</p>
+</li>
+<li onclick="window.location.href='artist-gallery.html'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="font-body-md font-medium">Gallery</p>
+</li>
+<li onclick="window.location.href='dashboard-artists.html'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">cloud_upload</span>
+<p class="font-body-md font-medium">Upload Artwork</p>
+</li>
+<li onclick="window.location.href='artist-portfolio.html'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">account_circle</span>
+<p class="font-body-md font-medium">Portfolio</p>
+</li>
+<li onclick="window.location.href='artist-settings.html'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<p class="font-body-md font-medium">Settings</p>
+</li>
+</ul>
+</nav>
+<div class="p-8 border-t border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-surface-dim overflow-hidden border border-outline rounded-full"><img id="sidebar-img"
+class="w-full h-full object-cover"
+src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T" />
+</div>
+<div>
+<p id="sidebar-name" class="font-label-sm text-on-surface">AMRITA R.</p>
+<p id="sidebar-role" class="text-[10px] text-on-surface-variant">MASTER ARTIST</p>
+</div>
+</div>
+<button onclick="logoutArtist()"
+class="w-full mt-3 flex items-center gap-3 px-4 py-3 rounded-lg
+text-stone-400 hover:text-red-500 hover:bg-red-50
+transition-all text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+Sign Out
+</button>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 bg-surface-bright h-screen overflow-y-auto">
+<div class="lg:hidden flex items-center bg-surface p-4 border-b border-outline-variant justify-between">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+<h2 class="text-on-surface font-headline-md text-xl font-bold flex-1 text-center">Home</h2>
+<div class="size-10"></div>
+</div>
+<div class="max-w-5xl mx-auto w-full px-6 md:px-10 py-12">
+<div id="approval-status-banner" class="hidden mb-6 p-4 rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-2xl" id="approval-banner-icon"></span>
+<div>
+<p class="font-bold text-sm" id="approval-banner-title"></p>
+<p class="text-xs" id="approval-banner-desc"></p>
+</div>
+</div>
+<header class="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+<div>
+<p class="font-label-sm text-primary uppercase tracking-widest mb-2">Welcome back</p>
+<h1 class="font-headline-lg text-on-background text-4xl">Amrita Raghavan</h1>
+<p class="font-body-lg text-on-surface-variant mt-2">Here's how your art is performing today.</p>
+</div>
+<button onclick="window.location.href='dashboard-artists.html'"
+class="h-12 px-8 bg-primary text-on-primary font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">add</span> New Artwork
+</button>
+</header>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+<div class="bg-surface-container-low border border-outline-variant p-6">
+<div class="flex items-center gap-2 mb-3"><span
+class="material-symbols-outlined text-primary">palette</span><span
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Total
+Artworks</span></div>
+<p id="stat-artworks" class="font-headline-md text-4xl text-on-surface">47</p>
+<p id="stat-artworks-sub" class="text-xs text-green-700 mt-1 font-bold">+3 this month</p>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-6">
+<div class="flex items-center gap-2 mb-3"><span
+class="material-symbols-outlined text-primary">visibility</span><span
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Profile Views</span>
+</div>
+<p id="stat-views" class="font-headline-md text-4xl text-on-surface">1,248</p>
+<p id="stat-views-sub" class="text-xs text-green-700 mt-1 font-bold">↑ 12% vs last month</p>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-6">
+<div class="flex items-center gap-2 mb-3"><span
+class="material-symbols-outlined text-primary">shopping_bag</span><span
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Artworks Sold</span>
+</div>
+<p id="stat-sold" class="font-headline-md text-4xl text-on-surface">34</p>
+<p id="stat-sold-sub" class="text-xs text-green-700 mt-1 font-bold">+5 this month</p>
+</div>
+<div class="bg-primary-container border border-outline-variant p-6">
+<div class="flex items-center gap-2 mb-3"><span
+class="material-symbols-outlined text-on-primary-container">payments</span><span
+class="font-label-sm text-on-primary-container/70 uppercase tracking-widest text-[10px]">Total
+Earnings</span></div>
+<p id="stat-earnings" class="font-headline-md text-4xl text-on-primary-container">₹2.4L</p>
+<p id="stat-earnings-sub" class="text-xs text-on-primary-container/70 mt-1 font-bold">₹45K this month</p>
+</div>
+</div>
+<section class="mb-12">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline-md text-2xl text-on-background">Recent Uploads</h2>
+<a href="artist-gallery.html"
+class="font-label-sm text-primary uppercase tracking-widest text-xs hover:underline">View All →</a>
+</div>
+<div id="recent-uploads-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<div
+class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow upload-btn-card"
+onclick="document.getElementById('reelUploadInput').click()">
+<div class="aspect-square bg-surface-variant overflow-hidden flex items-center justify-center"><span
+class="material-symbols-outlined text-primary text-6xl">videocam</span></div>
+<div class="p-4 text-center">
+<h4 class="font-body-md text-on-surface-variant">Upload New Reel</h4>
+</div>
+<input type="file" id="reelUploadInput" accept="video/*" capture="environment" class="hidden">
+</div>
+</div>
+</div>
+</section>
+<section class="mb-12">
+<h2 class="font-headline-md text-2xl text-on-background mb-6">Recent Activity</h2>
+<div class="bg-surface-container-low border border-outline-variant divide-y divide-outline-variant rounded-xl">
+<div class="flex items-center gap-4 p-5"><span
+class="material-symbols-outlined text-green-700">shopping_bag</span>
+<div class="flex-1">
+<p class="font-body-md text-on-surface"><strong>Eternal Echoes</strong> was purchased by a collector</p>
+<p class="text-xs text-on-surface-variant">2 hours ago</p>
+</div><span class="text-primary font-bold">₹18,000</span>
+</div>
+<div class="flex items-center gap-4 p-5"><span
+class="material-symbols-outlined text-green-700">shopping_bag</span>
+<div class="flex-1">
+<p class="font-body-md text-on-surface"><strong>Lotus Dreams</strong> was purchased by a collector</p>
+<p class="text-xs text-on-surface-variant">3 days ago</p>
+</div><span class="text-primary font-bold">₹12,000</span>
+</div>
+<div class="flex items-center gap-4 p-5"><span
+class="material-symbols-outlined text-secondary">event_available</span>
+<div class="flex-1">
+<p class="font-body-md text-on-surface"><strong>Sacred Rivers</strong> was booked for private viewing
+</p>
+<p class="text-xs text-on-surface-variant">5 days ago</p>
+</div><span class="text-primary font-bold">₹35,000</span>
+</div>
+<div class="flex items-center gap-4 p-5"><span
+class="material-symbols-outlined text-green-700">shopping_bag</span>
+<div class="flex-1">
+<p class="font-body-md text-on-surface"><strong>Morning Raaga</strong> was purchased by a collector</p>
+<p class="text-xs text-on-surface-variant">1 week ago</p>
+</div><span class="text-primary font-bold">₹15,500</span>
+</div>
+</div>
+</section>
+</div>
+<footer id="footer" class="mt-auto">
+<div class="container mx-auto px-6">
+<div class="foot-top">
+<div class="foot-brand">
+<div class="flex items-center gap-3 mb-6">
+<img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+</div>
+<p>India's premier multi-art platform — celebrating the living traditions of every state through
+artisanal AI and human craft.</p>
+<div class="socials">
+<a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp" class="hover:text-[#25D366]"><i
+data-lucide="message-circle"></i></a>
+<a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram"
+class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
+<a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube"
+class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
+<a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn"
+class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
+</div>
+</div>
+<div class="foot-col">
+<h5>Related</h5>
+<ul>
+<li>
+<a href="heritage.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Heritage Guide
+</a>
+</li>
+<li>
+<a href="masterpieces.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Masterpieces
+</a>
+</li>
+<li>
+<a href="team.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Our Team
+</a>
+</li>
+<li>
+<a href="signin.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Artist Login
+</a>
+</li>
+</ul>
+</div>
+<div class="foot-col">
+<h5>Platform</h5>
+<ul>
+<li>
+<a href="index.html#journal"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Art Forms
+</a>
+</li>
+<li>
+<a href="index.html#living-map-section"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Interactive Map
+</a>
+</li>
+<li>
+<a href="artists.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Meet the Makers
+</a>
+</li>
+<li>
+<a href="index.html#journal"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+The Muse Journal
+</a>
+</li>
+</ul>
+</div>
+<div class="foot-col">
+<h5>Navigations</h5>
+<ul>
+<li>
+<a href="index.html#living-map-section"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Live Map
+</a>
+</li>
+<li>
+<a href="index.html#yreel-hub"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Reels
+</a>
+</li>
+<li>
+<a href="artists.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Explore Artists
+</a>
+</li>
+<li>
+<a href="index.html" class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Art Retreats
+</a>
+</li>
+</ul>
+</div>
+<div class="foot-col">
+<h5>Contact Us</h5>
+<ul>
+<li>
+<a href="mailto:painterdmuse_2k26@gmail.com"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+painterdmuse_2k26@gmail.com
+</a>
+</li>
+<li>
+<a href="tel:+917798345690"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
++91 7798345690
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="foot-bot justify-center text-center">
+<div>© 2026 The Painted Muse · Made with ❤️ for Indian Art</div>
+</div>
+</div>
+</footer>
+</main>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+const user = JSON.parse(localStorage.getItem('currentUser'));
+if (!user) {
+window.location.href = 'signin.html';
+return;
+}
+const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+const userInDb = usersDb[user.email];
+if (!userInDb || !userInDb.isApproved) {
+window.location.href = 'signin.html?error=pending';
+return;
+}
 
-      const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
-      const userInDb = usersDb[user.email];
-      if (!userInDb || !userInDb.isApproved) {
-        window.location.href = 'signin.html?error=pending';
-        return;
-      }
+const loadProfile = () => {
+const storedProfile = localStorage.getItem('artist_profile_' + user.email);
+if (storedProfile) {
+const profile = JSON.parse(storedProfile);
+const welcomeHeader = document.querySelector('h1.font-headline-lg');
+if (welcomeHeader) welcomeHeader.textContent = profile.fullName;
+const sbImg = document.getElementById('sidebar-img');
+const sbName = document.getElementById('sidebar-name');
+const sbRole = document.getElementById('sidebar-role');
+if (sbImg) sbImg.src = profile.photoUrl;
+if (sbName) sbName.textContent = profile.displayName;
+if (sbRole) sbRole.textContent = (profile.specialization || "Master Artist").toUpperCase();
+}
+};
+loadProfile();
 
-      // 1. Profile Loading
-      const loadProfile = () => {
-        const storedProfile = localStorage.getItem('artist_profile_' + user.email);
-        if (storedProfile) {
-          const profile = JSON.parse(storedProfile);
-          const welcomeHeader = document.querySelector('h1.font-headline-lg');
-          if (welcomeHeader) welcomeHeader.textContent = profile.fullName;
-          const sbImg = document.getElementById('sidebar-img');
-          const sbName = document.getElementById('sidebar-name');
-          const sbRole = document.getElementById('sidebar-role');
-          if (sbImg) sbImg.src = profile.photoUrl;
-          if (sbName) sbName.textContent = profile.displayName;
-          if (sbRole) sbRole.textContent = (profile.specialization || "Master Artist").toUpperCase();
-        }
-      };
-      loadProfile();
+const dbName = "ReelsDB";
+const storeName = "videos";
+let db;
+const initDB = () => {
+return new Promise((resolve, reject) => {
+const request = indexedDB.open(dbName, 1);
+request.onupgradeneeded = (event) => {
+const db = event.target.result;
+if (!db.objectStoreNames.contains(storeName)) {
+db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
+}
+};
+request.onsuccess = (event) => {
+db = event.target.result;
+resolve(db);
+};
+request.onerror = (event) => reject(event.target.error);
+});
+};
+const saveVideo = (file) => {
+if (!db) return;
+const user = JSON.parse(localStorage.getItem('currentUser'));
+if (!user) return;
+const transaction = db.transaction([storeName], "readwrite");
+const store = transaction.objectStore(storeName);
+let artistName = user.fullName;
+let handle = "@" + user.fullName.toLowerCase().replace(/\s+/g, '_');
+try {
+const profileKey = 'artist_profile_' + user.email;
+const storedProfile = localStorage.getItem(profileKey);
+if (storedProfile) {
+const profile = JSON.parse(storedProfile);
+if (profile.displayName) {
+artistName = profile.displayName;
+handle = "@" + profile.displayName.toLowerCase().replace(/\s+/g, '_');
+}
+}
+} catch (e) { }
+const record = {
+file: file,
+timestamp: Date.now(),
+artistName: artistName,
+handle: handle,
+title: "Uploaded Reel",
+userEmail: user.email
+};
+const request = store.add(record);
+request.onsuccess = () => {
+loadRecentUploads();
+};
+};
+const createPostCard = (post) => {
+const div = document.createElement('div');
+div.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow";
+div.onclick = () => window.location.href = 'artist-gallery.html';
+div.innerHTML = `
+<div class="aspect-square bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${post.imgUrl}" onerror="this.src='https://placehold.co/600x600/F5F0E8/B5451B?text=Artwork'"/>
+</div>
+<div class="p-4">
+<h4 class="font-headline-md text-lg mb-1">${post.title}</h4>
+<div class="flex justify-between"><span class="text-xs text-on-surface-variant">${post.category || 'Artwork'}</span><span class="text-sm text-primary font-bold">₹${Number(post.price).toLocaleString()}</span></div>
+</div>
+`;
+return div;
+};
+const createReelCard = (reel) => {
+const reelUrl = reel.file ? URL.createObjectURL(reel.file) : reel.videoUrl;
+const div = document.createElement('div');
+div.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow relative overflow-hidden";
+div.onclick = () => window.location.href = 'artist-gallery.html';
+div.innerHTML = `
+<div class="aspect-square bg-surface-variant overflow-hidden relative">
+${reel.file ? `<video class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="${reelUrl}#t=0.1" muted></video>` : `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${reel.videoUrl}" />`}
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl opacity-80">play_circle</span>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-headline-md text-lg mb-1">${reel.title || 'Uploaded Reel'}</h4>
+<div class="flex justify-between"><span class="text-xs text-on-surface-variant">Reel</span><span class="text-sm text-primary font-bold text-green-700">New</span></div>
+</div>
+`;
+return div;
+};
+const loadRecentUploads = async () => {
+const grid = document.getElementById('recent-uploads-grid');
+if (!grid) return;
+const posts = JSON.parse(localStorage.getItem('artist_posts_' + user.email) || '[]');
+let reels = [];
+if (db) {
+const transaction = db.transaction([storeName], "readonly");
+const store = transaction.objectStore(storeName);
+const allReels = await new Promise((resolve) => {
+const req = store.getAll();
+req.onsuccess = () => resolve(req.result || []);
+});
+reels = allReels.filter(r => r.userEmail === user.email);
+}
+grid.innerHTML = '';
+const uploadBtn = document.createElement('div');
+uploadBtn.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow upload-btn-card";
+uploadBtn.onclick = () => document.getElementById('reelUploadInput').click();
+uploadBtn.innerHTML = `
+<div class="aspect-square bg-surface-variant overflow-hidden flex items-center justify-center"><span
+class="material-symbols-outlined text-primary text-6xl">videocam</span></div>
+<div class="p-4 text-center">
+<h4 class="font-body-md text-on-surface-variant">Upload New Reel</h4>
+</div>
+<input type="file" id="reelUploadInput" accept="video/*" capture="environment" class="hidden">
+`;
+grid.appendChild(uploadBtn);
+const fileInput = uploadBtn.querySelector('#reelUploadInput');
+fileInput.addEventListener('change', (e) => {
+const file = e.target.files[0];
+if (file) {
+saveVideo(file);
+alert('Reel uploaded successfully!');
+}
+});
 
-      // 2. Links Loading
-      const loadLinks = () => {
-        const linksContainer = document.getElementById('home-links');
-        const storedLinks = localStorage.getItem('artist_profile_links_' + user.email);
-        let links = storedLinks ? JSON.parse(storedLinks) : [
-          { title: 'Personal Website', url: '#' },
-          { title: 'Instagram', url: '#' }
-        ];
+const approvalBanner = document.getElementById('approval-status-banner');
+if (approvalBanner) {
+let usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+const userInDb = usersDb[user.email];
+if (userInDb) {
+const approvalIcon = document.getElementById('approval-banner-icon');
+const approvalTitle = document.getElementById('approval-banner-title');
+const approvalDesc = document.getElementById('approval-banner-desc');
+if (userInDb.isApproved) {
 
-        if (linksContainer) {
-          linksContainer.innerHTML = links.map(link => `
-            <a href="${link.url}" target="_blank" class="text-xs text-primary font-bold uppercase tracking-wider flex items-center gap-1 hover:underline bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant transition-colors">
-              <span class="material-symbols-outlined text-xs">link</span>${link.title}
-            </a>
-          `).join('');
-        }
-      };
-      loadLinks();
+approvalBanner.className = "mb-6 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800 flex items-center gap-3";
+if (approvalIcon) approvalIcon.textContent = "check_circle";
+if (approvalTitle) approvalTitle.textContent = "Profile Approved";
+if (approvalDesc) approvalDesc.textContent = "Your profile is verified and active! Your artworks are visible to the public.";
+approvalBanner.classList.remove('hidden');
+} else if (userInDb.isRejected) {
 
-      // 3. Dynamic Recent Uploads (Posts + Reels)
-      const dbName = "ReelsDB";
-      const storeName = "videos";
-      let db;
+approvalBanner.className = "mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800 flex items-center gap-3";
+if (approvalIcon) approvalIcon.textContent = "error";
+if (approvalTitle) approvalTitle.textContent = "Profile Rejected";
+if (approvalDesc) approvalDesc.textContent = "Your profile did not pass verification. Please contact support or update your settings.";
+approvalBanner.classList.remove('hidden');
+} else {
 
-      const initDB = () => {
-        return new Promise((resolve, reject) => {
-          const request = indexedDB.open(dbName, 1);
-          request.onupgradeneeded = (event) => {
-            const db = event.target.result;
-            if (!db.objectStoreNames.contains(storeName)) {
-              db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
-            }
-          };
-          request.onsuccess = (event) => {
-            db = event.target.result;
-            resolve(db);
-          };
-          request.onerror = (event) => reject(event.target.error);
-        });
-      };
+approvalBanner.className = "mb-6 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 flex items-center gap-3";
+if (approvalIcon) approvalIcon.textContent = "pending";
+if (approvalTitle) approvalTitle.textContent = "Pending Verification";
+if (approvalDesc) approvalDesc.textContent = "Your artist registration is currently being reviewed. You can upload artwork, but your profile will only be visible publicly after approval.";
+approvalBanner.classList.remove('hidden');
+}
+}
+}
+const combined = [
+...posts.map(p => ({ ...p, type: 'post' })),
+...reels.map(r => ({ ...r, type: 'reel' }))
+].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+combined.slice(0, 5).forEach(item => {
+if (item.type === 'post') {
+grid.appendChild(createPostCard(item));
+} else {
+grid.appendChild(createReelCard(item));
+}
+});
 
-      const saveVideo = (file) => {
-        if (!db) return;
-        const user = JSON.parse(localStorage.getItem('currentUser'));
-        if (!user) return;
+const sidebarName = document.getElementById('sidebar-name');
+const sidebarRole = document.getElementById('sidebar-role');
+const sbImg = document.getElementById('sidebar-img');
+const headers = document.querySelectorAll('header h1.text-4xl');
+if (sidebarName) sidebarName.textContent = user.fullName.toUpperCase();
+if (sidebarRole && user.spec) {
+sidebarRole.textContent = user.spec.toUpperCase() + ' ARTIST';
+}
+headers.forEach(h => {
+if (h.textContent.includes('Amrita') || h.textContent.includes('Raghavan')) {
+h.textContent = user.fullName;
+}
+});
 
-        const transaction = db.transaction([storeName], "readwrite");
-        const store = transaction.objectStore(storeName);
-        let artistName = user.fullName;
-        let handle = "@" + user.fullName.toLowerCase().replace(/\s+/g, '_');
+const profileKey = 'artist_profile_' + user.email;
+const storedProfile = localStorage.getItem(profileKey);
+if (storedProfile) {
+const profile = JSON.parse(storedProfile);
+if (sidebarName && profile.displayName) sidebarName.textContent = profile.displayName.toUpperCase();
+if (sidebarRole && profile.specialization) {
+sidebarRole.textContent = profile.specialization.toUpperCase() + ' ARTIST';
+}
+if (sbImg && profile.photoUrl) sbImg.src = profile.photoUrl;
+const mainImg = document.querySelector('aside img') || document.querySelector('.bg-surface-dim img');
+if (mainImg && profile.photoUrl) mainImg.src = profile.photoUrl;
+headers.forEach(h => {
+h.textContent = profile.displayName;
+});
+} else if (user.isNewUser) {
+if (sbImg) sbImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
+const mainImg = document.querySelector('aside img') || document.querySelector('.bg-surface-dim img');
+if (mainImg) mainImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
+}
+if (user.isNewUser) {
 
-        try {
-          const profileKey = 'artist_profile_' + user.email;
-          const storedProfile = localStorage.getItem(profileKey);
-          if (storedProfile) {
-            const profile = JSON.parse(storedProfile);
-            if (profile.displayName) {
-              artistName = profile.displayName;
-              handle = "@" + profile.displayName.toLowerCase().replace(/\s+/g, '_');
-            }
-          }
-        } catch (e) { }
-        const record = {
-          file: file,
-          timestamp: Date.now(),
-          artistName: artistName,
-          handle: handle,
-          title: "Uploaded Reel",
-          userEmail: user.email
-        };
-        const request = store.add(record);
-        request.onsuccess = () => {
-          loadRecentUploads();
-        };
-      };
-
-      const createPostCard = (post) => {
-        const div = document.createElement('div');
-        div.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow";
-        div.onclick = () => window.location.href = 'artist-gallery.html';
-        div.innerHTML = `
-          <div class="aspect-square bg-surface-variant overflow-hidden">
-            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${post.imgUrl}" onerror="this.src='https://placehold.co/600x600/F5F0E8/B5451B?text=Artwork'"/>
-          </div>
-          <div class="p-4">
-            <h4 class="font-headline-md text-lg mb-1">${post.title}</h4>
-            <div class="flex justify-between"><span class="text-xs text-on-surface-variant">${post.category || 'Artwork'}</span><span class="text-sm text-primary font-bold">₹${Number(post.price).toLocaleString()}</span></div>
-          </div>
-        `;
-        return div;
-      };
-
-      const createReelCard = (reel) => {
-        const reelUrl = reel.file ? URL.createObjectURL(reel.file) : reel.videoUrl;
-        const div = document.createElement('div');
-        div.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow relative overflow-hidden";
-        div.onclick = () => window.location.href = 'artist-gallery.html';
-        div.innerHTML = `
-          <div class="aspect-square bg-surface-variant overflow-hidden relative">
-            ${reel.file ? `<video class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="${reelUrl}#t=0.1" muted></video>` : `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${reel.videoUrl}" />`}
-            <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
-              <span class="material-symbols-outlined text-white text-5xl opacity-80">play_circle</span>
-            </div>
-          </div>
-          <div class="p-4">
-            <h4 class="font-headline-md text-lg mb-1">${reel.title || 'Uploaded Reel'}</h4>
-            <div class="flex justify-between"><span class="text-xs text-on-surface-variant">Reel</span><span class="text-sm text-primary font-bold text-green-700">New</span></div>
-          </div>
-        `;
-        return div;
-      };
-
-      const loadRecentUploads = async () => {
-        const grid = document.getElementById('recent-uploads-grid');
-        if (!grid) return;
-
-        const posts = JSON.parse(localStorage.getItem('artist_posts_' + user.email) || '[]');
-        let reels = [];
-        if (db) {
-          const transaction = db.transaction([storeName], "readonly");
-          const store = transaction.objectStore(storeName);
-          const allReels = await new Promise((resolve) => {
-            const req = store.getAll();
-            req.onsuccess = () => resolve(req.result || []);
-          });
-          reels = allReels.filter(r => r.userEmail === user.email);
-        }
-
-        grid.innerHTML = '';
-
-        const uploadBtn = document.createElement('div');
-        uploadBtn.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow upload-btn-card";
-        uploadBtn.onclick = () => document.getElementById('reelUploadInput').click();
-        uploadBtn.innerHTML = `
-          <div class="aspect-square bg-surface-variant overflow-hidden flex items-center justify-center"><span
-              class="material-symbols-outlined text-primary text-6xl">videocam</span></div>
-          <div class="p-4 text-center">
-            <h4 class="font-body-md text-on-surface-variant">Upload New Reel</h4>
-          </div>
-          <input type="file" id="reelUploadInput" accept="video/*" capture="environment" class="hidden">
-        `;
-        grid.appendChild(uploadBtn);
-
-        const fileInput = uploadBtn.querySelector('#reelUploadInput');
-        fileInput.addEventListener('change', (e) => {
-          const file = e.target.files[0];
-          if (file) {
-            saveVideo(file);
-            alert('Reel uploaded successfully!');
-          }
-        });
-
-        // Setup Approval Warning Banner based on the status in users database
-        const approvalBanner = document.getElementById('approval-status-banner');
-        if (approvalBanner) {
-          let usersDb = JSON.parse(localStorage.getItem('users') || '{}');
-          const userInDb = usersDb[user.email];
-          if (userInDb) {
-            const approvalIcon = document.getElementById('approval-banner-icon');
-            const approvalTitle = document.getElementById('approval-banner-title');
-            const approvalDesc = document.getElementById('approval-banner-desc');
-
-            if (userInDb.isApproved) {
-              // Approved
-              approvalBanner.className = "mb-6 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800 flex items-center gap-3";
-              if (approvalIcon) approvalIcon.textContent = "check_circle";
-              if (approvalTitle) approvalTitle.textContent = "Profile Approved";
-              if (approvalDesc) approvalDesc.textContent = "Your profile is verified and active! Your artworks are visible to the public.";
-              approvalBanner.classList.remove('hidden');
-            } else if (userInDb.isRejected) {
-              // Rejected
-              approvalBanner.className = "mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800 flex items-center gap-3";
-              if (approvalIcon) approvalIcon.textContent = "error";
-              if (approvalTitle) approvalTitle.textContent = "Profile Rejected";
-              if (approvalDesc) approvalDesc.textContent = "Your profile did not pass verification. Please contact support or update your settings.";
-              approvalBanner.classList.remove('hidden');
-            } else {
-              // Pending
-              approvalBanner.className = "mb-6 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 flex items-center gap-3";
-              if (approvalIcon) approvalIcon.textContent = "pending";
-              if (approvalTitle) approvalTitle.textContent = "Pending Verification";
-              if (approvalDesc) approvalDesc.textContent = "Your artist registration is currently being reviewed. You can upload artwork, but your profile will only be visible publicly after approval.";
-              approvalBanner.classList.remove('hidden');
-            }
-          }
-        }
-
-        const combined = [
-          ...posts.map(p => ({ ...p, type: 'post' })),
-          ...reels.map(r => ({ ...r, type: 'reel' }))
-        ].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-
-        combined.slice(0, 5).forEach(item => {
-          if (item.type === 'post') {
-            grid.appendChild(createPostCard(item));
-          } else {
-            grid.appendChild(createReelCard(item));
-          }
-        });
-
-        // Initialize Dynamic Sidebar and Headers
-        const sidebarName = document.getElementById('sidebar-name');
-        const sidebarRole = document.getElementById('sidebar-role');
-        const sbImg = document.getElementById('sidebar-img');
-        const headers = document.querySelectorAll('header h1.text-4xl');
-
-        if (sidebarName) sidebarName.textContent = user.fullName.toUpperCase();
-        if (sidebarRole && user.spec) {
-          sidebarRole.textContent = user.spec.toUpperCase() + ' ARTIST';
-        }
-        headers.forEach(h => {
-          if (h.textContent.includes('Amrita') || h.textContent.includes('Raghavan')) {
-            h.textContent = user.fullName;
-          }
-        });
-
-        // Load Custom Profile Settings if saved
-        const profileKey = 'artist_profile_' + user.email;
-        const storedProfile = localStorage.getItem(profileKey);
-
-        if (storedProfile) {
-          const profile = JSON.parse(storedProfile);
-          if (sidebarName && profile.displayName) sidebarName.textContent = profile.displayName.toUpperCase();
-          if (sidebarRole && profile.specialization) {
-            sidebarRole.textContent = profile.specialization.toUpperCase() + ' ARTIST';
-          }
-          if (sbImg && profile.photoUrl) sbImg.src = profile.photoUrl;
-
-          const mainImg = document.querySelector('aside img') || document.querySelector('.bg-surface-dim img');
-          if (mainImg && profile.photoUrl) mainImg.src = profile.photoUrl;
-
-          headers.forEach(h => {
-            h.textContent = profile.displayName;
-          });
-        } else if (user.isNewUser) {
-          if (sbImg) sbImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
-          const mainImg = document.querySelector('aside img') || document.querySelector('.bg-surface-dim img');
-          if (mainImg) mainImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
-        }
-
-        if (user.isNewUser) {
-          // Setup blank stats for newly signed up artist
-          const statArtworks = document.getElementById('stat-artworks');
-          const statArtworksSub = document.getElementById('stat-artworks-sub');
-          const statViews = document.getElementById('stat-views');
-          const statViewsSub = document.getElementById('stat-views-sub');
-          const statSold = document.getElementById('stat-sold');
-          const statSoldSub = document.getElementById('stat-sold-sub');
-          const statEarnings = document.getElementById('stat-earnings');
-          const statEarningsSub = document.getElementById('stat-earnings-sub');
-
-          if (statArtworks) statArtworks.textContent = reels.length + posts.length;
-          if (statArtworksSub) statArtworksSub.textContent = 'Uploaded by you';
-          if (statViews) statViews.textContent = '0';
-          if (statViewsSub) statViewsSub.textContent = 'No views yet';
-          if (statSold) statSold.textContent = '0';
-          if (statSoldSub) statSoldSub.textContent = 'No sales yet';
-          if (statEarnings) statEarnings.textContent = '₹0';
-          if (statEarningsSub) statEarningsSub.textContent = '₹0 this month';
-        }
-      };
-
-      initDB().then(() => loadRecentUploads()).catch(err => console.error("DB Init failed", err));
-    });
-  </script>
-
-  <script>
-    function logout() {
-      localStorage.removeItem('currentUser');
-      window.location.href = 'signin.html';
-    }
-  </script>
+const statArtworks = document.getElementById('stat-artworks');
+const statArtworksSub = document.getElementById('stat-artworks-sub');
+const statViews = document.getElementById('stat-views');
+const statViewsSub = document.getElementById('stat-views-sub');
+const statSold = document.getElementById('stat-sold');
+const statSoldSub = document.getElementById('stat-sold-sub');
+const statEarnings = document.getElementById('stat-earnings');
+const statEarningsSub = document.getElementById('stat-earnings-sub');
+if (statArtworks) statArtworks.textContent = reels.length + posts.length;
+if (statArtworksSub) statArtworksSub.textContent = 'Uploaded by you';
+if (statViews) statViews.textContent = '0';
+if (statViewsSub) statViewsSub.textContent = 'No views yet';
+if (statSold) statSold.textContent = '0';
+if (statSoldSub) statSoldSub.textContent = 'No sales yet';
+if (statEarnings) statEarnings.textContent = '₹0';
+if (statEarningsSub) statEarningsSub.textContent = '₹0 this month';
+}
+};
+initDB().then(() => loadRecentUploads()).catch(err => console.error("DB Init failed", err));
+});
+</script>
+<script>
+function logout() {
+localStorage.removeItem('currentUser');
+window.location.href = 'signin.html';
+}
+</script>
+<script>
+function logoutArtist() {
+if (confirm('Sign out of your studio?')) {
+localStorage.removeItem('artistLoggedIn');
+localStorage.removeItem('artistEmail');
+localStorage.removeItem('currentUser');
+window.location.href = 'signin.html';
+}
+}
+const _cu = JSON.parse(localStorage.getItem('currentUser') || '{}');
+const nameEl = document.getElementById('sidebar-artist-name');
+if (nameEl) nameEl.textContent = _cu.fullName || _cu.email || 'Artist';
+</script>
 </body>
-
 </html>

@@ -7,7 +7,7 @@ dotenv.config();
 
 const isRedisConfigured = !!process.env.REDIS_HOST;
 
-// Mock Queue Implementation for local zero-config development
+
 class MockQueue {
   constructor(name) {
     this.name = name;
@@ -28,7 +28,7 @@ class MockQueue {
     this.jobs.push(job);
     console.log(`[Queue: Mock] Added job ${jobId} to queue: ${jobName}`);
     
-    // Start processing async in the next event loop tick
+    
     process.nextTick(() => this.processNextJob());
     
     return { id: jobId };
@@ -71,7 +71,7 @@ class MockQueue {
   }
 }
 
-// Instantiate either Bull queue or Local Mock Queue
+
 let paymentQueue;
 
 if (isRedisConfigured) {
@@ -88,9 +88,7 @@ if (isRedisConfigured) {
   paymentQueue = new MockQueue('payment-processing');
 }
 
-/**
- * Queue Payment processing
- */
+
 async function queuePaymentProcessing(paymentData) {
   console.log(`Queue Service: Queueing payment processing for payment ID ${paymentData.paymentId}`);
   const jobId = await paymentQueue.add('process-card-payment', paymentData, {
@@ -103,9 +101,7 @@ async function queuePaymentProcessing(paymentData) {
   return jobId.id;
 }
 
-/**
- * Helper Actions
- */
+
 async function updatePaymentStatus(paymentId, status, errorMessage = null) {
   console.log(`[Queue Worker] Updating payment status to: ${status}`);
   const timestampField = status === 'processing' ? 'processing_at' : 
@@ -133,7 +129,7 @@ async function updatePaymentStatus(paymentId, status, errorMessage = null) {
   
   await db.query(queryText, params);
   
-  // Log event
+  
   await db.query(`
     INSERT INTO payment_events (payment_id, event_type, status, message, timestamp)
     VALUES ($1, 'status_update', $2, $3, CURRENT_TIMESTAMP)
@@ -205,9 +201,9 @@ async function updatePaymentWithResult(paymentId, result) {
   
   await db.query(queryText, params);
   
-  // Update associated checkout session as completed if payment succeeded
+  
   if (result.status === 'succeeded') {
-    // Find checkout session associated with this payment to set completed
+    
     const paymentInfo = await db.query('SELECT checkout_session_id FROM payments WHERE payment_id = $1', [paymentId]);
     if (paymentInfo.rows.length > 0) {
       const sessionId = paymentInfo.rows[0].checkout_session_id;
@@ -219,7 +215,7 @@ async function updatePaymentWithResult(paymentId, result) {
     }
   }
   
-  // Log event
+  
   await db.query(`
     INSERT INTO payment_events (payment_id, event_type, status, message, gateway_response, timestamp)
     VALUES ($1, 'gateway_response', $2, $3, $4, CURRENT_TIMESTAMP)
@@ -231,7 +227,7 @@ async function updatePaymentWithResult(paymentId, result) {
   ]);
 }
 
-// Business actions triggered upon successful payment
+
 async function activateMembership(customerId, productId) {
   console.log(`[Merchant Logic] Activating membership tier. Customer: ${customerId}, Product: ${productId}`);
 }
@@ -244,21 +240,21 @@ async function notifyMerchantWebhook(paymentData) {
   console.log(`[Merchant Logic] Dispatched webhook event for Payment ID ${paymentData.paymentId}`);
 }
 
-// Register the worker job processor
+
 paymentQueue.process('process-card-payment', 5, async (job) => {
   const paymentData = job.data;
   
   try {
-    // 1. Update status in database to processing
+    
     await updatePaymentStatus(paymentData.paymentId, 'processing');
     
-    // 2. Process payment with Stripe / Simulator gateway
+    
     const result = await gateway.processCardPayment(paymentData);
     
-    // 3. Update payment status in DB based on gateway result
+    
     await updatePaymentWithResult(paymentData.paymentId, result);
     
-    // 4. Trigger post-payment processes if succeeded
+    
     if (result.status === 'succeeded') {
       const customerId = paymentData.customerId || 'CUST_UNKNOWN';
       const productId = paymentData.productId || 'membership_celestial_annual';

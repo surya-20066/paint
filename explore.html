@@ -1,637 +1,619 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Explore Art Retreats | The Painted Muse</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:wght@400;500;700&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
-    <style>
-        :root {
-            --ink: #1A1208;
-            --saffron: #D4AF37;
-            --bg: #FDFBF7;
-            --cream: #F5F0E8;
-        }
-        body {
-            background-color: var(--bg);
-            color: var(--ink);
-            font-family: 'DM Sans', sans-serif;
-            overflow-x: hidden;
-        }
-        .serif {
-            font-family: 'Playfair Display', serif;
-        }
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .section-warm {
-            background-color: #FDFBF7;
-        }
-        .section-cream {
-            background-color: #F5F0E8;
-        }
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Explore Art Retreats | The Painted Muse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:wght@400;500;700&display=swap"
+rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+rel="stylesheet" />
+<style>
+:root {
+--ink: #1A1208;
+--saffron: #D4AF37;
+--bg: #FDFBF7;
+--cream: #F5F0E8;
+}
+body {
+background-color: var(--bg);
+color: var(--ink);
+font-family: 'DM Sans', sans-serif;
+overflow-x: hidden;
+}
+.serif {
+font-family: 'Playfair Display', serif;
+}
+.reveal {
+opacity: 0;
+transform: translateY(20px);
+transition: all 0.8s ease-out;
+}
+.reveal.in {
+opacity: 1;
+transform: translateY(0);
+}
+.section-warm {
+background-color: #FDFBF7;
+}
+.section-cream {
+background-color: #F5F0E8;
+}
 
-        /* Standard Footer Styles */
-        footer {
-            background: #FDFBF7;
-            color: var(--ink);
-            padding: 100px 0 40px;
-            position: relative;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--saffron), transparent);
-        }
-
-        .foot-top {
-            display: grid;
-            grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
-            gap: 48px;
-            margin-bottom: 60px;
-        }
-
-        .foot-brand p {
-            color: rgba(26, 18, 8, 0.7);
-            font-size: 14px;
-            margin: 20px 0 24px;
-            max-width: 320px;
-            line-height: 1.6;
-        }
-
-        .socials {
-            display: flex;
-            gap: 12px;
-        }
-
-        .socials a {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(26, 18, 8, 0.15);
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            color: var(--ink);
-            transition: all 0.3s ease;
-        }
-
-        .socials a:hover {
-            background: var(--saffron);
-            color: var(--ink);
-            border-color: var(--saffron);
-            transform: translateY(-3px);
-        }
-
-        .foot-col h5 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 15px;
-            margin-bottom: 24px;
-            color: var(--saffron);
-            font-weight: 700;
-            letter-spacing: 0.05em;
-        }
-
-        .foot-col ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .foot-col li {
-            margin-bottom: 12px;
-        }
-
-        .foot-col a {
-            font-size: 14px;
-            color: rgba(26, 18, 8, 0.75);
-            transition: color 0.3s ease;
-            text-decoration: none;
-        }
-
-        .foot-col a:hover {
-            color: var(--ink);
-        }
-
-        .foot-bot {
-            border-top: 1px solid rgba(26, 18, 8, 0.1);
-            padding-top: 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: rgba(26, 18, 8, 0.5);
-            font-size: 13px;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        @media (max-width: 1024px) {
-            .foot-top { grid-template-columns: repeat(3, 1fr); }
-            .foot-brand { grid-column: span 3; margin-bottom: 20px; }
-        }
-
-        @media (max-width: 768px) {
-            .foot-top { grid-template-columns: repeat(2, 1fr); }
-            .foot-brand { grid-column: span 2; }
-        }
-    </style>
+footer {
+background: #FDFBF7;
+color: var(--ink);
+padding: 100px 0 40px;
+position: relative;
+}
+footer::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--saffron), transparent);
+}
+.foot-top {
+display: grid;
+grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+gap: 48px;
+margin-bottom: 60px;
+}
+.foot-brand p {
+color: rgba(26, 18, 8, 0.7);
+font-size: 14px;
+margin: 20px 0 24px;
+max-width: 320px;
+line-height: 1.6;
+}
+.socials {
+display: flex;
+gap: 12px;
+}
+.socials a {
+width: 40px;
+height: 40px;
+border: 1px solid rgba(26, 18, 8, 0.15);
+border-radius: 50%;
+display: grid;
+place-items: center;
+color: var(--ink);
+transition: all 0.3s ease;
+}
+.socials a:hover {
+background: var(--saffron);
+color: var(--ink);
+border-color: var(--saffron);
+transform: translateY(-3px);
+}
+.foot-col h5 {
+font-family: 'Playfair Display', serif;
+font-style: italic;
+font-size: 15px;
+margin-bottom: 24px;
+color: var(--saffron);
+font-weight: 700;
+letter-spacing: 0.05em;
+}
+.foot-col ul {
+list-style: none;
+padding: 0;
+}
+.foot-col li {
+margin-bottom: 12px;
+}
+.foot-col a {
+font-size: 14px;
+color: rgba(26, 18, 8, 0.75);
+transition: color 0.3s ease;
+text-decoration: none;
+}
+.foot-col a:hover {
+color: var(--ink);
+}
+.foot-bot {
+border-top: 1px solid rgba(26, 18, 8, 0.1);
+padding-top: 32px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: rgba(26, 18, 8, 0.5);
+font-size: 13px;
+flex-wrap: wrap;
+gap: 16px;
+}
+@media (max-width: 1024px) {
+.foot-top { grid-template-columns: repeat(3, 1fr); }
+.foot-brand { grid-column: span 3; margin-bottom: 20px; }
+}
+@media (max-width: 768px) {
+.foot-top { grid-template-columns: repeat(2, 1fr); }
+.foot-brand { grid-column: span 2; }
+}
+</style>
 </head>
 <body class="selection:bg-[#D4AF37]/30">
-    <nav
-        class="fixed top-0 w-full z-50 bg-[#FDFBF7] backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-2 border-b border-stone-200/30 shadow-sm -translate-y-full transition-all duration-500 opacity-0" id="main-nav">
-        <a href="index.html" class="flex items-center gap-4">
-    <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+<nav
+class="fixed top-0 w-full z-50 bg-[#FDFBF7] backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-2 border-b border-stone-200/30 shadow-sm -translate-y-full transition-all duration-500 opacity-0" id="main-nav">
+<a href="index.html" class="flex items-center gap-4">
+<img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
 </a>
-        <div class="flex items-center gap-4 md:gap-8">
-            <a href="team.html"
-                class="hidden md:block font-sans text-[10px] font-bold uppercase tracking-widest text-stone-500 hover:text-[#B5451B] transition-colors mr-4">Our Team</a>
-            <a href="index.html"
-                class="hidden md:block font-sans text-[10px] font-bold uppercase tracking-widest text-stone-500 hover:text-[#B5451B] transition-colors">Back
-                to Sanctuary</a>
-            <button id="mobile-menu-btn" class="md:hidden text-stone-900 p-2">
-                <span class="material-symbols-outlined text-3xl">menu</span>
-            </button>
-        </div>
-    </nav>
-    <div id="mobile-menu"
-        class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 md:hidden">
-        <div class="flex justify-between items-center p-6 border-b border-stone-100">
-            <span class="text-[#1A1208] font-serif font-bold text-xl">Art Retreats</span>
-            <button id="close-menu-btn" class="text-stone-900 p-2">
-                <span class="material-symbols-outlined text-3xl">close</span>
-            </button>
-        </div>
-        <div class="flex flex-col p-12 gap-8 font-sans text-xl font-bold uppercase tracking-[0.2em]">
-            <a href="index.html">Back to Home</a>
-            <a href="team.html">Our Team</a>
-        </div>
-    </div>
-    <header class="pt-48 pb-24 section-cream relative overflow-hidden">
-        <div class="absolute inset-0 z-0 pointer-events-none">
-            <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-20">
-                <source src="explore-pics/bg.mp4" type="video/mp4">
-            </video>
-            <div class="absolute inset-0 bg-[#F5F0E8]/40"></div>
-        </div>
-        <div class="container mx-auto px-6 relative z-10 text-center">
-            <div class="inline-block mb-6 reveal">
-                <span
-                    class="font-sans text-[10px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold border-b border-[#D4AF37]/30 pb-2">Art
-                    Forms</span>
-            </div>
-            <h1 class="text-5xl md:text-7xl font-serif text-[#1A1208] mb-8 reveal" style="transition-delay: 100ms;">
-                Ancient Roots, <span class="text-[#B5451B] italic">Modern Soul</span></h1>
-            <p class="text-xl text-stone-600 max-w-3xl mx-auto font-sans leading-relaxed reveal"
-                style="transition-delay: 200ms;">
-                Witness the incredible journey of India's timeless art retreats as they transcend temple walls to define
-                contemporary luxury, global fashion, and the future of storytelling.
-            </p>
-        </div>
-    </header>
-    <main class="py-24 section-warm">
-        <section class="container mx-auto px-6 mb-32 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-6">The Gilded Legacy: <span
-                            class="italic text-[#B5451B]">Tanjore Art</span></h2>
-                    <p class="text-stone-600 font-sans leading-relaxed text-lg mb-8">
-                        Sacred gold-leaf paintings from Tamil Nadu, known for their dense composition and surface
-                        richness.
-                    </p>
-                    <div class="w-24 h-[1px] bg-[#D4AF37] mb-8"></div>
-                </div>
-                <div class="h-[400px] overflow-hidden rounded-xl shadow-2xl">
-                    <img src="explore-pics/tanjore.jpeg" alt="Tanjore Art"
-                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
-                    <div
-                        class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
-                        <img src="pics/tanjore_art.png" class="w-full h-full object-cover" alt="">
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="font-serif text-2xl text-[#B5451B] mb-4 italic">Traditional Form</h3>
-                        <p class="text-stone-600 font-sans leading-relaxed text-sm">
-                            Rooted in the 16th century, traditional Tanjore art is a sacred craft utilizing gold foil
-                            and semi-precious stones to depict divine icons. Its significance lies in its "Palagei
-                            Padam" (picture on wood) technique, serving as a pillar of South Indian devotional heritage
-                            and temple aesthetics.
-                        </p>
-                    </div>
-                </div>
-                <div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
-                    <div
-                        class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
-                        <img src="explore-pics/tanjore.jpeg" class="w-full h-full object-cover" alt="">
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="font-serif text-2xl text-[#1A1208] mb-4 italic">Modern Form</h3>
-                        <p class="text-stone-600 font-sans leading-relaxed text-sm">
-                            Today, Tanjore art has transitioned into luxury lifestyle spaces. Beyond deities, it is now
-                            used in modern portraiture, high-end architectural panels, and bespoke interior
-                            installations. Its modern usage emphasizes "textured luxury," blending ancestral techniques
-                            with contemporary secular themes and minimalist aesthetics.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="container mx-auto px-6 mb-32 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
-                <div class="order-2 lg:order-1 h-[400px] overflow-hidden rounded-xl shadow-2xl">
-                    <img src="explore-pics/pattachitra.jpeg" alt="Pattachitra"
-                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="order-1 lg:order-2">
-                    <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-6">Epic Scrolls: <span
-                            class="italic text-[#B5451B]">Pattachitra</span></h2>
-                    <p class="text-stone-600 font-sans leading-relaxed text-lg mb-8">
-                        Traditional cloth-based scroll painting from Odisha and West Bengal, depicting mythological
-                        narratives.
-                    </p>
-                    <div class="w-24 h-[1px] bg-[#D4AF37] mb-8"></div>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
-                    <div
-                        class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
-                        <img src="pics/pattachitra_art.png" class="w-full h-full object-cover" alt="">
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="font-serif text-2xl text-[#B5451B] mb-4 italic">Traditional Form</h3>
-                        <p class="text-stone-600 font-sans leading-relaxed text-sm">
-                            Originating from the ritual service of Lord Jagannath, traditional Pattachitra is
-                            characterized by its floral borders and natural mineral pigments. It represents the pinnacle
-                            of scroll storytelling, where every line and color is governed by ancient iconography rules
-                            passed down through generations.
-                        </p>
-                    </div>
-                </div>
-                <div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
-                    <div
-                        class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
-                        <img src="explore-pics/pattachitra.jpeg" class="w-full h-full object-cover" alt="">
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="font-serif text-2xl text-[#1A1208] mb-4 italic">Modern Form</h3>
-                        <p class="text-stone-600 font-sans leading-relaxed text-sm">
-                            Modern Pattachitra has found a new life in "Art-on-Utility." From hand-painted designer
-                            sarees and kettle art to sustainable accessories and corporate gifting, the art form is now
-                            a symbol of eco-conscious luxury. It bridges the gap between folklore and functional modern
-                            design, keeping the heritage alive in daily life.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="container mx-auto px-6 mb-32 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-6">Tribal Rhythms: <span
-                            class="italic text-[#B5451B]">Gond Art</span></h2>
-                    <p class="text-stone-600 font-sans leading-relaxed text-lg mb-8">
-                        Vibrant tribal art from Madhya Pradesh, characterized by intricate dots and lines forming
-                        mythical stories.
-                    </p>
-                    <div class="w-24 h-[1px] bg-[#D4AF37] mb-8"></div>
-                </div>
-                <div class="h-[400px] overflow-hidden rounded-xl shadow-2xl">
-                    <img src="explore-pics/gond.jpeg" alt="Gond Art"
-                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
-                    <div
-                        class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
-                        <img src="pics/gond_art.png" class="w-full h-full object-cover" alt="">
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="font-serif text-2xl text-[#B5451B] mb-4 italic">Traditional Form</h3>
-                        <p class="text-stone-600 font-sans leading-relaxed text-sm">
-                            Traditional Gond art was a communal language of the Pardhan Gond tribe, painted on mud walls
-                            to celebrate nature and mythical spirits. Using a signature "dot-and-line" technique, it
-                            serves as a spiritual map of the tribe's connection with the forest, where every creature is
-                            interconnected.
-                        </p>
-                    </div>
-                </div>
-                <div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
-                    <div
-                        class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
-                        <img src="explore-pics/gond.jpeg" class="w-full h-full object-cover" alt="">
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="font-serif text-2xl text-[#1A1208] mb-4 italic">Modern Form</h3>
-                        <p class="text-stone-600 font-sans leading-relaxed text-sm">
-                            In the modern world, Gond art has evolved into a powerhouse of contemporary illustration.
-                            Its vibrant patterns are utilized in global branding, high-fashion textiles, and boutique
-                            stationery. The modern usage highlights "primitive sophistication," making it a favorite for
-                            global collectors and modern graphic designers.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="container mx-auto px-6 mb-32 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
-                <div class="order-2 lg:order-1 h-[400px] overflow-hidden rounded-xl shadow-2xl">
-                    <img src="explore-pics/kalamkari.jpeg" alt="Kalamkari"
-                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="order-1 lg:order-2">
-                    <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-6">Sacred Penmanship: <span
-                            class="italic text-[#B5451B]">Kalamkari</span></h2>
-                    <p class="text-stone-600 font-sans leading-relaxed text-lg mb-8">
-                        Ancient style of hand-painted or block-printed cotton textile, produced in Andhra Pradesh.
-                    </p>
-                    <div class="w-24 h-[1px] bg-[#D4AF37] mb-8"></div>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
-                    <div
-                        class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
-                        <img src="pics/kalamkari_art.png" class="w-full h-full object-cover" alt="">
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="font-serif text-2xl text-[#B5451B] mb-4 italic">Traditional Form</h3>
-                        <p class="text-stone-600 font-sans leading-relaxed text-sm">
-                            Traditional Kalamkari represents the soul of Andhra textile heritage, using 23
-                            labor-intensive steps and natural dyes like indigo and pomegranate. It was the original
-                            "story-textile," where narrative scrolls depicted epics with an earthy, organic aesthetic
-                            that defined ancient Indian fashion.
-                        </p>
-                    </div>
-                </div>
-                <div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
-                    <div
-                        class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
-                        <img src="explore-pics/kalamkari.jpeg" class="w-full h-full object-cover" alt="">
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="font-serif text-2xl text-[#1A1208] mb-4 italic">Modern Form</h3>
-                        <p class="text-stone-600 font-sans leading-relaxed text-sm">
-                            Today, Kalamkari is a global icon of "Sustainable Luxury." Its patterns are featured in
-                            high-end resort wear, eco-friendly home furnishings, and luxury hotel interiors. Modern
-                            usage focuses on the "Hand-Painted" label as a mark of authenticity and slow-fashion,
-                            appealing to a generation that values artisanal ethics.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="container mx-auto px-6 mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-6">Silk Gardens: <span
-                            class="italic text-[#B5451B]">Phulkari</span></h2>
-                    <p class="text-stone-600 font-sans leading-relaxed text-lg mb-8">
-                        Flowery embroidery technique from Punjab, traditionally used on shawls and dupattas.
-                    </p>
-                    <div class="w-24 h-[1px] bg-[#D4AF37] mb-8"></div>
-                </div>
-                <div class="h-[400px] overflow-hidden rounded-xl shadow-2xl">
-                    <img src="explore-pics/phulkari.jpeg" alt="Phulkari"
-                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
-                    <div
-                        class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
-                        <img src="pics/phulkari_art.png" class="w-full h-full object-cover" alt="">
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="font-serif text-2xl text-[#B5451B] mb-4 italic">Traditional Form</h3>
-                        <p class="text-stone-600 font-sans leading-relaxed text-sm">
-                            Traditional Phulkari was an intimate domestic art of Punjab, where women embroidered "Bagh"
-                            (gardens) of silk on hand-spun khaddar. It was more than embroidery; it was a rhythmic
-                            documentation of life's milestones, with every stitch symbolizing prosperity, love, and
-                            maternal blessings.
-                        </p>
-                    </div>
-                </div>
-                <div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
-                    <div
-                        class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
-                        <img src="explore-pics/phulkari.jpeg" class="w-full h-full object-cover" alt="">
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="font-serif text-2xl text-[#1A1208] mb-4 italic">Modern Form</h3>
-                        <p class="text-stone-600 font-sans leading-relaxed text-sm">
-                            Modern Phulkari has exploded onto the international runway and luxury accessories market.
-                            From embroidered leather bags to high-fashion bridal couture, it is now celebrated for its
-                            geometric boldness. Modern usage emphasizes "heritage chic," where ancestral patterns are
-                            re-imagined for the global cosmopolitan wardrobe.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer id="footer">
-        <div class="container mx-auto px-6">
-            <div class="foot-top">
-                <div class="foot-brand">
-                    <div class="flex items-center gap-3 mb-6">
-                        <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
-                    </div>
-                    <p>India's premier multi-art platform — celebrating the living traditions of every state through
-                        artisanal AI and human craft.</p>
-                    <div class="socials">
-                        <a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp"
-                            class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
-                        <a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram"
-                            class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
-                        <a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube"
-                            class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
-                        <a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn"
-                            class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="foot-col">
-                    <h5>Related</h5>
-                    <ul>
-                        <li>
-                            <a href="heritage.html"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                Heritage Guide
-                            </a>
-                        </li>
-                        <li>
-                            <a href="masterpieces.html"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                Masterpieces
-                            </a>
-                        </li>
-                        <li>
-                            <a href="team.html"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                Our Team
-                            </a>
-                        </li>
-                        <li>
-                            <a href="signin.html"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                Artist Login
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="foot-col">
-                    <h5>Platform</h5>
-                    <ul>
-                        <li>
-                            <a href="index.html#journal"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                Art Forms
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html#living-map-section"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                Interactive Map
-                            </a>
-                        </li>
-                        <li>
-                            <a href="signin.html"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                Meet the Makers
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html#journal"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                The Muse Journal
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="foot-col">
-                    <h5>Navigations</h5>
-                    <ul>
-                        <li>
-                            <a href="index.html#living-map-section"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                Live Map
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html#yreel-hub"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                Reels
-                            </a>
-                        </li>
-                        <li>
-                            <a href="signin.html"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                Explore Artists
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                Art Retreats
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="foot-col">
-                    <h5>Contact Us</h5>
-                    <ul>
-                        <li>
-                            <a href="mailto:painterdmuse_2k26@gmail.com"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                painterdmuse_2k26@gmail.com
-                            </a>
-                        </li>
-                        <li>
-                            <a href="tel:+917798345690"
-                                class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
-                                +91 7798345690
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="foot-bot justify-center text-center">
-                <div>© 2025 The Painted Muse · Made with ❤️ for Indian Art</div>
-            </div>
-        </div>
-    </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const closeMenuBtn = document.getElementById('close-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.remove('translate-x-full');
-            });
-            closeMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.add('translate-x-full');
-            });
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('in');
-                        revealObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.reveal').forEach((el, index) => {
-                if (!el.style.transitionDelay) {
-                    el.style.transitionDelay = `${(index % 3) * 100}ms`;
-                }
-                revealObserver.observe(el);
-            });
-            const nav = document.getElementById('main-nav');
-            function handleScroll() {
-                if (window.scrollY > 5) {
-                    nav.classList.remove('-translate-y-full', 'opacity-0');
-                    nav.classList.add('translate-y-0', 'opacity-100');
-                } else {
-                    nav.classList.add('-translate-y-full', 'opacity-0');
-                    nav.classList.remove('translate-y-0', 'opacity-100');
-                }
-            }
-            window.addEventListener('scroll', handleScroll);
-        });
-    </script>
+<div class="flex items-center gap-4 md:gap-8">
+<a href="team.html"
+class="hidden md:block font-sans text-[10px] font-bold uppercase tracking-widest text-stone-500 hover:text-[#B5451B] transition-colors mr-4">Our Team</a>
+<a href="index.html"
+class="hidden md:block font-sans text-[10px] font-bold uppercase tracking-widest text-stone-500 hover:text-[#B5451B] transition-colors">Back
+to Sanctuary</a>
+<button id="mobile-menu-btn" class="md:hidden text-stone-900 p-2">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</nav>
+<div id="mobile-menu"
+class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 md:hidden">
+<div class="flex justify-between items-center p-6 border-b border-stone-100">
+<span class="text-[#1A1208] font-serif font-bold text-xl">Art Retreats</span>
+<button id="close-menu-btn" class="text-stone-900 p-2">
+<span class="material-symbols-outlined text-3xl">close</span>
+</button>
+</div>
+<div class="flex flex-col p-12 gap-8 font-sans text-xl font-bold uppercase tracking-[0.2em]">
+<a href="index.html">Back to Home</a>
+<a href="team.html">Our Team</a>
+</div>
+</div>
+<header class="pt-48 pb-24 section-cream relative overflow-hidden">
+<div class="absolute inset-0 z-0 pointer-events-none">
+<video autoplay muted loop playsinline class="w-full h-full object-cover opacity-20">
+<source src="explore-pics/bg.mp4" type="video/mp4">
+</video>
+<div class="absolute inset-0 bg-[#F5F0E8]/40"></div>
+</div>
+<div class="container mx-auto px-6 relative z-10 text-center">
+<div class="inline-block mb-6 reveal">
+<span
+class="font-sans text-[10px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold border-b border-[#D4AF37]/30 pb-2">Art
+Forms</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-serif text-[#1A1208] mb-8 reveal" style="transition-delay: 100ms;">
+Ancient Roots, <span class="text-[#B5451B] italic">Modern Soul</span></h1>
+<p class="text-xl text-stone-600 max-w-3xl mx-auto font-sans leading-relaxed reveal"
+style="transition-delay: 200ms;">
+Witness the incredible journey of India's timeless art retreats as they transcend temple walls to define
+contemporary luxury, global fashion, and the future of storytelling.
+</p>
+</div>
+</header>
+<main class="py-24 section-warm">
+<section class="container mx-auto px-6 mb-32 reveal">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+<div>
+<h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-6">The Gilded Legacy: <span
+class="italic text-[#B5451B]">Tanjore Art</span></h2>
+<p class="text-stone-600 font-sans leading-relaxed text-lg mb-8">
+Sacred gold-leaf paintings from Tamil Nadu, known for their dense composition and surface
+richness.
+</p>
+<div class="w-24 h-[1px] bg-[#D4AF37] mb-8"></div>
+</div>
+<div class="h-[400px] overflow-hidden rounded-xl shadow-2xl">
+<img src="explore-pics/tanjore.jpeg" alt="Tanjore Art"
+class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div
+class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
+<img src="pics/tanjore_art.png" class="w-full h-full object-cover" alt="">
+</div>
+<div class="relative z-10">
+<h3 class="font-serif text-2xl text-[#B5451B] mb-4 italic">Traditional Form</h3>
+<p class="text-stone-600 font-sans leading-relaxed text-sm">
+Rooted in the 16th century, traditional Tanjore art is a sacred craft utilizing gold foil
+and semi-precious stones to depict divine icons. Its significance lies in its "Palagei
+Padam" (picture on wood) technique, serving as a pillar of South Indian devotional heritage
+and temple aesthetics.
+</p>
+</div>
+</div>
+<div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div
+class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
+<img src="explore-pics/tanjore.jpeg" class="w-full h-full object-cover" alt="">
+</div>
+<div class="relative z-10">
+<h3 class="font-serif text-2xl text-[#1A1208] mb-4 italic">Modern Form</h3>
+<p class="text-stone-600 font-sans leading-relaxed text-sm">
+Today, Tanjore art has transitioned into luxury lifestyle spaces. Beyond deities, it is now
+used in modern portraiture, high-end architectural panels, and bespoke interior
+installations. Its modern usage emphasizes "textured luxury," blending ancestral techniques
+with contemporary secular themes and minimalist aesthetics.
+</p>
+</div>
+</div>
+</div>
+</section>
+<section class="container mx-auto px-6 mb-32 reveal">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+<div class="order-2 lg:order-1 h-[400px] overflow-hidden rounded-xl shadow-2xl">
+<img src="explore-pics/pattachitra.jpeg" alt="Pattachitra"
+class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+</div>
+<div class="order-1 lg:order-2">
+<h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-6">Epic Scrolls: <span
+class="italic text-[#B5451B]">Pattachitra</span></h2>
+<p class="text-stone-600 font-sans leading-relaxed text-lg mb-8">
+Traditional cloth-based scroll painting from Odisha and West Bengal, depicting mythological
+narratives.
+</p>
+<div class="w-24 h-[1px] bg-[#D4AF37] mb-8"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div
+class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
+<img src="pics/pattachitra_art.png" class="w-full h-full object-cover" alt="">
+</div>
+<div class="relative z-10">
+<h3 class="font-serif text-2xl text-[#B5451B] mb-4 italic">Traditional Form</h3>
+<p class="text-stone-600 font-sans leading-relaxed text-sm">
+Originating from the ritual service of Lord Jagannath, traditional Pattachitra is
+characterized by its floral borders and natural mineral pigments. It represents the pinnacle
+of scroll storytelling, where every line and color is governed by ancient iconography rules
+passed down through generations.
+</p>
+</div>
+</div>
+<div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div
+class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
+<img src="explore-pics/pattachitra.jpeg" class="w-full h-full object-cover" alt="">
+</div>
+<div class="relative z-10">
+<h3 class="font-serif text-2xl text-[#1A1208] mb-4 italic">Modern Form</h3>
+<p class="text-stone-600 font-sans leading-relaxed text-sm">
+Modern Pattachitra has found a new life in "Art-on-Utility." From hand-painted designer
+sarees and kettle art to sustainable accessories and corporate gifting, the art form is now
+a symbol of eco-conscious luxury. It bridges the gap between folklore and functional modern
+design, keeping the heritage alive in daily life.
+</p>
+</div>
+</div>
+</div>
+</section>
+<section class="container mx-auto px-6 mb-32 reveal">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+<div>
+<h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-6">Tribal Rhythms: <span
+class="italic text-[#B5451B]">Gond Art</span></h2>
+<p class="text-stone-600 font-sans leading-relaxed text-lg mb-8">
+Vibrant tribal art from Madhya Pradesh, characterized by intricate dots and lines forming
+mythical stories.
+</p>
+<div class="w-24 h-[1px] bg-[#D4AF37] mb-8"></div>
+</div>
+<div class="h-[400px] overflow-hidden rounded-xl shadow-2xl">
+<img src="explore-pics/gond.jpeg" alt="Gond Art"
+class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div
+class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
+<img src="pics/gond_art.png" class="w-full h-full object-cover" alt="">
+</div>
+<div class="relative z-10">
+<h3 class="font-serif text-2xl text-[#B5451B] mb-4 italic">Traditional Form</h3>
+<p class="text-stone-600 font-sans leading-relaxed text-sm">
+Traditional Gond art was a communal language of the Pardhan Gond tribe, painted on mud walls
+to celebrate nature and mythical spirits. Using a signature "dot-and-line" technique, it
+serves as a spiritual map of the tribe's connection with the forest, where every creature is
+interconnected.
+</p>
+</div>
+</div>
+<div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div
+class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
+<img src="explore-pics/gond.jpeg" class="w-full h-full object-cover" alt="">
+</div>
+<div class="relative z-10">
+<h3 class="font-serif text-2xl text-[#1A1208] mb-4 italic">Modern Form</h3>
+<p class="text-stone-600 font-sans leading-relaxed text-sm">
+In the modern world, Gond art has evolved into a powerhouse of contemporary illustration.
+Its vibrant patterns are utilized in global branding, high-fashion textiles, and boutique
+stationery. The modern usage highlights "primitive sophistication," making it a favorite for
+global collectors and modern graphic designers.
+</p>
+</div>
+</div>
+</div>
+</section>
+<section class="container mx-auto px-6 mb-32 reveal">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+<div class="order-2 lg:order-1 h-[400px] overflow-hidden rounded-xl shadow-2xl">
+<img src="explore-pics/kalamkari.jpeg" alt="Kalamkari"
+class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+</div>
+<div class="order-1 lg:order-2">
+<h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-6">Sacred Penmanship: <span
+class="italic text-[#B5451B]">Kalamkari</span></h2>
+<p class="text-stone-600 font-sans leading-relaxed text-lg mb-8">
+Ancient style of hand-painted or block-printed cotton textile, produced in Andhra Pradesh.
+</p>
+<div class="w-24 h-[1px] bg-[#D4AF37] mb-8"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div
+class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
+<img src="pics/kalamkari_art.png" class="w-full h-full object-cover" alt="">
+</div>
+<div class="relative z-10">
+<h3 class="font-serif text-2xl text-[#B5451B] mb-4 italic">Traditional Form</h3>
+<p class="text-stone-600 font-sans leading-relaxed text-sm">
+Traditional Kalamkari represents the soul of Andhra textile heritage, using 23
+labor-intensive steps and natural dyes like indigo and pomegranate. It was the original
+"story-textile," where narrative scrolls depicted epics with an earthy, organic aesthetic
+that defined ancient Indian fashion.
+</p>
+</div>
+</div>
+<div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div
+class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
+<img src="explore-pics/kalamkari.jpeg" class="w-full h-full object-cover" alt="">
+</div>
+<div class="relative z-10">
+<h3 class="font-serif text-2xl text-[#1A1208] mb-4 italic">Modern Form</h3>
+<p class="text-stone-600 font-sans leading-relaxed text-sm">
+Today, Kalamkari is a global icon of "Sustainable Luxury." Its patterns are featured in
+high-end resort wear, eco-friendly home furnishings, and luxury hotel interiors. Modern
+usage focuses on the "Hand-Painted" label as a mark of authenticity and slow-fashion,
+appealing to a generation that values artisanal ethics.
+</p>
+</div>
+</div>
+</div>
+</section>
+<section class="container mx-auto px-6 mb-16 reveal">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+<div>
+<h2 class="text-4xl md:text-5xl font-serif text-[#1A1208] mb-6">Silk Gardens: <span
+class="italic text-[#B5451B]">Phulkari</span></h2>
+<p class="text-stone-600 font-sans leading-relaxed text-lg mb-8">
+Flowery embroidery technique from Punjab, traditionally used on shawls and dupattas.
+</p>
+<div class="w-24 h-[1px] bg-[#D4AF37] mb-8"></div>
+</div>
+<div class="h-[400px] overflow-hidden rounded-xl shadow-2xl">
+<img src="explore-pics/phulkari.jpeg" alt="Phulkari"
+class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div
+class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
+<img src="pics/phulkari_art.png" class="w-full h-full object-cover" alt="">
+</div>
+<div class="relative z-10">
+<h3 class="font-serif text-2xl text-[#B5451B] mb-4 italic">Traditional Form</h3>
+<p class="text-stone-600 font-sans leading-relaxed text-sm">
+Traditional Phulkari was an intimate domestic art of Punjab, where women embroidered "Bagh"
+(gardens) of silk on hand-spun khaddar. It was more than embroidery; it was a rhythmic
+documentation of life's milestones, with every stitch symbolizing prosperity, love, and
+maternal blessings.
+</p>
+</div>
+</div>
+<div class="relative bg-white p-10 rounded-xl border border-stone-100 shadow-sm overflow-hidden group">
+<div
+class="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500">
+<img src="explore-pics/phulkari.jpeg" class="w-full h-full object-cover" alt="">
+</div>
+<div class="relative z-10">
+<h3 class="font-serif text-2xl text-[#1A1208] mb-4 italic">Modern Form</h3>
+<p class="text-stone-600 font-sans leading-relaxed text-sm">
+Modern Phulkari has exploded onto the international runway and luxury accessories market.
+From embroidered leather bags to high-fashion bridal couture, it is now celebrated for its
+geometric boldness. Modern usage emphasizes "heritage chic," where ancestral patterns are
+re-imagined for the global cosmopolitan wardrobe.
+</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer id="footer">
+<div class="container mx-auto px-6">
+<div class="foot-top">
+<div class="foot-brand">
+<div class="flex items-center gap-3 mb-6">
+<img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+</div>
+<p>India's premier multi-art platform — celebrating the living traditions of every state through
+artisanal AI and human craft.</p>
+<div class="socials">
+<a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp"
+class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
+<a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram"
+class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
+<a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube"
+class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
+<a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn"
+class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
+</div>
+</div>
+<div class="foot-col">
+<h5>Related</h5>
+<ul>
+<li>
+<a href="heritage.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Heritage Guide
+</a>
+</li>
+<li>
+<a href="masterpieces.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Masterpieces
+</a>
+</li>
+<li>
+<a href="team.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Our Team
+</a>
+</li>
+<li>
+<a href="artists.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Artist Login
+</a>
+</li>
+</ul>
+</div>
+<div class="foot-col">
+<h5>Platform</h5>
+<ul>
+<li>
+<a href="index.html#journal"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Art Forms
+</a>
+</li>
+<li>
+<a href="index.html#living-map-section"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Interactive Map
+</a>
+</li>
+<li>
+<a href="artists.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Meet the Makers
+</a>
+</li>
+<li>
+<a href="index.html#journal"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+The Muse Journal
+</a>
+</li>
+</ul>
+</div>
+<div class="foot-col">
+<h5>Navigations</h5>
+<ul>
+<li>
+<a href="index.html#living-map-section"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Live Map
+</a>
+</li>
+<li>
+<a href="index.html#yreel-hub"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Reels
+</a>
+</li>
+<li>
+<a href="signin.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Explore Artists
+</a>
+</li>
+<li>
+<a href="index.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Art Retreats
+</a>
+</li>
+</ul>
+</div>
+<div class="foot-col">
+<h5>Contact Us</h5>
+<ul>
+<li>
+<a href="mailto:painterdmuse_2k26@gmail.com"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+painterdmuse_2k26@gmail.com
+</a>
+</li>
+<li>
+<a href="tel:+917798345690"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
++91 7798345690
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="foot-bot justify-center text-center">
+<div>© 2025 The Painted Muse · Made with ❤️ for Indian Art</div>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const closeMenuBtn = document.getElementById('close-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+mobileMenuBtn.addEventListener('click', () => {
+mobileMenu.classList.remove('translate-x-full');
+});
+closeMenuBtn.addEventListener('click', () => {
+mobileMenu.classList.add('translate-x-full');
+});
+const revealObserver = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('in');
+revealObserver.unobserve(entry.target);
+}
+});
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach((el, index) => {
+if (!el.style.transitionDelay) {
+el.style.transitionDelay = `${(index % 3) * 100}ms`;
+}
+revealObserver.observe(el);
+});
+const nav = document.getElementById('main-nav');
+function handleScroll() {
+if (window.scrollY > 5) {
+nav.classList.remove('-translate-y-full', 'opacity-0');
+nav.classList.add('translate-y-0', 'opacity-100');
+} else {
+nav.classList.add('-translate-y-full', 'opacity-0');
+nav.classList.remove('translate-y-0', 'opacity-100');
+}
+}
+window.addEventListener('scroll', handleScroll);
+});
+</script>
 </body>
 </html>
-
-
-

@@ -1,786 +1,725 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>My Portfolio | The Painted Muse Studio</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;700&family=Mrs+Saint+Delafield&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#B5451B",
-                        accent: "#D4AF37",
-                        background: "#FDFBF7",
-                        text: "#1A1208",
-                        cream: "#F5F0E8",
-                        border: "rgba(212, 175, 55, 0.2)",
-                        "surface-bright": "#fff8f6",
-                        surface: "#fff8f6",
-                        "surface-container-low": "#fff1ed",
-                        "on-surface": "#241915",
-                        "surface-container": "#ffe9e3",
-                        "on-primary": "#ffffff",
-                        secondary: "#795900",
-                        "primary-container": "#b5451b",
-                        "surface-dim": "#ebd5cf",
-                        "surface-variant": "#f4ded7",
-                        "on-primary-container": "#ffe4dc",
-                        "surface-container-highest": "#f4ded7",
-                        "secondary-container": "#ffc641",
-                        "on-surface-variant": "#58423b",
-                        "surface-container-high": "#fae3dd",
-                        "surface-container-lowest": "#ffffff"
-                    },
-                    fontFamily: {
-                        serif: ["Playfair Display", "serif"],
-                        sans: ["DM Sans", "sans-serif"],
-                        calligraphy: ["Mrs Saint Delafield", "cursive"]
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #FDFBF7;
-            color: #1A1208;
-            font-family: 'DM Sans', sans-serif;
-            height: 100vh;
-            overflow: hidden;
-        }
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>My Portfolio | The Painted Muse Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;700&family=Mrs+Saint+Delafield&display=swap"
+rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+rel="stylesheet" />
+<script>
+(function checkArtistAuth() {
+if (localStorage.getItem('artistLoggedIn') !== 'true') {
+window.location.href = 'signin.html?error=auth';
+}
+})();
+tailwind.config = {
+darkMode: "class",
+theme: {
+extend: {
+colors: {
+primary: "#B5451B",
+accent: "#D4AF37",
+background: "#FDFBF7",
+text: "#1A1208",
+cream: "#F5F0E8",
+border: "rgba(212, 175, 55, 0.2)",
+"surface-bright": "#fff8f6",
+surface: "#fff8f6",
+"surface-container-low": "#fff1ed",
+"on-surface": "#241915",
+"surface-container": "#ffe9e3",
+"on-primary": "#ffffff",
+secondary: "#795900",
+"primary-container": "#b5451b",
+"surface-dim": "#ebd5cf",
+"surface-variant": "#f4ded7",
+"on-primary-container": "#ffe4dc",
+"surface-container-highest": "#f4ded7",
+"secondary-container": "#ffc641",
+"on-surface-variant": "#58423b",
+"surface-container-high": "#fae3dd",
+"surface-container-lowest": "#ffffff"
+},
+fontFamily: {
+serif: ["Playfair Display", "serif"],
+sans: ["DM Sans", "sans-serif"],
+calligraphy: ["Mrs Saint Delafield", "cursive"]
+}
+}
+}
+}
+</script>
+<style>
+body {
+background-color: #FDFBF7;
+color: #1A1208;
+font-family: 'DM Sans', sans-serif;
+height: 100vh;
+overflow: hidden;
+}
+.paper-grain {
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+opacity: 0.035;
+pointer-events: none;
+}
 
-        .paper-grain {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            opacity: 0.035;
-            pointer-events: none;
-        }
+.custom-scrollbar::-webkit-scrollbar {
+width: 6px;
+height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+background: rgba(26, 18, 8, 0.05);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+background: #D4AF37;
+border-radius: 9999px;
+}
 
-        /* Gold Custom Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(26, 18, 8, 0.05);
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #D4AF37;
-            border-radius: 9999px;
-        }
-
-        /* Warli-style double-border cards */
-        .warli-border {
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            position: relative;
-        }
-
-        .warli-border::before {
-            content: "";
-            position: absolute;
-            inset: 4px;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            pointer-events: none;
-        }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-in-up {
-            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .color-swatch {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .color-swatch.active {
-            border-color: #B5451B;
-            transform: scale(1.15);
-        }
-    </style>
+.warli-border {
+border: 1px solid rgba(212, 175, 55, 0.35);
+position: relative;
+}
+.warli-border::before {
+content: "";
+position: absolute;
+inset: 4px;
+border: 1px solid rgba(212, 175, 55, 0.15);
+pointer-events: none;
+}
+.glass-panel {
+background: rgba(255, 255, 255, 0.72);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+border: 1px solid rgba(212, 175, 55, 0.15);
+}
+@keyframes fadeInUp {
+from {
+opacity: 0;
+transform: translateY(15px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.animate-fade-in-up {
+animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.color-swatch {
+width: 32px;
+height: 32px;
+border-radius: 50%;
+cursor: pointer;
+border: 2px solid transparent;
+transition: all 0.3s ease;
+}
+.color-swatch.active {
+border-color: #B5451B;
+transform: scale(1.15);
+}
+</style>
 </head>
-
 <body class="bg-background">
-    <!-- Grain Overlay -->
-    <div class="fixed inset-0 paper-grain z-50 pointer-events-none"></div>
+<div class="fixed inset-0 paper-grain z-50 pointer-events-none"></div>
+<div class="relative flex h-screen w-full flex-row overflow-hidden">
+<aside class="hidden lg:flex w-72 flex-col bg-surface-container border-r border-outline-variant h-screen sticky top-0">
+<div class="p-8 cursor-pointer flex items-center gap-3" onclick="window.location.href='index.html'">
+<img src="pics/dp.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" />
+<span class="font-serif text-on-surface text-sm font-bold leading-tight">Artist<br>Dashboard</span>
+</div>
+<nav class="flex-1 px-4">
+<ul class="flex flex-col gap-2">
+<li onclick="window.location.href='artist-home.html'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">home</span>
+<p class="text-sm font-medium">Home</p>
+</li>
+<li onclick="window.location.href='artist-gallery.html'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium">Gallery</p>
+</li>
+<li onclick="window.location.href='dashboard-artists.html'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">cloud_upload</span>
+<p class="text-sm font-medium">Upload Artwork</p>
+</li>
+<li class="flex h-14 items-center gap-4 px-4 rounded-lg bg-primary text-on-primary shadow-sm cursor-default">
+<span class="material-symbols-outlined">account_circle</span>
+<p class="text-sm font-bold">Portfolio</p>
+</li>
+<li onclick="window.location.href='artist-settings.html'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</li>
+</ul>
+</nav>
+<div class="p-8 border-t border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-surface-dim overflow-hidden border border-outline rounded-full">
+<img id="sidebar-img" class="w-full h-full object-cover"
+src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T" />
+</div>
+<div>
+<p id="sidebar-name" class="text-xs font-bold text-on-surface">AMRITA R.</p>
+<p id="sidebar-role" class="text-[10px] text-on-surface-variant">MASTER ARTIST</p>
+</div>
+</div>
+<button onclick="logoutArtist()"
+class="w-full mt-3 flex items-center gap-3 px-4 py-3 rounded-lg
+text-stone-400 hover:text-red-500 hover:bg-red-50
+transition-all text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+Sign Out
+</button>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto custom-scrollbar">
+<div class="lg:hidden flex items-center bg-surface p-4 border-b border-outline-variant justify-between">
+<span class="material-symbols-outlined text-on-surface cursor-pointer" id="mobile-menu-btn">menu</span>
+<h2 class="text-on-surface font-serif text-xl font-bold flex-1 text-center">My Portfolio</h2>
+<div class="size-10"></div>
+</div>
+<header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-outline-variant px-8 py-4 flex justify-between items-center">
+<h1 class="font-serif text-2xl text-text">Portfolio <span class="italic text-primary">Showcase</span></h1>
+<div class="flex items-center gap-4">
+<div class="relative inline-block text-left" id="share-dropdown-container">
+<button onclick="toggleShareDropdown()"
+class="bg-[#F5F0E8] text-[#B5451B] border border-border px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-sm hover:bg-[#B5451B]/5 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm font-bold">share</span> Share Portfolio
+</button>
+<div id="share-dropdown" class="hidden absolute right-0 mt-2 w-56 rounded-xl shadow-xl bg-white border border-border ring-1 ring-black ring-opacity-5 focus:outline-none z-[100] p-2 space-y-1">
+<button onclick="shareAction('copy')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-text hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-[#B5451B]">content_copy</span> Copy Link
+</button>
+<button onclick="shareAction('whatsapp')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-text hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-[#25D366]">chat</span> WhatsApp
+</button>
+<button onclick="shareAction('instagram')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-text hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-[#E1306C]">photo_camera</span> Instagram
+</button>
+<button onclick="shareAction('twitter')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-text hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-[#1DA1F2]">share</span> Twitter / X
+</button>
+<button onclick="shareAction('facebook')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-text hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-[#1877F2]">thumb_up</span> Facebook
+</button>
+<button onclick="shareAction('native')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-text hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-accent">phonelink_ring</span> Mobile Share
+</button>
+</div>
+</div>
+<button onclick="toggleDrawer(true)"
+class="bg-primary text-on-primary border border-primary px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-lg hover:brightness-110 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm font-bold">edit</span> Edit Theme & Profile
+</button>
+</div>
+</header>
+<div id="portfolio-showcase-container" class="transition-colors duration-500 w-full min-h-[calc(100vh-73px)] pb-12">
+<div class="relative h-64 w-full bg-cream overflow-hidden">
+<div id="showcase-cover-pattern" class="absolute inset-0 opacity-[0.08] pointer-events-none bg-cover bg-center"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent"></div>
+</div>
+<div class="max-w-5xl mx-auto px-8 -mt-56 relative z-10 space-y-12">
+<div class="glass-panel p-8 rounded-2xl flex flex-col md:flex-row gap-8 items-center md:items-start shadow-xl">
+<div class="size-32 rounded-2xl overflow-hidden border-4 border-[#D4AF37]/45 shadow-md flex-shrink-0 bg-white">
+<img id="showcase-avatar" class="w-full h-full object-cover" src="pics/dp.png" />
+</div>
+<div class="text-center md:text-left flex-1 space-y-3">
+<div class="flex flex-col sm:flex-row items-center gap-2 justify-center md:justify-start">
+<h2 id="showcase-name" class="font-serif text-3xl font-bold tracking-tight text-text">Amrita Raghavan</h2>
+<span class="font-calligraphy text-2xl text-primary transform translate-y-1" id="showcase-calligraphy">Artistic Excellence</span>
+</div>
+<p id="showcase-spec" class="text-primary font-bold text-xs uppercase tracking-widest">Madhubani Master Artisan</p>
+<p class="text-text/70 text-xs flex items-center justify-center md:justify-start gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span> <span id="showcase-location">Madhubani, Bihar</span>
+</p>
+<p class="hidden text-text/70 text-xs flex items-center justify-center md:justify-start gap-3 mt-1.5 flex-wrap">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">mail</span> <span id="showcase-email">amrita@paintedmuse.com</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">call</span> <span id="showcase-phone">+91 98765 43210</span>
+</span>
+</p>
+<div class="flex flex-wrap gap-4 justify-center md:justify-start pt-2" id="showcase-links">
+</div>
+</div>
+<div class="border-t md:border-t-0 md:border-l border-border/40 pt-6 md:pt-0 md:pl-8 flex flex-row md:flex-col gap-6 justify-center text-center">
+<div>
+<h5 class="text-[10px] font-bold uppercase tracking-widest text-text/45">Views</h5>
+<p class="font-serif text-2xl text-primary font-bold">1.2K</p>
+</div>
+<div>
+<h5 class="text-[10px] font-bold uppercase tracking-widest text-text/45">Followers</h5>
+<p class="font-serif text-2xl text-primary font-bold">240</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="glass-panel p-8 rounded-2xl shadow-md space-y-4 relative overflow-hidden">
+<div class="bio-pattern absolute inset-0 opacity-[0.08] pointer-events-none bg-cover bg-center"></div>
+<h3 class="font-serif text-xl font-bold border-b border-border/30 pb-2 text-text relative z-10">Artist Biography</h3>
+<p id="showcase-bio" class="text-sm text-text/80 leading-relaxed italic relative z-10">
+"Crafting heritage art forms with meticulous devotion."
+</p>
+</div>
+<div class="glass-panel p-8 rounded-2xl shadow-md space-y-4 relative overflow-hidden">
+<div class="ach-pattern absolute inset-0 opacity-[0.08] pointer-events-none bg-cover bg-center"></div>
+<h3 class="font-serif text-xl font-bold border-b border-border/30 pb-2 text-text relative z-10">Exhibitions & Milestones</h3>
+<ul id="showcase-achievements" class="space-y-3 text-sm text-text/80 leading-relaxed relative z-10">
+</ul>
+</div>
+</div>
+<div class="space-y-6">
+<div class="space-y-4 pt-2">
+<div class="flex items-center justify-between border-b border-border/30 pb-3">
+<h3 class="font-serif text-2xl font-bold text-text">Masterpieces Collection</h3>
+<button onclick="window.location.href='gallery-immersive.html'"
+class="text-xs font-bold text-primary uppercase tracking-widest hover:underline flex items-center gap-1 group">
+View More <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+<p class="text-sm text-text/60 italic leading-relaxed">
+Click "View More" above to explore the artist's full collection of paintings, sketches, and cinematic tribal process videos in our immersive fullscreen exhibition gallery.
+</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="featured-uploads-grid">
+<div id="featured-image-card" class="warli-border bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group cursor-pointer" onclick="openLightbox('img')">
+<div class="aspect-video bg-cream overflow-hidden relative">
+<img id="featured-image-img" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" src="pics/madhubani_bg.png" />
+<span class="absolute top-3 left-3 bg-[#B5451B] text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Latest Image</span>
+</div>
+<div class="p-6">
+<h4 id="featured-image-title" class="font-serif text-lg font-bold text-text">Madhubani Lotus Pond</h4>
+<div class="flex justify-between items-center mt-3 pt-3 border-t border-border/20">
+<span id="featured-image-category" class="text-[9px] font-bold uppercase tracking-wider text-text/60">Mithila Traditional</span>
+<span id="featured-image-price" class="text-primary font-bold text-sm">₹18,000</span>
+</div>
+</div>
+</div>
+<div id="featured-video-card" class="warli-border bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group flex flex-col">
+<div class="aspect-video bg-cream overflow-hidden relative flex-1">
+<video id="featured-video-player" class="w-full h-full object-cover" controls src="pics/video.mp4"></video>
+<span class="absolute top-3 left-3 bg-secondary text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Latest Video Reel</span>
+</div>
+<div class="p-6">
+<h4 id="featured-video-title" class="font-serif text-lg font-bold text-text">Making of Lotus Pond</h4>
+<div class="flex justify-between items-center mt-3 pt-3 border-t border-border/20">
+<span class="text-[9px] font-bold uppercase tracking-wider text-text/60">Process Reel</span>
+<span class="text-green-700 font-bold text-xs uppercase tracking-wider">New Reel</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div id="edit-drawer-overlay" class="fixed inset-0 bg-black/50 z-[110] hidden transition-opacity duration-300" onclick="toggleDrawer(false)"></div>
+<div id="edit-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white border-l border-border shadow-2xl z-[120] translate-x-full transition-transform duration-300 flex flex-col">
+<div class="p-6 border-b border-border flex justify-between items-center bg-[#FDFBF7]">
+<h3 class="font-serif text-xl font-bold text-text flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">edit</span> Edit Portfolio Profile
+</h3>
+<button onclick="toggleDrawer(false)" class="text-text/65 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+<div class="space-y-3">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-text/70">Showcase Accent/Theme Color</label>
+<div class="flex gap-4 items-center flex-wrap" id="swatch-container">
+<div class="color-swatch active bg-[#FDFBF7]" data-color="#FDFBF7" title="Classic Cream"></div>
+<div class="color-swatch bg-[#F5F0E8]" data-color="#F5F0E8" title="Antique Paper"></div>
+<div class="color-swatch bg-[#FFF8F0]" data-color="#FFF8F0" title="Warm Silk"></div>
+<div class="color-swatch bg-[#E8E4D9]" data-color="#E8E4D9" title="Desert Sand"></div>
+<div class="color-swatch bg-[#ebd5cf]" data-color="#ebd5cf" title="Soft Terracotta"></div>
+<div class="color-swatch bg-[#ffe9e3]" data-color="#ffe9e3" title="Rose Clay"></div>
+</div>
+<div class="flex items-center gap-3 pt-2">
+<input type="color" id="custom-color" class="w-8 h-8 rounded-md border border-border cursor-pointer">
+<span class="text-[10px] font-bold uppercase tracking-widest text-text/60">Choose Custom Color</span>
+</div>
+</div>
+<div class="space-y-3">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-text/70">Cover Pattern Background</label>
+<div class="grid grid-cols-3 gap-3">
+<button onclick="selectPattern('pics/warli_pattern_1778230295803.png', this)" id="pat-warli" class="border-2 border-primary p-2 rounded-xl bg-background overflow-hidden transition-all text-center">
+<img src="pics/warli_pattern_1778230295803.png" class="w-full h-10 object-cover opacity-20 mx-auto" alt="Warli">
+<span class="text-[8px] font-bold uppercase mt-1 block">Warli</span>
+</button>
+<button onclick="selectPattern('pics/madhubani_pattern_1778230275283.png', this)" id="pat-madhubani" class="border-2 border-border p-2 rounded-xl bg-background overflow-hidden hover:border-primary/50 transition-all text-center">
+<img src="pics/madhubani_pattern_1778230275283.png" class="w-full h-10 object-cover opacity-20 mx-auto" alt="Madhubani">
+<span class="text-[8px] font-bold uppercase mt-1 block">Madhubani</span>
+</button>
+<button onclick="selectPattern('pics/gond_pattern_1778230315090.png', this)" id="pat-gond" class="border-2 border-border p-2 rounded-xl bg-background overflow-hidden hover:border-primary/50 transition-all text-center">
+<img src="pics/gond_pattern_1778230315090.png" class="w-full h-10 object-cover opacity-20 mx-auto" alt="Gond">
+<span class="text-[8px] font-bold uppercase mt-1 block">Gond Art</span>
+</button>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-text/70">Calligraphy Flourish Tag</label>
+<input type="text" id="inp-calligraphy" placeholder="e.g. Traditional Masterpiece"
+class="w-full bg-[#F5F0E8] border-border rounded-lg px-4 py-3 focus:ring-primary focus:border-primary text-sm">
+</div>
+<div class="space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-text/70">Exhibitions & Key Achievements (one per line)</label>
+<textarea id="inp-achievements" rows="6" placeholder="Exhibitions and milestones..."
+class="w-full bg-[#F5F0E8] border-border rounded-lg px-4 py-3 focus:ring-primary focus:border-primary text-sm"></textarea>
+</div>
+</div>
+<div class="p-6 border-t border-border bg-[#FDFBF7] flex gap-4">
+<button onclick="toggleDrawer(false)" class="flex-1 py-3 border border-border text-text font-bold uppercase text-xs tracking-wider rounded-lg hover:bg-cream transition-colors">Cancel</button>
+<button onclick="savePortfolioSettings()" class="flex-1 py-3 bg-primary text-white font-bold uppercase text-xs tracking-wider rounded-lg hover:brightness-110 transition-all shadow-md">Save Changes</button>
+</div>
+</div>
+<div id="lightbox-modal" class="fixed inset-0 z-[130] bg-black/90 hidden items-center justify-center p-6 transition-all duration-300" onclick="closeLightbox()">
+<button class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors cursor-pointer" onclick="closeLightbox()">
+<span class="material-symbols-outlined text-4xl">close</span>
+</button>
+<div class="max-w-4xl max-h-[85vh] w-full flex flex-col items-center justify-center space-y-4" onclick="event.stopPropagation()">
+<img id="lightbox-img" class="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl" src="" />
+<h4 id="lightbox-title" class="text-white font-serif text-xl font-bold">Artwork</h4>
+</div>
+</div>
+<script>
+let currentUser = null;
+let artistPosts = [];
+let artistReels = [];
+let selectedPatternUrl = 'pics/warli_pattern_1778230295803.png';
+let selectedBgColor = '#FDFBF7';
 
-    <div class="relative flex h-screen w-full flex-row overflow-hidden">
-        <!-- Sidebar -->
-        <aside class="hidden lg:flex w-72 flex-col bg-surface-container border-r border-outline-variant h-screen sticky top-0">
-            <div class="p-8 cursor-pointer flex items-center gap-3" onclick="window.location.href='index.html'">
-                <img src="pics/dp.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" />
-                <span class="font-serif text-on-surface text-sm font-bold leading-tight">Artist<br>Dashboard</span>
-            </div>
-            <nav class="flex-1 px-4">
-                <ul class="flex flex-col gap-2">
-                    <li onclick="window.location.href='artist-home.html'"
-                        class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
-                        <span class="material-symbols-outlined">home</span>
-                        <p class="text-sm font-medium">Home</p>
-                    </li>
-                    <li onclick="window.location.href='artist-gallery.html'"
-                        class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
-                        <span class="material-symbols-outlined">dashboard</span>
-                        <p class="text-sm font-medium">Gallery</p>
-                    </li>
-                    <li onclick="window.location.href='dashboard-artists.html'"
-                        class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
-                        <span class="material-symbols-outlined">cloud_upload</span>
-                        <p class="text-sm font-medium">Upload Artwork</p>
-                    </li>
-                    <li class="flex h-14 items-center gap-4 px-4 rounded-lg bg-primary text-on-primary shadow-sm cursor-default">
-                        <span class="material-symbols-outlined">account_circle</span>
-                        <p class="text-sm font-bold">Portfolio</p>
-                    </li>
-                    <li onclick="window.location.href='artist-settings.html'"
-                        class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
-                        <span class="material-symbols-outlined">settings</span>
-                        <p class="text-sm font-medium">Settings</p>
-                    </li>
-                </ul>
-            </nav>
-            <div class="p-8 border-t border-outline-variant">
-                <div class="flex items-center gap-3">
-                    <div class="size-10 bg-surface-dim overflow-hidden border border-outline rounded-full">
-                        <img id="sidebar-img" class="w-full h-full object-cover"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T" />
-                    </div>
-                    <div>
-                        <p id="sidebar-name" class="text-xs font-bold text-on-surface">AMRITA R.</p>
-                        <p id="sidebar-role" class="text-[10px] text-on-surface-variant">MASTER ARTIST</p>
-                    </div>
-                </div>
-            </div>
-        </aside>
+const dbName = "ReelsDB";
+const storeName = "videos";
+let db;
+function initDB() {
+return new Promise((resolve, reject) => {
+const request = indexedDB.open(dbName, 1);
+request.onerror = event => reject(event.target.error);
+request.onsuccess = event => {
+db = event.target.result;
+resolve(db);
+};
+request.onupgradeneeded = event => {
+const db = event.target.result;
+if (!db.objectStoreNames.contains(storeName)) {
+db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
+}
+};
+});
+}
 
-        <!-- Main Content -->
-        <main class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto custom-scrollbar">
-            <!-- Mobile Header -->
-            <div class="lg:hidden flex items-center bg-surface p-4 border-b border-outline-variant justify-between">
-                <span class="material-symbols-outlined text-on-surface cursor-pointer" id="mobile-menu-btn">menu</span>
-                <h2 class="text-on-surface font-serif text-xl font-bold flex-1 text-center">My Portfolio</h2>
-                <div class="size-10"></div>
-            </div>
+document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+const aside = document.querySelector('aside');
+if (aside) {
+aside.classList.toggle('hidden');
+aside.classList.toggle('flex');
+aside.classList.toggle('fixed');
+aside.classList.toggle('inset-y-0');
+aside.classList.toggle('left-0');
+aside.classList.toggle('z-50');
+aside.classList.toggle('w-72');
+}
+});
 
-            <!-- Dashboard Actions bar -->
-            <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-outline-variant px-8 py-4 flex justify-between items-center">
-                <h1 class="font-serif text-2xl text-text">Portfolio <span class="italic text-primary">Showcase</span></h1>
-                
-                <div class="flex items-center gap-4">
-                    <!-- Share Dropdown Button -->
-                    <div class="relative inline-block text-left" id="share-dropdown-container">
-                        <button onclick="toggleShareDropdown()"
-                            class="bg-[#F5F0E8] text-[#B5451B] border border-border px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-sm hover:bg-[#B5451B]/5 transition-all flex items-center gap-2">
-                            <span class="material-symbols-outlined text-sm font-bold">share</span> Share Portfolio
-                        </button>
-                        <div id="share-dropdown" class="hidden absolute right-0 mt-2 w-56 rounded-xl shadow-xl bg-white border border-border ring-1 ring-black ring-opacity-5 focus:outline-none z-[100] p-2 space-y-1">
-                            <button onclick="shareAction('copy')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-text hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-3">
-                                <span class="material-symbols-outlined text-sm text-[#B5451B]">content_copy</span> Copy Link
-                            </button>
-                            <button onclick="shareAction('whatsapp')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-text hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-3">
-                                <span class="material-symbols-outlined text-sm text-[#25D366]">chat</span> WhatsApp
-                            </button>
-                            <button onclick="shareAction('instagram')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-text hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-3">
-                                <span class="material-symbols-outlined text-sm text-[#E1306C]">photo_camera</span> Instagram
-                            </button>
-                            <button onclick="shareAction('twitter')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-text hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-3">
-                                <span class="material-symbols-outlined text-sm text-[#1DA1F2]">share</span> Twitter / X
-                            </button>
-                            <button onclick="shareAction('facebook')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-text hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-3">
-                                <span class="material-symbols-outlined text-sm text-[#1877F2]">thumb_up</span> Facebook
-                            </button>
-                            <button onclick="shareAction('native')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-text hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-3">
-                                <span class="material-symbols-outlined text-sm text-accent">phonelink_ring</span> Mobile Share
-                            </button>
-                        </div>
-                    </div>
+function toggleDrawer(show) {
+const drawer = document.getElementById('edit-drawer');
+const overlay = document.getElementById('edit-drawer-overlay');
+if (show) {
 
-                    <button onclick="toggleDrawer(true)"
-                        class="bg-primary text-on-primary border border-primary px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-lg hover:brightness-110 transition-all flex items-center gap-2">
-                        <span class="material-symbols-outlined text-sm font-bold">edit</span> Edit Theme & Profile
-                    </button>
-                </div>
-            </header>
+const profileKey = 'artist_profile_' + currentUser.email;
+const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
+document.getElementById('inp-calligraphy').value = profile.calligraphy || 'Artistic Excellence';
+document.getElementById('inp-achievements').value = profile.achievements ||
+"• Solo Exhibition, Visual Arts Gallery, New Delhi (2023)\n• State Award for Traditional Crafts, Government of Bihar (2021)\n• National Traditional Conclave Participant (2020)";
 
-            <!-- Portfolio Core Visual Area -->
-            <div id="portfolio-showcase-container" class="transition-colors duration-500 w-full min-h-[calc(100vh-73px)] pb-12">
-                <!-- Cover Banner Area -->
-                <div class="relative h-64 w-full bg-cream overflow-hidden">
-                    <div id="showcase-cover-pattern" class="absolute inset-0 opacity-[0.08] pointer-events-none bg-cover bg-center"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent"></div>
-                </div>
+selectedBgColor = profile.themeBgColor || '#FDFBF7';
+selectedPatternUrl = profile.themePattern || 'pics/warli_pattern_1778230295803.png';
 
-                <!-- Showcase Profile Info -->
-                <div class="max-w-5xl mx-auto px-8 -mt-56 relative z-10 space-y-12">
-                    <div class="glass-panel p-8 rounded-2xl flex flex-col md:flex-row gap-8 items-center md:items-start shadow-xl">
-                        <div class="size-32 rounded-2xl overflow-hidden border-4 border-[#D4AF37]/45 shadow-md flex-shrink-0 bg-white">
-                            <img id="showcase-avatar" class="w-full h-full object-cover" src="pics/dp.png" />
-                        </div>
-                        <div class="text-center md:text-left flex-1 space-y-3">
-                            <div class="flex flex-col sm:flex-row items-center gap-2 justify-center md:justify-start">
-                                <h2 id="showcase-name" class="font-serif text-3xl font-bold tracking-tight text-text">Amrita Raghavan</h2>
-                                <span class="font-calligraphy text-2xl text-primary transform translate-y-1" id="showcase-calligraphy">Artistic Excellence</span>
-                            </div>
-                            <p id="showcase-spec" class="text-primary font-bold text-xs uppercase tracking-widest">Madhubani Master Artisan</p>
-                            <p class="text-text/70 text-xs flex items-center justify-center md:justify-start gap-1">
-                                <span class="material-symbols-outlined text-sm">location_on</span> <span id="showcase-location">Madhubani, Bihar</span>
-                            </p>
-                            
-                            <!-- Custom Links -->
-                            <div class="flex flex-wrap gap-4 justify-center md:justify-start pt-2" id="showcase-links">
-                                <!-- Links will load dynamically -->
-                            </div>
-                        </div>
+document.querySelectorAll('[data-pattern]').forEach(b => {
+if (b.getAttribute('data-pattern') === selectedPatternUrl) {
+b.classList.remove('border-border');
+b.classList.add('border-primary');
+}
+});
+drawer.classList.remove('translate-x-full');
+overlay.classList.remove('hidden');
+} else {
+drawer.classList.add('translate-x-full');
+overlay.classList.add('hidden');
+}
+}
 
-                        <!-- Mini Stats Card inside profile -->
-                        <div class="border-t md:border-t-0 md:border-l border-border/40 pt-6 md:pt-0 md:pl-8 flex flex-row md:flex-col gap-6 justify-center text-center">
-                            <div>
-                                <h5 class="text-[10px] font-bold uppercase tracking-widest text-text/45">Views</h5>
-                                <p class="font-serif text-2xl text-primary font-bold">1.2K</p>
-                            </div>
-                            <div>
-                                <h5 class="text-[10px] font-bold uppercase tracking-widest text-text/45">Followers</h5>
-                                <p class="font-serif text-2xl text-primary font-bold">240</p>
-                            </div>
-                        </div>
-                    </div>
+function selectPattern(url, btn) {
+selectedPatternUrl = url;
+const buttons = btn.parentElement.querySelectorAll('button');
+buttons.forEach(b => {
+b.classList.remove('border-primary');
+b.classList.add('border-border');
+});
+btn.classList.remove('border-border');
+btn.classList.add('border-primary');
+}
 
-                    <!-- Biography & Achievements Row -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="glass-panel p-8 rounded-2xl shadow-md space-y-4 relative overflow-hidden">
-                            <div class="bio-pattern absolute inset-0 opacity-[0.08] pointer-events-none bg-cover bg-center"></div>
-                            <h3 class="font-serif text-xl font-bold border-b border-border/30 pb-2 text-text relative z-10">Artist Biography</h3>
-                            <p id="showcase-bio" class="text-sm text-text/80 leading-relaxed italic relative z-10">
-                                "Crafting heritage art forms with meticulous devotion."
-                            </p>
-                        </div>
-                        <div class="glass-panel p-8 rounded-2xl shadow-md space-y-4 relative overflow-hidden">
-                            <div class="ach-pattern absolute inset-0 opacity-[0.08] pointer-events-none bg-cover bg-center"></div>
-                            <h3 class="font-serif text-xl font-bold border-b border-border/30 pb-2 text-text relative z-10">Exhibitions & Milestones</h3>
-                            <ul id="showcase-achievements" class="space-y-3 text-sm text-text/80 leading-relaxed relative z-10">
-                                <!-- Achievements will load dynamically -->
-                            </ul>
-                        </div>
-                    </div>
+document.querySelectorAll('.color-swatch').forEach(swatch => {
+swatch.addEventListener('click', () => {
+const color = swatch.getAttribute('data-color');
+selectedBgColor = color;
+document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+swatch.classList.add('active');
+});
+});
 
-                    <!-- Featured Latest Uploads (Image and Video) -->
-                    <div class="space-y-6">
+document.getElementById('custom-color').addEventListener('input', (e) => {
+selectedBgColor = e.target.value;
+document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+});
 
-                        <!-- Masterpieces Collection Section -->
-                        <div class="space-y-4 pt-2">
-                            <div class="flex items-center justify-between border-b border-border/30 pb-3">
-                                <h3 class="font-serif text-2xl font-bold text-text">Masterpieces Collection</h3>
-                                <button onclick="window.location.href='gallery-immersive.html'"
-                                    class="text-xs font-bold text-primary uppercase tracking-widest hover:underline flex items-center gap-1 group">
-                                    View More <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
-                                </button>
-                            </div>
-                            <p class="text-sm text-text/60 italic leading-relaxed">
-                                Click "View More" above to explore the artist's full collection of paintings, sketches, and cinematic tribal process videos in our immersive fullscreen exhibition gallery.
-                            </p>
-                        </div>
+function savePortfolioSettings() {
+const profileKey = 'artist_profile_' + currentUser.email;
+const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
+profile.calligraphy = document.getElementById('inp-calligraphy').value.trim();
+profile.achievements = document.getElementById('inp-achievements').value.trim();
+profile.themeBgColor = selectedBgColor;
+profile.themePattern = selectedPatternUrl;
+localStorage.setItem(profileKey, JSON.stringify(profile));
+toggleDrawer(false);
+loadShowcase();
+}
 
-                        <!-- Featured Cards -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="featured-uploads-grid">
-                            <!-- Image card -->
-                            <div id="featured-image-card" class="warli-border bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group cursor-pointer" onclick="openLightbox('img')">
-                                <div class="aspect-video bg-cream overflow-hidden relative">
-                                    <img id="featured-image-img" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" src="pics/madhubani_bg.png" />
-                                    <span class="absolute top-3 left-3 bg-[#B5451B] text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Latest Image</span>
-                                </div>
-                                <div class="p-6">
-                                    <h4 id="featured-image-title" class="font-serif text-lg font-bold text-text">Madhubani Lotus Pond</h4>
-                                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-border/20">
-                                        <span id="featured-image-category" class="text-[9px] font-bold uppercase tracking-wider text-text/60">Mithila Traditional</span>
-                                        <span id="featured-image-price" class="text-primary font-bold text-sm">₹18,000</span>
-                                    </div>
-                                </div>
-                            </div>
+async function loadShowcase() {
+if (!currentUser) return;
+const profileKey = 'artist_profile_' + currentUser.email;
+const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
 
-                            <!-- Video card -->
-                            <div id="featured-video-card" class="warli-border bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group flex flex-col">
-                                <div class="aspect-video bg-cream overflow-hidden relative flex-1">
-                                    <video id="featured-video-player" class="w-full h-full object-cover" controls src="pics/video.mp4"></video>
-                                    <span class="absolute top-3 left-3 bg-secondary text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Latest Video Reel</span>
-                                </div>
-                                <div class="p-6">
-                                    <h4 id="featured-video-title" class="font-serif text-lg font-bold text-text">Making of Lotus Pond</h4>
-                                    <div class="flex justify-between items-center mt-3 pt-3 border-t border-border/20">
-                                        <span class="text-[9px] font-bold uppercase tracking-wider text-text/60">Process Reel</span>
-                                        <span class="text-green-700 font-bold text-xs uppercase tracking-wider">New Reel</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
+const displayName = profile.displayName || currentUser.fullName;
+const spec = profile.specialization || currentUser.spec || 'Traditional Artist';
+const location = profile.cityState || 'India';
+const photoUrl = profile.photoUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150';
+const bio = profile.bio || 'Crafting heritage art forms with meticulous devotion.';
+const calligraphy = profile.calligraphy || 'Artistic Excellence';
+const achievements = profile.achievements ||
+"• Solo Exhibition, Visual Arts Gallery, New Delhi (2023)\n• State Award for Traditional Crafts, Government of Bihar (2021)\n• National Traditional Conclave Participant (2020)";
 
-    <!-- Edit Portfolio Profile Slider Drawer -->
-    <div id="edit-drawer-overlay" class="fixed inset-0 bg-black/50 z-[110] hidden transition-opacity duration-300" onclick="toggleDrawer(false)"></div>
-    <div id="edit-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white border-l border-border shadow-2xl z-[120] translate-x-full transition-transform duration-300 flex flex-col">
-        <div class="p-6 border-b border-border flex justify-between items-center bg-[#FDFBF7]">
-            <h3 class="font-serif text-xl font-bold text-text flex items-center gap-2">
-                <span class="material-symbols-outlined text-primary">edit</span> Edit Portfolio Profile
-            </h3>
-            <button onclick="toggleDrawer(false)" class="text-text/65 hover:text-primary transition-colors">
-                <span class="material-symbols-outlined text-2xl">close</span>
-            </button>
-        </div>
-        
-        <div class="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
-            <!-- Background Theme Color -->
-            <div class="space-y-3">
-                <label class="block text-[10px] font-bold uppercase tracking-widest text-text/70">Showcase Accent/Theme Color</label>
-                <div class="flex gap-4 items-center flex-wrap" id="swatch-container">
-                    <div class="color-swatch active bg-[#FDFBF7]" data-color="#FDFBF7" title="Classic Cream"></div>
-                    <div class="color-swatch bg-[#F5F0E8]" data-color="#F5F0E8" title="Antique Paper"></div>
-                    <div class="color-swatch bg-[#FFF8F0]" data-color="#FFF8F0" title="Warm Silk"></div>
-                    <div class="color-swatch bg-[#E8E4D9]" data-color="#E8E4D9" title="Desert Sand"></div>
-                    <div class="color-swatch bg-[#ebd5cf]" data-color="#ebd5cf" title="Soft Terracotta"></div>
-                    <div class="color-swatch bg-[#ffe9e3]" data-color="#ffe9e3" title="Rose Clay"></div>
-                </div>
-                <div class="flex items-center gap-3 pt-2">
-                    <input type="color" id="custom-color" class="w-8 h-8 rounded-md border border-border cursor-pointer">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-text/60">Choose Custom Color</span>
-                </div>
-            </div>
+const bgColor = profile.themeBgColor || '#FDFBF7';
+const pattern = profile.themePattern || 'pics/warli_pattern_1778230295803.png';
+document.getElementById('portfolio-showcase-container').style.backgroundColor = bgColor;
+document.getElementById('showcase-cover-pattern').style.backgroundImage = `url('${pattern}')`;
+document.body.style.backgroundColor = bgColor;
+const mainEl = document.querySelector('main');
+if (mainEl) mainEl.style.backgroundColor = bgColor;
 
-            <!-- Accent Pattern -->
-            <div class="space-y-3">
-                <label class="block text-[10px] font-bold uppercase tracking-widest text-text/70">Cover Pattern Background</label>
-                <div class="grid grid-cols-3 gap-3">
-                    <button onclick="selectPattern('pics/warli_pattern_1778230295803.png', this)" id="pat-warli" class="border-2 border-primary p-2 rounded-xl bg-background overflow-hidden transition-all text-center">
-                        <img src="pics/warli_pattern_1778230295803.png" class="w-full h-10 object-cover opacity-20 mx-auto" alt="Warli">
-                        <span class="text-[8px] font-bold uppercase mt-1 block">Warli</span>
-                    </button>
-                    <button onclick="selectPattern('pics/madhubani_pattern_1778230275283.png', this)" id="pat-madhubani" class="border-2 border-border p-2 rounded-xl bg-background overflow-hidden hover:border-primary/50 transition-all text-center">
-                        <img src="pics/madhubani_pattern_1778230275283.png" class="w-full h-10 object-cover opacity-20 mx-auto" alt="Madhubani">
-                        <span class="text-[8px] font-bold uppercase mt-1 block">Madhubani</span>
-                    </button>
-                    <button onclick="selectPattern('pics/gond_pattern_1778230315090.png', this)" id="pat-gond" class="border-2 border-border p-2 rounded-xl bg-background overflow-hidden hover:border-primary/50 transition-all text-center">
-                        <img src="pics/gond_pattern_1778230315090.png" class="w-full h-10 object-cover opacity-20 mx-auto" alt="Gond">
-                        <span class="text-[8px] font-bold uppercase mt-1 block">Gond Art</span>
-                    </button>
-                </div>
-            </div>
+const bioPattern = document.querySelector('.bio-pattern');
+const achPattern = document.querySelector('.ach-pattern');
+if (bioPattern) bioPattern.style.backgroundImage = `url('${pattern}')`;
+if (achPattern) achPattern.style.backgroundImage = `url('${pattern}')`;
 
-            <!-- Calligraphy Flourish -->
-            <div class="space-y-2">
-                <label class="block text-[10px] font-bold uppercase tracking-widest text-text/70">Calligraphy Flourish Tag</label>
-                <input type="text" id="inp-calligraphy" placeholder="e.g. Traditional Masterpiece"
-                    class="w-full bg-[#F5F0E8] border-border rounded-lg px-4 py-3 focus:ring-primary focus:border-primary text-sm">
-            </div>
+document.getElementById('showcase-avatar').src = photoUrl;
+document.getElementById('showcase-name').textContent = displayName;
+document.getElementById('showcase-calligraphy').textContent = calligraphy;
+document.getElementById('showcase-spec').textContent = spec;
+document.getElementById('showcase-location').textContent = location;
+document.getElementById('showcase-bio').textContent = `"${bio}"`;
 
-            <!-- Achievements list -->
-            <div class="space-y-2">
-                <label class="block text-[10px] font-bold uppercase tracking-widest text-text/70">Exhibitions & Key Achievements (one per line)</label>
-                <textarea id="inp-achievements" rows="6" placeholder="Exhibitions and milestones..."
-                    class="w-full bg-[#F5F0E8] border-border rounded-lg px-4 py-3 focus:ring-primary focus:border-primary text-sm"></textarea>
-            </div>
-        </div>
+const showcaseEmail = document.getElementById('showcase-email');
+const showcasePhone = document.getElementById('showcase-phone');
+if (showcaseEmail) showcaseEmail.textContent = currentUser.email;
+if (showcasePhone) showcasePhone.textContent = profile.phone || currentUser.phone || '+91 98765 43210';
 
-        <div class="p-6 border-t border-border bg-[#FDFBF7] flex gap-4">
-            <button onclick="toggleDrawer(false)" class="flex-1 py-3 border border-border text-text font-bold uppercase text-xs tracking-wider rounded-lg hover:bg-cream transition-colors">Cancel</button>
-            <button onclick="savePortfolioSettings()" class="flex-1 py-3 bg-primary text-white font-bold uppercase text-xs tracking-wider rounded-lg hover:brightness-110 transition-all shadow-md">Save Changes</button>
-        </div>
-    </div>
+const sbImg = document.getElementById('sidebar-img');
+const sbName = document.getElementById('sidebar-name');
+const sbRole = document.getElementById('sidebar-role');
+if (sbImg) sbImg.src = photoUrl;
+if (sbName) sbName.textContent = displayName.toUpperCase();
+if (sbRole) sbRole.textContent = spec.toUpperCase() + ' ARTIST';
 
-    <!-- Cinematic Fullscreen Lightbox Modal -->
-    <div id="lightbox-modal" class="fixed inset-0 z-[130] bg-black/90 hidden items-center justify-center p-6 transition-all duration-300" onclick="closeLightbox()">
-        <button class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors cursor-pointer" onclick="closeLightbox()">
-            <span class="material-symbols-outlined text-4xl">close</span>
-        </button>
-        <div class="max-w-4xl max-h-[85vh] w-full flex flex-col items-center justify-center space-y-4" onclick="event.stopPropagation()">
-            <img id="lightbox-img" class="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl" src="" />
-            <h4 id="lightbox-title" class="text-white font-serif text-xl font-bold">Artwork</h4>
-        </div>
-    </div>
+const linksContainer = document.getElementById('showcase-links');
+linksContainer.innerHTML = '';
+const links = [
+{ title: 'Personal Website', url: profile.website, icon: 'language' },
+{ title: 'Instagram', url: profile.instagram, icon: 'link' },
+{ title: 'Behance / Dribbble', url: profile.behance, icon: 'share' }
+];
+links.forEach(l => {
+if (l.url) {
+const btn = document.createElement('a');
+btn.href = l.url.startsWith('http') ? l.url : 'https://' + l.url;
+btn.target = '_blank';
+btn.className = "flex items-center gap-1.5 text-xs text-primary font-bold tracking-wide uppercase hover:underline bg-white/50 border border-border px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm transition-colors";
+btn.innerHTML = `<span class="material-symbols-outlined text-sm font-bold">${l.icon}</span> ${l.title}`;
+linksContainer.appendChild(btn);
+}
+});
 
-    <script>
-        let currentUser = null;
-        let artistPosts = [];
-        let artistReels = [];
-        let selectedPatternUrl = 'pics/warli_pattern_1778230295803.png';
-        let selectedBgColor = '#FDFBF7';
+const achContainer = document.getElementById('showcase-achievements');
+achContainer.innerHTML = achievements.split('\n')
+.filter(l => l.trim() !== '')
+.map(l => `<li class="flex items-start gap-2.5"><span class="text-primary mt-1">•</span><span>${l.replace(/^[•\-\*\s]+/, '')}</span></li>`)
+.join('');
 
-        // Initialize indexedDB
-        const dbName = "ReelsDB";
-        const storeName = "videos";
-        let db;
+const postsKey = 'artist_posts_' + currentUser.email;
+artistPosts = JSON.parse(localStorage.getItem(postsKey) || '[]');
 
-        function initDB() {
-            return new Promise((resolve, reject) => {
-                const request = indexedDB.open(dbName, 1);
-                request.onerror = event => reject(event.target.error);
-                request.onsuccess = event => {
-                    db = event.target.result;
-                    resolve(db);
-                };
-                request.onupgradeneeded = event => {
-                    const db = event.target.result;
-                    if (!db.objectStoreNames.contains(storeName)) {
-                        db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
-                    }
-                };
-            });
-        }
+const imgCard = document.getElementById('featured-image-card');
+if (artistPosts.length > 0) {
+const latestImg = artistPosts[artistPosts.length - 1]; 
+document.getElementById('featured-image-img').src = latestImg.imgUrl;
+document.getElementById('featured-image-title').textContent = latestImg.title;
+document.getElementById('featured-image-category').textContent = latestImg.category || 'Artwork';
+document.getElementById('featured-image-price').textContent = '₹' + Number(latestImg.price).toLocaleString();
+imgCard.style.display = 'block';
+} else {
 
-        // Toggle mobile drawer
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-            const aside = document.querySelector('aside');
-            if (aside) {
-                aside.classList.toggle('hidden');
-                aside.classList.toggle('flex');
-                aside.classList.toggle('fixed');
-                aside.classList.toggle('inset-y-0');
-                aside.classList.toggle('left-0');
-                aside.classList.toggle('z-50');
-                aside.classList.toggle('w-72');
-            }
-        });
+imgCard.innerHTML = `
+<div class="aspect-video bg-cream overflow-hidden relative flex flex-col items-center justify-center p-8 text-center" onclick="window.location.href='dashboard-artists.html'">
+<span class="material-symbols-outlined text-primary text-5xl mb-3">add_photo_alternate</span>
+<h4 class="font-serif text-lg font-bold text-text">No Featured Image</h4>
+<p class="text-xs text-text/60 mt-1">Upload artwork in your Gallery to feature it here.</p>
+</div>
+`;
+}
 
-        // Toggle Drawer
-        function toggleDrawer(show) {
-            const drawer = document.getElementById('edit-drawer');
-            const overlay = document.getElementById('edit-drawer-overlay');
-            if (show) {
-                // Populate inputs
-                const profileKey = 'artist_profile_' + currentUser.email;
-                const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
-                document.getElementById('inp-calligraphy').value = profile.calligraphy || 'Artistic Excellence';
-                document.getElementById('inp-achievements').value = profile.achievements || 
-                    "• Solo Exhibition, Visual Arts Gallery, New Delhi (2023)\n• State Award for Traditional Crafts, Government of Bihar (2021)\n• National Traditional Conclave Participant (2020)";
+let videoUrl = 'pics/video.mp4';
+let videoTitle = 'Process Reel';
+let hasVideo = false;
+if (db) {
+const transaction = db.transaction([storeName], "readonly");
+const store = transaction.objectStore(storeName);
+const request = store.getAll();
+await new Promise((resolve) => {
+request.onsuccess = () => {
+const allReels = request.result || [];
+const userReels = allReels.filter(r => r.userEmail === currentUser.email);
+if (userReels.length > 0) {
+const latestReel = userReels[userReels.length - 1];
+videoUrl = latestReel.file ? URL.createObjectURL(latestReel.file) : latestReel.videoUrl;
+videoTitle = latestReel.title || 'Process Reel';
+hasVideo = true;
+}
+resolve();
+};
+});
+}
+const videoCard = document.getElementById('featured-video-card');
+const player = document.getElementById('featured-video-player');
+if (hasVideo) {
+player.src = videoUrl;
+document.getElementById('featured-video-title').textContent = videoTitle;
+videoCard.style.display = 'flex';
+} else {
 
-                // Init theme values
-                selectedBgColor = profile.themeBgColor || '#FDFBF7';
-                selectedPatternUrl = profile.themePattern || 'pics/warli_pattern_1778230295803.png';
+player.src = 'pics/video.mp4';
+document.getElementById('featured-video-title').textContent = 'Mithila Clay Painting Demo';
+}
+}
 
-                // Select pattern button
-                document.querySelectorAll('[data-pattern]').forEach(b => {
-                    if (b.getAttribute('data-pattern') === selectedPatternUrl) {
-                        b.classList.remove('border-border');
-                        b.classList.add('border-primary');
-                    }
-                });
+function openLightbox() {
+if (artistPosts.length === 0) return;
+const latestImg = artistPosts[artistPosts.length - 1];
+const modal = document.getElementById('lightbox-modal');
+document.getElementById('lightbox-img').src = latestImg.imgUrl;
+document.getElementById('lightbox-title').textContent = latestImg.title;
+modal.classList.remove('hidden');
+modal.classList.add('flex');
+}
+function closeLightbox() {
+const modal = document.getElementById('lightbox-modal');
+modal.classList.add('hidden');
+modal.classList.remove('flex');
+}
 
-                drawer.classList.remove('translate-x-full');
-                overlay.classList.remove('hidden');
-            } else {
-                drawer.classList.add('translate-x-full');
-                overlay.classList.add('hidden');
-            }
-        }
+function toggleShareDropdown() {
+const dropdown = document.getElementById('share-dropdown');
+dropdown.classList.toggle('hidden');
+}
 
-        // Select pattern
-        function selectPattern(url, btn) {
-            selectedPatternUrl = url;
-            const buttons = btn.parentElement.querySelectorAll('button');
-            buttons.forEach(b => {
-                b.classList.remove('border-primary');
-                b.classList.add('border-border');
-            });
-            btn.classList.remove('border-border');
-            btn.classList.add('border-primary');
-        }
+window.addEventListener('click', (e) => {
+const container = document.getElementById('share-dropdown-container');
+if (container && !container.contains(e.target)) {
+document.getElementById('share-dropdown').classList.add('hidden');
+}
+});
 
-        // Color swatches & background color switcher
-        document.querySelectorAll('.color-swatch').forEach(swatch => {
-            swatch.addEventListener('click', () => {
-                const color = swatch.getAttribute('data-color');
-                selectedBgColor = color;
-                document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
-                swatch.classList.add('active');
-            });
-        });
+function shareAction(platform) {
+const shareUrl = window.location.origin + '/artist-portfolio.html?artist=' + encodeURIComponent(currentUser.email);
+const title = "Exquisite Heritage Art Portfolio by " + currentUser.fullName;
+const message = "Explore my portfolio and masterpieces collection at The Painted Muse: " + shareUrl;
+document.getElementById('share-dropdown').classList.add('hidden');
+switch (platform) {
+case 'copy':
+navigator.clipboard.writeText(shareUrl).then(() => {
+alert('Portfolio public share link copied to clipboard!');
+});
+break;
+case 'whatsapp':
+window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(message), '_blank');
+break;
+case 'instagram':
+alert('Instagram sharing guide:\n\n1. Public link copied to clipboard.\n2. Paste it in your Instagram Bio under Edit Profile to showcase your works!');
+navigator.clipboard.writeText(shareUrl);
+break;
+case 'twitter':
+window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(title), '_blank');
+break;
+case 'facebook':
+window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), '_blank');
+break;
+case 'native':
+if (navigator.share) {
+navigator.share({
+title: title,
+text: message,
+url: shareUrl
+}).catch(console.error);
+} else {
+navigator.clipboard.writeText(shareUrl).then(() => {
+alert('Native sharing not supported. Portfolio share link copied to clipboard instead!');
+});
+}
+break;
+}
+}
 
-        // Custom hex color picker
-        document.getElementById('custom-color').addEventListener('input', (e) => {
-            selectedBgColor = e.target.value;
-            document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
-        });
-
-        // Save settings
-        function savePortfolioSettings() {
-            const profileKey = 'artist_profile_' + currentUser.email;
-            const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
-
-            profile.calligraphy = document.getElementById('inp-calligraphy').value.trim();
-            profile.achievements = document.getElementById('inp-achievements').value.trim();
-            profile.themeBgColor = selectedBgColor;
-            profile.themePattern = selectedPatternUrl;
-
-            localStorage.setItem(profileKey, JSON.stringify(profile));
-            toggleDrawer(false);
-            loadShowcase();
-        }
-
-        // Load Showcase elements
-        async function loadShowcase() {
-            if (!currentUser) return;
-            const profileKey = 'artist_profile_' + currentUser.email;
-            const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
-
-            // Set up fallback details
-            const displayName = profile.displayName || currentUser.fullName;
-            const spec = profile.specialization || currentUser.spec || 'Traditional Artist';
-            const location = profile.cityState || 'India';
-            const photoUrl = profile.photoUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150';
-            const bio = profile.bio || 'Crafting heritage art forms with meticulous devotion.';
-            const calligraphy = profile.calligraphy || 'Artistic Excellence';
-            const achievements = profile.achievements || 
-                "• Solo Exhibition, Visual Arts Gallery, New Delhi (2023)\n• State Award for Traditional Crafts, Government of Bihar (2021)\n• National Traditional Conclave Participant (2020)";
-            
-            // Set cover color & pattern
-            const bgColor = profile.themeBgColor || '#FDFBF7';
-            const pattern = profile.themePattern || 'pics/warli_pattern_1778230295803.png';
-            
-            document.getElementById('portfolio-showcase-container').style.backgroundColor = bgColor;
-            document.getElementById('showcase-cover-pattern').style.backgroundImage = `url('${pattern}')`;
-            document.body.style.backgroundColor = bgColor;
-            const mainEl = document.querySelector('main');
-            if (mainEl) mainEl.style.backgroundColor = bgColor;
-
-            // Apply selected pattern to the two cards below details card
-            const bioPattern = document.querySelector('.bio-pattern');
-            const achPattern = document.querySelector('.ach-pattern');
-            if (bioPattern) bioPattern.style.backgroundImage = `url('${pattern}')`;
-            if (achPattern) achPattern.style.backgroundImage = `url('${pattern}')`;
-
-            // Update UI texts
-            document.getElementById('showcase-avatar').src = photoUrl;
-            document.getElementById('showcase-name').textContent = displayName;
-            document.getElementById('showcase-calligraphy').textContent = calligraphy;
-            document.getElementById('showcase-spec').textContent = spec;
-            document.getElementById('showcase-location').textContent = location;
-            document.getElementById('showcase-bio').textContent = `"${bio}"`;
-
-            // Sidebar Sync
-            const sbImg = document.getElementById('sidebar-img');
-            const sbName = document.getElementById('sidebar-name');
-            const sbRole = document.getElementById('sidebar-role');
-            if (sbImg) sbImg.src = photoUrl;
-            if (sbName) sbName.textContent = displayName.toUpperCase();
-            if (sbRole) sbRole.textContent = spec.toUpperCase() + ' ARTIST';
-
-            // Custom links
-            const linksContainer = document.getElementById('showcase-links');
-            linksContainer.innerHTML = '';
-            const links = [
-                { title: 'Personal Website', url: profile.website, icon: 'language' },
-                { title: 'Instagram', url: profile.instagram, icon: 'link' },
-                { title: 'Behance / Dribbble', url: profile.behance, icon: 'share' }
-            ];
-            links.forEach(l => {
-                if (l.url) {
-                    const btn = document.createElement('a');
-                    btn.href = l.url.startsWith('http') ? l.url : 'https://' + l.url;
-                    btn.target = '_blank';
-                    btn.className = "flex items-center gap-1.5 text-xs text-primary font-bold tracking-wide uppercase hover:underline bg-white/50 border border-border px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm transition-colors";
-                    btn.innerHTML = `<span class="material-symbols-outlined text-sm font-bold">${l.icon}</span> ${l.title}`;
-                    linksContainer.appendChild(btn);
-                }
-            });
-
-            // Render Achievements
-            const achContainer = document.getElementById('showcase-achievements');
-            achContainer.innerHTML = achievements.split('\n')
-                .filter(l => l.trim() !== '')
-                .map(l => `<li class="flex items-start gap-2.5"><span class="text-primary mt-1">•</span><span>${l.replace(/^[•\-\*\s]+/, '')}</span></li>`)
-                .join('');
-
-            // Load 1 latest image post
-            const postsKey = 'artist_posts_' + currentUser.email;
-            artistPosts = JSON.parse(localStorage.getItem(postsKey) || '[]');
-            
-            // Render latest image
-            const imgCard = document.getElementById('featured-image-card');
-            if (artistPosts.length > 0) {
-                const latestImg = artistPosts[artistPosts.length - 1]; // Last added is latest
-                document.getElementById('featured-image-img').src = latestImg.imgUrl;
-                document.getElementById('featured-image-title').textContent = latestImg.title;
-                document.getElementById('featured-image-category').textContent = latestImg.category || 'Artwork';
-                document.getElementById('featured-image-price').textContent = '₹' + Number(latestImg.price).toLocaleString();
-                imgCard.style.display = 'block';
-            } else {
-                // Placeholder
-                imgCard.innerHTML = `
-                    <div class="aspect-video bg-cream overflow-hidden relative flex flex-col items-center justify-center p-8 text-center" onclick="window.location.href='dashboard-artists.html'">
-                        <span class="material-symbols-outlined text-primary text-5xl mb-3">add_photo_alternate</span>
-                        <h4 class="font-serif text-lg font-bold text-text">No Featured Image</h4>
-                        <p class="text-xs text-text/60 mt-1">Upload artwork in your Gallery to feature it here.</p>
-                    </div>
-                `;
-            }
-
-            // Load 1 latest video reel from IndexedDB
-            let videoUrl = 'pics/video.mp4';
-            let videoTitle = 'Process Reel';
-            let hasVideo = false;
-
-            if (db) {
-                const transaction = db.transaction([storeName], "readonly");
-                const store = transaction.objectStore(storeName);
-                const request = store.getAll();
-                await new Promise((resolve) => {
-                    request.onsuccess = () => {
-                        const allReels = request.result || [];
-                        const userReels = allReels.filter(r => r.userEmail === currentUser.email);
-                        if (userReels.length > 0) {
-                            const latestReel = userReels[userReels.length - 1];
-                            videoUrl = latestReel.file ? URL.createObjectURL(latestReel.file) : latestReel.videoUrl;
-                            videoTitle = latestReel.title || 'Process Reel';
-                            hasVideo = true;
-                        }
-                        resolve();
-                    };
-                });
-            }
-
-            const videoCard = document.getElementById('featured-video-card');
-            const player = document.getElementById('featured-video-player');
-            if (hasVideo) {
-                player.src = videoUrl;
-                document.getElementById('featured-video-title').textContent = videoTitle;
-                videoCard.style.display = 'flex';
-            } else {
-                // If no user reels exist, show the default demo video
-                player.src = 'pics/video.mp4';
-                document.getElementById('featured-video-title').textContent = 'Mithila Clay Painting Demo';
-            }
-        }
-
-        // Lightbox
-        function openLightbox() {
-            if (artistPosts.length === 0) return;
-            const latestImg = artistPosts[artistPosts.length - 1];
-            const modal = document.getElementById('lightbox-modal');
-            document.getElementById('lightbox-img').src = latestImg.imgUrl;
-            document.getElementById('lightbox-title').textContent = latestImg.title;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeLightbox() {
-            const modal = document.getElementById('lightbox-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        // Share dropdown toggle
-        function toggleShareDropdown() {
-            const dropdown = document.getElementById('share-dropdown');
-            dropdown.classList.toggle('hidden');
-        }
-
-        // Close dropdown when clicking outside
-        window.addEventListener('click', (e) => {
-            const container = document.getElementById('share-dropdown-container');
-            if (container && !container.contains(e.target)) {
-                document.getElementById('share-dropdown').classList.add('hidden');
-            }
-        });
-
-        // Share intents
-        function shareAction(platform) {
-            const shareUrl = window.location.origin + '/artist-portfolio.html?artist=' + encodeURIComponent(currentUser.email);
-            const title = "Exquisite Heritage Art Portfolio by " + currentUser.fullName;
-            const message = "Explore my portfolio and masterpieces collection at The Painted Muse: " + shareUrl;
-
-            document.getElementById('share-dropdown').classList.add('hidden');
-
-            switch (platform) {
-                case 'copy':
-                    navigator.clipboard.writeText(shareUrl).then(() => {
-                        alert('Portfolio public share link copied to clipboard!');
-                    });
-                    break;
-                case 'whatsapp':
-                    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(message), '_blank');
-                    break;
-                case 'instagram':
-                    alert('Instagram sharing guide:\n\n1. Public link copied to clipboard.\n2. Paste it in your Instagram Bio under Edit Profile to showcase your works!');
-                    navigator.clipboard.writeText(shareUrl);
-                    break;
-                case 'twitter':
-                    window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(title), '_blank');
-                    break;
-                case 'facebook':
-                    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), '_blank');
-                    break;
-                case 'native':
-                    if (navigator.share) {
-                        navigator.share({
-                            title: title,
-                            text: message,
-                            url: shareUrl
-                        }).catch(console.error);
-                    } else {
-                        navigator.clipboard.writeText(shareUrl).then(() => {
-                            alert('Native sharing not supported. Portfolio share link copied to clipboard instead!');
-                        });
-                    }
-                    break;
-            }
-        }
-
-        // Check login
-        document.addEventListener('DOMContentLoaded', () => {
-            currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            if (!currentUser) {
-                window.location.href = 'signin.html';
-                return;
-            }
-
-            const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
-            const userInDb = usersDb[currentUser.email];
-            if (!userInDb || !userInDb.isApproved) {
-                window.location.href = 'signin.html?error=pending';
-                return;
-            }
-
-            initDB().then(() => {
-                loadShowcase();
-            }).catch(err => {
-                console.error("IndexedDB error", err);
-                loadShowcase();
-            });
-        });
-    </script>
+document.addEventListener('DOMContentLoaded', () => {
+currentUser = JSON.parse(localStorage.getItem('currentUser'));
+if (!currentUser) {
+window.location.href = 'signin.html';
+return;
+}
+const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+const userInDb = usersDb[currentUser.email];
+if (!userInDb || !userInDb.isApproved) {
+window.location.href = 'signin.html?error=pending';
+return;
+}
+initDB().then(() => {
+loadShowcase();
+}).catch(err => {
+console.error("IndexedDB error", err);
+loadShowcase();
+});
+});
+</script>
+<script>
+function logoutArtist() {
+if (confirm('Sign out of your studio?')) {
+localStorage.removeItem('artistLoggedIn');
+localStorage.removeItem('artistEmail');
+localStorage.removeItem('currentUser');
+window.location.href = 'signin.html';
+}
+}
+const _cu = JSON.parse(localStorage.getItem('currentUser') || '{}');
+const nameEl = document.getElementById('sidebar-artist-name');
+if (nameEl) nameEl.textContent = _cu.fullName || _cu.email || 'Artist';
+</script>
 </body>
-
 </html>

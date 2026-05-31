@@ -3,7 +3,7 @@ const http = require('http');
 const PORT = process.env.PORT || 3000;
 const BASE_URL = `http://localhost:${PORT}`;
 
-// Helper: Make HTTP POST
+
 function post(path, body, headers = {}) {
   return new Promise((resolve, reject) => {
     const data = JSON.stringify(body);
@@ -50,7 +50,7 @@ function post(path, body, headers = {}) {
   });
 }
 
-// Helper: Make HTTP GET
+
 function get(path, headers = {}) {
   return new Promise((resolve, reject) => {
     const options = {
@@ -94,7 +94,7 @@ function get(path, headers = {}) {
   });
 }
 
-// Sleep helper
+
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function runTests() {
@@ -103,7 +103,7 @@ async function runTests() {
   console.log('===========================================================\n');
 
   try {
-    // 1. Initialize Checkout Session
+    
     console.log('Step 1: Initializing Checkout Session...');
     const initData = {
       productId: 'membership_celestial_annual',
@@ -127,7 +127,7 @@ async function runTests() {
     console.log(`✅ Success! Session Created: ${checkoutSessionId}`);
     console.log(`🔑 JWT Token generated (truncated): ${sessionToken.substring(0, 30)}...\n`);
 
-    // 2. Validate Card Helper
+    
     console.log('Step 2: Testing Card Validation helper API...');
     const cardCheck = {
       cardNumber: '4242 4242 4242 4242',
@@ -141,7 +141,7 @@ async function runTests() {
     }
     console.log(`✅ Success! Detected Card Brand: ${valRes.body.cardBrand.toUpperCase()}\n`);
 
-    // 3. Process Card Payment (Simulated Instant Success)
+    
     console.log('Step 3: Processing Card Payment...');
     const paymentData = {
       checkoutSessionId,
@@ -165,7 +165,7 @@ async function runTests() {
     const paymentId = payBody.paymentId;
     console.log(`💳 Payment Reference ID: ${paymentId}`);
 
-    // 4. Poll Payment Status
+    
     console.log('\nStep 4: Polling Payment Status for final resolution...');
     let finalStatus = payBody.status;
     let attempts = 0;

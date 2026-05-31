@@ -14,9 +14,7 @@ if (!isMock) {
   console.log('Gateway Service: Initializing Mock Payment Gateway Simulator...');
 }
 
-/**
- * Process card payment through Stripe or Mock simulator
- */
+
 async function processCardPayment(paymentData) {
   if (isMock) {
     return simulateMockCardPayment(paymentData);
@@ -25,17 +23,15 @@ async function processCardPayment(paymentData) {
   }
 }
 
-/**
- * Real Stripe Integration
- */
+
 async function processStripePayment(paymentData) {
   try {
     const returnUrl = `${process.env.APP_URL || 'http://localhost:3000'}/api/v1/checkout/payment/card/complete-3ds`;
     
-    // Create payment intent
-    // Note: We use payment_method_data with card token to support legacy tok_123 tokens
+    
+    
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(paymentData.amount * 100), // Convert to cents
+      amount: Math.round(paymentData.amount * 100), 
       currency: paymentData.currency.toLowerCase(),
       payment_method_data: {
         type: 'card',
@@ -55,7 +51,7 @@ async function processStripePayment(paymentData) {
       return_url: returnUrl,
     });
     
-    // Check if 3DS required
+    
     if (paymentIntent.status === 'requires_action' && 
         paymentIntent.next_action?.type === 'redirect_to_url') {
       return {
@@ -66,7 +62,7 @@ async function processStripePayment(paymentData) {
       };
     }
     
-    // Payment succeeded
+    
     if (paymentIntent.status === 'succeeded') {
       const charge = paymentIntent.charges?.data[0] || {};
       const cardDetails = charge.payment_method_details?.card || {};
@@ -81,7 +77,7 @@ async function processStripePayment(paymentData) {
       };
     }
     
-    // Payment failed
+    
     return {
       status: 'failed',
       failureCode: paymentIntent.last_payment_error?.code || 'payment_failed',
@@ -98,16 +94,14 @@ async function processStripePayment(paymentData) {
   }
 }
 
-/**
- * Mock Gateway Simulator
- */
+
 async function simulateMockCardPayment(paymentData) {
-  // Simulate network delay
+  
   await new Promise(resolve => setTimeout(resolve, 1500));
 
   const { cardToken, paymentId, orderId, checkoutSessionId } = paymentData;
 
-  // 1. Decline simulation: token is tok_chargeDeclined, tok_decline, or contains "decline"
+  
   if (cardToken === 'tok_chargeDeclined' || 
       cardToken.includes('decline') || 
       cardToken.includes('fail')) {
@@ -120,12 +114,12 @@ async function simulateMockCardPayment(paymentData) {
     };
   }
 
-  // 2. 3D Secure Challenge simulation: token contains "3ds", "challenge", or "auth"
+  
   if (cardToken === 'tok_3ds' || 
       cardToken.includes('3ds') || 
       cardToken.includes('challenge')) {
     
-    // Generate a simulated challenge URL on our local server
+    
     const appUrl = process.env.APP_URL || 'http://localhost:3000';
     const challengeToken = `3ds_mock_${Math.random().toString(36).substring(2, 10)}`;
     const authenticationUrl = `${appUrl}/3ds-challenge.html?paymentId=${paymentId}&token=${challengeToken}`;
@@ -138,7 +132,7 @@ async function simulateMockCardPayment(paymentData) {
     };
   }
 
-  // 3. Normal successful payment
+  
   const randomTxn = Math.random().toString(36).substring(2, 10).toUpperCase();
   const brand = cardToken.includes('mastercard') ? 'mastercard' : 
                 cardToken.includes('amex') ? 'amex' : 

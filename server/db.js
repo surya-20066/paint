@@ -22,27 +22,24 @@ if (isPostgres) {
   sqliteDb = new sqlite3.Database(dbPath);
 }
 
-/**
- * Execute SQL Query
- * Mimics Postgres pg.Pool.query format to return { rows: [...] }
- */
+
 function query(text, params = []) {
   if (isPostgres) {
     return pool.query(text, params);
   } else {
     return new Promise((resolve, reject) => {
-      // Translate Postgres parameterized queries ($1, $2) to SQLite (?)
-      // SQLite parameter binding uses ? for index-based array params
+      
+      
       const sqliteSql = text.replace(/\$(\d+)/g, '?');
 
-      // Map true/false values to 1/0 for SQLite booleans
+      
       const mappedParams = params.map(val => {
         if (typeof val === 'boolean') return val ? 1 : 0;
         if (val !== null && typeof val === 'object') return JSON.stringify(val);
         return val;
       });
 
-      // Check if it's an INSERT/UPDATE or SELECT
+      
       const cleanSql = sqliteSql.trim();
       const isMutating = /^(insert|update|delete|create|drop)/i.test(cleanSql);
 
@@ -62,20 +59,20 @@ function query(text, params = []) {
         sqliteDb.all(cleanSql, mappedParams, (err, rows) => {
           if (err) return reject(err);
 
-          // Parse JSON fields to objects in returned rows to match Postgres JSONB
+          
           const processedRows = (rows || []).map(row => {
             const newRow = { ...row };
-            // Auto parse JSON text fields
+            
             ['enabled_payment_methods', 'metadata', 'payment_method_details', 'billing_address', 'fraud_checks', 'payload', 'gateway_response'].forEach(field => {
               if (typeof newRow[field] === 'string') {
                 try {
                   newRow[field] = JSON.parse(newRow[field]);
                 } catch (e) {
-                  // Keep as string if parsing fails
+                  
                 }
               }
             });
-            // Convert 1/0 booleans back to true/false
+            
             ['requires_3ds', 'three_ds_authenticated', 'signature_valid', 'processed'].forEach(field => {
               if (newRow[field] !== undefined) {
                 newRow[field] = newRow[field] === 1 || newRow[field] === true;
@@ -91,9 +88,7 @@ function query(text, params = []) {
   }
 }
 
-/**
- * Run DDL Migration Scripts
- */
+
 async function initializeDatabase() {
   if (isPostgres) {
     const createTableQueries = `
@@ -220,7 +215,7 @@ async function initializeDatabase() {
     await query(createTableQueries);
     console.log('Database Layer: PostgreSQL tables initialized successfully.');
   } else {
-    // Initialize SQLite tables
+    
     const tableQueries = [
       `CREATE TABLE IF NOT EXISTS checkout_sessions (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
