@@ -4,22 +4,7 @@
 <meta charset="utf-8" />
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <title>Dashboard | The Painted Muse</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
-
-const mobileMenuBtns = document.querySelectorAll('.mobile-menu-btn-toggle');
-const closeMenuBtn = document.getElementById('close-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-if (mobileMenuBtns && closeMenuBtn && mobileMenu) {
-mobileMenuBtns.forEach(btn => {
-btn.addEventListener('click', () => {
-mobileMenu.classList.remove('translate-x-full');
-});
-});
-closeMenuBtn.addEventListener('click', () => {
-mobileMenu.classList.add('translate-x-full');
-});
-}
-</script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link
 href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&amp;family=DM+Sans:wght@400;500;700&amp;family=Mrs+Saint+Delafield&amp;display=swap"
 rel="stylesheet" />
@@ -231,25 +216,20 @@ grid-column: span 2;
 </style>
 </head>
 <body class="min-h-screen flex flex-col overflow-hidden">
-<nav
-class="w-full z-[100] bg-[#FDFBF7] border-b border-stone-200 flex justify-between items-center px-6 md:px-12 py-2 shrink-0 shadow-sm relative">
+<nav class="w-full z-[100] bg-[#FDFBF7] border-b border-stone-200 flex justify-between items-center px-6 md:px-12 py-2 shrink-0 shadow-sm relative">
 <div class="flex items-center gap-4">
 <a href="index.html" class="flex items-center gap-4">
-<img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+<img src="pics/dp.png" alt="The Painted Muse Logo" class="h-12 md:h-16 w-auto object-contain" />
 </a>
 </div>
-<div class="hidden md:flex gap-10 font-sans text-[10px] font-bold uppercase tracking-[0.15em] items-center">
-<a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500"
-href="index.html">Home</a>
-<a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500"
-href="index.html#about-india">About</a>
-<a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500"
-href="index.html#journal">Stories</a>
-<a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500"
-href="artists.html">Be an Artist</a>
+<div class="hidden lg:flex gap-10 font-sans text-[10px] font-bold uppercase tracking-[0.15em] items-center font-bold">
+<a class="nav-item whitespace-nowrap text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html">Home</a>
+<a class="nav-item whitespace-nowrap text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#about-india">About</a>
+<a class="nav-item whitespace-nowrap text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#journal">Stories</a>
+<a class="nav-item whitespace-nowrap text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="artists.html">Be an Artist</a>
 </div>
 <div class="flex items-center gap-4 md:gap-6">
-<button class="mobile-menu-btn-toggle md:hidden text-stone-900 p-2">
+<button class="mobile-menu-btn-toggle lg:hidden text-stone-900 p-2">
 <span class="material-symbols-outlined text-3xl">menu</span>
 </button>
 </div>
@@ -763,27 +743,42 @@ animation: fadeIn 0.6s ease-out forwards;
 `;
 document.head.appendChild(style);
 </script>
-<div id="mobile-menu"
-class="fixed inset-0 z-[60] bg-[#FDFBF7] translate-x-full transition-transform duration-500 lg:hidden">
-<div class="flex justify-between items-center p-6 border-b border-stone-100">
-<img src="pics/dp.png" alt="The Painted Muse Logo" class="h-28 w-auto object-contain" />
-<button id="close-menu-btn" class="text-stone-900 p-2">
-<span class="material-symbols-outlined text-3xl">close</span>
-</button>
-</div>
-<div class="flex flex-col p-12 gap-8 font-sans text-xl font-bold uppercase tracking-[0.2em]">
-<a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard.html">Overview</a>
-<a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard-artists.html">Artists</a>
-<a class="mobile-nav-item hover:text-[#B5451B] transition-colors" href="dashboard-commissions.html"
-class="text-[#B5451B] font-bold">My Commissions</a>
-<a class="mobile-nav-item hover:text-[#B5451B] transition-colors"
-href="dashboard-workshops.html">Workshops</a>
-<hr class="border-stone-100 my-2">
-<a class="mobile-nav-item text-stone-400 text-sm hover:text-stone-600 transition-colors"
-href="index.html">Main Website</a>
-</div>
-</div>
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+const menuBtns = document.querySelectorAll('.mobile-menu-btn-toggle');
+const sidebar = document.querySelector('aside');
+if (sidebar) {
+const closeBtn = document.createElement('button');
+closeBtn.className = 'lg:hidden absolute top-4 right-4 text-stone-900 hover:text-[#B5451B] p-2 z-50';
+closeBtn.innerHTML = '<span class="material-symbols-outlined text-3xl">close</span>';
+sidebar.appendChild(closeBtn);
+
+sidebar.classList.add('transition-all', 'duration-300');
+
+menuBtns.forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+sidebar.classList.remove('hidden');
+sidebar.classList.add('fixed', 'inset-y-0', 'left-0', 'z-[100]', 'shadow-2xl', 'flex');
+});
+});
+
+closeBtn.addEventListener('click', () => {
+sidebar.classList.add('hidden');
+sidebar.classList.remove('fixed', 'inset-y-0', 'left-0', 'z-[100]', 'shadow-2xl', 'flex');
+});
+
+document.addEventListener('click', (e) => {
+if (window.innerWidth < 1024 && sidebar.classList.contains('fixed')) {
+if (!sidebar.contains(e.target) && ![...menuBtns].some(btn => btn.contains(e.target))) {
+sidebar.classList.add('hidden');
+sidebar.classList.remove('fixed', 'inset-y-0', 'left-0', 'z-[100]', 'shadow-2xl', 'flex');
+}
+}
+});
+}
+});
+
 function logoutArtist() {
 if (confirm('Sign out of your studio?')) {
 localStorage.removeItem('artistLoggedIn');

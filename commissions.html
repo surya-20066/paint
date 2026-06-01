@@ -136,7 +136,12 @@ class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-
 </aside>
 <main class="flex-1 flex flex-col h-screen overflow-y-auto custom-scrollbar relative">
 <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-stone-100 px-8 py-4 flex justify-between items-center">
+<div class="flex items-center gap-4">
+<button class="mobile-menu-btn-toggle lg:hidden text-stone-900 p-2 flex items-center justify-center mr-2">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
 <h1 class="font-serif text-2xl text-[#1A1208]">My <span class="italic text-[#D4AF37]">Commissions</span></h1>
+</div>
 <button class="bg-[#B5451B] text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-[#D4AF37] transition-all">New Request</button>
 </header>
 <div class="p-8 max-w-5xl mx-auto w-full space-y-12">
@@ -234,6 +239,41 @@ class="sidebar-item flex items-center gap-4 px-8 py-4 text-stone-600 hover:text-
 </div>
 </section>
 </div>
-</main>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const menuBtns = document.querySelectorAll('.mobile-menu-btn-toggle');
+const sidebar = document.querySelector('aside');
+if (sidebar) {
+const closeBtn = document.createElement('button');
+closeBtn.className = 'lg:hidden absolute top-4 right-4 text-stone-900 hover:text-[#B5451B] p-2 z-50';
+closeBtn.innerHTML = '<span class="material-symbols-outlined text-3xl">close</span>';
+sidebar.appendChild(closeBtn);
+
+sidebar.classList.add('transition-all', 'duration-300');
+
+menuBtns.forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+sidebar.classList.remove('hidden');
+sidebar.classList.add('fixed', 'inset-y-0', 'left-0', 'z-[100]', 'shadow-2xl', 'flex');
+});
+});
+
+closeBtn.addEventListener('click', () => {
+sidebar.classList.add('hidden');
+sidebar.classList.remove('fixed', 'inset-y-0', 'left-0', 'z-[100]', 'shadow-2xl', 'flex');
+});
+
+document.addEventListener('click', (e) => {
+if (window.innerWidth < 1024 && sidebar.classList.contains('fixed')) {
+if (!sidebar.contains(e.target) && ![...menuBtns].some(btn => btn.contains(e.target))) {
+sidebar.classList.add('hidden');
+sidebar.classList.remove('fixed', 'inset-y-0', 'left-0', 'z-[100]', 'shadow-2xl', 'flex');
+}
+}
+});
+}
+});
+</script>
 </body>
 </html>
