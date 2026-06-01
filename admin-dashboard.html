@@ -212,6 +212,27 @@ Invalid administrator password.
 <i data-lucide="settings" class="nav-icon w-5 h-5 flex-shrink-0"></i>
 <span class="hide-on-collapse whitespace-nowrap">Settings</span>
 </button>
+<div class="hide-on-collapse my-2 px-3"><div class="border-t border-ink/10"></div><p class="text-[9px] uppercase tracking-widest text-ink-light font-bold mt-2 mb-1">Website CMS</p></div>
+<button onclick="switchView('cms-home')" class="nav-item w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-smooth relative group text-ink-muted hover:text-ink hover:bg-cream border border-transparent">
+<i data-lucide="home" class="nav-icon w-5 h-5 flex-shrink-0"></i>
+<span class="hide-on-collapse whitespace-nowrap">Home Page</span>
+</button>
+<button onclick="switchView('cms-explore')" class="nav-item w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-smooth relative group text-ink-muted hover:text-ink hover:bg-cream border border-transparent">
+<i data-lucide="shopping-bag" class="nav-icon w-5 h-5 flex-shrink-0"></i>
+<span class="hide-on-collapse whitespace-nowrap">Explore / Shop</span>
+</button>
+<button onclick="switchView('cms-team')" class="nav-item w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-smooth relative group text-ink-muted hover:text-ink hover:bg-cream border border-transparent">
+<i data-lucide="users-round" class="nav-icon w-5 h-5 flex-shrink-0"></i>
+<span class="hide-on-collapse whitespace-nowrap">Team Page</span>
+</button>
+<button onclick="switchView('cms-testimonials')" class="nav-item w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-smooth relative group text-ink-muted hover:text-ink hover:bg-cream border border-transparent">
+<i data-lucide="message-square-quote" class="nav-icon w-5 h-5 flex-shrink-0"></i>
+<span class="hide-on-collapse whitespace-nowrap">Testimonials</span>
+</button>
+<button onclick="switchView('cms-footer')" class="nav-item w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-smooth relative group text-ink-muted hover:text-ink hover:bg-cream border border-transparent">
+<i data-lucide="panel-bottom" class="nav-icon w-5 h-5 flex-shrink-0"></i>
+<span class="hide-on-collapse whitespace-nowrap">Footer & Nav</span>
+</button>
 </nav>
 <div class="p-3 border-t border-ink/10 space-y-2">
 <button id="toggleSidebar" class="w-full flex items-center justify-center gap-2 px-3 py-2 text-ink-muted hover:text-ink text-xs rounded-lg hover:bg-cream transition-smooth">
@@ -335,11 +356,71 @@ Exit Admin
 </h1>
 <p class="text-ink-muted text-sm mt-1">Approve, manage, and control all registered artisans</p>
 </div>
+<div class="flex items-center gap-3 flex-wrap md:flex-nowrap w-full md:w-auto">
 <div class="relative w-full md:w-80">
 <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-muted"></i>
 <input type="text" id="artist-search-input" placeholder="Search name, art form..." class="w-full pl-10 pr-4 py-2 bg-bg border border-ink/20 rounded-xl focus:outline-none focus:border-saffron-dark focus:ring-1 focus:ring-saffron-dark" />
 </div>
+<button onclick="toggleAddArtistForm()" class="whitespace-nowrap px-4 py-2 bg-ink hover:bg-[#B5451B] text-[#FDFBF7] font-semibold text-sm rounded-xl transition-smooth flex items-center gap-1.5 shadow-soft">
+<i data-lucide="plus" class="w-4 h-4"></i> Add Artist
+</button>
 </div>
+</div>
+
+<!-- Add Artist Form Container -->
+<div id="add-artist-form-container" class="hidden bg-bg border border-ink/10 rounded-2xl p-6 shadow-medium transition-smooth">
+<h3 class="text-lg font-serif font-bold text-ink mb-4 flex items-center gap-2">
+<i data-lucide="user-plus" class="w-5 h-5 text-saffron-dark"></i> Add New Artist
+</h3>
+<form id="add-artist-form" onsubmit="saveNewArtist(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-ink-muted uppercase tracking-wider">Full Name</label>
+<input type="text" id="new-artist-name" placeholder="E.g., Bhalchandra Rao" required class="bg-bg border border-ink/20 rounded-xl px-3 py-2 text-sm focus:border-saffron-dark focus:ring-1 focus:ring-saffron-dark" />
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-ink-muted uppercase tracking-wider">Email Address</label>
+<input type="email" id="new-artist-email" placeholder="E.g., artist@example.com" required class="bg-bg border border-ink/20 rounded-xl px-3 py-2 text-sm focus:border-saffron-dark focus:ring-1 focus:ring-saffron-dark" />
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-ink-muted uppercase tracking-wider">Password (default: Heritage@2025)</label>
+<input type="password" id="new-artist-password" placeholder="Password" class="bg-bg border border-ink/20 rounded-xl px-3 py-2 text-sm focus:border-saffron-dark focus:ring-1 focus:ring-saffron-dark" value="Heritage@2025" />
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-ink-muted uppercase tracking-wider">Art Specialization</label>
+<select id="new-artist-spec" required class="bg-bg border border-ink/20 rounded-xl px-3 py-2 text-sm focus:border-saffron-dark focus:ring-1 focus:ring-saffron-dark">
+<option value="mithila">Mithila (Madhubani)</option>
+<option value="tanjore">Tanjore Painting</option>
+<option value="warli">Warli Art</option>
+<option value="pattachitra">Pattachitra</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-ink-muted uppercase tracking-wider">Experience</label>
+<input type="text" id="new-artist-exp" placeholder="E.g., 10 yrs exp" class="bg-bg border border-ink/20 rounded-xl px-3 py-2 text-sm focus:border-saffron-dark focus:ring-1 focus:ring-saffron-dark" value="5 yrs exp" />
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-ink-muted uppercase tracking-wider">State</label>
+<input type="text" id="new-artist-state" placeholder="E.g., Bihar" class="bg-bg border border-ink/20 rounded-xl px-3 py-2 text-sm focus:border-saffron-dark focus:ring-1 focus:ring-saffron-dark" value="Bihar" />
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-ink-muted uppercase tracking-wider">Status</label>
+<select id="new-artist-status" required class="bg-bg border border-ink/20 rounded-xl px-3 py-2 text-sm focus:border-saffron-dark focus:ring-1 focus:ring-saffron-dark">
+<option value="PENDING">PENDING</option>
+<option value="APPROVED" selected>APPROVED</option>
+<option value="REJECTED">REJECTED</option>
+</select>
+</div>
+<div class="md:col-span-3 flex justify-end gap-2 mt-2">
+<button type="button" onclick="toggleAddArtistForm()" class="px-4 py-2 border border-ink/20 text-ink-muted rounded-xl hover:bg-cream/50 transition-smooth text-sm font-semibold">
+Cancel
+</button>
+<button type="submit" class="px-5 py-2 bg-ink text-white hover:bg-saffron-dark rounded-xl transition-smooth text-sm font-semibold">
+Save Artist
+</button>
+</div>
+</form>
+</div>
+
 <div class="flex items-center gap-2 flex-wrap" id="artist-filter-buttons">
 <button onclick="filterArtists('ALL')" class="px-4 py-2 rounded-xl text-sm font-medium transition-smooth bg-saffron-light/50 text-saffron-dark border border-saffron-dark/20 filter-btn active">
 All <span class="ml-2 text-xs opacity-60" id="filter-count-all">0</span>
@@ -365,6 +446,34 @@ Rejected <span class="ml-2 text-xs opacity-60" id="filter-count-rejected">0</spa
 </h1>
 <p class="text-ink-muted text-sm mt-1">Manage registered customers and art enthusiasts</p>
 </div>
+<button onclick="toggleAddUserForm()" class="whitespace-nowrap px-4 py-2 bg-ink hover:bg-blue-600 text-[#FDFBF7] font-semibold text-sm rounded-xl transition-smooth flex items-center gap-1.5 shadow-soft">
+<i data-lucide="plus" class="w-4 h-4"></i> Add User
+</button>
+</div>
+
+<!-- Add User Form Container -->
+<div id="add-user-form-container" class="hidden bg-bg border border-ink/10 rounded-2xl p-6 shadow-medium transition-smooth">
+<h3 class="text-lg font-serif font-bold text-ink mb-4 flex items-center gap-2">
+<i data-lucide="user-plus" class="w-5 h-5 text-blue-600"></i> Add New User
+</h3>
+<form id="add-user-form" onsubmit="saveNewUser(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-ink-muted uppercase tracking-wider">Full Name</label>
+<input type="text" id="new-user-name" placeholder="E.g., Vikram Sharma" required class="bg-bg border border-ink/20 rounded-xl px-3 py-2 text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600" />
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-ink-muted uppercase tracking-wider">Email Address</label>
+<input type="email" id="new-user-email" placeholder="E.g., patron@example.com" required class="bg-bg border border-ink/20 rounded-xl px-3 py-2 text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600" />
+</div>
+<div class="md:col-span-2 flex justify-end gap-2 mt-2">
+<button type="button" onclick="toggleAddUserForm()" class="px-4 py-2 border border-ink/20 text-ink-muted rounded-xl hover:bg-cream/50 transition-smooth text-sm font-semibold">
+Cancel
+</button>
+<button type="submit" class="px-5 py-2 bg-ink text-white hover:bg-blue-600 rounded-xl transition-smooth text-sm font-semibold">
+Save User
+</button>
+</div>
+</form>
 </div>
 <div class="bg-bg rounded-2xl border border-ink/10 shadow-soft overflow-hidden">
 <table class="w-full text-left border-collapse">
@@ -456,6 +565,14 @@ Rejected <span class="ml-2 text-xs opacity-60" id="filter-count-rejected">0</spa
 <p class="text-sm font-semibold text-green-600 flex items-center gap-1.5">
 <span class="inline-block w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span> Enabled
 </p>
+</div>
+<div class="pt-2 flex gap-2">
+<button onclick="restoreDatabaseToDefault()" class="text-xs px-3 py-2 bg-saffron hover:bg-saffron-dark text-ink font-bold rounded-lg transition-smooth shadow-soft">
+Restore Defaults
+</button>
+<button onclick="clearEntireDatabase()" class="text-xs px-3 py-2 bg-destructive/10 hover:bg-destructive/20 text-destructive font-bold rounded-lg transition-smooth">
+Wipe Data
+</button>
 </div>
 </div>
 </div>
@@ -564,6 +681,216 @@ alert("Please select an image file first.");
 </div>
 </div>
 </div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--                   CMS VIEW PANELS                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<!-- ─── HOME PAGE CMS ─────────────────────────────────────── -->
+<div id="view-cms-home" class="view-section space-y-6">
+<div>
+  <h1 class="text-3xl font-serif font-bold text-ink flex items-center gap-3">
+    <i data-lucide="home" class="w-7 h-7 text-saffron-dark"></i> Home Page Content
+  </h1>
+  <p class="text-ink-muted text-sm mt-1">Edit every text and image on the homepage. Changes apply instantly.</p>
+</div>
+
+<!-- Hero Section -->
+<div class="bg-bg rounded-2xl border border-ink/10 p-6 shadow-soft">
+  <h3 class="text-ink font-semibold mb-4 flex items-center gap-2 font-serif"><i data-lucide="image" class="w-4 h-4 text-saffron-dark"></i> Hero Section</h3>
+  <div class="space-y-4">
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Subtitle</label>
+    <input type="text" id="cms-hero-subtitle" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0" placeholder="e.g. Cultural Immersion through Curation"></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Main Title (HTML)</label>
+    <textarea id="cms-hero-title" rows="3" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0" placeholder='e.g. Discover<br/>India<br/>Through<br/><span class="text-[#D4AF37] italic">Art</span>'></textarea></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Description</label>
+    <textarea id="cms-hero-desc" rows="2" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></textarea></div>
+    <button onclick="saveCmsField('hero_subtitle', 'cms-hero-subtitle'); saveCmsField('hero_title', 'cms-hero-title'); saveCmsField('hero_desc', 'cms-hero-desc'); showCmsToast();" class="px-6 py-3 bg-saffron hover:bg-saffron-dark text-ink font-bold text-sm rounded-xl transition-all shadow-md flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4"></i> Save & Apply Hero</button>
+  </div>
+</div>
+
+<!-- About India Section -->
+<div class="bg-bg rounded-2xl border border-ink/10 p-6 shadow-soft">
+  <h3 class="text-ink font-semibold mb-4 flex items-center gap-2 font-serif"><i data-lucide="globe" class="w-4 h-4 text-saffron-dark"></i> About India Section</h3>
+  <div class="space-y-4">
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Section Heading (HTML)</label>
+    <input type="text" id="cms-about-heading" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Main Description</label>
+    <textarea id="cms-about-desc" rows="3" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></textarea></div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Traditions</label>
+      <textarea id="cms-about-traditions" rows="4" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></textarea></div>
+      <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Culture</label>
+      <textarea id="cms-about-culture" rows="4" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></textarea></div>
+      <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Art & Paintings</label>
+      <textarea id="cms-about-art" rows="4" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></textarea></div>
+    </div>
+    <button onclick="['about_heading','about_desc','about_traditions','about_culture','about_art'].forEach(k=>saveCmsField(k,'cms-'+k.replace(/_/g,'-'))); showCmsToast();" class="px-6 py-3 bg-saffron hover:bg-saffron-dark text-ink font-bold text-sm rounded-xl transition-all shadow-md flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4"></i> Save & Apply About</button>
+  </div>
+</div>
+
+<!-- Map / Journal / Reels Headings -->
+<div class="bg-bg rounded-2xl border border-ink/10 p-6 shadow-soft">
+  <h3 class="text-ink font-semibold mb-4 flex items-center gap-2 font-serif"><i data-lucide="type" class="w-4 h-4 text-saffron-dark"></i> Section Headings</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Living Map Heading (HTML)</label>
+    <input type="text" id="cms-map-heading" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Journal Heading (HTML)</label>
+    <input type="text" id="cms-journal-heading" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Journal Description</label>
+    <input type="text" id="cms-journal-desc" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Reels Heading (HTML)</label>
+    <input type="text" id="cms-reels-heading" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Reels Description</label>
+    <input type="text" id="cms-reels-desc" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></div>
+  </div>
+  <button onclick="['map_heading','journal_heading','journal_desc','reels_heading','reels_desc'].forEach(k=>saveCmsField(k,'cms-'+k.replace(/_/g,'-'))); showCmsToast();" class="mt-4 px-6 py-3 bg-saffron hover:bg-saffron-dark text-ink font-bold text-sm rounded-xl transition-all shadow-md flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4"></i> Save & Apply Headings</button>
+</div>
+
+<button onclick="clearCmsKeys(['hero_subtitle','hero_title','hero_desc','about_heading','about_desc','about_traditions','about_culture','about_art','map_heading','journal_heading','journal_desc','reels_heading','reels_desc']); showCmsToast('Reset to defaults!');" class="px-4 py-2 bg-destructive/10 text-destructive text-xs font-bold rounded-lg hover:bg-destructive/20 transition-colors flex items-center gap-1"><i data-lucide="rotate-ccw" class="w-3 h-3"></i> Reset Home Page to Defaults</button>
+</div>
+
+<!-- ─── EXPLORE / SHOP CMS ────────────────────────────────── -->
+<div id="view-cms-explore" class="view-section space-y-6">
+<div>
+  <h1 class="text-3xl font-serif font-bold text-ink flex items-center gap-3">
+    <i data-lucide="shopping-bag" class="w-7 h-7 text-saffron-dark"></i> Explore / Shop Content
+  </h1>
+  <p class="text-ink-muted text-sm mt-1">Manage art cards — add, edit, remove, and reorder. All changes reflect instantly on explore.html.</p>
+</div>
+
+<!-- Explore Header -->
+<div class="bg-bg rounded-2xl border border-ink/10 p-6 shadow-soft">
+  <h3 class="text-ink font-semibold mb-4 flex items-center gap-2 font-serif"><i data-lucide="heading" class="w-4 h-4 text-saffron-dark"></i> Page Header</h3>
+  <div class="space-y-4">
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Subtitle</label>
+    <input type="text" id="cms-explore-subtitle" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Title (HTML)</label>
+    <input type="text" id="cms-explore-title" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Description</label>
+    <textarea id="cms-explore-desc" rows="2" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></textarea></div>
+    <button onclick="['explore_subtitle','explore_title','explore_desc'].forEach(k=>saveCmsField(k,'cms-'+k.replace(/_/g,'-'))); showCmsToast();" class="px-6 py-3 bg-saffron hover:bg-saffron-dark text-ink font-bold text-sm rounded-xl transition-all shadow-md flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4"></i> Save Header</button>
+  </div>
+</div>
+
+<!-- Art Cards Manager -->
+<div class="bg-bg rounded-2xl border border-ink/10 p-6 shadow-soft">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-ink font-semibold flex items-center gap-2 font-serif"><i data-lucide="grid-3x3" class="w-4 h-4 text-saffron-dark"></i> Art Cards Manager</h3>
+    <button onclick="addNewArtCard()" class="px-4 py-2 bg-success/10 text-success text-xs font-bold rounded-lg hover:bg-success/20 transition-colors flex items-center gap-1"><i data-lucide="plus" class="w-3 h-3"></i> Add New Art</button>
+  </div>
+  <div id="cms-art-cards-list" class="space-y-3"></div>
+  <button onclick="saveArtCards(); showCmsToast();" class="mt-4 px-6 py-3 bg-saffron hover:bg-saffron-dark text-ink font-bold text-sm rounded-xl transition-all shadow-md flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4"></i> Save & Apply All Art Cards</button>
+</div>
+
+<button onclick="localStorage.removeItem('cms_explore_arts'); renderArtCardsManager(); showCmsToast('Art cards reset to HTML defaults!');" class="px-4 py-2 bg-destructive/10 text-destructive text-xs font-bold rounded-lg hover:bg-destructive/20 transition-colors flex items-center gap-1"><i data-lucide="rotate-ccw" class="w-3 h-3"></i> Reset Art Cards to Defaults</button>
+</div>
+
+<!-- ─── TEAM PAGE CMS ─────────────────────────────────────── -->
+<div id="view-cms-team" class="view-section space-y-6">
+<div>
+  <h1 class="text-3xl font-serif font-bold text-ink flex items-center gap-3">
+    <i data-lucide="users-round" class="w-7 h-7 text-saffron-dark"></i> Team Page Content
+  </h1>
+  <p class="text-ink-muted text-sm mt-1">Edit founder details and development team names.</p>
+</div>
+
+<div class="bg-bg rounded-2xl border border-ink/10 p-6 shadow-soft">
+  <h3 class="text-ink font-semibold mb-4 flex items-center gap-2 font-serif"><i data-lucide="user" class="w-4 h-4 text-saffron-dark"></i> Founder Details</h3>
+  <div class="space-y-4">
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Founder Name</label>
+    <input type="text" id="cms-team-founder-name" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Founder Title</label>
+    <input type="text" id="cms-team-founder-title" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Founder Image</label>
+    <input type="file" id="cms-team-founder-img-file" accept="image/*" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-2 text-sm text-ink file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-saffron file:text-ink hover:file:bg-saffron-dark">
+    <img id="cms-team-founder-img-preview" class="mt-2 h-24 rounded-lg object-cover hidden" alt="Preview"></div>
+    <button onclick="saveCmsField('team_founder_name','cms-team-founder-name'); saveCmsField('team_founder_title','cms-team-founder-title'); saveImageField('team_founder_img','cms-team-founder-img-file','cms-team-founder-img-preview'); showCmsToast();" class="px-6 py-3 bg-saffron hover:bg-saffron-dark text-ink font-bold text-sm rounded-xl transition-all shadow-md flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4"></i> Save Founder</button>
+  </div>
+</div>
+
+<div class="bg-bg rounded-2xl border border-ink/10 p-6 shadow-soft">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-ink font-semibold flex items-center gap-2 font-serif"><i data-lucide="code" class="w-4 h-4 text-saffron-dark"></i> Development Team</h3>
+    <button onclick="addDevTeamMember()" class="px-4 py-2 bg-success/10 text-success text-xs font-bold rounded-lg hover:bg-success/20 transition-colors flex items-center gap-1"><i data-lucide="plus" class="w-3 h-3"></i> Add Member</button>
+  </div>
+  <div id="cms-dev-team-list" class="space-y-2"></div>
+  <button onclick="saveDevTeam(); showCmsToast();" class="mt-4 px-6 py-3 bg-saffron hover:bg-saffron-dark text-ink font-bold text-sm rounded-xl transition-all shadow-md flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4"></i> Save Dev Team</button>
+</div>
+</div>
+
+<!-- ─── TESTIMONIALS CMS ──────────────────────────────────── -->
+<div id="view-cms-testimonials" class="view-section space-y-6">
+<div>
+  <h1 class="text-3xl font-serif font-bold text-ink flex items-center gap-3">
+    <i data-lucide="message-square-quote" class="w-7 h-7 text-saffron-dark"></i> Testimonials Manager
+  </h1>
+  <p class="text-ink-muted text-sm mt-1">Add, edit, or remove customer testimonials. Changes reflect on the home page instantly.</p>
+</div>
+
+<div class="bg-bg rounded-2xl border border-ink/10 p-6 shadow-soft">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-ink font-semibold flex items-center gap-2 font-serif"><i data-lucide="star" class="w-4 h-4 text-saffron-dark"></i> Testimonials</h3>
+    <button onclick="addTestimonial()" class="px-4 py-2 bg-success/10 text-success text-xs font-bold rounded-lg hover:bg-success/20 transition-colors flex items-center gap-1"><i data-lucide="plus" class="w-3 h-3"></i> Add Testimonial</button>
+  </div>
+  <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Section Heading (HTML)</label>
+  <input type="text" id="cms-testimonials-heading" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0 mb-4"></div>
+  <div id="cms-testimonials-list" class="space-y-3"></div>
+  <button onclick="saveCmsField('testimonials_heading','cms-testimonials-heading'); saveTestimonials(); showCmsToast();" class="mt-4 px-6 py-3 bg-saffron hover:bg-saffron-dark text-ink font-bold text-sm rounded-xl transition-all shadow-md flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4"></i> Save & Apply Testimonials</button>
+</div>
+
+<button onclick="localStorage.removeItem('cms_testimonials'); localStorage.removeItem('cms_testimonials_heading'); renderTestimonialsManager(); showCmsToast('Reset to defaults!');" class="px-4 py-2 bg-destructive/10 text-destructive text-xs font-bold rounded-lg hover:bg-destructive/20 transition-colors flex items-center gap-1"><i data-lucide="rotate-ccw" class="w-3 h-3"></i> Reset Testimonials to Defaults</button>
+</div>
+
+<!-- ─── FOOTER & NAV CMS ──────────────────────────────────── -->
+<div id="view-cms-footer" class="view-section space-y-6">
+<div>
+  <h1 class="text-3xl font-serif font-bold text-ink flex items-center gap-3">
+    <i data-lucide="panel-bottom" class="w-7 h-7 text-saffron-dark"></i> Footer & Navigation
+  </h1>
+  <p class="text-ink-muted text-sm mt-1">Edit footer content, social links, and contact details across all pages.</p>
+</div>
+
+<div class="bg-bg rounded-2xl border border-ink/10 p-6 shadow-soft">
+  <h3 class="text-ink font-semibold mb-4 flex items-center gap-2 font-serif"><i data-lucide="type" class="w-4 h-4 text-saffron-dark"></i> Footer Text</h3>
+  <div class="space-y-4">
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Footer Description</label>
+    <textarea id="cms-footer-desc" rows="2" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></textarea></div>
+  </div>
+</div>
+
+<div class="bg-bg rounded-2xl border border-ink/10 p-6 shadow-soft">
+  <h3 class="text-ink font-semibold mb-4 flex items-center gap-2 font-serif"><i data-lucide="share-2" class="w-4 h-4 text-saffron-dark"></i> Social Media Links</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">WhatsApp URL</label>
+    <input type="url" id="cms-footer-whatsapp" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0" placeholder="https://wa.me/..."></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Instagram URL</label>
+    <input type="url" id="cms-footer-instagram" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0" placeholder="https://instagram.com/..."></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">YouTube URL</label>
+    <input type="url" id="cms-footer-youtube" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0" placeholder="https://youtube.com/..."></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">LinkedIn URL</label>
+    <input type="url" id="cms-footer-linkedin" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0" placeholder="https://linkedin.com/..."></div>
+  </div>
+</div>
+
+<div class="bg-bg rounded-2xl border border-ink/10 p-6 shadow-soft">
+  <h3 class="text-ink font-semibold mb-4 flex items-center gap-2 font-serif"><i data-lucide="phone" class="w-4 h-4 text-saffron-dark"></i> Contact Info</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Contact Email</label>
+    <input type="email" id="cms-footer-email" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></div>
+    <div><label class="block text-[10px] uppercase tracking-wider font-bold text-ink-muted mb-1">Contact Phone</label>
+    <input type="tel" id="cms-footer-phone" class="w-full bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0"></div>
+  </div>
+</div>
+
+<button onclick="saveCmsField('footer_desc','cms-footer-desc'); ['whatsapp','instagram','youtube','linkedin','email','phone'].forEach(k=>{const v=document.getElementById('cms-footer-'+k).value.trim(); if(v) localStorage.setItem('cms_footer_'+k,v);}); showCmsToast();" class="px-6 py-3 bg-saffron hover:bg-saffron-dark text-ink font-bold text-sm rounded-xl transition-all shadow-md flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4"></i> Save & Apply Footer</button>
+</div>
+
+<!-- CMS Toast Notification -->
+<div id="cms-toast" class="fixed top-4 right-4 z-[9999] bg-success text-white px-6 py-3 rounded-xl shadow-large font-bold text-sm flex items-center gap-2 transform translate-x-[400px] transition-transform duration-300">
+<i data-lucide="check-circle" class="w-5 h-5"></i> <span id="cms-toast-text">Changes saved & applied!</span>
+</div>
+
 </main>
 </div>
 <script>
@@ -694,15 +1021,31 @@ const initialUsers = [
 { name: "Sathwik Manoj", email: "sathwik@example.com", joined: "May 15, 2026" }
 ];
 let adminArtists = JSON.parse(localStorage.getItem('admin_artists'));
-if (!adminArtists) {
+if (!adminArtists || !Array.isArray(adminArtists)) {
 adminArtists = initialArtists;
-localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
 }
+adminArtists = adminArtists.map(a => {
+  if (a.specialization && !a.spec) a.spec = a.specialization;
+  if (a.spec && !a.specialization) a.specialization = a.spec;
+  if (a.joinedDate && !a.joined) a.joined = a.joinedDate;
+  if (a.joined && !a.joinedDate) a.joinedDate = a.joined;
+  if (!a.id) a.id = "ART-" + Math.floor(1000 + Math.random() * 9000);
+  if (!a.status) a.status = "PENDING";
+  if (!a.exp) a.exp = "1 yr exp";
+  if (!a.state) a.state = "India";
+  return a;
+});
+try { localStorage.setItem('admin_artists', JSON.stringify(adminArtists)); } catch(e) {}
+
 let adminUsers = JSON.parse(localStorage.getItem('admin_users'));
-if (!adminUsers) {
+if (!adminUsers || !Array.isArray(adminUsers)) {
 adminUsers = initialUsers;
-localStorage.setItem('admin_users', JSON.stringify(adminUsers));
 }
+adminUsers = adminUsers.map(u => {
+  if (u.joinedDate && !u.joined) u.joined = u.joinedDate;
+  return u;
+});
+try { localStorage.setItem('admin_users', JSON.stringify(adminUsers)); } catch(e) {}
 
 let users = JSON.parse(localStorage.getItem('users') || '{}');
 let updated = false;
@@ -735,8 +1078,10 @@ updated = true;
 }
 }
 if (updated) {
+try {
 localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
 localStorage.setItem('admin_users', JSON.stringify(adminUsers));
+} catch(e) {}
 }
 
 const searchInput = document.getElementById('artist-search-input');
@@ -809,10 +1154,12 @@ warli: "Warli Art",
 pattachitra: "Pattachitra"
 };
 function getSpecDisplayName(spec) {
+if (!spec) return "Mithila (Madhubani)";
 return artSpecNames[spec.toLowerCase()] || spec;
 }
 function renderArtists(filter, query = '') {
-const adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+let adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+if (!Array.isArray(adminArtists)) adminArtists = [];
 const container = document.getElementById('artist-list-container');
 if (!container) return;
 container.innerHTML = '';
@@ -822,11 +1169,13 @@ filtered = filtered.filter(a => a.status === filter);
 }
 if (query.trim()) {
 const q = query.toLowerCase();
-filtered = filtered.filter(a =>
-a.name.toLowerCase().includes(q) ||
-a.spec.toLowerCase().includes(q) ||
-getSpecDisplayName(a.spec).toLowerCase().includes(q)
-);
+filtered = filtered.filter(a => {
+  const nameVal = a.name || '';
+  const specVal = a.spec || a.specialization || '';
+  return nameVal.toLowerCase().includes(q) ||
+         specVal.toLowerCase().includes(q) ||
+         getSpecDisplayName(specVal).toLowerCase().includes(q);
+});
 }
 if (filtered.length === 0) {
 container.innerHTML = `
@@ -836,8 +1185,9 @@ container.innerHTML = `
 `;
 return;
 }
+try {
 filtered.forEach(artist => {
-const initial = artist.name.charAt(0).toUpperCase();
+const initial = (artist.name || 'A').charAt(0).toUpperCase();
 let cardClass = "bg-bg rounded-2xl border transition-smooth shadow-soft w-full ";
 let statusBadge = "";
 if (artist.status === 'PENDING') {
@@ -882,11 +1232,11 @@ ${initial}
 </div>
 <div class="flex-1 min-w-0">
 <div class="flex items-center gap-2 flex-wrap">
-<p class="text-ink font-semibold truncate text-lg">${artist.name}</p>
+<p class="text-ink font-semibold truncate text-lg">${artist.name || 'Unknown Artist'}</p>
 ${statusBadge}
 </div>
-<p class="text-ink-muted text-sm">${getSpecDisplayName(artist.spec)} • ${artist.exp} • ${artist.state}</p>
-<p class="text-ink-muted/60 text-xs mt-1">Email: ${artist.email} | Joined: ${artist.joined}</p>
+<p class="text-ink-muted text-sm">${getSpecDisplayName(artist.spec || artist.specialization)} • ${artist.exp || '1 yr exp'} • ${artist.state || 'India'}</p>
+<p class="text-ink-muted/60 text-xs mt-1">Email: ${artist.email || 'N/A'} | Joined: ${artist.joined || artist.joinedDate || 'Recent'}</p>
 </div>
 <div class="flex items-center gap-2 flex-shrink-0 flex-wrap w-full md:w-auto mt-4 md:mt-0">
 ${actionButtons}
@@ -898,10 +1248,14 @@ ${actionButtons}
 `;
 container.appendChild(item);
 });
+} catch(e) {
+  container.innerHTML = `<div class="p-8 text-destructive">Render Error: ${e.message}</div>`;
+}
 lucide.createIcons();
 }
 function renderUsers() {
-const adminUsers = JSON.parse(localStorage.getItem('admin_users') || '[]');
+let adminUsers = JSON.parse(localStorage.getItem('admin_users') || '[]');
+if (!Array.isArray(adminUsers)) adminUsers = [];
 const tableBody = document.getElementById('user-table-body');
 if (!tableBody) return;
 tableBody.innerHTML = '';
@@ -913,6 +1267,7 @@ tableBody.innerHTML = `
 `;
 return;
 }
+try {
 adminUsers.forEach(user => {
 const tr = document.createElement('tr');
 tr.className = "hover:bg-cream/30 transition-colors";
@@ -928,6 +1283,9 @@ tr.innerHTML = `
 `;
 tableBody.appendChild(tr);
 });
+} catch(e) {
+  tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-destructive">Render Error: ${e.message}</td></tr>`;
+}
 lucide.createIcons();
 }
 function renderRecentActivity() {
@@ -990,13 +1348,13 @@ let adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
 const index = adminArtists.findIndex(a => a.email === email);
 if (index !== -1) {
 adminArtists[index].status = 'APPROVED';
-localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
+try { localStorage.setItem('admin_artists', JSON.stringify(adminArtists)); } catch(e) {}
 
 let users = JSON.parse(localStorage.getItem('users') || '{}');
 if (users[email]) {
 users[email].isApproved = true;
 users[email].isRejected = false;
-localStorage.setItem('users', JSON.stringify(users));
+try { localStorage.setItem('users', JSON.stringify(users)); } catch(e) {}
 }
 refreshDashboard();
 }
@@ -1007,13 +1365,13 @@ let adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
 const index = adminArtists.findIndex(a => a.email === email);
 if (index !== -1) {
 adminArtists[index].status = 'REJECTED';
-localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
+try { localStorage.setItem('admin_artists', JSON.stringify(adminArtists)); } catch(e) {}
 
 let users = JSON.parse(localStorage.getItem('users') || '{}');
 if (users[email]) {
 users[email].isApproved = false;
 users[email].isRejected = true;
-localStorage.setItem('users', JSON.stringify(users));
+try { localStorage.setItem('users', JSON.stringify(users)); } catch(e) {}
 }
 refreshDashboard();
 }
@@ -1023,12 +1381,12 @@ function deleteArtist(email) {
 if (confirm(`Are you sure you want to delete the artist with email: ${email}?`)) {
 let adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
 adminArtists = adminArtists.filter(a => a.email !== email);
-localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
+try { localStorage.setItem('admin_artists', JSON.stringify(adminArtists)); } catch(e) {}
 
 let users = JSON.parse(localStorage.getItem('users') || '{}');
 if (users[email]) {
 delete users[email];
-localStorage.setItem('users', JSON.stringify(users));
+try { localStorage.setItem('users', JSON.stringify(users)); } catch(e) {}
 }
 refreshDashboard();
 }
@@ -1038,20 +1396,606 @@ function deleteUser(email) {
 if (confirm(`Are you sure you want to delete the user with email: ${email}?`)) {
 let adminUsers = JSON.parse(localStorage.getItem('admin_users') || '[]');
 adminUsers = adminUsers.filter(u => u.email !== email);
-localStorage.setItem('admin_users', JSON.stringify(adminUsers));
+try { localStorage.setItem('admin_users', JSON.stringify(adminUsers)); } catch(e) {}
 
 let users = JSON.parse(localStorage.getItem('users') || '{}');
 if (users[email]) {
 delete users[email];
-localStorage.setItem('users', JSON.stringify(users));
+try { localStorage.setItem('users', JSON.stringify(users)); } catch(e) {}
 }
 
 let adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
 adminArtists = adminArtists.filter(a => a.email !== email);
-localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
+try { localStorage.setItem('admin_artists', JSON.stringify(adminArtists)); } catch(e) {}
+
 refreshDashboard();
 }
 }
+
+function toggleAddArtistForm() {
+  const container = document.getElementById('add-artist-form-container');
+  if (container) {
+    container.classList.toggle('hidden');
+    if (!container.classList.contains('hidden')) {
+      document.getElementById('new-artist-name').focus();
+    }
+  }
+}
+
+function saveNewArtist(e) {
+  e.preventDefault();
+  const name = document.getElementById('new-artist-name').value.trim();
+  const email = document.getElementById('new-artist-email').value.trim();
+  const password = document.getElementById('new-artist-password').value || 'Heritage@2025';
+  const spec = document.getElementById('new-artist-spec').value;
+  const exp = document.getElementById('new-artist-exp').value.trim() || '5 yrs exp';
+  const state = document.getElementById('new-artist-state').value.trim() || 'Bihar';
+  const status = document.getElementById('new-artist-status').value;
+
+  if (!name || !email) return;
+
+  let users = JSON.parse(localStorage.getItem('users') || '{}');
+  users[email] = {
+    fullName: name,
+    spec: spec,
+    password: password,
+    isNewUser: false,
+    isApproved: status === 'APPROVED',
+    isRejected: status === 'REJECTED'
+  };
+  try { localStorage.setItem('users', JSON.stringify(users)); } catch(err) { console.error(err); }
+
+  let adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+  if (!Array.isArray(adminArtists)) adminArtists = [];
+  
+  const existingIdx = adminArtists.findIndex(a => a.email === email);
+  const artistData = {
+    id: "ART-" + Math.floor(1000 + Math.random() * 9000),
+    name: name,
+    email: email,
+    spec: spec,
+    specialization: spec,
+    status: status,
+    exp: exp,
+    experience: exp,
+    state: state,
+    joined: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+    joinedDate: new Date().toLocaleDateString('en-IN')
+  };
+
+  if (existingIdx !== -1) {
+    adminArtists[existingIdx] = artistData;
+  } else {
+    adminArtists.push(artistData);
+  }
+  
+  try { localStorage.setItem('admin_artists', JSON.stringify(adminArtists)); } catch(err) { console.error(err); }
+
+  document.getElementById('add-artist-form').reset();
+  document.getElementById('new-artist-password').value = 'Heritage@2025';
+  document.getElementById('new-artist-exp').value = '5 yrs exp';
+  document.getElementById('new-artist-state').value = 'Bihar';
+  document.getElementById('add-artist-form-container').classList.add('hidden');
+
+  refreshDashboard();
+  showCmsToast('Artist added successfully!');
+}
+
+function toggleAddUserForm() {
+  const container = document.getElementById('add-user-form-container');
+  if (container) {
+    container.classList.toggle('hidden');
+    if (!container.classList.contains('hidden')) {
+      document.getElementById('new-user-name').focus();
+    }
+  }
+}
+
+function saveNewUser(e) {
+  e.preventDefault();
+  const name = document.getElementById('new-user-name').value.trim();
+  const email = document.getElementById('new-user-email').value.trim();
+
+  if (!name || !email) return;
+
+  let adminUsers = JSON.parse(localStorage.getItem('admin_users') || '[]');
+  if (!Array.isArray(adminUsers)) adminUsers = [];
+  
+  if (!adminUsers.some(u => u.email === email)) {
+    adminUsers.push({
+      name: name,
+      email: email,
+      joined: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    });
+    try { localStorage.setItem('admin_users', JSON.stringify(adminUsers)); } catch(err) { console.error(err); }
+  }
+
+  let users = JSON.parse(localStorage.getItem('users') || '{}');
+  if (!users[email]) {
+    users[email] = {
+      fullName: name,
+      password: 'User@123',
+      isApproved: true,
+      isRejected: false
+    };
+    try { localStorage.setItem('users', JSON.stringify(users)); } catch(err) { console.error(err); }
+  }
+
+  document.getElementById('add-user-form').reset();
+  document.getElementById('add-user-form-container').classList.add('hidden');
+
+  refreshDashboard();
+  showCmsToast('User added successfully!');
+}
+
+function restoreDatabaseToDefault() {
+  if (confirm("Are you sure you want to restore the database to its default status? This will restore original master artists and default demo users.")) {
+    const initialArtists = [
+      { id: "ART-9281", name: "Sita Devi", email: "sita@example.com", spec: "mithila", status: "APPROVED", exp: "20 yrs exp", state: "Bihar", joined: "May 19, 2026" },
+      { id: "ART-9282", name: "Ravi Varma", email: "ravi@example.com", spec: "pattachitra", status: "PENDING", exp: "15 yrs exp", state: "Odisha", joined: "May 18, 2026" },
+      { id: "ART-9283", name: "Jivya Soma Mashe", email: "jivya@example.com", spec: "warli", status: "APPROVED", exp: "30 yrs exp", state: "Maharashtra", joined: "May 15, 2026" },
+      { id: "ART-9284", name: "Anjali Pichai", email: "anjali@example.com", spec: "tanjore", status: "APPROVED", exp: "12 yrs exp", state: "Tamil Nadu", joined: "May 12, 2026" }
+    ];
+    const initialUsers = [
+      { name: "Ananya Sharma", email: "ananya@example.com", joined: "May 19, 2026" },
+      { name: "Vikram Singh", email: "vikram@example.com", joined: "May 18, 2026" },
+      { name: "Sathwik Manoj", email: "sathwik@example.com", joined: "May 15, 2026" }
+    ];
+    
+    const users = {
+      "artist@paintedmuse.com": {
+        password: "Heritage@2025",
+        fullName: "Demo Artist",
+        spec: "mithila",
+        state: "Bihar",
+        isApproved: true,
+        isRejected: false
+      },
+      "sita@example.com": {
+        password: "Heritage@2025",
+        fullName: "Sita Devi",
+        spec: "mithila",
+        state: "Bihar",
+        isApproved: true,
+        isRejected: false
+      },
+      "ravi@example.com": {
+        password: "Heritage@2025",
+        fullName: "Ravi Varma",
+        spec: "pattachitra",
+        state: "Odisha",
+        isApproved: false,
+        isRejected: false
+      },
+      "jivya@example.com": {
+        password: "Heritage@2025",
+        fullName: "Jivya Soma Mashe",
+        spec: "warli",
+        state: "Maharashtra",
+        isApproved: true,
+        isRejected: false
+      },
+      "anjali@example.com": {
+        password: "Heritage@2025",
+        fullName: "Anjali Pichai",
+        spec: "tanjore",
+        state: "Tamil Nadu",
+        isApproved: true,
+        isRejected: false
+      }
+    };
+    
+    try {
+      localStorage.setItem('admin_artists', JSON.stringify(initialArtists));
+      localStorage.setItem('admin_users', JSON.stringify(initialUsers));
+      localStorage.setItem('users', JSON.stringify(users));
+      showCmsToast('Database restored to default status!');
+      setTimeout(() => window.location.reload(), 1500);
+    } catch(err) {
+      alert("Failed to restore defaults: " + err.message);
+    }
+  }
+}
+
+function clearEntireDatabase() {
+  if (confirm("WARNING: This will completely wipe all artists, users, and CMS configurations. Are you sure you want to proceed?")) {
+    try {
+      localStorage.removeItem('admin_artists');
+      localStorage.removeItem('admin_users');
+      localStorage.removeItem('users');
+      showCmsToast('All user and artist data wiped!');
+      setTimeout(() => window.location.reload(), 1500);
+    } catch(err) {
+      alert("Wipe failed: " + err.message);
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CMS FUNCTIONS — God-Level Content Management
+   ═══════════════════════════════════════════════════════════════ */
+
+const CMS_PREFIX = 'cms_';
+
+// ─── Toast Notification ────────────────────────────────────
+function showCmsToast(msg) {
+  const toast = document.getElementById('cms-toast');
+  const text = document.getElementById('cms-toast-text');
+  if (msg) text.textContent = msg;
+  else text.textContent = 'Changes saved & applied!';
+  toast.style.transform = 'translateX(0)';
+  setTimeout(() => { toast.style.transform = 'translateX(400px)'; }, 2500);
+}
+
+// ─── Safe Storage ──────────────────────────────────────────
+function safeSetStorage(key, val) {
+  try {
+    localStorage.setItem(key, val);
+    return true;
+  } catch(e) {
+    alert("Storage Error: Local storage is full (" + e.message + "). Please clear some data or reset sections to defaults.");
+    console.error("Storage Error:", e);
+    throw e; // rethrow to stop execution so toast doesn't show if it fails
+  }
+}
+
+// ─── Save a text field to localStorage ─────────────────────
+function saveCmsField(cmsKey, inputId) {
+  const el = document.getElementById(inputId);
+  if (!el) return;
+  const val = el.value.trim();
+  if (val) {
+    safeSetStorage(CMS_PREFIX + cmsKey, val);
+  }
+}
+
+// ─── Save an image as base64 ───────────────────────────────
+function saveImageField(cmsKey, fileInputId, previewId) {
+  const fileInput = document.getElementById(fileInputId);
+  if (!fileInput || !fileInput.files || !fileInput.files[0]) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const maxW = 800;
+      const scale = img.width > maxW ? maxW / img.width : 1;
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      const compressed = canvas.toDataURL('image/jpeg', 0.7);
+      safeSetStorage(CMS_PREFIX + cmsKey, compressed);
+      if (previewId) {
+        const prev = document.getElementById(previewId);
+        if (prev) { prev.src = compressed; prev.classList.remove('hidden'); }
+      }
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(fileInput.files[0]);
+}
+
+// ─── Clear CMS keys (reset to defaults) ────────────────────
+function clearCmsKeys(keys) {
+  keys.forEach(k => {
+    localStorage.removeItem(CMS_PREFIX + k);
+    const el = document.getElementById('cms-' + k.replace(/_/g, '-'));
+    if (el) el.value = '';
+  });
+}
+
+// ─── Load CMS field values on view switch ──────────────────
+function loadCmsFieldsForView(viewName) {
+  if (viewName === 'cms-home') {
+    const fields = ['hero_subtitle','hero_title','hero_desc','about_heading','about_desc','about_traditions','about_culture','about_art','map_heading','journal_heading','journal_desc','reels_heading','reels_desc'];
+    fields.forEach(k => {
+      const v = localStorage.getItem(CMS_PREFIX + k);
+      const el = document.getElementById('cms-' + k.replace(/_/g, '-'));
+      if (el && v) el.value = v;
+    });
+  } else if (viewName === 'cms-explore') {
+    ['explore_subtitle','explore_title','explore_desc'].forEach(k => {
+      const v = localStorage.getItem(CMS_PREFIX + k);
+      const el = document.getElementById('cms-' + k.replace(/_/g, '-'));
+      if (el && v) el.value = v;
+    });
+    renderArtCardsManager();
+  } else if (viewName === 'cms-team') {
+    ['team_founder_name','team_founder_title'].forEach(k => {
+      const v = localStorage.getItem(CMS_PREFIX + k);
+      const el = document.getElementById('cms-' + k.replace(/_/g, '-'));
+      if (el && v) el.value = v;
+    });
+    const imgSrc = localStorage.getItem(CMS_PREFIX + 'team_founder_img');
+    if (imgSrc) {
+      const prev = document.getElementById('cms-team-founder-img-preview');
+      if (prev) { prev.src = imgSrc; prev.classList.remove('hidden'); }
+    }
+    renderDevTeamManager();
+  } else if (viewName === 'cms-testimonials') {
+    const h = localStorage.getItem(CMS_PREFIX + 'testimonials_heading');
+    if (h) document.getElementById('cms-testimonials-heading').value = h;
+    renderTestimonialsManager();
+  } else if (viewName === 'cms-footer') {
+    const desc = localStorage.getItem(CMS_PREFIX + 'footer_desc');
+    if (desc) document.getElementById('cms-footer-desc').value = desc;
+    ['whatsapp','instagram','youtube','linkedin','email','phone'].forEach(k => {
+      const v = localStorage.getItem(CMS_PREFIX + 'footer_' + k);
+      const el = document.getElementById('cms-footer-' + k);
+      if (el && v) el.value = v;
+    });
+  }
+}
+
+// ─── Art Cards Manager ─────────────────────────────────────
+
+// Default art cards from explore.html (scraped once for seed data)
+const DEFAULT_ART_CARDS = [
+  { name: "Tanjore Art", state: "Tamil Nadu", price: 3500, description: "A classical South Indian painting style known for rich colors, surface richness, and compact composition.", image: "explore-pics/tanjore.jpeg" },
+  { name: "Pattachitra", state: "Odisha", price: 2800, description: "Traditional cloth-based scroll painting with rich mythological narratives and intricate motifs.", image: "explore-pics/pattachitra.jpeg" },
+  { name: "Gond Art", state: "Madhya Pradesh", price: 2500, description: "Vibrant tribal art form using dots and dashes to create elaborate patterns of flora and fauna.", image: "explore-pics/gond.jpeg" },
+  { name: "Kalamkari Art", state: "Andhra Pradesh", price: 4200, description: "Hand-painted or block-printed cotton textile art using natural dyes, depicting mythological scenes.", image: "explore-pics/kalamkari.jpeg" },
+  { name: "Phulkari", state: "Punjab", price: 3200, description: "An embroidery technique from Punjab featuring bright, colorful floral patterns on shawls and dupattas.", image: "explore-pics/phulkari.jpeg" },
+  { name: "Madhubani Art", state: "Bihar", price: 1800, description: "Characterized by complex geometrical patterns, this art form depicts ritual content for special occasions.", image: "explore-pics/madhubani.jpeg" },
+  { name: "Warli Art", state: "Maharashtra", price: 1500, description: "One of the oldest art forms featuring rudimentary wall paintings using geometric shapes.", image: "explore-pics/warli.jpeg" },
+  { name: "Chikankari Art", state: "Uttar Pradesh", price: 4800, description: "Delicate and artful hand embroidery on muslin and silk fabrics, known for its elegance.", image: "explore-pics/chikankari.jpeg" },
+  { name: "Bidriware", state: "Karnataka", price: 6500, description: "A metal handicraft from Bidar, Karnataka, using silver inlay on a blackened alloy of zinc and copper.", image: "explore-pics/bidriware.jpeg" },
+  { name: "Blue Pottery", state: "Rajasthan", price: 2200, description: "A traditional craft of Jaipur using blue dye, known for its striking blue and white patterns.", image: "explore-pics/blue_pottery.jpeg" },
+  { name: "Dhokra Art", state: "Chhattisgarh", price: 3800, description: "One of the earliest methods of non-ferrous metal casting using the lost-wax technique.", image: "explore-pics/dhokra.jpeg" },
+  { name: "Aipan Art", state: "Uttarakhand", price: 1600, description: "Ritualistic floor and wall art from Kumaon region using geometric and floral motifs.", image: "explore-pics/aipan.jpeg" },
+  { name: "Pichwai Art", state: "Rajasthan", price: 5500, description: "Intricate paintings hung behind the deity in Nathdwara temples, depicting Lord Krishna.", image: "explore-pics/pichwai.jpeg" },
+  { name: "Rogan Art", state: "Gujarat", price: 7200, description: "An extremely rare form of textile painting using castor oil-based paint, practiced by few families.", image: "explore-pics/rogan.jpeg" },
+  { name: "Cheriyal Art", state: "Telangana", price: 2900, description: "A stylized scroll painting narrating stories from mythology and epics.", image: "explore-pics/cheriyal.jpeg" },
+  { name: "Kangra Art", state: "Himachal Pradesh", price: 4500, description: "Delicate and lyrical miniature paintings from the Kangra valley, known for their romantic themes.", image: "explore-pics/kangra.jpeg" },
+  { name: "Toda Embroidery", state: "Tamil Nadu", price: 3100, description: "Distinctive embroidery by the Toda tribe using red and black thread on off-white cloth.", image: "explore-pics/toda.jpeg" }
+];
+
+function getArtCards() {
+  const raw = localStorage.getItem(CMS_PREFIX + 'explore_arts');
+  if (raw) {
+    try { return JSON.parse(raw); } catch(e) {}
+  }
+  return [...DEFAULT_ART_CARDS];
+}
+
+function renderArtCardsManager() {
+  const container = document.getElementById('cms-art-cards-list');
+  if (!container) return;
+  const cards = getArtCards();
+  container.innerHTML = '';
+
+  cards.forEach((card, idx) => {
+    const row = document.createElement('div');
+    row.className = 'bg-cream/30 border border-ink/10 rounded-xl p-4 flex flex-col md:flex-row gap-4 items-start';
+    row.innerHTML = `
+      <div class="flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden bg-cream relative group">
+        <img src="${card.image || ''}" class="w-full h-full object-cover" alt="${card.name}" onerror="this.src='pics/logoo.png'">
+        <label class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+          <span class="text-white text-[10px] font-bold">Replace</span>
+          <input type="file" accept="image/*" class="hidden" onchange="handleArtImageReplace(${idx}, this)">
+        </label>
+      </div>
+      <div class="flex-1 grid grid-cols-2 md:grid-cols-4 gap-2">
+        <input type="text" value="${card.name || ''}" data-art-field="name" data-art-idx="${idx}" class="bg-bg border border-ink/10 rounded-lg px-3 py-2 text-xs text-ink" placeholder="Art Name">
+        <input type="text" value="${card.state || ''}" data-art-field="state" data-art-idx="${idx}" class="bg-bg border border-ink/10 rounded-lg px-3 py-2 text-xs text-ink" placeholder="State">
+        <input type="number" value="${card.price || 0}" data-art-field="price" data-art-idx="${idx}" class="bg-bg border border-ink/10 rounded-lg px-3 py-2 text-xs text-ink" placeholder="Price">
+        <textarea data-art-field="description" data-art-idx="${idx}" class="bg-bg border border-ink/10 rounded-lg px-3 py-2 text-xs text-ink col-span-2 md:col-span-1" rows="2" placeholder="Description">${card.description || ''}</textarea>
+      </div>
+      <button onclick="removeArtCard(${idx})" class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-destructive/50 hover:text-destructive hover:bg-destructive/10 transition-colors" title="Delete"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+    `;
+    container.appendChild(row);
+  });
+  lucide.createIcons();
+}
+
+function handleArtImageReplace(idx, fileInput) {
+  if (!fileInput.files || !fileInput.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const maxW = 600;
+      const scale = img.width > maxW ? maxW / img.width : 1;
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      const compressed = canvas.toDataURL('image/jpeg', 0.6);
+      const cards = getArtCards();
+      if (cards[idx]) {
+        cards[idx].image = compressed;
+        localStorage.setItem(CMS_PREFIX + 'explore_arts', JSON.stringify(cards));
+        renderArtCardsManager();
+        showCmsToast('Image replaced!');
+      }
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(fileInput.files[0]);
+}
+
+function addNewArtCard() {
+  const cards = getArtCards();
+  cards.push({ name: 'New Art Form', state: 'State', price: 1000, description: 'Enter description...', image: '' });
+  localStorage.setItem(CMS_PREFIX + 'explore_arts', JSON.stringify(cards));
+  renderArtCardsManager();
+}
+
+function removeArtCard(idx) {
+  if (!confirm('Remove this art card?')) return;
+  const cards = getArtCards();
+  cards.splice(idx, 1);
+  localStorage.setItem(CMS_PREFIX + 'explore_arts', JSON.stringify(cards));
+  renderArtCardsManager();
+}
+
+function saveArtCards() {
+  const cards = getArtCards();
+  document.querySelectorAll('[data-art-idx]').forEach(input => {
+    const idx = parseInt(input.getAttribute('data-art-idx'));
+    const field = input.getAttribute('data-art-field');
+    if (cards[idx] && field) {
+      cards[idx][field] = field === 'price' ? parseFloat(input.value) || 0 : input.value;
+    }
+  });
+  localStorage.setItem(CMS_PREFIX + 'explore_arts', JSON.stringify(cards));
+}
+
+// ─── Dev Team Manager ──────────────────────────────────────
+function getDevTeam() {
+  const raw = localStorage.getItem(CMS_PREFIX + 'dev_team');
+  if (raw) {
+    try { return JSON.parse(raw); } catch(e) {}
+  }
+  return ['Mahamed Jani', 'Surya Sathwik', 'Manoj Kumar'];
+}
+
+function renderDevTeamManager() {
+  const container = document.getElementById('cms-dev-team-list');
+  if (!container) return;
+  const names = getDevTeam();
+  container.innerHTML = '';
+  names.forEach((name, idx) => {
+    const row = document.createElement('div');
+    row.className = 'flex items-center gap-2';
+    row.innerHTML = `
+      <input type="text" value="${name}" data-devteam-idx="${idx}" class="flex-1 bg-cream/30 border border-ink/10 rounded-xl px-4 py-3 text-sm text-ink focus:border-saffron-dark focus:ring-0">
+      <button onclick="removeDevTeamMember(${idx})" class="w-8 h-8 rounded-lg flex items-center justify-center text-destructive/50 hover:text-destructive hover:bg-destructive/10 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+    `;
+    container.appendChild(row);
+  });
+  lucide.createIcons();
+}
+
+function addDevTeamMember() {
+  const names = getDevTeam();
+  names.push('New Member');
+  localStorage.setItem(CMS_PREFIX + 'dev_team', JSON.stringify(names));
+  renderDevTeamManager();
+}
+
+function removeDevTeamMember(idx) {
+  const names = getDevTeam();
+  names.splice(idx, 1);
+  localStorage.setItem(CMS_PREFIX + 'dev_team', JSON.stringify(names));
+  renderDevTeamManager();
+}
+
+function saveDevTeam() {
+  const names = [];
+  document.querySelectorAll('[data-devteam-idx]').forEach(input => {
+    names.push(input.value.trim());
+  });
+  localStorage.setItem(CMS_PREFIX + 'dev_team', JSON.stringify(names.filter(n => n)));
+}
+
+// ─── Testimonials Manager ──────────────────────────────────
+const DEFAULT_TESTIMONIALS = [
+  { name: "Michael Smith", location: "New York, USA", text: "A brilliant platform. We discovered a 7th generation Pattachitra artist for our gallery exhibition.", avatar: "https://i.pravatar.cc/150?u=ms" },
+  { name: "Robert Weber", location: "Berlin, Germany", text: "The craft retreats are life-changing. Learning Warli directly from the tribal masters in their village was an unforgettable experience.", avatar: "https://i.pravatar.cc/150?u=rw" },
+  { name: "Elena Rodriguez", location: "Madrid, Spain", text: "Commissioning a mural was seamless. The artist understood our vision and transformed our office space with incredible Gond art.", avatar: "https://i.pravatar.cc/150?u=er" },
+  { name: "Priya Sharma", location: "Mumbai, India", text: "Every piece tells a story. I purchased a Madhubani painting and the authenticity and detail are unmatched.", avatar: "https://i.pravatar.cc/150?u=ps" },
+  { name: "David Chen", location: "Vancouver, Canada", text: "This is what preservation looks like. A beautiful, dignified way to connect directly with India's heritage artisans.", avatar: "https://i.pravatar.cc/150?u=dc" },
+  { name: "Sarah Jenkins", location: "London, UK", text: "The live painting session at our event left guests mesmerized. Such a powerful way to experience Indian folk art.", avatar: "https://i.pravatar.cc/150?u=sj" },
+];
+
+function getTestimonials() {
+  const raw = localStorage.getItem(CMS_PREFIX + 'testimonials');
+  if (raw) {
+    try { return JSON.parse(raw); } catch(e) {}
+  }
+  return [...DEFAULT_TESTIMONIALS];
+}
+
+function renderTestimonialsManager() {
+  const container = document.getElementById('cms-testimonials-list');
+  if (!container) return;
+  const items = getTestimonials();
+  container.innerHTML = '';
+  items.forEach((t, idx) => {
+    const row = document.createElement('div');
+    row.className = 'bg-cream/30 border border-ink/10 rounded-xl p-4 space-y-2';
+    row.innerHTML = `
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+        <input type="text" value="${t.name || ''}" data-testimonial-idx="${idx}" data-testimonial-field="name" class="bg-bg border border-ink/10 rounded-lg px-3 py-2 text-xs text-ink" placeholder="Reviewer Name">
+        <input type="text" value="${t.location || ''}" data-testimonial-idx="${idx}" data-testimonial-field="location" class="bg-bg border border-ink/10 rounded-lg px-3 py-2 text-xs text-ink" placeholder="Location">
+        <input type="url" value="${t.avatar || ''}" data-testimonial-idx="${idx}" data-testimonial-field="avatar" class="bg-bg border border-ink/10 rounded-lg px-3 py-2 text-xs text-ink" placeholder="Avatar URL">
+      </div>
+      <div class="flex gap-2">
+        <textarea data-testimonial-idx="${idx}" data-testimonial-field="text" rows="2" class="flex-1 bg-bg border border-ink/10 rounded-lg px-3 py-2 text-xs text-ink" placeholder="Review text...">${t.text || ''}</textarea>
+        <button onclick="removeTestimonial(${idx})" class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-destructive/50 hover:text-destructive hover:bg-destructive/10 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+      </div>
+    `;
+    container.appendChild(row);
+  });
+  lucide.createIcons();
+}
+
+function addTestimonial() {
+  const items = getTestimonials();
+  items.push({ name: 'New Reviewer', location: 'City, Country', text: 'Enter review text...', avatar: 'https://i.pravatar.cc/150?u=new' + Date.now() });
+  localStorage.setItem(CMS_PREFIX + 'testimonials', JSON.stringify(items));
+  renderTestimonialsManager();
+}
+
+function removeTestimonial(idx) {
+  if (!confirm('Remove this testimonial?')) return;
+  const items = getTestimonials();
+  items.splice(idx, 1);
+  localStorage.setItem(CMS_PREFIX + 'testimonials', JSON.stringify(items));
+  renderTestimonialsManager();
+}
+
+function saveTestimonials() {
+  const items = getTestimonials();
+  document.querySelectorAll('[data-testimonial-idx]').forEach(input => {
+    const idx = parseInt(input.getAttribute('data-testimonial-idx'));
+    const field = input.getAttribute('data-testimonial-field');
+    if (items[idx] && field) {
+      items[idx][field] = input.value;
+    }
+  });
+  localStorage.setItem(CMS_PREFIX + 'testimonials', JSON.stringify(items));
+}
+
+// ─── Hook into switchView to load CMS fields ───────────────
+const _originalSwitchView = window.switchView;
+window.switchView = function(viewName) {
+  // Call original first
+  if (typeof _originalSwitchView === 'function') {
+    _originalSwitchView(viewName);
+  }
+  
+  // Show the CMS view panel if it's a CMS view
+  if (viewName.startsWith('cms-')) {
+    document.querySelectorAll('.view-section').forEach(v => v.style.display = 'none');
+    const panel = document.getElementById('view-' + viewName);
+    if (panel) panel.style.display = '';
+
+    // Style nav items
+    document.querySelectorAll('.nav-item').forEach(b => {
+      b.classList.remove('active', 'bg-saffron-light', 'text-saffron-dark', 'border-saffron-dark/20');
+      b.classList.add('text-ink-muted', 'hover:text-ink', 'hover:bg-cream', 'border-transparent');
+    });
+    const navBtns = document.querySelectorAll('.nav-item');
+    navBtns.forEach(btn => {
+      if (btn.onclick && btn.onclick.toString().includes(viewName)) {
+        btn.classList.add('active', 'bg-saffron-light', 'text-saffron-dark', 'border-saffron-dark/20');
+        btn.classList.remove('text-ink-muted', 'hover:text-ink', 'hover:bg-cream', 'border-transparent');
+      }
+    });
+
+    // Load fields
+    loadCmsFieldsForView(viewName);
+    lucide.createIcons();
+  }
+};
+
 </script>
+<div id="cms-toast" class="fixed bottom-6 right-6 bg-success text-white px-6 py-4 rounded-xl shadow-large flex items-center gap-3 transition-transform duration-300 transform translate-x-[400px] z-[100]">
+  <i data-lucide="check-circle" class="w-5 h-5"></i>
+  <span id="cms-toast-text" class="font-medium text-sm">Changes saved & applied!</span>
+</div>
 </body>
 </html>

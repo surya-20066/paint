@@ -1,0 +1,274 @@
+{
+
+"Rajasthan": {
+hero: "Rajasthani Phad painting on cloth scroll, vibrant folk art depicting epic of Pabuji, orange yellow red colors, traditional Indian folk art style, highly detailed, no text",
+artForms: {
+"Phad Painting": "Phad scroll painting Rajasthan, colorful cloth canvas, folk deities Pabuji and Devnarayan, bright orange red yellow, traditional Indian scroll art, detailed patterns, no text",
+"Miniature Painting": "Rajasthani miniature painting Mewar style, royal court scene, intricate detail, gold borders, jewel colors, Mughal influence, small format precise brushwork, no text",
+"Pichwai Painting": "Pichwai painting Nathdwara, Lord Srinathji deity on cloth, floral border patterns, deep indigo blue background, gold lotus flowers, devotional Hindu art, no text",
+"Blue Pottery": "Jaipur Blue Pottery vase, turquoise cobalt blue Persian floral design, white quartz base, geometric arabesque patterns, traditional Rajasthani craft, no text",
+"Kathputli Puppetry": "Rajasthani Kathputli string puppets, colorful dressed wooden puppets, folk performance, desert village, traditional costumes, vibrant marionettes, no text",
+"Mandana": "Mandana wall art Rajasthan, geometric white patterns on red ochre mud wall, festival floor art, traditional folk motifs, angular symmetrical design, no text"
+},
+artifacts: [
+"Ancient Phad scroll painting artifact museum Rajasthan, faded vintage cloth, ceremonial folk scroll, heritage collection display, no text",
+"Antique Rajasthani miniature painting on ivory, Mughal court scene, museum artifact, ornate gold border frame, historical Indian art, no text",
+"Old Pichwai cloth painting museum collection, Krishna Gopika scene, faded natural pigments, heritage textile Nathdwara, no text",
+"Historic Jaipur Blue Pottery collection, antique turquoise ceramic, Persian motif, museum display shelf, traditional Rajasthani craft, no text"
+]
+},
+
+"Bihar": {
+hero: "Madhubani Mithila painting Bihar, colorful geometric fish and lotus motifs, bold black outlines filled with vivid colors, traditional Indian folk art, women artisans, no text",
+artForms: {
+"Madhubani Painting": "Madhubani painting Bihar, Bharni style, goddess Durga with lotus flowers, black bold outlines, bright red orange yellow green fill, geometric border pattern, no text",
+"Mithila Art": "Mithila painting Bihar India, wedding ceremony scene, bride groom under canopy, vivid colors red blue yellow, intricate geometric fill patterns, traditional folk art, no text",
+"Sohrai Painting": "Sohrai wall painting Bihar, white and red tribal motifs on terracotta mud wall, animals birds flowers, harvest festival art, Hazaribagh region, no text",
+"Manjusha Art": "Manjusha scroll painting Bihar Bhagalpur, snake god Bihula story, bright primary colors, sequential narrative panels, folk scroll art, no text",
+"Tikuli Art": "Tikuli art Bihar Patna, ornate decorative circular disc painting, gold leaf background, floral motifs peacock, traditional lacquerware folk art, no text"
+},
+artifacts: [
+"Ancient Madhubani painting on handmade paper, museum collection Bihar, faded geometric fish motif, traditional folk art heritage, no text",
+"Old Mithila art cloth painting, vintage Indian folk art museum, wedding scene natural pigments, heritage collection display, no text",
+"Historical Sohrai wall art fragment Bihar, terracotta plaster, tribal animal motif, folk heritage museum India, no text",
+"Antique Manjusha scroll Bihar, old scroll painting snake story panels, heritage folk art collection, no text"
+]
+},
+
+"Maharashtra": {
+hero: "Warli tribal painting Maharashtra, white geometric figures on red ochre background, circle triangle human figures, harvest dance scene, Sahyadri forest, no text",
+artForms: {
+"Warli Painting": "Warli painting Maharashtra tribe, white rice paste on mud wall, stick figures dancing in circle, trees animals geometric shapes, traditional tribal art India, no text",
+"Pithora Painting": "Pithora painting tribal Maharashtra Gujarat border, colorful horses gods festive scene, votive ritual wall mural, Rathwa tribe, vibrant folk art, no text",
+"Paithani Weaving": "Paithani silk saree Maharashtra, pure silk gold zari border, peacock motif in pallu, jewel green color, handloom weaving Paithan traditional, no text",
+"Sawantwadi Lacquerware": "Sawantwadi lacquerware toy Maharashtra, painted wooden chess piece, bright lacquer finish, folk craft, colorful traditional Goa border craft, no text",
+"Kolhapuri Craft": "Kolhapuri silver craft Maharashtra, traditional tribal jewelry necklace, hammered silver geometric pattern, folk tribal adornment, no text"
+},
+artifacts: [
+"Ancient Warli painting on cloth Maharashtra, museum tribal art, white on dark background geometric pattern, heritage folk art India, no text",
+"Old Paithani silk textile museum collection Maharashtra, vintage handloom weaving, peacock motif gold border, heritage Indian textile, no text",
+"Historical Sawantwadi lacquerware collection, antique painted wooden toys, museum Maharashtra craft, no text",
+"Traditional Warli ritual mural fragment museum, tribal art Maharashtra, white rice paste mud wall heritage, no text"
+]
+},
+
+"Odisha": {
+hero: "Pattachitra painting Odisha, Lord Jagannath on chariot, rich colors red yellow black, intricate border of flowers, traditional cloth canvas, fine detail chitrakar art, no text",
+artForms: {
+"Pattachitra Painting": "Pattachitra painting Odisha Raghurajpur, Lord Krishna dancing with gopis, bold colors orange red yellow black, floral garland border, traditional Chitrakar art, no text",
+"Palm Leaf Engraving": "Palm leaf engraving Odisha, fine etched line drawing of deity, ancient manuscript art, carved palm leaf frond, traditional heritage craft, no text",
+"Appliqué Work": "Pipili applique work Odisha, colorful fabric cut-out lampshade, elephant fish bird motifs, layered bright cloth, festival chandelier craft, no text",
+"Sand Art": "Sand art sculpture Odisha beach, Sudarsan Pattnaik style, intricate detailed sand mandala, festival theme, artistic beach installation, no text",
+"Dhokra Metal Casting": "Dhokra brass casting Odisha tribal, ancient lost wax technique, bronze tribal figure horse or elephant, rough textured metal, folk craft, no text"
+},
+artifacts: [
+"Ancient Pattachitra cloth painting museum Odisha, vintage Jagannath theme, faded natural pigments, heritage chitrakar art collection, no text",
+"Old palm leaf manuscript engraving Odisha, ancient script religious text carved palm, museum heritage collection, no text",
+"Historical Dhokra bronze figure museum, ancient lost wax cast tribal figure horse, heritage metal craft India, no text",
+"Antique Pipili applique cloth work museum collection Odisha, heritage festival textile craft, no text"
+]
+},
+
+"Madhya Pradesh": {
+hero: "Gond tribal painting Madhya Pradesh, colorful tree of life with birds fish animals, intricate dot and dash patterns, bright red blue yellow green, Jangarh Kalam style, no text",
+artForms: {
+"Gond Painting": "Gond art painting Madhya Pradesh, large sacred tree filled with birds fish deer, dots lines fish scale texture, Jangarh Singh Shyam style, vivid folk colors, no text",
+"Bhil Art": "Bhil painting tribal art Madhya Pradesh, white dots on colored background, festival dance scene, abstract geometric figures, traditional Pithora votive style, no text",
+"Bagh Print": "Bagh hand block print fabric Madhya Pradesh, deep indigo blue natural dye, repeating floral geometric pattern, cotton cloth, traditional resist print, no text",
+"Dhokra Craft": "Dhokra metal craft Madhya Pradesh, bronze Ganesh figurine lost wax casting, folk tribal sculpture, rough patina texture, ancient craft India, no text",
+"Piparia Stone Carving": "Sandstone carving sculpture Madhya Pradesh, temple architectural relief, dancing apsara figure, intricate chiseled detail, heritage stone craft, no text"
+},
+artifacts: [
+"Ancient Gond painting on paper museum, Madhya Pradesh tribal art, colorful tree birds early Jangarh Kalam, heritage collection, no text",
+"Old Bagh print textile museum Madhya Pradesh, indigo block print cloth, natural dye heritage fabric collection, no text",
+"Historical Dhokra bronze sculpture museum, ancient lost wax tribal figure, Madhya Pradesh folk metal art heritage, no text",
+"Antique Bhil painting on cloth museum, tribal dotted white pattern, folk votive art Madhya Pradesh collection, no text"
+]
+},
+
+"Tamil Nadu": {
+hero: "Thanjavur Tanjore painting Tamil Nadu, Lord Krishna Balakrishna on wooden panel, real gold leaf crown jewels, bright red blue background, gesso raised relief, devotional South Indian art, no text",
+artForms: {
+"Tanjore Painting": "Tanjore Thanjavur painting Tamil Nadu, Goddess Lakshmi on lotus, 22 carat gold leaf jewelry crown, vibrant jewel colors, three dimensional gesso relief, decorated border, no text",
+"Chola Bronze Casting": "Chola bronze Nataraja statue Tamil Nadu, dancing Shiva cosmic dance, ring of flames, ancient lost wax bronze casting, 10th century, museum quality, no text",
+"Kolam": "Tamil Nadu Kolam floor art, intricate white rice flour rangoli, geometric dot connected pattern, Pongal festival, courtyard design, symmetrical folk art, no text",
+"Kalamkari": "Kalamkari hand painted cotton cloth Tamil Nadu Andhra, natural dye, Ramayana scene, flowing lines pen work, indigo red ochre colors, temple hanging textile, no text",
+"Tanjore Doll Making": "Tanjore dancing doll Tamil Nadu, bobblehead dancing lady in silk saree, weighted papier mache, vibrant painted folk craft, traditional golu doll, no text"
+},
+artifacts: [
+"Ancient Tanjore painting panel museum Tamil Nadu, gold leaf deity heritage art, 19th century wooden panel art collection, no text",
+"Old Chola bronze sculpture museum collection, ancient Nataraja dancing Shiva, heritage Tamil Nadu metal art, no text",
+"Historical Kalamkari textile museum Tamil Nadu, old natural dye cloth Ramayana scene, heritage temple hanging collection, no text",
+"Antique Tanjore golu doll collection museum, traditional painted clay dolls, Tamil heritage craft display, no text"
+]
+},
+
+"Andhra Pradesh": {
+hero: "Kalamkari painting Srikalahasti style, hand drawn pen work on cotton, Shiva Parvati scene, flowing black outlines, natural indigo red ochre dyes, temple textile art, no text",
+artForms: {
+"Kalamkari Painting": "Kalamkari Srikalahasti hand drawn pen cotton cloth, Mahabharata war scene, fine black line work, natural vegetable dyes red yellow indigo, South Indian temple art, no text",
+"Nirmal Painting": "Nirmal painting Andhra Pradesh, Krishna with gopis on ivory wooden panel, soft pastel watercolor style, gold background, delicate brushwork, Telangana folk art, no text",
+"Kondapalli Wooden Toys": "Kondapalli wooden toys Andhra Pradesh, painted colorful village set, ponky wood, elephant horse temple chariot figurines, bright lacquer colors, folk craft, no text",
+"Etikoppaka Lacquerware": "Etikoppaka lacquerware toys Andhra Pradesh, turned wood brightly painted, natural dye lac coating, colorful toys and boxes, Krishna river region craft, no text",
+"Budithi Brass Work": "Budithi brass craft Andhra Pradesh, traditional bell metal vessel, hand hammered pot with engraved pattern, folk metal craft, no text"
+},
+artifacts: [
+"Ancient Kalamkari cloth museum Andhra Pradesh, old temple hanging hand drawn fabric, natural dye heritage textile, no text",
+"Historical Nirmal painting panel museum, old ivory wooden painting Andhra, soft colors heritage folk art collection, no text",
+"Old Kondapalli wooden toy set museum collection Andhra Pradesh, antique painted village figures heritage craft, no text",
+"Antique Etikoppaka lacquerware museum, traditional turned wood toy painted natural dye, heritage folk craft Andhra, no text"
+]
+},
+
+"Kerala": {
+hero: "Kerala mural painting temple wall, Panchavarnam five colors, Vishnu or Krishna deity, flowing form, white yellow red green black pigments, ancient temple fresco, Kerala style, no text",
+artForms: {
+"Kerala Mural Painting": "Kerala mural painting temple, Lord Vishnu reclining Ananthasayana, five sacred colors white red yellow green black, ancient fresco style wall painting, no text",
+"Kathakali Face Painting": "Kathakali makeup face Kerala, Pacha green heroic character, elaborate headdress, ornate face paint design, traditional dance drama, no text",
+"Theyyam Ritual Art": "Theyyam ritual face painting Kerala, elaborate red orange headdress, wild deity costume, traditional ritual performance, North Kerala folk art, no text",
+"Aranmula Kannadi": "Aranmula metal mirror Kerala, unique bronze alloy hand mirror, intricate handle, traditional craft, one family secret alloy, heritage museum piece, no text",
+"Kasavu Weaving": "Kerala Kasavu saree, cream white cotton with golden zari border, traditional wedding saree, handloom weaving Balaramapuram, elegant Indian textile, no text"
+},
+artifacts: [
+"Ancient Kerala mural fragment museum, temple wall painting five colors, heritage fresco heritage collection Kerala, no text",
+"Old Kathakali costume headdress museum Kerala, ornate traditional dance drama costume, heritage performing art, no text",
+"Historical Aranmula mirror museum Kerala, antique bronze alloy hand mirror, unique traditional metal heritage craft, no text",
+"Traditional Theyyam costume mask museum Kerala, elaborate ritual headdress, folk heritage collection, no text"
+]
+},
+
+"Gujarat": {
+hero: "Rogan Art Gujarat Kutch, intricate castor oil paint design on dark cloth, metallic sheen, geometric floral pattern, Khatri family craft Nirona village, no text",
+artForms: {
+"Rogan Art": "Rogan painting Gujarat Kutch Nirona, castor oil metallic paint on black cloth, tree of life motif, mirror image technique, Khatri family craft, shimmering colors, no text",
+"Patola Silk Weaving": "Patola silk saree Gujarat Patan, double ikat woven, geometric elephant parrot pattern, jewel red green colors, handloom triple ikat technique, no text",
+"Lippan Kaam": "Lippan kaam mirror mosaic Gujarat Rabari tribe, white mud relief with mirror inlay, geometric floral pattern on wall, tribal home decoration, shimmering mirrors, no text",
+"Kutch Embroidery": "Kutch embroidery Gujarat, colorful silk thread mirror work, geometric pattern on dark blue cloth, Ahir tribe embroidery, intricate stitch work, no text",
+"Pithora Painting": "Pithora ritual painting Gujarat Rathwa tribe, colorful horses gods village scene on white washed wall, votive offering art, bright folk mural, no text"
+},
+artifacts: [
+"Antique Rogan art cloth museum Gujarat, old castor oil painted textile Kutch, heritage Khatri family craft collection, no text",
+"Old Patola silk double ikat saree museum Gujarat, antique triple ikat weaving Patan, heritage Indian textile collection, no text",
+"Historical Kutch embroidery sample museum, antique mirror work silk thread Gujarat, folk textile heritage, no text",
+"Ancient Pithora painting on wall museum Gujarat, tribal ritual horse god scene, folk heritage collection, no text"
+]
+},
+
+"West Bengal": {
+hero: "Kalighat painting West Bengal, bold black outline Goddess Kali figure, flat bright color wash, colonial era Bengali folk art, Kalighat temple style, no text",
+artForms: {
+"Kalighat Painting": "Kalighat painting Kolkata, bold black outline Durga goddess figure, flat wash of color, simple powerful composition, 19th century Bengali folk art, Kalighat style, no text",
+"Bengal Scroll Painting": "Patachitra Bengal scroll painting Medinipur, narrative sequential panels, Jadupatua storytelling, bright folk colors, mounted cloth scroll, no text",
+"Bankura Terracotta": "Bankura horse terracotta West Bengal, traditional clay horse sculpture, elongated neck, folk pottery kiln fired, festival deity offering, no text",
+"Baluchari Silk Weaving": "Baluchari silk saree Bishnupur Bengal, Mahabharata scene woven in border, temple town weaving, jewel colors, supplementary weft brocade, no text",
+"Dokra Craft": "Dokra brass craft West Bengal, lost wax cast tribal figurine, goddess or musician figure, textured metal surface, folk metal art Bihar Bengal, no text"
+},
+artifacts: [
+"Antique Kalighat painting museum Kolkata, 19th century Bengali folk art collection, old Kali goddess figure, heritage collection, no text",
+"Old Bankura horse terracotta museum West Bengal, antique clay pottery folk craft, heritage collection Bishnupur, no text",
+"Historical Baluchari silk textile museum, antique Bengal handloom weaving Mahabharata scene, heritage Indian textile, no text",
+"Traditional Dokra bronze figure museum Bengal, old lost wax tribal figure, folk metal art heritage collection, no text"
+]
+},
+
+"Uttarakhand": {
+hero: "Aipan ritual floor art Uttarakhand Kumaon, white rice paste geometric pattern on red ochre floor, sacred threshold design, traditional folk art, mountain village home, no text",
+artForms: {
+"Aipan Ritual Art": "Aipan floor painting Kumaon Uttarakhand, white rice paste on red floor, lotus geometric pattern, sacred Navratri ritual art, women folk art India, no text",
+"Garhwal Pahari Painting": "Garhwal Pahari miniature painting Uttarakhand, Radha Krishna in lush Himalayan garden, soft colors, mountain landscape, 18th century court style, no text",
+"Kumaon Woodcarving": "Kumaon woodcarving temple door Uttarakhand, ornate floral geometric pattern, cedar deodar carved panel, Himalayan folk craft heritage, no text",
+"Ringal Bamboo Craft": "Ringal bamboo basket weaving Uttarakhand, intricate woven bamboo pattern, mountain folk craft, natural material utility art, no text"
+},
+artifacts: [
+"Antique Aipan design preserved museum Uttarakhand, traditional Kumaon rice paste floor pattern, folk heritage art, no text",
+"Old Garhwali miniature painting museum, Pahari style Krishna painting 18th century, mountain court heritage, no text",
+"Historical woodcarved temple panel museum Uttarakhand, Kumaon folk craft carved cedar door heritage, no text",
+"Traditional Ringal bamboo craft museum, handwoven mountain basket Uttarakhand folk heritage, no text"
+]
+},
+
+"Telangana": {
+hero: "Cheriyal scroll painting Telangana Nakashi, bright red background, sequential comic-strip panels of mythology, bold primary colors, folk narrative art, no text",
+artForms: {
+"Cheriyal Scroll Painting": "Cheriyal scroll painting Telangana, red background narrative panels, Nakashi community storytelling art, Ramayana scenes, bold primary colors sequential layout, no text",
+"Bidriware": "Bidriware Hyderabad Telangana, black zinc alloy with silver inlay floral pattern, vase or box, intricate inlaid metalwork, Mughal craft heritage, no text",
+"Pochampally Ikat Weaving": "Pochampally Ikat silk saree Telangana, tie dye resist woven geometric diamond pattern, vibrant silk colors, double ikat traditional weaving, no text",
+"Nirmal Painting": "Nirmal painting Telangana, forest scene with animals on ivory wood panel, soft watercolor style, gold lacquer background, traditional Andhra folk art, no text",
+"Pembarthi Metal Craft": "Pembarthi metal craft Telangana, repousse brass work, decorative wall panel with floral peacock motif, traditional hammered metalwork, no text"
+},
+artifacts: [
+"Ancient Cheriyal scroll museum Telangana, old painted narrative scroll, faded primary colors, folk heritage collection, no text",
+"Historical Bidriware vase museum Hyderabad, antique silver inlay black zinc alloy, Mughal era craft heritage, no text",
+"Old Pochampally ikat silk museum Telangana, antique double ikat weaving, traditional geometric textile heritage, no text",
+"Antique Pembarthi brass craft museum, repousse metalwork traditional Telangana, folk heritage collection, no text"
+]
+},
+
+"Karnataka": {
+hero: "Mysore painting Karnataka, Goddess Saraswati on pale background, 22 carat gold leaf jewelry, rich jewel colors, royal court style, fine detailed brushwork, no text",
+artForms: {
+"Mysore Painting": "Mysore painting Karnataka, Lord Ganesha on white background, delicate gold leaf ornaments, jewel colors green blue red, Vijayanagara era style, fine miniature detail, no text",
+"Channapatna Wooden Toys": "Channapatna wooden toy Karnataka, turned lathe toy elephant and doll, bright lacquer colors natural shellac, toy town India folk craft, no text",
+"Kasuti Embroidery": "Kasuti embroidery Karnataka, geometric cross stitch pattern on silk, temple chariot elephant motifs, traditional running darning stitch, folk textile art, no text",
+"Kinnal Craft": "Kinnal craft Karnataka, painted wooden deity figure, lacquered bright colors, folk art sculpture Koppal district, traditional craft heritage, no text",
+"Yakshagana Art": "Yakshagana makeup Karnataka, elaborate face paint warrior character, ornate golden crown headdress, traditional dance drama South India, no text"
+},
+artifacts: [
+"Antique Mysore painting museum Karnataka, gold leaf deity painting 19th century, royal heritage collection, no text",
+"Old Channapatna wooden toy museum Karnataka, antique turned lacquer folk toy, heritage craft collection, no text",
+"Historical Kasuti embroidery museum Karnataka, antique silk textile folk stitch, heritage fabric collection, no text",
+"Traditional Kinnal wooden figure museum Karnataka, folk craft painted deity sculpture heritage, no text"
+]
+},
+
+"Assam": {
+hero: "Muga silk weaving Assam, golden natural silk saree, shimmering honey gold color, traditional loom Sualkuchi, intricate border pattern, mekhela chador, no text",
+artForms: {
+"Muga Silk Weaving": "Muga silk Assam, natural golden honey colored silk, mekhela chador saree, handloom traditional weaving Sualkuchi, lustrous sheen Indian textile, no text",
+"Eri Silk Craft": "Eri silk weaving Assam, peace silk off white shawl, traditional Assamese loom, soft thick texture, tribal handloom no text",
+"Jamdani Weaving": "Jamdani weaving Sualkuchi Assam, fine silk with supplementary weft floral motifs, transparent sheer fabric, traditional Indian loom heritage, no text",
+"Brass Bell Metal Craft": "Sarthebari brass bell metal craft Assam, hand hammered utensil pot with fish motif, traditional bronze alloy, folk metal heritage India, no text",
+"Majuli Mask Making": "Majuli island mask making Assam, large bamboo and clay face mask deity character, bright colors painted, traditional Sattriya performance, no text"
+},
+artifacts: [
+"Antique Muga silk textile museum Assam, old golden silk saree heritage, traditional weaving collection, no text",
+"Historical brass bell metal vessel museum Assam, antique Sarthebari hammered pot, folk metal art collection, no text",
+"Old Majuli mask museum Assam, bamboo clay deity mask heritage performance art, folk collection, no text",
+"Traditional Jamdani silk fragment museum Assam, antique supplementary weft weaving heritage, no text"
+]
+},
+
+"Punjab": {
+hero: "Phulkari embroidery Punjab, vibrant flower work on coarse khaddar cloth, orange red silk thread, geometric floral pattern, darning stitch, traditional bridal craft, no text",
+artForms: {
+"Phulkari Embroidery": "Phulkari embroidery Punjab, orange khaddar cloth covered in silk thread flowers, bright multicolor geometric motifs, darning stitch bridal shawl, no text",
+"Bagh Embroidery": "Bagh Phulkari Punjab, fully embroidered no visible background, dense geometric flower pattern in vivid silk thread, traditional bridal gift craft, no text",
+"Punjab Pottery": "Punjab blue pottery, terracotta pot with hand painted floral design, folk ceramic craft, traditional North India, no text",
+"Nakshi Embroidery": "Nakshi kantha embroidery Punjab Bengal, layered running stitch white thread pattern, folk textile heritage, no text",
+"Loom Weaving": "Punjab handloom weaving, durrie cotton carpet geometric pattern, bold bright stripes folk textile, traditional loom craft, no text"
+},
+artifacts: [
+"Antique Phulkari shawl museum Punjab, old bridal embroidery folk textile, heritage collection, no text",
+"Old Bagh embroidery museum Punjab, fully covered silk thread folk textile, heritage collection, no text",
+"Historical Punjab pottery museum, antique terracotta painted pot, folk heritage craft, no text",
+"Traditional Punjabi handloom durrie museum, antique woven cotton carpet folk heritage, no text"
+]
+},
+
+"Uttar Pradesh": {
+hero: "Chikankari embroidery Lucknow, white thread shadow work on fine muslin cloth, delicate floral pattern, traditional Indian embroidery craft, no text",
+artForms: {
+"Chikankari": "Chikankari embroidery Lucknow close up, white thread on white muslin fabric, 36 stitch types, delicate shadow work floral motif, Indian folk craft, no text",
+"Zardozi": "Zardozi gold thread embroidery Lucknow, metallic gold silver wire on silk velvet, Mughal floral pattern, sequins pearls beads, opulent Indian embroidery, no text",
+"Sanjhi Art": "Sanjhi art Mathura Vrindavan, intricate paper cut stencil, Krishna peacock lotus design, fine detailed paper cutout, sacred Indian temple art, no text",
+"Banarasi Silk Brocade": "Banarasi silk brocade saree Varanasi, gold zari woven motif, kalga bel floral pattern, pit loom weaving, opulent Indian textile, no text",
+"Gorakhpur Terracotta": "Gorakhpur terracotta horse Uttar Pradesh, decorated clay figurine, hand modeled and carved, folk pottery painted, village craft India, no text"
+},
+artifacts: [
+"Antique Chikankari garment museum Lucknow, old Nawabi era embroidered kurta, heritage craft collection, no text",
+"Historical Zardozi embroidery museum UP, Mughal era gold thread court garment, heritage collection, no text",
+"Old Banarasi silk brocade museum, antique kinkhab gold saree, heritage Varanasi textile collection, no text",
+"Ancient Gorakhpur terracotta horse museum, folk clay figurine heritage collection UP, no text"
+]
+}
+}

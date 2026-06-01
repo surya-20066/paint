@@ -145,7 +145,7 @@ grid-column: span 2;
 <aside
 class="hidden lg:flex w-72 flex-col bg-surface-container border-r border-outline-variant h-screen sticky top-0">
 <div class="p-8 cursor-pointer flex items-center gap-3" onclick="window.location.href='index.html'">
-<img src="pics/dp.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" />
+<img src="pics/logoo.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" />
 <span class="font-headline-md text-on-surface text-sm font-bold leading-tight">Artist<br>Dashboard</span>
 </div>
 <nav class="flex-1 px-4">
@@ -315,7 +315,7 @@ class="material-symbols-outlined text-green-700">shopping_bag</span>
 <div class="foot-top">
 <div class="foot-brand">
 <div class="flex items-center gap-3 mb-6">
-<img src="pics/dp.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+<img src="pics/logoo.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
 </div>
 <p>India's premier multi-art platform — celebrating the living traditions of every state through
 artisanal AI and human craft.</p>
@@ -455,12 +455,23 @@ class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-3
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', async () => {
-const user = JSON.parse(localStorage.getItem('currentUser'));
+let user = null;
+try {
+  user = JSON.parse(localStorage.getItem('currentUser'));
+} catch(e) {
+  console.error("Corrupted currentUser", e);
+}
 if (!user) {
 window.location.href = 'signin.html';
 return;
 }
-const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+let usersDb = {};
+try {
+  usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+  if (typeof usersDb !== 'object' || Array.isArray(usersDb)) usersDb = {};
+} catch(e) {
+  usersDb = {};
+}
 const userInDb = usersDb[user.email];
 if (!userInDb || !userInDb.isApproved) {
 window.location.href = 'signin.html?error=pending';
@@ -504,7 +515,10 @@ request.onerror = (event) => reject(event.target.error);
 };
 const saveVideo = (file) => {
 if (!db) return;
-const user = JSON.parse(localStorage.getItem('currentUser'));
+let user = null;
+try {
+  user = JSON.parse(localStorage.getItem('currentUser'));
+} catch(e) {}
 if (!user) return;
 const transaction = db.transaction([storeName], "readwrite");
 const store = transaction.objectStore(storeName);
@@ -571,7 +585,13 @@ return div;
 const loadRecentUploads = async () => {
 const grid = document.getElementById('recent-uploads-grid');
 if (!grid) return;
-const posts = JSON.parse(localStorage.getItem('artist_posts_' + user.email) || '[]');
+let posts = [];
+try {
+  posts = JSON.parse(localStorage.getItem('artist_posts_' + user.email) || '[]');
+  if (!Array.isArray(posts)) posts = [];
+} catch(e) {
+  posts = [];
+}
 let reels = [];
 if (db) {
 const transaction = db.transaction([storeName], "readonly");
@@ -606,7 +626,13 @@ alert('Reel uploaded successfully!');
 
 const approvalBanner = document.getElementById('approval-status-banner');
 if (approvalBanner) {
-let usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+let usersDb = {};
+try {
+  usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+  if (typeof usersDb !== 'object' || Array.isArray(usersDb)) usersDb = {};
+} catch(e) {
+  usersDb = {};
+}
 const userInDb = usersDb[user.email];
 if (userInDb) {
 const approvalIcon = document.getElementById('approval-banner-icon');
@@ -665,7 +691,11 @@ h.textContent = user.fullName;
 const profileKey = 'artist_profile_' + user.email;
 const storedProfile = localStorage.getItem(profileKey);
 if (storedProfile) {
-const profile = JSON.parse(storedProfile);
+let profile = null;
+try {
+  profile = JSON.parse(storedProfile);
+} catch(e) {}
+if (profile) {
 if (sidebarName && profile.displayName) sidebarName.textContent = profile.displayName.toUpperCase();
 if (sidebarRole && profile.specialization) {
 sidebarRole.textContent = profile.specialization.toUpperCase() + ' ARTIST';
@@ -676,6 +706,7 @@ if (mainImg && profile.photoUrl) mainImg.src = profile.photoUrl;
 headers.forEach(h => {
 h.textContent = profile.displayName;
 });
+}
 } else if (user.isNewUser) {
 if (sbImg) sbImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
 const mainImg = document.querySelector('aside img') || document.querySelector('.bg-surface-dim img');
@@ -719,9 +750,16 @@ localStorage.removeItem('currentUser');
 window.location.href = 'signin.html';
 }
 }
-const _cu = JSON.parse(localStorage.getItem('currentUser') || '{}');
+let _cu = {};
+try {
+  _cu = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  if (typeof _cu !== 'object' || Array.isArray(_cu)) _cu = {};
+} catch(e) {
+  _cu = {};
+}
 const nameEl = document.getElementById('sidebar-artist-name');
 if (nameEl) nameEl.textContent = _cu.fullName || _cu.email || 'Artist';
 </script>
+<script src="content-loader.js"></script>
 </body>
 </html>
