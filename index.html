@@ -647,19 +647,19 @@ id="main-nav">
 <img src="pics/logoo.png" alt="The Painted Muse Logo" class="h-12 md:h-16 w-auto object-contain" />
 </a>
 </div>
-<div class="hidden md:flex gap-10 font-sans text-[10px] font-bold uppercase tracking-[0.15em] items-center relative"
+<div class="hidden lg:flex gap-10 font-sans text-[10px] font-bold uppercase tracking-[0.15em] items-center relative"
 id="nav-links">
-<a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#"
+<a class="nav-item whitespace-nowrap text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="index.html#"
 data-section="hero">Home</a>
-<a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500"
+<a class="nav-item whitespace-nowrap text-stone-900 hover:text-[#B5451B] transition-colors duration-500"
 href="index.html#about-india" data-section="about-india">About</a>
-<a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500"
+<a class="nav-item whitespace-nowrap text-stone-900 hover:text-[#B5451B] transition-colors duration-500"
 href="index.html#journal" data-section="journal">Stories</a>
-<a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500"
+<a class="nav-item whitespace-nowrap text-stone-900 hover:text-[#B5451B] transition-colors duration-500"
 href="art-retreats.html" data-section="art-forms">Art Retreats</a>
-<a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="team.html"
+<a class="nav-item whitespace-nowrap text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="team.html"
 data-section="team">Our Team</a>
-<a class="nav-item text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="signin.html"
+<a class="nav-item whitespace-nowrap text-stone-900 hover:text-[#B5451B] transition-colors duration-500" href="signin.html"
 data-section="artisans">Be an Artist</a>
 <div id="nav-indicator"></div>
 </div>
@@ -668,43 +668,44 @@ data-section="artisans">Be an Artist</a>
 <span class="material-symbols-outlined text-xl md:text-2xl">search</span>
 </button>
 <button id="nav-artist-btn" onclick="window.location.href='signin.html'"
-class="hidden sm:block font-sans text-[10px] font-bold uppercase tracking-wider text-stone-900 px-6 py-2.5 border border-stone-900 hover:bg-stone-50 transition-colors">Artist
+class="hidden sm:block whitespace-nowrap font-sans text-[10px] font-bold uppercase tracking-wider text-stone-900 px-6 py-2.5 border border-stone-900 hover:bg-stone-50 transition-colors">Artist
 Login</button>
 <button onclick="window.location.href='dashboard.html'"
-class="hidden lg:flex font-sans text-[10px] font-bold uppercase tracking-wider bg-[#1A1208] text-white px-6 py-2.5 hover:bg-stone-800 transition-all shadow-lg items-center gap-2 group">
+class="hidden lg:flex whitespace-nowrap font-sans text-[10px] font-bold uppercase tracking-wider bg-[#1A1208] text-white px-6 py-2.5 hover:bg-stone-800 transition-all shadow-lg items-center gap-2 group">
 Book Artist
 <span
 class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </button>
 <button onclick="window.location.href='admin-dashboard.html'"
-class="hidden sm:block font-sans text-[10px] font-bold uppercase tracking-wider text-[#B5451B] px-6 py-2.5 border border-[#B5451B] hover:bg-[#B5451B]/5 transition-colors">Admin</button>
-<button id="mobile-menu-btn" class="md:hidden text-stone-900 p-2">
+class="hidden sm:block whitespace-nowrap font-sans text-[10px] font-bold uppercase tracking-wider text-[#B5451B] px-6 py-2.5 border border-[#B5451B] hover:bg-[#B5451B]/5 transition-colors">Admin</button>
+<button id="mobile-menu-btn" class="lg:hidden text-stone-900 p-2">
 <span class="material-symbols-outlined text-3xl">menu</span>
 </button>
 </div>
 </nav>
 <div id="mobile-menu"
-class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 md:hidden flex flex-col">
+class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 lg:hidden flex flex-col">
 <div class="flex justify-between items-center p-4 border-b border-stone-100">
 <img src="pics/logoo.png" alt="The Painted Muse Logo" class="h-10 w-auto object-contain" />
 <button id="close-menu-btn" class="text-stone-900 p-2">
 <span class="material-symbols-outlined text-3xl">close</span>
 </button>
 </div>
-<div class="flex flex-col p-12 gap-8 font-sans text-xl font-bold uppercase tracking-[0.2em]">
+<div class="flex flex-col p-12 gap-5 font-sans text-sm font-bold uppercase tracking-[0.15em]">
 <a class="mobile-nav-item" href="index.html#">Home</a>
 <a class="mobile-nav-item" href="index.html#about-india">About</a>
 <a class="mobile-nav-item" href="index.html#journal">Stories</a>
 <a class="mobile-nav-item" href="explore.html">Art Retreats</a>
 <a class="mobile-nav-item" href="team.html">Our Team</a>
 <a class="mobile-nav-item" href="signin.html">Be an Artist</a>
+<a class="mobile-nav-item text-[#B5451B]" href="admin-dashboard.html">Admin</a>
 </div>
-<div class="absolute bottom-12 left-12 right-12 flex flex-col gap-4">
+<div class="absolute bottom-8 left-12 right-12 flex flex-col gap-3">
 <button id="nav-artist-btn-mobile" onclick="window.location.href='signin.html'"
-class="w-full py-4 border border-stone-900 font-sans text-xs font-bold uppercase tracking-widest">Artist
+class="w-full py-3.5 border border-stone-900 font-sans text-xs font-bold uppercase tracking-widest">Artist
 Login</button>
 <button onclick="window.location.href='dashboard.html'"
-class="w-full py-4 bg-[#1A1208] text-white font-sans text-xs font-bold uppercase tracking-widest">Book
+class="w-full py-3.5 bg-[#1A1208] text-white font-sans text-xs font-bold uppercase tracking-widest">Book
 an Artist</button>
 </div>
 </div>
@@ -870,9 +871,9 @@ class="text-[#D4AF37] italic">Map</span></h2>
 <p class="font-sans text-lg text-stone-600 mt-4">Trace the lineage of art across the sub-continent.
 </p>
 </div>
-<div class="flex flex-col lg:flex-row gap-8 h-[600px] lg:h-[550px] max-w-5xl mx-auto">
+<div class="flex flex-col lg:flex-row gap-8 h-auto lg:h-[550px] max-w-5xl mx-auto">
 <div
-class="lg:w-1/2 h-full border border-stone-200 rounded-xl overflow-hidden relative bg-white shadow-lg group">
+class="lg:w-1/2 h-[450px] lg:h-full border border-stone-200 rounded-xl overflow-hidden relative bg-white shadow-lg group">
 <div id="map-loader"
 class="absolute inset-0 flex flex-col items-center justify-center bg-white z-30 transition-opacity duration-500">
 <div
@@ -917,9 +918,9 @@ href="heritage.html">
 </a>
 </div>
 <div id="state-info-container"
-class="lg:w-1/2 h-full border border-stone-200 bg-white rounded-xl overflow-hidden shadow-lg relative">
+class="lg:w-1/2 h-auto lg:h-full border border-stone-200 bg-white rounded-xl overflow-hidden shadow-lg relative">
 <div id="state-info-panel"
-class="w-full h-full p-8 flex flex-col justify-center items-center text-center transition-opacity duration-300">
+class="w-full h-auto min-h-[350px] lg:h-full p-8 py-12 lg:py-8 flex flex-col justify-center items-center text-center transition-opacity duration-300">
 <div
 class="w-24 h-24 rounded-full border-2 border-dashed border-[#D4AF37]/30 flex items-center justify-center mb-8 animate-[spin_10s_linear_infinite]">
 <span
@@ -2653,7 +2654,7 @@ const statusColors = {
 };
 const sc = statusColors[data.status] || statusColors["Documenting"];
 panel.innerHTML = `
-<div style="font-family: 'DM Sans', sans-serif; height: 100%; overflow-y: auto;">
+<div style="font-family: 'DM Sans', sans-serif;" class="h-auto lg:h-full lg:overflow-y-auto">
 <div style="padding: 20px 20px 0;">
 <p style="font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
 text-transform: uppercase; color: var(--primary, #B5451B); margin: 0 0 4px;">
@@ -3051,7 +3052,7 @@ activeState = null;
 const infoDiv = document.getElementById("state-info-panel");
 if (infoDiv) {
 infoDiv.innerHTML = `
-<div class="w-full h-full p-8 flex flex-col justify-center items-center text-center transition-opacity duration-300">
+<div class="w-full h-auto min-h-[350px] lg:h-full p-8 py-12 lg:py-8 flex flex-col justify-center items-center text-center transition-opacity duration-300">
 <div class="w-24 h-24 rounded-full border-2 border-dashed border-[#D4AF37]/30 flex items-center justify-center mb-8 animate-[spin_10s_linear_infinite]">
 <span class="material-symbols-outlined text-4xl text-[#D4AF37]/50 animate-pulse">touch_app</span>
 </div>
