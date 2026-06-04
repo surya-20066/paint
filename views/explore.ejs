@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Explore Art Retreats | The Painted Muse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:wght@400;500;700&display=swap"
+rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+rel="stylesheet" />
+<style>
+:root {
+--ink: #1A1208;
+--saffron: #D4AF37;
+--bg: #FDFBF7;
+--cream: #F5F0E8;
+}
+body {
+background-color: var(--bg);
+color: var(--ink);
+font-family: 'DM Sans', sans-serif;
+overflow-x: hidden;
+}
+.serif {
+font-family: 'Playfair Display', serif;
+}
+.reveal {
+opacity: 0;
+transform: translateY(20px);
+transition: all 0.8s ease-out;
+}
+.reveal.in {
+opacity: 1;
+transform: translateY(0);
+}
+.section-warm {
+background-color: #FDFBF7;
+}
+.section-cream {
+background-color: #F5F0E8;
+}
+
+footer {
+background: #FDFBF7;
+color: var(--ink);
+padding: 100px 0 40px;
+position: relative;
+}
+footer::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--saffron), transparent);
+}
+.foot-top {
+display: grid;
+grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+gap: 48px;
+margin-bottom: 60px;
+}
+.foot-brand p {
+color: rgba(26, 18, 8, 0.7);
+font-size: 14px;
+margin: 20px 0 24px;
+max-width: 320px;
+line-height: 1.6;
+}
+.socials {
+display: flex;
+gap: 12px;
+}
+.socials a {
+width: 40px;
+height: 40px;
+border: 1px solid rgba(26, 18, 8, 0.15);
+border-radius: 50%;
+display: grid;
+place-items: center;
+color: var(--ink);
+transition: all 0.3s ease;
+}
+.socials a:hover {
+background: var(--saffron);
+color: var(--ink);
+border-color: var(--saffron);
+transform: translateY(-3px);
+}
+.foot-col h5 {
+font-family: 'Playfair Display', serif;
+font-style: italic;
+font-size: 15px;
+margin-bottom: 24px;
+color: var(--saffron);
+font-weight: 700;
+letter-spacing: 0.05em;
+}
+.foot-col ul {
+list-style: none;
+padding: 0;
+}
+.foot-col li {
+margin-bottom: 12px;
+}
+.foot-col a {
+font-size: 14px;
+color: rgba(26, 18, 8, 0.75);
+transition: color 0.3s ease;
+text-decoration: none;
+}
+.foot-col a:hover {
+color: var(--ink);
+}
+.foot-bot {
+border-top: 1px solid rgba(26, 18, 8, 0.1);
+padding-top: 32px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: rgba(26, 18, 8, 0.5);
+font-size: 13px;
+flex-wrap: wrap;
+gap: 16px;
+}
+@media (max-width: 1024px) {
+.foot-top { grid-template-columns: repeat(3, 1fr); }
+.foot-brand { grid-column: span 3; margin-bottom: 20px; }
+}
+@media (max-width: 768px) {
+.foot-top { grid-template-columns: repeat(2, 1fr); }
+.foot-brand { grid-column: span 2; }
+}
+</style>
+</head>
+<body class="selection:bg-[#D4AF37]/30">
+<nav
+class="fixed top-0 w-full z-50 bg-[#FDFBF7] backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-2 border-b border-stone-200/30 shadow-sm -translate-y-full transition-all duration-500 opacity-0" id="main-nav">
+<a href="index.html" class="flex items-center gap-4">
+<img src="pics/logoo.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+</a>
+<div class="flex items-center gap-4 md:gap-8">
+<a href="team.html"
+class="hidden lg:block whitespace-nowrap font-sans text-[10px] font-bold uppercase tracking-widest text-stone-500 hover:text-[#B5451B] transition-colors mr-4">Our Team</a>
+<a href="index.html"
+class="hidden lg:block whitespace-nowrap font-sans text-[10px] font-bold uppercase tracking-widest text-stone-500 hover:text-[#B5451B] transition-colors mr-4">Back
+to Sanctuary</a>
+<a href="admin-dashboard.html"
+class="hidden lg:block whitespace-nowrap font-sans text-[10px] font-bold uppercase tracking-widest text-[#B5451B] hover:text-[#B5451B] transition-colors">Admin</a>
+<button id="mobile-menu-btn" class="lg:hidden text-stone-900 p-2">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</nav>
+<div id="mobile-menu"
+class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 lg:hidden">
+<div class="flex justify-between items-center p-6 border-b border-stone-100">
+<span class="text-[#1A1208] font-serif font-bold text-xl">Art Retreats</span>
+<button id="close-menu-btn" class="text-stone-900 p-2">
+<span class="material-symbols-outlined text-3xl">close</span>
+</button>
+</div>
+<div class="flex flex-col p-12 gap-5 font-sans text-sm font-bold uppercase tracking-[0.15em]">
+<a href="index.html">Back to Home</a>
+<a href="team.html">Our Team</a>
+<a href="admin-dashboard.html" class="text-[#B5451B]">Admin</a>
+</div>
+</div>
+<header class="pt-48 pb-24 section-cream relative overflow-hidden">
+<div class="absolute inset-0 z-0 pointer-events-none">
+<video autoplay muted loop playsinline class="w-full h-full object-cover opacity-20">
+<source src="explore-pics/bg.mp4" type="video/mp4">
+</video>
+<div class="absolute inset-0 bg-[#F5F0E8]/40"></div>
+</div>
+<div class="container mx-auto px-6 relative z-10 text-center">
+<div class="inline-block mb-6 reveal">
+<span class="font-sans text-[10px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold border-b border-[#D4AF37]/30 pb-2" data-cms="explore_subtitle">Buy Your Loved Art</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-serif text-[#1A1208] mb-8 reveal" style="transition-delay: 100ms;" data-cms="explore_title">
+Authentic Masterpieces, <span class="text-[#B5451B] italic">Direct to You</span></h1>
+<p class="text-xl text-stone-600 max-w-3xl mx-auto font-sans leading-relaxed reveal" style="transition-delay: 200ms;" data-cms="explore_desc">
+Find and purchase authentic Indian art directly from the artisans. Bring the timeless heritage of ancient India into your contemporary space.
+</p>
+</div>
+</header>
+<main class="py-16 section-warm">
+<!-- Search and Filter Bar -->
+<section class="container mx-auto px-6 mb-16 reveal">
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 flex flex-col md:flex-row gap-4 items-center justify-between">
+    <div class="w-full md:w-1/2 relative">
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">search</span>
+        <input type="text" id="searchInput" placeholder="Search by art form, motif, or story..." class="w-full pl-12 pr-4 py-3 bg-stone-50 border-none rounded-xl text-stone-700 focus:ring-2 focus:ring-[#D4AF37] font-sans">
+    </div>
+    <div class="w-full md:w-1/3 relative">
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">location_on</span>
+        <select id="stateFilter" class="w-full pl-12 pr-10 py-3 bg-stone-50 border-none rounded-xl text-stone-700 focus:ring-2 focus:ring-[#D4AF37] font-sans appearance-none">
+            <option value="all">All States</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Uttarakhand">Uttarakhand</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+        </select>
+        <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none">expand_more</span>
+    </div>
+</div>
+</section>
+
+<!-- Art Grid -->
+<section class="container mx-auto px-6 mb-32 reveal" id="artGrid">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10" id="art-cards-grid">
+
+    <!-- Tanjore Art -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Tamil Nadu" data-title="tanjore art">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/tanjore.jpeg" alt="Tanjore Art" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Tamil Nadu
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Tanjore Art</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Sacred gold-leaf paintings known for their dense composition, "Palagei Padam" technique, and rich embedded semi-precious stones.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹15,000</span>
+                </div>
+                <a href="payment.html?item=Tanjore%20Art&price=15000" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pattachitra -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Odisha" data-title="pattachitra epic scrolls">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/pattachitra.jpeg" alt="Pattachitra" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Odisha & WB
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Pattachitra</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Traditional cloth-based scroll painting depicting mythological narratives with floral borders and natural mineral pigments.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹8,500</span>
+                </div>
+                <a href="payment.html?item=Pattachitra%20Scroll&price=8500" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gond Art -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Madhya Pradesh" data-title="gond art tribal rhythms">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/gond.jpeg" alt="Gond Art" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Madhya Pradesh
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Gond Art</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Vibrant tribal art characterized by intricate dots and lines forming mythical stories and celebrating nature.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹6,200</span>
+                </div>
+                <a href="payment.html?item=Gond%20Art&price=6200" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kalamkari -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Andhra Pradesh" data-title="kalamkari sacred penmanship">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/kalamkari.jpeg" alt="Kalamkari" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Andhra Pradesh
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Kalamkari</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Ancient style of hand-painted or block-printed cotton textile using 23 labor-intensive steps and natural dyes.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹4,500</span>
+                </div>
+                <a href="payment.html?item=Kalamkari%20Textile&price=4500" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phulkari -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Punjab" data-title="phulkari silk gardens">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/phulkari.jpeg" alt="Phulkari" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Punjab
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Phulkari</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Flowery embroidery technique where women embroidered "Bagh" (gardens) of silk on hand-spun khaddar.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹7,800</span>
+                </div>
+                <a href="payment.html?item=Phulkari%20Embroidery&price=7800" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Madhubani -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Bihar" data-title="madhubani painting nature elements">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/madhubani.png" alt="Madhubani Art" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Bihar
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Madhubani</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Intricate folk art from Mithila, painted with natural dyes and pigments, showcasing deep geometric patterns.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹5,500</span>
+                </div>
+                <a href="payment.html?item=Madhubani%20Painting&price=5500" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Warli -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Maharashtra" data-title="warli tribal art dance">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/warli.png" alt="Warli Art" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Maharashtra
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Warli Art</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Ancient tribal art created by indigenous people of the Western Ghats, utilizing rhythmic stick figures and white pigment.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹3,200</span>
+                </div>
+                <a href="payment.html?item=Warli%20Art&price=3200" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chikankari -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Uttar Pradesh" data-title="chikankari embroidery lucknow">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/chikankari.png" alt="Chikankari" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Uttar Pradesh
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Chikankari</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Delicate white-on-white hand embroidery from Lucknow, featuring intricate shadow-work stitches on fine muslin fabric.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹4,200</span>
+                </div>
+                <a href="payment.html?item=Chikankari%20Embroidery&price=4200" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bidriware -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Karnataka" data-title="bidriware metal inlay silver">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/bidriware.png" alt="Bidriware" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Karnataka
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Bidriware</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Exquisite silver inlay work on blackened alloy metal from Bidar. Fine geometric and floral patterns on dark surfaces.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹9,800</span>
+                </div>
+                <a href="payment.html?item=Bidriware%20Metal%20Art&price=9800" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blue Pottery -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Rajasthan" data-title="blue pottery jaipur ceramic">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/blue_pottery.png" alt="Blue Pottery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Rajasthan
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Blue Pottery</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Vibrant cobalt blue and turquoise ceramics from Jaipur with hand-painted floral and geometric Persian-inspired patterns.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹3,800</span>
+                </div>
+                <a href="payment.html?item=Blue%20Pottery&price=3800" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dhokra Art -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Chhattisgarh" data-title="dhokra metal casting bronze tribal">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/dhokra.png" alt="Dhokra Art" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Chhattisgarh
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Dhokra Art</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Ancient lost-wax bronze casting technique creating rustic tribal figurines with intricate wire-work detailing.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹5,600</span>
+                </div>
+                <a href="payment.html?item=Dhokra%20Bronze%20Art&price=5600" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pichwai Painting -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Rajasthan" data-title="pichwai painting nathdwara krishna">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/pichwai.png" alt="Pichwai Painting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Rajasthan
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Pichwai Painting</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Intricate devotional paintings from Nathdwara depicting Lord Krishna with lotus flowers, cows, and peacocks in jewel tones.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹18,500</span>
+                </div>
+                <a href="payment.html?item=Pichwai%20Painting&price=18500" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aipan Art -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Uttarakhand" data-title="aipan folk art geometric ritual">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/aipan.png" alt="Aipan Art" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Uttarakhand
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Aipan Art</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Sacred ceremonial floor and wall art with geometric red-and-white ritualistic patterns from the Kumaon region.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹2,800</span>
+                </div>
+                <a href="payment.html?item=Aipan%20Art&price=2800" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rogan Art -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Gujarat" data-title="rogan art kutch fabric oil painting">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/rogan.png" alt="Rogan Art" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Gujarat
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Rogan Art</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Rare castor oil-based hand-painted fabric art from Kutch with symmetrical tree-of-life and floral motifs.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹12,000</span>
+                </div>
+                <a href="payment.html?item=Rogan%20Art&price=12000" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cheriyal Scroll -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Telangana" data-title="cheriyal scroll painting narrative">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/cheriyal.png" alt="Cheriyal Scroll" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Telangana
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Cheriyal Scroll</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Vivid narrative storytelling scrolls with bold red backgrounds depicting mythological tales in vibrant folk style.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹6,800</span>
+                </div>
+                <a href="payment.html?item=Cheriyal%20Scroll&price=6800" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kangra Painting -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Himachal Pradesh" data-title="kangra miniature painting pahari">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/kangra.png" alt="Kangra Painting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Himachal Pradesh
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Kangra Painting</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Delicate Pahari miniature watercolors depicting romantic scenes in lush green landscapes with soft pastel hues.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹22,000</span>
+                </div>
+                <a href="payment.html?item=Kangra%20Miniature%20Painting&price=22000" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toda Embroidery -->
+    <div class="art-card flex flex-col h-full bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden group hover:shadow-xl transition-all duration-500" data-state="Tamil Nadu" data-title="toda embroidery nilgiris tribal">
+        <div class="h-64 overflow-hidden relative">
+            <img src="explore-pics/toda.png" alt="Toda Embroidery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#1A1208] uppercase tracking-wider flex items-center gap-1 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+            </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 mb-3 text-stone-500 text-sm font-sans">
+                <span class="material-symbols-outlined text-[16px]">pin_drop</span> Tamil Nadu
+            </div>
+            <h3 class="font-serif text-3xl text-[#1A1208] mb-3">Toda Embroidery</h3>
+            <p class="text-stone-600 font-sans leading-relaxed text-sm mb-6 line-clamp-3">
+                Distinctive black and red geometric embroidery by Toda tribe women of Nilgiris on natural off-white cloth.
+            </p>
+            <div class="flex items-end justify-between mt-auto border-t border-stone-100 pt-6">
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-stone-400 mb-1">Price</span>
+                    <span class="font-serif text-2xl font-bold text-[#1A1208]">₹7,200</span>
+                </div>
+                <a href="payment.html?item=Toda%20Embroidery&price=7200" class="px-6 py-2.5 bg-[#1A1208] text-white rounded-lg font-sans font-medium hover:bg-[#B5451B] transition-colors flex items-center gap-2">
+                    Buy <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- No Results Message -->
+<div id="noResults" class="hidden text-center py-20 w-full col-span-full">
+    <span class="material-symbols-outlined text-6xl text-stone-300 mb-4">search_off</span>
+    <h3 class="text-2xl font-serif text-[#1A1208] mb-2">No art forms found</h3>
+    <p class="text-stone-500 font-sans">Try adjusting your search or filter to find what you're looking for.</p>
+</div>
+</section>
+</main>
+<footer id="footer">
+<div class="container mx-auto px-6">
+<div class="foot-top">
+<div class="foot-brand">
+<div class="flex items-center gap-3 mb-6">
+<img src="pics/logoo.png" alt="The Painted Muse Logo" class="h-20 w-62 object-contain" />
+</div>
+<p>India's premier multi-art platform — celebrating the living traditions of every state through
+artisanal AI and human craft.</p>
+<div class="socials">
+<a href="https://wa.me/911234567890" target="_blank" aria-label="WhatsApp"
+class="hover:text-[#25D366]"><i data-lucide="message-circle"></i></a>
+<a href="https://instagram.com/thepaintedmuse" target="_blank" aria-label="Instagram"
+class="hover:text-[#E1306C]"><i data-lucide="instagram"></i></a>
+<a href="https://youtube.com/thepaintedmuse" target="_blank" aria-label="Youtube"
+class="hover:text-[#FF0000]"><i data-lucide="youtube"></i></a>
+<a href="https://linkedin.com/company/thepaintedmuse" target="_blank" aria-label="LinkedIn"
+class="hover:text-[#0077B5]"><i data-lucide="linkedin"></i></a>
+</div>
+</div>
+<div class="foot-col">
+<h5>Related</h5>
+<ul>
+<li>
+<a href="heritage.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Heritage Guide
+</a>
+</li>
+<li>
+<a href="masterpieces.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Masterpieces
+</a>
+</li>
+<li>
+<a href="team.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Our Team
+</a>
+</li>
+<li>
+<a href="artists.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Artist Login
+</a>
+</li>
+</ul>
+</div>
+<div class="foot-col">
+<h5>Platform</h5>
+<ul>
+<li>
+<a href="index.html#journal"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Art Forms
+</a>
+</li>
+<li>
+<a href="index.html#living-map-section"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Interactive Map
+</a>
+</li>
+<li>
+<a href="artists.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Meet the Makers
+</a>
+</li>
+<li>
+<a href="index.html#journal"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+The Muse Journal
+</a>
+</li>
+</ul>
+</div>
+<div class="foot-col">
+<h5>Navigations</h5>
+<ul>
+<li>
+<a href="index.html#living-map-section"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Live Map
+</a>
+</li>
+<li>
+<a href="index.html#yreel-hub"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Reels
+</a>
+</li>
+<li>
+<a href="signin.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Explore Artists
+</a>
+</li>
+<li>
+<a href="index.html"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+Art Retreats
+</a>
+</li>
+</ul>
+</div>
+<div class="foot-col">
+<h5>Contact Us</h5>
+<ul>
+<li>
+<a href="mailto:painterdmuse_2k26@gmail.com"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
+painterdmuse_2k26@gmail.com
+</a>
+</li>
+<li>
+<a href="tel:+917798345690"
+class="flex items-center gap-2 hover:text-[#B5451B] transition-colors duration-300">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B5451B] inline-block"></span>
++91 7798345690
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="foot-bot justify-center text-center">
+<div>© 2025 The Painted Muse · Made with ❤️ for Indian Art</div>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const closeMenuBtn = document.getElementById('close-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+mobileMenuBtn.addEventListener('click', () => {
+mobileMenu.classList.remove('translate-x-full');
+});
+closeMenuBtn.addEventListener('click', () => {
+mobileMenu.classList.add('translate-x-full');
+});
+const revealObserver = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('in');
+revealObserver.unobserve(entry.target);
+}
+});
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach((el, index) => {
+if (!el.style.transitionDelay) {
+el.style.transitionDelay = `${(index % 3) * 100}ms`;
+}
+revealObserver.observe(el);
+});
+const nav = document.getElementById('main-nav');
+function handleScroll() {
+if (window.scrollY > 5) {
+nav.classList.remove('-translate-y-full', 'opacity-0');
+nav.classList.add('translate-y-0', 'opacity-100');
+} else {
+nav.classList.add('-translate-y-full', 'opacity-0');
+nav.classList.remove('translate-y-0', 'opacity-100');
+}
+}
+window.addEventListener('scroll', handleScroll);
+});
+</script>
+
+<script>
+// Storefront Filtering logic
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const stateFilter = document.getElementById('stateFilter');
+    const artCards = document.querySelectorAll('.art-card');
+    const noResults = document.getElementById('noResults');
+
+    if (searchInput && stateFilter) {
+        function filterCards() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedState = stateFilter.value;
+            let visibleCount = 0;
+
+            artCards.forEach(card => {
+                const cardState = card.getAttribute('data-state') || '';
+                const cardTitle = card.getAttribute('data-title') || '';
+                
+                const matchesSearch = cardTitle.includes(searchTerm);
+                const matchesState = selectedState === 'all' || cardState.includes(selectedState);
+
+                if (matchesSearch && matchesState) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        searchInput.addEventListener('input', filterCards);
+        stateFilter.addEventListener('change', filterCards);
+    }
+});
+</script>
+<script src="content-loader.js"></script>
+</body>
+</html>

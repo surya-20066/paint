@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Settings | The Painted Muse Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="components/Navbar.js" defer></script>
+<script src="components/Sidebar.js" defer></script>
+<script src="components/Footer.js" defer></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Outfit:wght@400;500;700&amp;display=swap"
+rel="stylesheet" />
+<link
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+rel="stylesheet" />
+<script>
+(function checkArtistAuth() {
+if (localStorage.getItem('artistLoggedIn') !== 'true') {
+window.location.href = '/?error=auth';
+}
+})();
+tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-background": "#241915", outline: "#8b7169", "outline-variant": "#dfc0b6", "on-error": "#ffffff", "surface-bright": "#fff8f6", surface: "#fff8f6", "surface-container-low": "#fff1ed", primary: "#942e02", background: "#fff8f6", "on-surface": "#241915", "surface-container": "#ffe9e3", "on-primary": "#ffffff", secondary: "#795900", "primary-container": "#b5451b", "surface-dim": "#ebd5cf", "surface-variant": "#f4ded7", "on-primary-container": "#ffe4dc", error: "#ba1a1a", "surface-container-highest": "#f4ded7", "secondary-container": "#ffc641", "on-surface-variant": "#58423b", "surface-container-high": "#fae3dd", "surface-container-lowest": "#ffffff", "secondary-fixed": "#ffdfa0", "primary-fixed": "#ffdbd0" }, borderRadius: { DEFAULT: "12px", lg: "16px", xl: "20px", full: "9999px" }, fontFamily: { "label-sm": ["Outfit"], "headline-lg": ["Cormorant Garamond"], "headline-md": ["Cormorant Garamond"], "body-lg": ["Outfit"], "body-md": ["Outfit"] } } } }
+</script>
+<style>
+body {
+background: #fff8f6;
+color: #241915;
+font-family: 'Outfit', sans-serif;
+height: 100vh;
+overflow: hidden
+}
+.material-symbols-outlined {
+font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+}
+.paper-grain {
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+opacity: .03;
+pointer-events: none
+}
+/* Smooth Page Transition */
+@keyframes pageFadeIn {
+from { opacity: 0; transform: translateY(12px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+main > .max-w-5xl {
+animation: pageFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.tab-btn {
+transition: all .3s ease
+}
+.tab-btn.active {
+background: #942e02;
+color: #fff;
+box-shadow: 0 4px 12px rgba(148, 46, 2, .25)
+}
+.section-panel {
+display: none;
+animation: fadeIn .4s ease
+}
+.section-panel.active {
+display: block
+}
+@keyframes fadeIn {
+from {
+opacity: 0;
+transform: translateY(10px)
+}
+to {
+opacity: 1;
+transform: translateY(0)
+}
+}
+
+footer {
+background: #FDFBF7;
+color: var(--on-surface);
+padding: 100px 0 40px;
+position: relative;
+width: 100%;
+}
+footer::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+.foot-top {
+display: grid;
+grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+gap: 48px;
+margin-bottom: 60px;
+}
+.foot-brand p {
+color: rgba(26, 18, 8, 0.7);
+font-size: 14px;
+margin: 20px 0 24px;
+max-width: 320px;
+line-height: 1.6;
+}
+.socials {
+display: flex;
+gap: 12px;
+}
+.socials a {
+width: 40px;
+height: 40px;
+border: 1px solid rgba(26, 18, 8, 0.15);
+border-radius: 50%;
+display: grid;
+place-items: center;
+color: var(--on-surface);
+transition: all 0.3s ease;
+}
+.socials a:hover {
+background: var(--primary);
+color: white;
+border-color: var(--primary);
+transform: translateY(-3px);
+}
+.foot-col h5 {
+font-family: 'Cormorant Garamond', serif;
+font-style: italic;
+font-size: 15px;
+margin-bottom: 24px;
+color: var(--primary);
+font-weight: 700;
+letter-spacing: 0.05em;
+}
+.foot-col ul {
+list-style: none;
+padding: 0;
+}
+.foot-col li {
+margin-bottom: 12px;
+}
+.foot-col a {
+font-size: 14px;
+color: rgba(26, 18, 8, 0.75);
+transition: color 0.3s ease;
+text-decoration: none;
+}
+.foot-col a:hover {
+color: var(--primary);
+}
+.foot-bot {
+border-top: 1px solid rgba(26, 18, 8, 0.1);
+padding-top: 32px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: rgba(26, 18, 8, 0.5);
+font-size: 13px;
+flex-wrap: wrap;
+gap: 16px;
+}
+@media (max-width: 1024px) {
+.foot-top {
+grid-template-columns: repeat(3, 1fr);
+}
+.foot-brand {
+grid-column: span 3;
+margin-bottom: 20px;
+}
+}
+@media (max-width: 768px) {
+.foot-top {
+grid-template-columns: repeat(2, 1fr);
+}
+.foot-brand {
+grid-column: span 2;
+}
+}
+</style>
+</head>
+<body class="bg-surface">
+<div class="fixed inset-0 paper-grain z-0"></div>
+<div class="relative flex h-screen w-full flex-row overflow-hidden z-10">
+<dashboard-sidebar type="artist"></dashboard-sidebar>
+<main class="flex-1 flex flex-col min-w-0 bg-surface-bright h-screen overflow-y-auto">
+<div class="lg:hidden flex items-center bg-surface p-4 border-b border-outline-variant justify-between"><span
+class="material-symbols-outlined text-on-surface cursor-pointer mobile-menu-btn-toggle">menu</span>
+<h2 class="text-on-surface font-headline-md text-xl font-bold flex-1 text-center">Settings</h2>
+<div class="size-10"></div>
+</div>
+<div class="max-w-4xl mx-auto w-full px-6 md:px-10 py-12">
+<header class="mb-10">
+<h1 class="font-headline-lg text-on-background text-4xl mb-2">Settings</h1>
+<p class="font-body-lg text-on-surface-variant">Manage your artist profile, sales & account.</p>
+</header>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+<button onclick="showTab('profile')" id="btn-profile"
+class="tab-btn active flex items-center gap-4 p-6 rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:shadow-lg">
+<span class="material-symbols-outlined text-3xl">person</span>
+<div class="text-left">
+<h3 class="font-headline-md text-lg">Profile</h3>
+<p class="text-xs opacity-70">Edit your details</p>
+</div>
+</button>
+<button onclick="showTab('sales')" id="btn-sales"
+class="tab-btn flex items-center gap-4 p-6 rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:shadow-lg">
+<span class="material-symbols-outlined text-3xl">payments</span>
+<div class="text-left">
+<h3 class="font-headline-md text-lg">Sales</h3>
+<p class="text-xs opacity-70">Earnings & payouts</p>
+</div>
+</button>
+<button onclick="showTab('logout')" id="btn-logout"
+class="tab-btn flex items-center gap-4 p-6 rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:shadow-lg">
+<span class="material-symbols-outlined text-3xl">logout</span>
+<div class="text-left">
+<h3 class="font-headline-md text-lg">Logout</h3>
+<p class="text-xs opacity-70">Sign out safely</p>
+</div>
+</button>
+</div>
+<div id="panel-profile" class="section-panel active">
+<div class="bg-surface-container-low border border-outline-variant p-8 rounded-xl">
+<div class="flex flex-col sm:flex-row items-center gap-8 mb-10 pb-8 border-b border-outline-variant">
+<div class="relative group cursor-pointer" onclick="document.getElementById('inp-file').click()">
+<div class="size-32 bg-surface-dim overflow-hidden border-2 border-primary rounded-2xl">
+<img id="profile-img" class="w-full h-full object-cover"
+src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T" />
+</div>
+<div
+class="absolute inset-0 bg-black/40 rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-3xl">photo_camera</span>
+</div>
+<input type="file" id="inp-file" accept="image/*" class="hidden" onchange="updateProfilePic(event)" />
+</div>
+<div class="text-center sm:text-left">
+<h3 id="profile-header-name" class="font-headline-md text-2xl text-on-surface mb-1">Amrita Raghavan</h3>
+<p id="profile-header-role" class="font-label-sm text-primary uppercase tracking-widest mb-2">Mithila
+(Madhubani) • Verified</p>
+<p class="text-sm text-on-surface-variant">Member since January 2023</p>
+<button onclick="document.getElementById('inp-file').click()"
+class="mt-3 text-sm text-primary font-bold uppercase tracking-widest hover:underline">Change
+Photo</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+<div class="flex flex-col gap-1"><label
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Full
+Name</label><input id="inp-full-name"
+class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-2 font-body-md"
+value="Amrita Raghavan" type="text" /></div>
+<div class="flex flex-col gap-1"><label
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Display
+Name</label><input id="inp-display-name"
+class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-2 font-body-md"
+value="Amrita R." type="text" /></div>
+<div class="flex flex-col gap-1"><label
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Email
+Address</label><input id="inp-email"
+class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-2 font-body-md"
+value="amrita@paintedmuse.com" type="email" /></div>
+<div class="flex flex-col gap-1"><label
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Phone
+Number</label><input id="inp-phone"
+class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-2 font-body-md"
+value="+91 98765 43210" type="tel" /></div>
+<div class="flex flex-col gap-1"><label
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Art
+Specialization</label><select id="inp-specialization"
+class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-2 font-body-md appearance-none">
+<option selected value="Mithila (Madhubani)">Mithila (Madhubani)</option>
+<option value="Tanjore Painting">Tanjore Painting</option>
+<option value="Warli Art">Warli Art</option>
+<option value="Pattachitra">Pattachitra</option>
+</select></div>
+<div class="flex flex-col gap-1"><label
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">City,
+State</label><input id="inp-city-state"
+class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-2 font-body-md"
+value="Madhubani, Bihar" type="text" /></div>
+</div>
+<div class="flex flex-col gap-1 mb-8"><label
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Artist
+Bio</label><textarea id="inp-bio"
+class="bg-transparent border border-outline-variant text-on-surface focus:border-primary focus:ring-0 p-4 font-body-md resize-none rounded-lg"
+rows="3">Award-winning Madhubani artist with 15+ years of experience bridging traditional Mithila storytelling with contemporary themes.</textarea>
+</div>
+<div class="hidden">
+<h3 class="font-label-sm text-on-surface uppercase tracking-widest mb-4 flex items-center gap-2"><span
+class="material-symbols-outlined text-primary text-lg">link</span>Profile Links</h3>
+<div class="flex flex-col gap-4 mb-8 pb-8 border-b border-outline-variant">
+<div id="links-container" class="flex flex-col gap-2">
+</div>
+<div class="flex flex-col sm:flex-row gap-4 mt-2">
+<div class="flex-1 flex flex-col gap-1">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Link
+Title</label>
+<input id="new-link-title"
+class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-2 font-body-md"
+placeholder="e.g. Portfolio, Instagram, Facebook" type="text" />
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">URL</label>
+<input id="new-link-url"
+class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-2 font-body-md"
+placeholder="https://example.com" type="url" />
+</div>
+<button onclick="addUrl()"
+class="sm:self-end h-10 px-6 bg-surface-container-highest text-on-surface font-body-md font-bold uppercase tracking-widest hover:bg-surface-container-high transition-all rounded-lg flex items-center gap-1"><span
+class="material-symbols-outlined text-lg">add</span>Add</button>
+</div>
+</div>
+</div>
+<div class="flex justify-end gap-4 items-center">
+<p id="save-feedback" class="text-green-700 font-bold text-sm opacity-0 transition-opacity">Saved
+successfully!</p>
+<button onclick="saveProfile()"
+class="h-12 px-10 bg-primary text-on-primary font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg rounded-lg">Save
+Profile</button>
+</div>
+</div>
+</div>
+<div id="panel-sales" class="section-panel">
+<div class="bg-surface-container-low border border-outline-variant p-8 rounded-xl">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 pb-8 border-b border-outline-variant">
+<div class="bg-surface-container-lowest p-5 border border-outline-variant text-center rounded-xl">
+<p class="font-headline-md text-3xl text-primary mb-1">₹2.4L</p>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Total Earnings
+</p>
+</div>
+<div class="bg-surface-container-lowest p-5 border border-outline-variant text-center rounded-xl">
+<p class="font-headline-md text-3xl text-on-surface mb-1">34</p>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Artworks Sold</p>
+</div>
+<div class="bg-surface-container-lowest p-5 border border-outline-variant text-center rounded-xl">
+<p class="font-headline-md text-3xl text-on-surface mb-1">8</p>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Pending Orders
+</p>
+</div>
+<div class="bg-surface-container-lowest p-5 border border-outline-variant text-center rounded-xl">
+<p class="font-headline-md text-3xl text-on-surface mb-1">₹45K</p>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">This Month</p>
+</div>
+</div>
+<h3 class="font-label-sm text-on-surface uppercase tracking-widest mb-4 flex items-center gap-2"><span
+class="material-symbols-outlined text-primary text-lg">account_balance</span>Bank / Payout Details</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="flex flex-col gap-1"><label
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Bank
+Name</label><input
+class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-2 font-body-md"
+value="State Bank of India" type="text" /></div>
+<div class="flex flex-col gap-1"><label
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Account
+Number</label><input
+class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-2 font-body-md tracking-widest"
+value="•••• •••• •••• 7890" type="text" /></div>
+<div class="flex flex-col gap-1"><label
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">IFSC
+Code</label><input
+class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-2 font-body-md"
+value="SBIN0001234" type="text" /></div>
+<div class="flex flex-col gap-1"><label
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">UPI
+ID</label><input
+class="bg-transparent border-b border-outline text-on-surface focus:border-primary focus:ring-0 px-0 py-2 font-body-md"
+value="amrita@upi" type="text" /></div>
+</div>
+<div class="flex justify-end"><button
+class="h-12 px-10 bg-primary text-on-primary font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg rounded-lg">Update
+Payout Info</button></div>
+</div>
+</div>
+<div id="panel-logout" class="section-panel">
+<div
+class="bg-surface-container-low border border-outline-variant p-10 rounded-xl text-center max-w-md mx-auto">
+<span class="material-symbols-outlined text-error text-6xl mb-4">logout</span>
+<h2 class="font-headline-md text-2xl text-on-surface mb-3">Sign Out?</h2>
+<p class="font-body-md text-on-surface-variant mb-8">You will be redirected to the homepage. Your data is
+safely saved.</p>
+<div class="flex flex-col gap-3">
+<button onclick="logout()"
+class="w-full h-14 bg-error text-on-error font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all rounded-lg flex items-center justify-center gap-2"><span
+class="material-symbols-outlined">logout</span>Logout</button>
+<button onclick="showTab('profile')"
+class="w-full h-14 border border-outline-variant text-on-surface font-body-md font-bold uppercase tracking-widest hover:bg-surface-container-high transition-all rounded-lg">Cancel</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+function showTab(tab) {
+document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.style.background = ''; b.style.color = '' });
+document.getElementById('panel-' + tab).classList.add('active');
+document.getElementById('btn-' + tab).classList.add('active');
+}
+let profileLinks = [];
+function loadLinks() {
+const user = JSON.parse(localStorage.getItem('currentUser'));
+if (!user) return;
+const stored = localStorage.getItem('artist_profile_links_' + user.email);
+if (stored) {
+profileLinks = JSON.parse(stored);
+} else {
+profileLinks = [
+{ title: 'Personal Website', url: 'https://amritaart.com' },
+{ title: 'Instagram', url: 'https://instagram.com/amrita_madhubani' }
+];
+localStorage.setItem('artist_profile_links_' + user.email, JSON.stringify(profileLinks));
+}
+renderLinks();
+}
+function renderLinks() {
+const container = document.getElementById('links-container');
+if (!container) return;
+container.innerHTML = '';
+if (profileLinks.length === 0) {
+container.innerHTML = `<p class="text-sm text-on-surface-variant italic py-2">No custom links added yet.</p>`;
+return;
+}
+profileLinks.forEach((link, idx) => {
+const row = document.createElement('div');
+row.className = 'flex items-center justify-between bg-surface-container-lowest border border-outline-variant p-3 rounded-lg gap-4';
+row.innerHTML = `
+<div class="flex-1 min-w-0">
+<p class="font-bold text-sm text-on-surface truncate">${link.title}</p>
+<a href="${link.url}" target="_blank" class="text-xs text-primary truncate block hover:underline">${link.url}</a>
+</div>
+<button onclick="deleteLink(${idx})" class="text-error hover:bg-surface-container p-2 rounded-full flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+`;
+container.appendChild(row);
+});
+}
+function addUrl() {
+const titleInp = document.getElementById('new-link-title');
+const urlInp = document.getElementById('new-link-url');
+if (!titleInp || !urlInp) return;
+const title = titleInp.value.trim();
+const url = urlInp.value.trim();
+if (!title || !url) {
+alert('Please enter both a title and a URL.');
+return;
+}
+try {
+new URL(url.startsWith('http') ? url : 'https://' + url);
+} catch (e) {
+alert('Please enter a valid URL.');
+return;
+}
+const finalUrl = url.startsWith('http') ? url : 'https://' + url;
+profileLinks.push({ title, url: finalUrl });
+titleInp.value = '';
+urlInp.value = '';
+renderLinks();
+}
+function deleteLink(idx) {
+profileLinks.splice(idx, 1);
+renderLinks();
+}
+let profileData = {
+fullName: "Amrita Raghavan",
+displayName: "Amrita R.",
+email: "amrita@paintedmuse.com",
+phone: "+91 98765 43210",
+specialization: "Mithila (Madhubani)",
+cityState: "Madhubani, Bihar",
+bio: "Award-winning Madhubani artist with 15+ years of experience bridging traditional Mithila storytelling with contemporary themes.",
+photoUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T"
+};
+function loadProfile() {
+const user = JSON.parse(localStorage.getItem('currentUser'));
+if (!user) return;
+const profileKey = 'artist_profile_' + user.email;
+const stored = localStorage.getItem(profileKey);
+if (stored) {
+profileData = JSON.parse(stored);
+} else {
+profileData = {
+fullName: user.fullName || "Amrita Raghavan",
+displayName: user.fullName ? user.fullName.split(' ')[0] : "Amrita R.",
+email: user.email || "amrita@paintedmuse.com",
+phone: "+91 98765 43210",
+specialization: user.spec || "Mithila (Madhubani)",
+cityState: "Madhubani, Bihar",
+bio: "Award-winning traditional artist with years of experience.",
+photoUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T"
+};
+localStorage.setItem(profileKey, JSON.stringify(profileData));
+}
+document.getElementById('inp-full-name').value = profileData.fullName;
+document.getElementById('inp-display-name').value = profileData.displayName;
+document.getElementById('inp-email').value = profileData.email;
+document.getElementById('inp-phone').value = profileData.phone;
+document.getElementById('inp-specialization').value = profileData.specialization;
+document.getElementById('inp-city-state').value = profileData.cityState;
+document.getElementById('inp-bio').value = profileData.bio;
+document.getElementById('profile-header-name').textContent = profileData.fullName;
+document.getElementById('profile-header-role').textContent = profileData.specialization + " • Verified";
+document.getElementById('profile-img').src = profileData.photoUrl;
+}
+function updateProfilePic(event) {
+const file = event.target.files[0];
+if (!file) return;
+const reader = new FileReader();
+reader.onload = function (e) {
+const base64Url = e.target.result;
+document.getElementById('profile-img').src = base64Url;
+profileData.photoUrl = base64Url;
+
+const user = JSON.parse(localStorage.getItem('currentUser'));
+if (user) {
+const profileKey = 'artist_profile_' + user.email;
+localStorage.setItem(profileKey, JSON.stringify(profileData));
+
+const sbImg = document.getElementById('sidebar-img');
+if (sbImg) sbImg.src = base64Url;
+}
+};
+reader.readAsDataURL(file);
+}
+function saveProfile() {
+const user = JSON.parse(localStorage.getItem('currentUser'));
+if (!user) return;
+const profileKey = 'artist_profile_' + user.email;
+localStorage.setItem('artist_profile_links_' + user.email, JSON.stringify(profileLinks));
+profileData.fullName = document.getElementById('inp-full-name').value;
+profileData.displayName = document.getElementById('inp-display-name').value;
+profileData.email = document.getElementById('inp-email').value;
+profileData.phone = document.getElementById('inp-phone').value;
+profileData.specialization = document.getElementById('inp-specialization').value;
+profileData.cityState = document.getElementById('inp-city-state').value;
+profileData.bio = document.getElementById('inp-bio').value;
+localStorage.setItem(profileKey, JSON.stringify(profileData));
+
+user.fullName = profileData.fullName;
+user.spec = profileData.specialization;
+localStorage.setItem('currentUser', JSON.stringify(user));
+
+let users = JSON.parse(localStorage.getItem('users') || '{}');
+if (users[user.email]) {
+users[user.email].fullName = profileData.fullName;
+users[user.email].spec = profileData.specialization;
+localStorage.setItem('users', JSON.stringify(users));
+}
+
+let adminArtists = JSON.parse(localStorage.getItem('admin_artists') || '[]');
+const idx = adminArtists.findIndex(a => a.email === user.email);
+if (idx !== -1) {
+adminArtists[idx].name = profileData.fullName;
+adminArtists[idx].spec = profileData.specialization;
+adminArtists[idx].state = profileData.cityState.split(',').pop().trim();
+localStorage.setItem('admin_artists', JSON.stringify(adminArtists));
+}
+document.getElementById('profile-header-name').textContent = profileData.fullName;
+document.getElementById('profile-header-role').textContent = profileData.specialization + " • Verified";
+const feedback = document.getElementById('save-feedback');
+feedback.classList.remove('opacity-0');
+feedback.classList.add('opacity-100');
+setTimeout(() => {
+feedback.classList.remove('opacity-100');
+feedback.classList.add('opacity-0');
+}, 3000);
+}
+document.addEventListener('DOMContentLoaded', () => {
+loadLinks();
+loadProfile();
+});
+</script>
+
+<script>
+function logout() {
+localStorage.removeItem('artistLoggedIn');
+localStorage.removeItem('artistEmail');
+localStorage.removeItem('currentUser');
+window.location.href = '/';
+}
+document.addEventListener('DOMContentLoaded', () => {
+const user = JSON.parse(localStorage.getItem('currentUser'));
+if (!user) {
+window.location.href = '/';
+return;
+}
+const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+const userInDb = usersDb[user.email];
+if (!userInDb || !userInDb.isApproved) {
+window.location.href = '/?error=pending';
+return;
+}
+
+const sidebarName = document.getElementById('sidebar-name');
+if (sidebarName) sidebarName.textContent = user.fullName.toUpperCase();
+const sidebarRole = document.getElementById('sidebar-role');
+if (sidebarRole && user.spec) {
+sidebarRole.textContent = user.spec.toUpperCase() + ' ARTIST';
+}
+const profileKey = 'artist_profile_' + user.email;
+const storedProfile = localStorage.getItem(profileKey);
+if (storedProfile) {
+const profile = JSON.parse(storedProfile);
+const sbImg = document.getElementById('sidebar-img');
+if (sbImg && profile.photoUrl) sbImg.src = profile.photoUrl;
+if (sidebarName && profile.displayName) sidebarName.textContent = profile.displayName.toUpperCase();
+if (sidebarRole && profile.specialization) sidebarRole.textContent = profile.specialization.toUpperCase() + ' ARTIST';
+} else if (user.isNewUser) {
+const sbImg = document.getElementById('sidebar-img');
+if (sbImg) sbImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
+}
+});
+</script>
+<script>
+function logoutArtist() {
+if (confirm('Sign out of your studio?')) {
+localStorage.removeItem('artistLoggedIn');
+localStorage.removeItem('artistEmail');
+localStorage.removeItem('currentUser');
+window.location.href = '/';
+}
+}
+const _cu = JSON.parse(localStorage.getItem('currentUser') || '{}');
+const nameEl = document.getElementById('sidebar-artist-name');
+if (nameEl) nameEl.textContent = _cu.fullName || _cu.email || 'Artist';
+</script>
+<script src="content-loader.js"></script>
+</body>
+</html>

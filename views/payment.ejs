@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Secure Checkout | PaymentGate</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="components/Navbar.js" defer></script>
+<script src="components/Footer.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&amp;family=Outfit:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+<link
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+rel="stylesheet" />
+<script id="tailwind-config">
+tailwind.config = {
+darkMode: "class",
+theme: {
+extend: {
+"colors": {
+"primary": "#4F46E5", 
+"primary-dark": "#312E81",
+"on-primary": "#ffffff",
+"secondary": "#1E1B4B", 
+"tertiary": "#D97706", 
+"background": "#F8FAFC",
+"surface": "#FFFFFF",
+"surface-container": "#EEF2FF",
+"on-surface": "#1E293B",
+"on-surface-variant": "#64748B",
+"outline": "#E2E8F0",
+"outline-variant": "#CBD5E1"
+},
+"borderRadius": {
+"DEFAULT": "0.25rem",
+"lg": "0.5rem",
+"xl": "0.75rem",
+"full": "9999px"
+},
+"spacing": {
+"container-max": "1200px",
+"md": "16px",
+"lg": "24px",
+"xs": "4px",
+"xl": "32px",
+"sm": "8px",
+"gutter": "24px",
+"xxl": "48px",
+"base": "4px"
+},
+"fontFamily": {
+"label-md": ["Inter"],
+"headline-lg-mobile": ["Inter"],
+"body-lg": ["Inter"],
+"headline-sm": ["Inter"],
+"display-lg": ["Inter"],
+"headline-md": ["Inter"],
+"body-sm": ["Inter"],
+"body-md": ["Inter"],
+"label-sm": ["Inter"]
+},
+"fontSize": {
+"label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+"headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+"body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+"headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+"display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+"headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+"body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+"body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+"label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }]
+}
+},
+},
+}
+</script>
+<style>
+body {
+background-color: #F8FAFC;
+min-height: 100dvh;
+}
+.premium-card {
+background: #FFFFFF;
+border: 1px solid #E2E8F0;
+box-shadow: 0 4px 25px -5px rgba(79, 70, 229, 0.08);
+}
+.input-focus:focus {
+box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+border-color: #4F46E5;
+}
+.shiny-gradient-btn {
+background: linear-gradient(135deg, #312E81 0%, #4F46E5 50%, #818CF8 100%);
+position: relative;
+overflow: hidden;
+}
+.shimmer::after {
+content: "";
+position: absolute;
+top: -50%;
+left: -50%;
+width: 200%;
+height: 200%;
+background: linear-gradient(to bottom right,
+rgba(255, 255, 255, 0) 0%,
+rgba(255, 255, 255, 0) 40%,
+rgba(255, 255, 255, 0.4) 50%,
+rgba(255, 255, 255, 0) 60%,
+rgba(255, 255, 255, 0) 100%);
+transform: rotate(45deg);
+animation: shimmer 3s infinite;
+}
+@keyframes shimmer {
+0% {
+transform: translateX(-100%) rotate(45deg);
+}
+100% {
+transform: translateX(100%) rotate(45deg);
+}
+}
+.gold-frame {
+border: 4px solid #D97706;
+box-shadow: 0 0 15px rgba(217, 119, 6, 0.2);
+}
+.upi-id-box {
+background: #F1F5F9;
+color: #1E293B;
+font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.sticky-summary {
+position: sticky;
+top: 88px;
+z-index: 30;
+}
+
+/* FOOTER CSS INJECTION */
+footer {
+background: #FDFBF7;
+color: #1A1208;
+padding: 100px 0 40px;
+position: relative;
+font-family: 'Outfit', sans-serif;
+}
+footer::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, #B5451B, transparent);
+}
+.foot-top {
+display: grid;
+grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+gap: 48px;
+margin-bottom: 60px;
+}
+.foot-brand p {
+color: rgba(26, 18, 8, 0.7);
+font-size: 14px;
+margin: 20px 0 24px;
+max-width: 320px;
+line-height: 1.6;
+}
+.socials {
+display: flex;
+gap: 12px;
+}
+.socials a {
+width: 40px;
+height: 40px;
+border: 1px solid rgba(26, 18, 8, 0.15);
+border-radius: 50%;
+display: grid;
+place-items: center;
+color: #1A1208;
+transition: all 0.3s ease;
+}
+.socials a:hover {
+background: #B5451B;
+color: white;
+border-color: #B5451B;
+transform: translateY(-3px);
+}
+.foot-col h5 {
+font-family: 'Cormorant Garamond', serif;
+font-style: italic;
+font-size: 15px;
+margin-bottom: 24px;
+color: #B5451B;
+font-weight: 700;
+letter-spacing: 0.05em;
+}
+.foot-col ul {
+list-style: none;
+padding: 0;
+}
+.foot-col li {
+margin-bottom: 12px;
+}
+.foot-col a {
+font-size: 14px;
+color: rgba(26, 18, 8, 0.75);
+transition: color 0.3s ease;
+text-decoration: none;
+}
+.foot-col a:hover {
+color: #B5451B;
+}
+.foot-bot {
+border-top: 1px solid rgba(26, 18, 8, 0.1);
+padding-top: 32px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: rgba(26, 18, 8, 0.5);
+font-size: 13px;
+flex-wrap: wrap;
+gap: 16px;
+}
+@media (max-width: 1024px) {
+.foot-top { grid-template-columns: repeat(3, 1fr); }
+.foot-brand { grid-column: span 3; margin-bottom: 20px; }
+}
+@media (max-width: 768px) {
+.foot-top { grid-template-columns: repeat(2, 1fr); }
+.foot-brand { grid-column: span 2; }
+}
+</style>
+</head>
+<body class="font-body-md text-on-surface antialiased flex flex-col">
+<app-navbar></app-navbar>
+<main class="flex-grow pt-24 pb-12 px-md">
+<div class="max-w-container-max mx-auto flex flex-col lg:grid lg:grid-cols-12 gap-lg items-start">
+<aside class="w-full lg:col-span-5 order-1 lg:order-2 sticky-summary">
+<div class="premium-card rounded-2xl overflow-hidden">
+<div class="p-lg border-b border-outline bg-surface-container/50">
+<h2 class="font-headline-md text-headline-md text-secondary">Your Selection</h2>
+</div>
+<div class="p-lg space-y-lg">
+<div class="flex gap-md">
+<div
+class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-outline bg-secondary">
+<img alt="Item Preview" class="w-full h-full object-cover"
+src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3oaAqkpu5b2M5gbl2pE3-ZdPsUWXBTNMuAuxKG5a2ezhf8NcaIY_7cDTj0zWr_X0TKjTY1SDjCRMQvlItnyDyfbpeYAS5SxU-JKHftC2DW69Yd_lnHrotqF0hsXIisEdbptP0kAnihy30vDKNFKZHqttn7wGN0oQNIyu9V1NEN7aMzCxY2WbPlNxWB91YmLISBU-LY3YZyFeq8VGjYznykqvBQm3ry4JEipsKlaTQqvPKkvXPA0TzBhYmigVtnxLJscyEb1xtjX8h" />
+</div>
+<div class="flex flex-col justify-center">
+<p class="font-headline-sm text-headline-sm text-secondary" id="pg-item-name">Celestial Membership</p>
+<p class="font-label-md text-label-md text-on-surface-variant" id="pg-item-tier">Annual Premium Tier</p>
+</div>
+</div>
+<div class="space-y-sm">
+<div class="flex justify-between font-body-md text-body-md">
+<span class="text-on-surface-variant">Subtotal</span>
+<span class="text-secondary font-medium" id="pg-subtotal">₹1,200.00</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md">
+<span class="text-on-surface-variant">Platform Fee</span>
+<span class="text-secondary font-medium" id="pg-platform-fee">₹12.50</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md">
+<span class="text-on-surface-variant">Secured Tax</span>
+<span class="text-secondary font-medium" id="pg-tax">₹96.00</span>
+</div>
+</div>
+<div class="pt-lg border-t border-outline flex justify-between items-center">
+<div>
+<p
+class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">
+Total Amount</p>
+<p class="font-display-lg text-display-lg text-primary" id="pg-total">₹1,308.50</p>
+</div>
+<div class="bg-green-50 text-green-700 px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]"
+style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-sm">Secured</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-lg p-md bg-white border border-outline rounded-xl flex items-center gap-md">
+<div
+class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined">security</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-md text-secondary font-bold">100% Secure Payment</p>
+<p class="text-xs text-on-surface-variant">Your transaction is protected by 256-bit encryption.
+</p>
+</div>
+</div>
+</aside>
+<div class="w-full lg:col-span-7 order-2 lg:order-1" id="payment-container">
+<section class="premium-card rounded-2xl p-lg lg:p-xl" id="payment-form-section">
+<div class="flex items-center gap-md mb-lg">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary scale-110">qr_code_2</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-secondary">Pay via UPI</h2>
+<p class="font-body-sm text-on-surface-variant mt-xs" id="pg-qr-subtitle">Scan the QR or use manual ID to pay
+₹1,308.50</p>
+</div>
+</div>
+<div
+class="flex flex-col items-center justify-center bg-slate-50 rounded-2xl p-lg mb-xl border border-outline">
+<div
+class="gold-frame bg-white p-4 rounded-xl shadow-lg inline-block transform transition-transform hover:scale-[1.02]">
+<img
+id="upi-qr-img"
+alt="UPI QR Code"
+class="w-[300px] h-[300px] object-contain"
+src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=upi%3A%2F%2Fpay%3Fpa%3Dpaintedmuse%40upi%26pn%3DThePaintedMuse%26am%3D1308.50%26cu%3DINR%26tn%3DArtPurchase&bgcolor=ffffff&color=1A1208&qzone=2"
+/>
+</div>
+<div class="mt-lg text-center">
+<p class="font-label-md text-secondary font-bold">Scan with any UPI App</p>
+<div class="flex gap-2 mt-3 flex-wrap justify-center">
+<span class="px-3 py-1 bg-green-50 border border-green-200 rounded-full
+text-[10px] font-bold text-green-700 tracking-wider">GPay</span>
+<span class="px-3 py-1 bg-purple-50 border border-purple-200 rounded-full
+text-[10px] font-bold text-purple-700 tracking-wider">PhonePe</span>
+<span class="px-3 py-1 bg-blue-50 border border-blue-200 rounded-full
+text-[10px] font-bold text-blue-700 tracking-wider">Paytm</span>
+<span class="px-3 py-1 bg-orange-50 border border-orange-200 rounded-full
+text-[10px] font-bold text-orange-700 tracking-wider">BHIM</span>
+</div>
+</div>
+</div>
+<div class="mb-xl">
+<label
+class="block font-label-sm text-label-sm mb-xs text-on-surface-variant font-semibold">Payment
+UPI ID</label>
+<div class="upi-id-box rounded-xl p-md flex items-center justify-between border border-outline">
+<span class="font-bold tracking-wide text-secondary" id="upi-id-text">paintedmuse@upi</span>
+<button
+class="flex items-center gap-xs text-primary font-bold bg-white px-md py-2 rounded-lg border border-primary/20 transition-all hover:bg-primary hover:text-white shadow-sm active:scale-95"
+id="copy-upi-btn" onclick="copyUPI()">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+<span id="copy-btn-text">Copy</span>
+</button>
+</div>
+</div>
+<form class="space-y-lg border-t border-outline pt-xl" id="upi-confirmation-form"
+onsubmit="handleUpiSubmit(event)">
+<div class="space-y-md">
+<div>
+<label
+class="block font-label-sm text-label-sm mb-xs text-on-surface-variant font-semibold">Sender
+Name</label>
+<input
+class="w-full bg-white border border-outline rounded-xl p-md font-body-md text-body-md focus:outline-none input-focus transition-all"
+id="user-name" placeholder="Name as per your bank account" required=""
+type="text" />
+</div>
+<div>
+<label
+class="block font-label-sm text-label-sm mb-xs text-on-surface-variant font-semibold">UTR
+/ Transaction ID (12 Digits)</label>
+<input
+class="w-full bg-white border border-outline rounded-xl p-md font-body-md text-body-md focus:outline-none input-focus transition-all"
+id="transaction-id" placeholder="Enter the 12-digit UTR number" required=""
+type="text" />
+</div>
+</div>
+<div class="flex items-start gap-md py-sm">
+<input
+class="mt-1 w-5 h-5 rounded border-outline text-primary focus:ring-primary cursor-pointer"
+id="payment-confirm" required="" type="checkbox" />
+<label class="font-body-sm text-body-sm text-on-surface-variant cursor-pointer"
+for="payment-confirm" id="pg-confirm-label">
+I confirm I have transferred exactly <strong class="text-secondary">₹1,308.50</strong>
+to <strong class="text-secondary">paintedmuse@upi</strong>
+</label>
+</div>
+<button
+class="w-full shiny-gradient-btn shimmer text-white font-headline-sm text-headline-sm py-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-sm active:scale-[0.98] group"
+type="submit">
+Confirm Payment
+<span
+class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</form>
+</section>
+<div class="mt-lg grid grid-cols-2 md:grid-cols-3 gap-md opacity-60 px-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">verified_user</span>
+<span class="font-label-sm text-label-sm">E2E Encrypted</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">shield</span>
+<span class="font-label-sm text-label-sm">Fraud Protection</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">lock_clock</span>
+<span class="font-label-sm text-label-sm">Session Secured</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<app-footer></app-footer>
+<script>
+// ===== UNIVERSAL PAYMENT GATEWAY SCRIPT =====
+var UPI_ID = 'paintedmuse@upi';
+var UPI_NAME = 'ThePaintedMuse';
+var PLATFORM_FEE = 12.50;
+var TAX_RATE = 0.08; // 8%
+
+function formatINR(num) {
+  return '₹' + num.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function buildQrUrl(amount) {
+  var upiString = 'upi://pay?pa=' + UPI_ID + '&pn=' + UPI_NAME + '&am=' + amount.toFixed(2) + '&cu=INR&tn=ArtPurchase';
+  return 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(upiString) + '&bgcolor=ffffff&color=1A1208&qzone=2';
+}
+
+// Fallback QR
+document.getElementById('upi-qr-img').onerror = function() {
+  var currentTotal = parseFloat(this.dataset.amount) || 1308.50;
+  this.src = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' +
+    encodeURIComponent('upi://pay?pa=' + UPI_ID + '&pn=' + UPI_NAME + '&am=' + currentTotal.toFixed(2) + '&cu=INR') +
+    '&choe=UTF-8';
+};
+
+// Admin QR override
+document.addEventListener('DOMContentLoaded', function() {
+  var adminQr = localStorage.getItem('admin_payment_qr');
+  if (adminQr) {
+    document.getElementById('upi-qr-img').src = adminQr;
+  }
+});
+
+// ===== DYNAMIC PRICE UPDATE FROM URL PARAMS =====
+(function() {
+  var urlParams = new URLSearchParams(window.location.search);
+  var item = urlParams.get('item');
+  var price = urlParams.get('price');
+
+  if (item && price) {
+    var subtotal = parseFloat(price);
+    if (isNaN(subtotal) || subtotal <= 0) return;
+
+    var tax = subtotal * TAX_RATE;
+    var total = subtotal + PLATFORM_FEE + tax;
+
+    // Update item name & tier
+    document.getElementById('pg-item-name').textContent = item;
+    document.getElementById('pg-item-tier').textContent = 'One-time Purchase';
+
+    // Update price breakdown
+    document.getElementById('pg-subtotal').textContent = formatINR(subtotal);
+    document.getElementById('pg-platform-fee').textContent = formatINR(PLATFORM_FEE);
+    document.getElementById('pg-tax').textContent = formatINR(tax);
+    document.getElementById('pg-total').textContent = formatINR(total);
+
+    // Update QR subtitle
+    document.getElementById('pg-qr-subtitle').textContent = 'Scan the QR or use manual ID to pay ' + formatINR(total);
+
+    // Update QR code image with correct amount
+    var qrImg = document.getElementById('upi-qr-img');
+    qrImg.dataset.amount = total.toFixed(2);
+    qrImg.src = buildQrUrl(total);
+
+    // Update confirmation label
+    document.getElementById('pg-confirm-label').innerHTML =
+      'I confirm I have transferred exactly <strong class="text-secondary">' + formatINR(total) + '</strong> to <strong class="text-secondary">' + UPI_ID + '</strong>';
+  }
+})();
+
+function copyUPI() {
+  navigator.clipboard.writeText(UPI_ID).then(function() {
+    var btnText = document.getElementById('copy-btn-text');
+    var btn = document.getElementById('copy-upi-btn');
+    btnText.innerText = "Copied ✓";
+    btn.classList.add('bg-green-600', 'text-white', 'border-green-600');
+    btn.classList.remove('bg-white', 'text-primary', 'border-primary/20');
+    setTimeout(function() {
+      btnText.innerText = "Copy";
+      btn.classList.remove('bg-green-600', 'text-white', 'border-green-600');
+      btn.classList.add('bg-white', 'text-primary', 'border-primary/20');
+    }, 2000);
+  });
+}
+
+function handleUpiSubmit(e) {
+  e.preventDefault();
+  var name = document.getElementById('user-name').value;
+  var utr = document.getElementById('transaction-id').value;
+  if (!name || !utr) return;
+
+  var totalText = document.getElementById('pg-total').textContent;
+  var itemName = document.getElementById('pg-item-name').textContent || 'Art Purchase';
+  var amountNum = parseFloat(totalText.replace(/[^0-9.]/g, ''));
+  var bookingRef = "TPM-" + Math.floor(100000 + Math.random() * 900000);
+  
+  var submitBtn = e.target.querySelector('button[type="submit"]');
+  var originalText = submitBtn.innerHTML;
+  submitBtn.innerHTML = 'Processing...';
+  submitBtn.disabled = true;
+
+  fetch('/api/payments', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+          transactionId: utr,
+          customerName: name,
+          amount: amountNum,
+          itemName: itemName,
+          bookingReference: bookingRef
+      })
+  }).then(function(r) { return r.json(); }).then(function(data) {
+      if (data.success) {
+          var paymentSection = document.getElementById('payment-form-section');
+          paymentSection.innerHTML = '<div class="flex flex-col items-center justify-center py-xxl px-lg text-center">' +
+            '<div class="w-24 h-24 rounded-full bg-green-50 flex items-center justify-center mb-lg border border-green-200">' +
+            '<span class="material-symbols-outlined text-green-600 text-[64px]" style="font-variation-settings: \'FILL\' 1;">check_circle</span>' +
+            '</div>' +
+            '<h2 class="font-headline-md text-headline-md text-secondary mb-md">Payment Details Submitted</h2>' +
+            '<p class="font-body-md text-on-surface-variant max-w-md mx-auto">' +
+            'Thank you, <strong>' + name + '</strong>. Your transaction of <strong>' + totalText + '</strong> (ID: <strong>' + utr + '</strong>) has been successfully captured for verification.' +
+            '</p>' +
+            '<div class="mt-xl p-lg bg-surface-container rounded-2xl border border-primary/20 w-full max-w-sm">' +
+            '<p class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-xs font-bold">Booking Reference</p>' +
+            '<p class="font-headline-sm text-headline-sm tracking-widest text-primary font-bold">' + bookingRef + '</p>' +
+            '</div>' +
+            '<div class="mt-xl flex flex-col gap-sm">' +
+            '<p class="text-xs text-on-surface-variant">Estimated verification time: ~15-30 minutes</p>' +
+            '<button onclick="window.location.href=\'/\'" class="text-primary font-bold hover:underline">Return to Home</button>' +
+            '</div>' +
+            '</div>';
+          paymentSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+          alert(data.message || 'Error submitting payment.');
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+      }
+  }).catch(function(err) {
+      console.error(err);
+      alert('Network error submitting payment.');
+      submitBtn.innerHTML = originalText;
+      submitBtn.disabled = false;
+  });
+}
+</script>
+<script src="content-loader.js"></script>
+</body>
+</html>

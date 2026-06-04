@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Home | The Painted Muse Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Outfit:wght@400;500;700&amp;display=swap"
+rel="stylesheet" />
+<link
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+rel="stylesheet" />
+<script src="components/Navbar.js" defer></script>
+<script src="components/Sidebar.js" defer></script>
+<script src="components/Footer.js" defer></script>
+<script>
+(function checkArtistAuth() {
+if (localStorage.getItem('artistLoggedIn') !== 'true') {
+window.location.href = '/?error=auth';
+}
+})();
+tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-background": "#241915", outline: "#8b7169", "outline-variant": "#dfc0b6", "on-error": "#ffffff", "surface-bright": "#fff8f6", surface: "#fff8f6", "surface-container-low": "#fff1ed", primary: "#942e02", background: "#fff8f6", "on-surface": "#241915", "surface-container": "#ffe9e3", "on-primary": "#ffffff", secondary: "#795900", "primary-container": "#b5451b", "surface-dim": "#ebd5cf", "surface-variant": "#f4ded7", "on-primary-container": "#ffe4dc", error: "#ba1a1a", "surface-container-highest": "#f4ded7", "secondary-container": "#ffc641", "on-surface-variant": "#58423b", "surface-container-high": "#fae3dd", "surface-container-lowest": "#ffffff", "secondary-fixed": "#ffdfa0", "primary-fixed": "#ffdbd0" }, borderRadius: { DEFAULT: "12px", lg: "16px", xl: "20px", full: "9999px" }, fontFamily: { "label-sm": ["Outfit"], "headline-lg": ["Cormorant Garamond"], "headline-md": ["Cormorant Garamond"], "body-lg": ["Outfit"], "body-md": ["Outfit"] } } } }
+</script>
+<link
+href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+rel="stylesheet" />
+<style>
+body {
+background: #fff8f6;
+color: #241915;
+font-family: 'Outfit', sans-serif;
+min-height: max(884px, 100dvh)
+}
+.material-symbols-outlined {
+font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+}
+.paper-grain {
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+opacity: .03;
+pointer-events: none
+}
+.font-calligraphy {
+font-family: 'Great Vibes', cursive;
+}
+
+/* ── Smooth Page Transition ── */
+@keyframes pageFadeIn {
+from { opacity: 0; transform: translateY(12px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+main > .max-w-5xl {
+animation: pageFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Portfolio Section Styles ── */
+.portfolio-section {
+position: relative;
+}
+.warli-border {
+border: 1px solid rgba(212, 175, 55, 0.35);
+position: relative;
+}
+.warli-border::before {
+content: "";
+position: absolute;
+inset: 4px;
+border: 1px solid rgba(212, 175, 55, 0.15);
+pointer-events: none;
+}
+.glass-panel {
+background: rgba(255, 255, 255, 0.72);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+border: 1px solid rgba(212, 175, 55, 0.15);
+}
+.color-swatch {
+width: 32px;
+height: 32px;
+border-radius: 50%;
+cursor: pointer;
+border: 2px solid transparent;
+transition: all 0.3s ease;
+}
+.color-swatch.active {
+border-color: #B5451B;
+transform: scale(1.15);
+}
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(15px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.custom-scrollbar::-webkit-scrollbar {
+width: 6px;
+height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+background: rgba(26, 18, 8, 0.05);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+background: #D4AF37;
+border-radius: 9999px;
+}
+
+footer {
+background: #FDFBF7;
+color: var(--on-surface);
+padding: 100px 0 40px;
+position: relative;
+width: 100%;
+}
+footer::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+.foot-top {
+display: grid;
+grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+gap: 48px;
+margin-bottom: 60px;
+}
+.foot-brand p {
+color: rgba(26, 18, 8, 0.7);
+font-size: 14px;
+margin: 20px 0 24px;
+max-width: 320px;
+line-height: 1.6;
+}
+.socials {
+display: flex;
+gap: 12px;
+}
+.socials a {
+width: 40px;
+height: 40px;
+border: 1px solid rgba(26, 18, 8, 0.15);
+border-radius: 50%;
+display: grid;
+place-items: center;
+color: var(--on-surface);
+transition: all 0.3s ease;
+}
+.socials a:hover {
+background: var(--primary);
+color: white;
+border-color: var(--primary);
+transform: translateY(-3px);
+}
+.foot-col h5 {
+font-family: 'Cormorant Garamond', serif;
+font-style: italic;
+font-size: 15px;
+margin-bottom: 24px;
+color: var(--primary);
+font-weight: 700;
+letter-spacing: 0.05em;
+}
+.foot-col ul {
+list-style: none;
+padding: 0;
+}
+.foot-col li {
+margin-bottom: 12px;
+}
+.foot-col a {
+font-size: 14px;
+color: rgba(26, 18, 8, 0.75);
+transition: color 0.3s ease;
+text-decoration: none;
+}
+.foot-col a:hover {
+color: var(--primary);
+}
+.foot-bot {
+border-top: 1px solid rgba(26, 18, 8, 0.1);
+padding-top: 32px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: rgba(26, 18, 8, 0.5);
+font-size: 13px;
+flex-wrap: wrap;
+gap: 16px;
+}
+@media (max-width: 1024px) {
+.foot-top {
+grid-template-columns: repeat(3, 1fr);
+}
+.foot-brand {
+grid-column: span 3;
+margin-bottom: 20px;
+}
+}
+@media (max-width: 768px) {
+.foot-top {
+grid-template-columns: repeat(2, 1fr);
+}
+.foot-brand {
+grid-column: span 2;
+}
+}
+</style>
+</head>
+<body class="bg-surface">
+<div class="fixed inset-0 paper-grain z-0"></div>
+<div class="relative flex h-screen w-full flex-row overflow-hidden z-10">
+<dashboard-sidebar type="artist"></dashboard-sidebar>
+<main class="flex-1 flex flex-col min-w-0 bg-surface-bright h-screen overflow-y-auto">
+<div class="lg:hidden flex items-center bg-surface p-4 border-b border-outline-variant justify-between">
+<span class="material-symbols-outlined text-on-surface cursor-pointer mobile-menu-btn-toggle">menu</span>
+<h2 class="text-on-surface font-headline-md text-xl font-bold flex-1 text-center">Home</h2>
+<div class="size-10"></div>
+</div>
+<div class="max-w-5xl mx-auto w-full px-6 md:px-10 py-12">
+<div id="approval-status-banner" class="hidden mb-6 p-4 rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-2xl" id="approval-banner-icon"></span>
+<div>
+<p class="font-bold text-sm" id="approval-banner-title"></p>
+<p class="text-xs" id="approval-banner-desc"></p>
+</div>
+</div>
+<header class="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+<div>
+<p class="font-label-sm text-primary uppercase tracking-widest mb-2">Welcome back</p>
+<h1 class="font-headline-lg text-on-background text-4xl"><%= user ? user.fullName : 'Artist' %></h1>
+<p class="font-body-lg text-on-surface-variant mt-2">Here's how your art is performing today.</p>
+</div>
+<button onclick="window.location.href='/'"
+class="h-12 px-8 bg-primary text-on-primary font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">add</span> New Artwork
+</button>
+</header>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+<div class="bg-surface-container-low border border-outline-variant p-6">
+<div class="flex items-center gap-2 mb-3"><span
+class="material-symbols-outlined text-primary">palette</span><span
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Total
+Artworks</span></div>
+<p id="stat-artworks" class="font-headline-md text-4xl text-on-surface">47</p>
+<p id="stat-artworks-sub" class="text-xs text-green-700 mt-1 font-bold">+3 this month</p>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-6">
+<div class="flex items-center gap-2 mb-3"><span
+class="material-symbols-outlined text-primary">visibility</span><span
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Profile Views</span>
+</div>
+<p id="stat-views" class="font-headline-md text-4xl text-on-surface">1,248</p>
+<p id="stat-views-sub" class="text-xs text-green-700 mt-1 font-bold">↑ 12% vs last month</p>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-6">
+<div class="flex items-center gap-2 mb-3"><span
+class="material-symbols-outlined text-primary">shopping_bag</span><span
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Artworks Sold</span>
+</div>
+<p id="stat-sold" class="font-headline-md text-4xl text-on-surface">34</p>
+<p id="stat-sold-sub" class="text-xs text-green-700 mt-1 font-bold">+5 this month</p>
+</div>
+<div class="bg-primary-container border border-outline-variant p-6">
+<div class="flex items-center gap-2 mb-3"><span
+class="material-symbols-outlined text-on-primary-container">payments</span><span
+class="font-label-sm text-on-primary-container/70 uppercase tracking-widest text-[10px]">Total
+Earnings</span></div>
+<p id="stat-earnings" class="font-headline-md text-4xl text-on-primary-container">₹2.4L</p>
+<p id="stat-earnings-sub" class="text-xs text-on-primary-container/70 mt-1 font-bold">₹45K this month</p>
+</div>
+</div>
+<section class="mb-12">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline-md text-2xl text-on-background">Recent Uploads</h2>
+<a href="/"
+class="font-label-sm text-primary uppercase tracking-widest text-xs hover:underline">View All →</a>
+</div>
+<div id="recent-uploads-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<div
+class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow upload-btn-card"
+onclick="document.getElementById('reelUploadInput').click()">
+<div class="aspect-square bg-surface-variant overflow-hidden flex items-center justify-center"><span
+class="material-symbols-outlined text-primary text-6xl">videocam</span></div>
+<div class="p-4 text-center">
+<h4 class="font-body-md text-on-surface-variant">Upload New Reel</h4>
+</div>
+<input type="file" id="reelUploadInput" accept="video/*" capture="environment" class="hidden">
+</div>
+</div>
+</div>
+</section>
+<section class="mb-12">
+<h2 class="font-headline-md text-2xl text-on-background mb-6">Recent Activity</h2>
+<div class="bg-surface-container-low border border-outline-variant divide-y divide-outline-variant rounded-xl">
+<div class="flex items-center gap-4 p-5"><span
+class="material-symbols-outlined text-green-700">shopping_bag</span>
+<div class="flex-1">
+<p class="font-body-md text-on-surface"><strong>Eternal Echoes</strong> was purchased by a collector</p>
+<p class="text-xs text-on-surface-variant">2 hours ago</p>
+</div><span class="text-primary font-bold">₹18,000</span>
+</div>
+<div class="flex items-center gap-4 p-5"><span
+class="material-symbols-outlined text-green-700">shopping_bag</span>
+<div class="flex-1">
+<p class="font-body-md text-on-surface"><strong>Lotus Dreams</strong> was purchased by a collector</p>
+<p class="text-xs text-on-surface-variant">3 days ago</p>
+</div><span class="text-primary font-bold">₹12,000</span>
+</div>
+<div class="flex items-center gap-4 p-5"><span
+class="material-symbols-outlined text-secondary">event_available</span>
+<div class="flex-1">
+<p class="font-body-md text-on-surface"><strong>Sacred Rivers</strong> was booked for private viewing
+</p>
+<p class="text-xs text-on-surface-variant">5 days ago</p>
+</div><span class="text-primary font-bold">₹35,000</span>
+</div>
+<div class="flex items-center gap-4 p-5"><span
+class="material-symbols-outlined text-green-700">shopping_bag</span>
+<div class="flex-1">
+<p class="font-body-md text-on-surface"><strong>Morning Raaga</strong> was purchased by a collector</p>
+<p class="text-xs text-on-surface-variant">1 week ago</p>
+</div><span class="text-primary font-bold">₹15,500</span>
+</div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--           PORTFOLIO SHOWCASE SECTION           -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="portfolio" class="portfolio-section mb-12 scroll-mt-20">
+<div class="flex items-center justify-between mb-8 border-b border-outline-variant pb-4">
+<div>
+<h2 class="font-headline-md text-2xl text-on-background">Portfolio <span class="italic text-primary">Showcase</span></h2>
+<p class="text-sm text-on-surface-variant mt-1">Your public-facing artist profile and masterpieces.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative inline-block text-left" id="share-dropdown-container">
+<button onclick="toggleShareDropdown()"
+class="bg-surface-container-low text-primary border border-outline-variant px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider shadow-sm hover:bg-primary/5 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm font-bold">share</span> Share
+</button>
+<div id="share-dropdown" class="hidden absolute right-0 mt-2 w-56 rounded-xl shadow-xl bg-white border border-outline-variant ring-1 ring-black ring-opacity-5 z-[100] p-2 space-y-1">
+<button onclick="shareAction('copy')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface hover:bg-surface-container-low rounded-lg transition-colors flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-primary">content_copy</span> Copy Link
+</button>
+<button onclick="shareAction('whatsapp')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface hover:bg-surface-container-low rounded-lg transition-colors flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-[#25D366]">chat</span> WhatsApp
+</button>
+<button onclick="shareAction('twitter')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface hover:bg-surface-container-low rounded-lg transition-colors flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-[#1DA1F2]">share</span> Twitter / X
+</button>
+<button onclick="shareAction('facebook')" class="w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface hover:bg-surface-container-low rounded-lg transition-colors flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-[#1877F2]">thumb_up</span> Facebook
+</button>
+</div>
+</div>
+<button onclick="togglePortfolioDrawer(true)"
+class="bg-primary text-on-primary border border-primary px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider shadow-lg hover:brightness-110 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm font-bold">edit</span> Edit Theme
+</button>
+</div>
+</div>
+
+<!-- Portfolio Profile Card -->
+<div id="portfolio-showcase-container" class="transition-colors duration-500 space-y-8">
+<div class="relative h-48 w-full rounded-2xl overflow-hidden bg-surface-container-low">
+<div id="showcase-cover-pattern" class="absolute inset-0 opacity-[0.08] pointer-events-none bg-cover bg-center"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+</div>
+<div class="-mt-32 relative z-10 px-4">
+<div class="glass-panel p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-center md:items-start shadow-xl">
+<div class="size-28 rounded-2xl overflow-hidden border-4 border-[#D4AF37]/45 shadow-md flex-shrink-0 bg-white">
+<img id="showcase-avatar" class="w-full h-full object-cover" src="pics/logoo.png" />
+</div>
+<div class="text-center md:text-left flex-1 space-y-2">
+<div class="flex flex-col sm:flex-row items-center gap-2 justify-center md:justify-start">
+<h3 id="showcase-name" class="font-headline-md text-2xl font-bold tracking-tight text-on-surface">Artist Name</h3>
+<span class="font-calligraphy text-xl text-primary transform translate-y-1" id="showcase-calligraphy">Artistic Excellence</span>
+</div>
+<p id="showcase-spec" class="text-primary font-bold text-xs uppercase tracking-widest">Traditional Artist</p>
+<p class="text-on-surface-variant text-xs flex items-center justify-center md:justify-start gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span> <span id="showcase-location">India</span>
+</p>
+<div class="flex flex-wrap gap-3 justify-center md:justify-start pt-1" id="showcase-links"></div>
+</div>
+<div class="border-t md:border-t-0 md:border-l border-outline-variant/40 pt-4 md:pt-0 md:pl-6 flex flex-row md:flex-col gap-5 justify-center text-center">
+<div>
+<h5 class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50">Views</h5>
+<p class="font-headline-md text-xl text-primary font-bold">1.2K</p>
+</div>
+<div>
+<h5 class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50">Followers</h5>
+<p class="font-headline-md text-xl text-primary font-bold">240</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Bio & Achievements -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="glass-panel p-6 rounded-2xl shadow-md space-y-3 relative overflow-hidden">
+<div class="bio-pattern absolute inset-0 opacity-[0.08] pointer-events-none bg-cover bg-center"></div>
+<h3 class="font-headline-md text-lg font-bold border-b border-outline-variant/30 pb-2 text-on-surface relative z-10">Artist Biography</h3>
+<p id="showcase-bio" class="text-sm text-on-surface/80 leading-relaxed italic relative z-10">
+"Crafting heritage art forms with meticulous devotion."
+</p>
+</div>
+<div class="glass-panel p-6 rounded-2xl shadow-md space-y-3 relative overflow-hidden">
+<div class="ach-pattern absolute inset-0 opacity-[0.08] pointer-events-none bg-cover bg-center"></div>
+<h3 class="font-headline-md text-lg font-bold border-b border-outline-variant/30 pb-2 text-on-surface relative z-10">Exhibitions & Milestones</h3>
+<ul id="showcase-achievements" class="space-y-2 text-sm text-on-surface/80 leading-relaxed relative z-10"></ul>
+</div>
+</div>
+
+<!-- Featured Uploads -->
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-3">
+<h3 class="font-headline-md text-xl font-bold text-on-surface">Masterpieces Collection</h3>
+<button onclick="window.location.href='/'"
+class="text-xs font-bold text-primary uppercase tracking-widest hover:underline flex items-center gap-1 group">
+View More <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+<p class="text-sm text-on-surface-variant/60 italic leading-relaxed">
+Click "View More" above to explore the full collection in the immersive gallery.
+</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="featured-uploads-grid">
+<div id="featured-image-card" class="warli-border bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group cursor-pointer" onclick="openLightbox()">
+<div class="aspect-video bg-surface-container-low overflow-hidden relative">
+<img id="featured-image-img" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" src="pics/madhubani_bg.png" />
+<span class="absolute top-3 left-3 bg-primary text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Latest Image</span>
+</div>
+<div class="p-5">
+<h4 id="featured-image-title" class="font-headline-md text-lg font-bold text-on-surface">Madhubani Lotus Pond</h4>
+<div class="flex justify-between items-center mt-3 pt-3 border-t border-outline-variant/20">
+<span id="featured-image-category" class="text-[9px] font-bold uppercase tracking-wider text-on-surface-variant/60">Mithila Traditional</span>
+<span id="featured-image-price" class="text-primary font-bold text-sm">₹18,000</span>
+</div>
+</div>
+</div>
+<div id="featured-video-card" class="warli-border bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group flex flex-col">
+<div class="aspect-video bg-surface-container-low overflow-hidden relative flex-1">
+<video id="featured-video-player" class="w-full h-full object-cover" controls src="pics/video.mp4"></video>
+<span class="absolute top-3 left-3 bg-secondary text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-10">Latest Video Reel</span>
+</div>
+<div class="p-5">
+<h4 id="featured-video-title" class="font-headline-md text-lg font-bold text-on-surface">Making of Lotus Pond</h4>
+<div class="flex justify-between items-center mt-3 pt-3 border-t border-outline-variant/20">
+<span class="text-[9px] font-bold uppercase tracking-wider text-on-surface-variant/60">Process Reel</span>
+<span class="text-green-700 font-bold text-xs uppercase tracking-wider">New Reel</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<app-footer></app-footer>
+</main>
+</div>
+
+<!-- ═══ Portfolio Edit Drawer ═══ -->
+<div id="edit-drawer-overlay" class="fixed inset-0 bg-black/50 z-[110] hidden transition-opacity duration-300" onclick="togglePortfolioDrawer(false)"></div>
+<div id="edit-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white border-l border-outline-variant shadow-2xl z-[120] translate-x-full transition-transform duration-300 flex flex-col">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface">
+<h3 class="font-headline-md text-xl font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">edit</span> Edit Portfolio Profile
+</h3>
+<button onclick="togglePortfolioDrawer(false)" class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+<div class="space-y-3">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Showcase Accent/Theme Color</label>
+<div class="flex gap-4 items-center flex-wrap" id="swatch-container">
+<div class="color-swatch active bg-[#FDFBF7]" data-color="#FDFBF7" title="Classic Cream"></div>
+<div class="color-swatch bg-[#F5F0E8]" data-color="#F5F0E8" title="Antique Paper"></div>
+<div class="color-swatch bg-[#FFF8F0]" data-color="#FFF8F0" title="Warm Silk"></div>
+<div class="color-swatch bg-[#E8E4D9]" data-color="#E8E4D9" title="Desert Sand"></div>
+<div class="color-swatch bg-[#ebd5cf]" data-color="#ebd5cf" title="Soft Terracotta"></div>
+<div class="color-swatch bg-[#ffe9e3]" data-color="#ffe9e3" title="Rose Clay"></div>
+</div>
+<div class="flex items-center gap-3 pt-2">
+<input type="color" id="custom-color" class="w-8 h-8 rounded-md border border-outline-variant cursor-pointer">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/60">Choose Custom Color</span>
+</div>
+</div>
+<div class="space-y-3">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Cover Pattern Background</label>
+<div class="grid grid-cols-3 gap-3">
+<button onclick="selectPattern('pics/warli_pattern_1778230295803.png', this)" class="border-2 border-primary p-2 rounded-xl bg-surface overflow-hidden transition-all text-center">
+<img src="pics/warli_pattern_1778230295803.png" class="w-full h-10 object-cover opacity-20 mx-auto" alt="Warli">
+<span class="text-[8px] font-bold uppercase mt-1 block">Warli</span>
+</button>
+<button onclick="selectPattern('pics/madhubani_pattern_1778230275283.png', this)" class="border-2 border-outline-variant p-2 rounded-xl bg-surface overflow-hidden hover:border-primary/50 transition-all text-center">
+<img src="pics/madhubani_pattern_1778230275283.png" class="w-full h-10 object-cover opacity-20 mx-auto" alt="Madhubani">
+<span class="text-[8px] font-bold uppercase mt-1 block">Madhubani</span>
+</button>
+<button onclick="selectPattern('pics/gond_pattern_1778230315090.png', this)" class="border-2 border-outline-variant p-2 rounded-xl bg-surface overflow-hidden hover:border-primary/50 transition-all text-center">
+<img src="pics/gond_pattern_1778230315090.png" class="w-full h-10 object-cover opacity-20 mx-auto" alt="Gond">
+<span class="text-[8px] font-bold uppercase mt-1 block">Gond Art</span>
+</button>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Calligraphy Flourish Tag</label>
+<input type="text" id="inp-calligraphy" placeholder="e.g. Traditional Masterpiece"
+class="w-full bg-surface-container-low border-outline-variant rounded-lg px-4 py-3 focus:ring-primary focus:border-primary text-sm">
+</div>
+<div class="space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Exhibitions & Key Achievements (one per line)</label>
+<textarea id="inp-achievements" rows="5" placeholder="Exhibitions and milestones..."
+class="w-full bg-surface-container-low border-outline-variant rounded-lg px-4 py-3 focus:ring-primary focus:border-primary text-sm"></textarea>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant bg-surface flex gap-4">
+<button onclick="togglePortfolioDrawer(false)" class="flex-1 py-3 border border-outline-variant text-on-surface font-bold uppercase text-xs tracking-wider rounded-lg hover:bg-surface-container-low transition-colors">Cancel</button>
+<button onclick="savePortfolioSettings()" class="flex-1 py-3 bg-primary text-white font-bold uppercase text-xs tracking-wider rounded-lg hover:brightness-110 transition-all shadow-md">Save Changes</button>
+</div>
+</div>
+
+<!-- Lightbox Modal -->
+<div id="lightbox-modal" class="fixed inset-0 z-[130] bg-black/90 hidden items-center justify-center p-6 transition-all duration-300" onclick="closeLightbox()">
+<button class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors cursor-pointer" onclick="closeLightbox()">
+<span class="material-symbols-outlined text-4xl">close</span>
+</button>
+<div class="max-w-4xl max-h-[85vh] w-full flex flex-col items-center justify-center space-y-4" onclick="event.stopPropagation()">
+<img id="lightbox-img" class="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl" src="" />
+<h4 id="lightbox-title" class="text-white font-headline-md text-xl font-bold">Artwork</h4>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+let user = null;
+try {
+  user = JSON.parse(localStorage.getItem('currentUser'));
+} catch(e) {
+  console.error("Corrupted currentUser", e);
+}
+if (!user) {
+window.location.href = '/';
+return;
+}
+let usersDb = {};
+try {
+  usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+  if (typeof usersDb !== 'object' || Array.isArray(usersDb)) usersDb = {};
+} catch(e) {
+  usersDb = {};
+}
+const userInDb = usersDb[user.email];
+if (!userInDb || !userInDb.isApproved) {
+window.location.href = '/?error=pending';
+return;
+}
+
+const loadProfile = () => {
+const storedProfile = localStorage.getItem('artist_profile_' + user.email);
+if (storedProfile) {
+const profile = JSON.parse(storedProfile);
+const welcomeHeader = document.querySelector('h1.font-headline-lg');
+if (welcomeHeader) welcomeHeader.textContent = profile.fullName;
+const sbImg = document.getElementById('sidebar-img');
+const sbName = document.getElementById('sidebar-name');
+const sbRole = document.getElementById('sidebar-role');
+if (sbImg) sbImg.src = profile.photoUrl;
+if (sbName) sbName.textContent = profile.displayName;
+if (sbRole) sbRole.textContent = (profile.specialization || "Master Artist").toUpperCase();
+}
+};
+loadProfile();
+
+const dbName = "ReelsDB";
+const storeName = "videos";
+let db;
+const initDB = () => {
+return new Promise((resolve, reject) => {
+const request = indexedDB.open(dbName, 1);
+request.onupgradeneeded = (event) => {
+const db = event.target.result;
+if (!db.objectStoreNames.contains(storeName)) {
+db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
+}
+};
+request.onsuccess = (event) => {
+db = event.target.result;
+resolve(db);
+};
+request.onerror = (event) => reject(event.target.error);
+});
+};
+const saveVideo = (file) => {
+if (!db) return;
+let user = null;
+try {
+  user = JSON.parse(localStorage.getItem('currentUser'));
+} catch(e) {}
+if (!user) return;
+const transaction = db.transaction([storeName], "readwrite");
+const store = transaction.objectStore(storeName);
+let artistName = user.fullName;
+let handle = "@" + user.fullName.toLowerCase().replace(/\s+/g, '_');
+try {
+const profileKey = 'artist_profile_' + user.email;
+const storedProfile = localStorage.getItem(profileKey);
+if (storedProfile) {
+const profile = JSON.parse(storedProfile);
+if (profile.displayName) {
+artistName = profile.displayName;
+handle = "@" + profile.displayName.toLowerCase().replace(/\s+/g, '_');
+}
+}
+} catch (e) { }
+const record = {
+file: file,
+timestamp: Date.now(),
+artistName: artistName,
+handle: handle,
+title: "Uploaded Reel",
+userEmail: user.email
+};
+const request = store.add(record);
+request.onsuccess = () => {
+loadRecentUploads();
+};
+};
+const createPostCard = (post) => {
+const div = document.createElement('div');
+div.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow";
+div.onclick = () => window.location.href = '/';
+div.innerHTML = `
+<div class="aspect-square bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${post.imgUrl}" onerror="this.src='https://placehold.co/600x600/F5F0E8/B5451B?text=Artwork'"/>
+</div>
+<div class="p-4">
+<h4 class="font-headline-md text-lg mb-1">${post.title}</h4>
+<div class="flex justify-between"><span class="text-xs text-on-surface-variant">${post.category || 'Artwork'}</span><span class="text-sm text-primary font-bold">₹${Number(post.price).toLocaleString()}</span></div>
+</div>
+`;
+return div;
+};
+const createReelCard = (reel) => {
+const reelUrl = reel.file ? URL.createObjectURL(reel.file) : reel.videoUrl;
+const div = document.createElement('div');
+div.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow relative overflow-hidden";
+div.onclick = () => window.location.href = '/';
+div.innerHTML = `
+<div class="aspect-square bg-surface-variant overflow-hidden relative">
+${reel.file ? `<video class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="${reelUrl}#t=0.1" muted></video>` : `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${reel.videoUrl}" />`}
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl opacity-80">play_circle</span>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-headline-md text-lg mb-1">${reel.title || 'Uploaded Reel'}</h4>
+<div class="flex justify-between"><span class="text-xs text-on-surface-variant">Reel</span><span class="text-sm text-primary font-bold text-green-700">New</span></div>
+</div>
+`;
+return div;
+};
+const loadRecentUploads = async () => {
+const grid = document.getElementById('recent-uploads-grid');
+if (!grid) return;
+let posts = [];
+try {
+  posts = JSON.parse(localStorage.getItem('artist_posts_' + user.email) || '[]');
+  if (!Array.isArray(posts)) posts = [];
+} catch(e) {
+  posts = [];
+}
+let reels = [];
+if (db) {
+const transaction = db.transaction([storeName], "readonly");
+const store = transaction.objectStore(storeName);
+const allReels = await new Promise((resolve) => {
+const req = store.getAll();
+req.onsuccess = () => resolve(req.result || []);
+});
+reels = allReels.filter(r => r.userEmail === user.email);
+}
+grid.innerHTML = '';
+const uploadBtn = document.createElement('div');
+uploadBtn.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-shadow upload-btn-card";
+uploadBtn.onclick = () => document.getElementById('reelUploadInput').click();
+uploadBtn.innerHTML = `
+<div class="aspect-square bg-surface-variant overflow-hidden flex items-center justify-center"><span
+class="material-symbols-outlined text-primary text-6xl">videocam</span></div>
+<div class="p-4 text-center">
+<h4 class="font-body-md text-on-surface-variant">Upload New Reel</h4>
+</div>
+<input type="file" id="reelUploadInput" accept="video/*" capture="environment" class="hidden">
+`;
+grid.appendChild(uploadBtn);
+const fileInput = uploadBtn.querySelector('#reelUploadInput');
+fileInput.addEventListener('change', (e) => {
+const file = e.target.files[0];
+if (file) {
+saveVideo(file);
+alert('Reel uploaded successfully!');
+}
+});
+
+const approvalBanner = document.getElementById('approval-status-banner');
+if (approvalBanner) {
+let usersDb = {};
+try {
+  usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+  if (typeof usersDb !== 'object' || Array.isArray(usersDb)) usersDb = {};
+} catch(e) {
+  usersDb = {};
+}
+const userInDb = usersDb[user.email];
+if (userInDb) {
+const approvalIcon = document.getElementById('approval-banner-icon');
+const approvalTitle = document.getElementById('approval-banner-title');
+const approvalDesc = document.getElementById('approval-banner-desc');
+if (userInDb.isApproved) {
+
+approvalBanner.className = "mb-6 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800 flex items-center gap-3";
+if (approvalIcon) approvalIcon.textContent = "check_circle";
+if (approvalTitle) approvalTitle.textContent = "Profile Approved";
+if (approvalDesc) approvalDesc.textContent = "Your profile is verified and active! Your artworks are visible to the public.";
+approvalBanner.classList.remove('hidden');
+} else if (userInDb.isRejected) {
+
+approvalBanner.className = "mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800 flex items-center gap-3";
+if (approvalIcon) approvalIcon.textContent = "error";
+if (approvalTitle) approvalTitle.textContent = "Profile Rejected";
+if (approvalDesc) approvalDesc.textContent = "Your profile did not pass verification. Please contact support or update your settings.";
+approvalBanner.classList.remove('hidden');
+} else {
+
+approvalBanner.className = "mb-6 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 flex items-center gap-3";
+if (approvalIcon) approvalIcon.textContent = "pending";
+if (approvalTitle) approvalTitle.textContent = "Pending Verification";
+if (approvalDesc) approvalDesc.textContent = "Your artist registration is currently being reviewed. You can upload artwork, but your profile will only be visible publicly after approval.";
+approvalBanner.classList.remove('hidden');
+}
+}
+}
+const combined = [
+...posts.map(p => ({ ...p, type: 'post' })),
+...reels.map(r => ({ ...r, type: 'reel' }))
+].sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+combined.slice(0, 5).forEach(item => {
+if (item.type === 'post') {
+grid.appendChild(createPostCard(item));
+} else {
+grid.appendChild(createReelCard(item));
+}
+});
+
+const sidebarName = document.getElementById('sidebar-name');
+const sidebarRole = document.getElementById('sidebar-role');
+const sbImg = document.getElementById('sidebar-img');
+const headers = document.querySelectorAll('header h1.text-4xl');
+if (sidebarName) sidebarName.textContent = user.fullName.toUpperCase();
+if (sidebarRole && user.spec) {
+sidebarRole.textContent = user.spec.toUpperCase() + ' ARTIST';
+}
+headers.forEach(h => {
+if (h.textContent.includes('Amrita') || h.textContent.includes('Raghavan')) {
+h.textContent = user.fullName;
+}
+});
+
+const profileKey = 'artist_profile_' + user.email;
+const storedProfile = localStorage.getItem(profileKey);
+if (storedProfile) {
+let profile = null;
+try {
+  profile = JSON.parse(storedProfile);
+} catch(e) {}
+if (profile) {
+if (sidebarName && profile.displayName) sidebarName.textContent = profile.displayName.toUpperCase();
+if (sidebarRole && profile.specialization) {
+sidebarRole.textContent = profile.specialization.toUpperCase() + ' ARTIST';
+}
+if (sbImg && profile.photoUrl) sbImg.src = profile.photoUrl;
+const mainImg = document.querySelector('aside img') || document.querySelector('.bg-surface-dim img');
+if (mainImg && profile.photoUrl) mainImg.src = profile.photoUrl;
+headers.forEach(h => {
+h.textContent = profile.displayName;
+});
+}
+} else if (user.isNewUser) {
+if (sbImg) sbImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
+const mainImg = document.querySelector('aside img') || document.querySelector('.bg-surface-dim img');
+if (mainImg) mainImg.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
+}
+if (user.isNewUser) {
+
+const statArtworks = document.getElementById('stat-artworks');
+const statArtworksSub = document.getElementById('stat-artworks-sub');
+const statViews = document.getElementById('stat-views');
+const statViewsSub = document.getElementById('stat-views-sub');
+const statSold = document.getElementById('stat-sold');
+const statSoldSub = document.getElementById('stat-sold-sub');
+const statEarnings = document.getElementById('stat-earnings');
+const statEarningsSub = document.getElementById('stat-earnings-sub');
+if (statArtworks) statArtworks.textContent = reels.length + posts.length;
+if (statArtworksSub) statArtworksSub.textContent = 'Uploaded by you';
+if (statViews) statViews.textContent = '0';
+if (statViewsSub) statViewsSub.textContent = 'No views yet';
+if (statSold) statSold.textContent = '0';
+if (statSoldSub) statSoldSub.textContent = 'No sales yet';
+if (statEarnings) statEarnings.textContent = '₹0';
+if (statEarningsSub) statEarningsSub.textContent = '₹0 this month';
+}
+};
+initDB().then(() => {
+  loadRecentUploads();
+  loadPortfolioShowcase();
+}).catch(err => {
+  console.error("DB Init failed", err);
+  loadRecentUploads();
+  loadPortfolioShowcase();
+});
+
+// Scroll to portfolio section if hash is #portfolio
+if (window.location.hash === '#portfolio') {
+  setTimeout(() => {
+    const portfolioEl = document.getElementById('portfolio');
+    if (portfolioEl) portfolioEl.scrollIntoView({ behavior: 'smooth' });
+  }, 400);
+}
+});
+
+/* ═══════════════════════════════════════════════ */
+/*          PORTFOLIO SHOWCASE FUNCTIONS           */
+/* ═══════════════════════════════════════════════ */
+
+let selectedPatternUrl = 'pics/warli_pattern_1778230295803.png';
+let selectedBgColor = '#FDFBF7';
+let artistPosts = [];
+
+function togglePortfolioDrawer(show) {
+  const drawer = document.getElementById('edit-drawer');
+  const overlay = document.getElementById('edit-drawer-overlay');
+  let user = null;
+  try { user = JSON.parse(localStorage.getItem('currentUser')); } catch(e) {}
+  if (!user) return;
+  if (show) {
+    const profileKey = 'artist_profile_' + user.email;
+    const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
+    document.getElementById('inp-calligraphy').value = profile.calligraphy || 'Artistic Excellence';
+    document.getElementById('inp-achievements').value = profile.achievements ||
+      "• Solo Exhibition, Visual Arts Gallery, New Delhi (2023)\n• State Award for Traditional Crafts, Government of Bihar (2021)\n• National Traditional Conclave Participant (2020)";
+    selectedBgColor = profile.themeBgColor || '#FDFBF7';
+    selectedPatternUrl = profile.themePattern || 'pics/warli_pattern_1778230295803.png';
+    drawer.classList.remove('translate-x-full');
+    overlay.classList.remove('hidden');
+  } else {
+    drawer.classList.add('translate-x-full');
+    overlay.classList.add('hidden');
+  }
+}
+
+function selectPattern(url, btn) {
+  selectedPatternUrl = url;
+  const buttons = btn.parentElement.querySelectorAll('button');
+  buttons.forEach(b => {
+    b.classList.remove('border-primary');
+    b.classList.add('border-outline-variant');
+  });
+  btn.classList.remove('border-outline-variant');
+  btn.classList.add('border-primary');
+}
+
+document.querySelectorAll('.color-swatch').forEach(swatch => {
+  swatch.addEventListener('click', () => {
+    selectedBgColor = swatch.getAttribute('data-color');
+    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+    swatch.classList.add('active');
+  });
+});
+
+const customColorInput = document.getElementById('custom-color');
+if (customColorInput) {
+  customColorInput.addEventListener('input', (e) => {
+    selectedBgColor = e.target.value;
+    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+  });
+}
+
+function savePortfolioSettings() {
+  let user = null;
+  try { user = JSON.parse(localStorage.getItem('currentUser')); } catch(e) {}
+  if (!user) return;
+  const profileKey = 'artist_profile_' + user.email;
+  const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
+  profile.calligraphy = document.getElementById('inp-calligraphy').value.trim();
+  profile.achievements = document.getElementById('inp-achievements').value.trim();
+  profile.themeBgColor = selectedBgColor;
+  profile.themePattern = selectedPatternUrl;
+  localStorage.setItem(profileKey, JSON.stringify(profile));
+  togglePortfolioDrawer(false);
+  loadPortfolioShowcase();
+}
+
+async function loadPortfolioShowcase() {
+  let user = null;
+  try { user = JSON.parse(localStorage.getItem('currentUser')); } catch(e) {}
+  if (!user) return;
+  const profileKey = 'artist_profile_' + user.email;
+  const profile = JSON.parse(localStorage.getItem(profileKey) || '{}');
+
+  const displayName = profile.displayName || user.fullName;
+  const spec = profile.specialization || user.spec || 'Traditional Artist';
+  const location = profile.cityState || 'India';
+  const photoUrl = profile.photoUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150';
+  const bio = profile.bio || 'Crafting heritage art forms with meticulous devotion.';
+  const calligraphy = profile.calligraphy || 'Artistic Excellence';
+  const achievements = profile.achievements ||
+    "• Solo Exhibition, Visual Arts Gallery, New Delhi (2023)\n• State Award for Traditional Crafts, Government of Bihar (2021)\n• National Traditional Conclave Participant (2020)";
+
+  const bgColor = profile.themeBgColor || '#FDFBF7';
+  const pattern = profile.themePattern || 'pics/warli_pattern_1778230295803.png';
+
+  const container = document.getElementById('portfolio-showcase-container');
+  if (container) container.style.backgroundColor = bgColor;
+  const coverPattern = document.getElementById('showcase-cover-pattern');
+  if (coverPattern) coverPattern.style.backgroundImage = `url('${pattern}')`;
+
+  const bioPattern = document.querySelector('.bio-pattern');
+  const achPattern = document.querySelector('.ach-pattern');
+  if (bioPattern) bioPattern.style.backgroundImage = `url('${pattern}')`;
+  if (achPattern) achPattern.style.backgroundImage = `url('${pattern}')`;
+
+  const setTextById = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+  const setSrcById = (id, src) => { const el = document.getElementById(id); if (el) el.src = src; };
+
+  setSrcById('showcase-avatar', photoUrl);
+  setTextById('showcase-name', displayName);
+  setTextById('showcase-calligraphy', calligraphy);
+  setTextById('showcase-spec', spec);
+  setTextById('showcase-location', location);
+  setTextById('showcase-bio', `"${bio}"`);
+
+  // Links
+  const linksContainer = document.getElementById('showcase-links');
+  if (linksContainer) {
+    linksContainer.innerHTML = '';
+    const links = [
+      { title: 'Website', url: profile.website, icon: 'language' },
+      { title: 'Instagram', url: profile.instagram, icon: 'link' },
+      { title: 'Behance', url: profile.behance, icon: 'share' }
+    ];
+    links.forEach(l => {
+      if (l.url) {
+        const btn = document.createElement('a');
+        btn.href = l.url.startsWith('http') ? l.url : 'https://' + l.url;
+        btn.target = '_blank';
+        btn.className = "flex items-center gap-1.5 text-xs text-primary font-bold tracking-wide uppercase hover:underline bg-white/50 border border-outline-variant px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm transition-colors";
+        btn.innerHTML = `<span class="material-symbols-outlined text-sm font-bold">${l.icon}</span> ${l.title}`;
+        linksContainer.appendChild(btn);
+      }
+    });
+  }
+
+  // Achievements
+  const achContainer = document.getElementById('showcase-achievements');
+  if (achContainer) {
+    achContainer.innerHTML = achievements.split('\n')
+      .filter(l => l.trim() !== '')
+      .map(l => `<li class="flex items-start gap-2.5"><span class="text-primary mt-1">•</span><span>${l.replace(/^[•\-\*\s]+/, '')}</span></li>`)
+      .join('');
+  }
+
+  // Featured image
+  const postsKey = 'artist_posts_' + user.email;
+  artistPosts = JSON.parse(localStorage.getItem(postsKey) || '[]');
+  const imgCard = document.getElementById('featured-image-card');
+  if (imgCard) {
+    if (artistPosts.length > 0) {
+      const latestImg = artistPosts[artistPosts.length - 1];
+      setSrcById('featured-image-img', latestImg.imgUrl);
+      setTextById('featured-image-title', latestImg.title);
+      setTextById('featured-image-category', latestImg.category || 'Artwork');
+      const priceEl = document.getElementById('featured-image-price');
+      if (priceEl) priceEl.textContent = '₹' + Number(latestImg.price).toLocaleString();
+      imgCard.style.display = 'block';
+    } else {
+      imgCard.innerHTML = `
+        <div class="aspect-video bg-surface-container-low overflow-hidden relative flex flex-col items-center justify-center p-8 text-center cursor-pointer" onclick="window.location.href='/'">
+          <span class="material-symbols-outlined text-primary text-5xl mb-3">add_photo_alternate</span>
+          <h4 class="font-headline-md text-lg font-bold text-on-surface">No Featured Image</h4>
+          <p class="text-xs text-on-surface-variant/60 mt-1">Upload artwork in your Gallery to feature it here.</p>
+        </div>
+      `;
+    }
+  }
+
+  // Featured video
+  let videoUrl = 'pics/video.mp4';
+  let videoTitle = 'Process Reel';
+  let hasVideo = false;
+  if (typeof db !== 'undefined' && db) {
+    const transaction = db.transaction([storeName], "readonly");
+    const store = transaction.objectStore(storeName);
+    const request = store.getAll();
+    await new Promise((resolve) => {
+      request.onsuccess = () => {
+        const allReels = request.result || [];
+        const userReels = allReels.filter(r => r.userEmail === user.email);
+        if (userReels.length > 0) {
+          const latestReel = userReels[userReels.length - 1];
+          videoUrl = latestReel.file ? URL.createObjectURL(latestReel.file) : latestReel.videoUrl;
+          videoTitle = latestReel.title || 'Process Reel';
+          hasVideo = true;
+        }
+        resolve();
+      };
+    });
+  }
+  const videoCard = document.getElementById('featured-video-card');
+  const player = document.getElementById('featured-video-player');
+  if (videoCard && player) {
+    if (hasVideo) {
+      player.src = videoUrl;
+      setTextById('featured-video-title', videoTitle);
+      videoCard.style.display = 'flex';
+    } else {
+      player.src = 'pics/video.mp4';
+      setTextById('featured-video-title', 'Mithila Clay Painting Demo');
+    }
+  }
+}
+
+function openLightbox() {
+  if (artistPosts.length === 0) return;
+  const latestImg = artistPosts[artistPosts.length - 1];
+  const modal = document.getElementById('lightbox-modal');
+  document.getElementById('lightbox-img').src = latestImg.imgUrl;
+  document.getElementById('lightbox-title').textContent = latestImg.title;
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+}
+function closeLightbox() {
+  const modal = document.getElementById('lightbox-modal');
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+}
+
+function toggleShareDropdown() {
+  document.getElementById('share-dropdown').classList.toggle('hidden');
+}
+window.addEventListener('click', (e) => {
+  const container = document.getElementById('share-dropdown-container');
+  if (container && !container.contains(e.target)) {
+    document.getElementById('share-dropdown').classList.add('hidden');
+  }
+});
+
+function shareAction(platform) {
+  let user = null;
+  try { user = JSON.parse(localStorage.getItem('currentUser')); } catch(e) {}
+  if (!user) return;
+  const shareUrl = window.location.origin + '//?artist=' + encodeURIComponent(user.email) + '#portfolio';
+  const title = 'Exquisite Heritage Art Portfolio by ' + user.fullName;
+  const message = 'Explore my portfolio and masterpieces at The Painted Muse: ' + shareUrl;
+  document.getElementById('share-dropdown').classList.add('hidden');
+  switch (platform) {
+    case 'copy':
+      navigator.clipboard.writeText(shareUrl).then(() => alert('Portfolio link copied!'));
+      break;
+    case 'whatsapp':
+      window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(message), '_blank');
+      break;
+    case 'twitter':
+      window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(title), '_blank');
+      break;
+    case 'facebook':
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), '_blank');
+      break;
+  }
+}
+</script>
+<script src="content-loader.js"></script>
+</body>
+</html>

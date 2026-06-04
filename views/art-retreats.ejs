@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Art Retreats | The Painted Muse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="components/Navbar.js" defer></script>
+<script src="components/Footer.js" defer></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Outfit:wght@400;500;700&display=swap"
+rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+rel="stylesheet" />
+<style>
+:root {
+--ink: #1A1208;
+--saffron: #D4AF37;
+--bg: #FDFBF7;
+--cream: #F5F0E8;
+--terracotta: #B5451B;
+}
+body {
+background-color: var(--bg);
+color: var(--ink);
+font-family: 'Outfit', sans-serif;
+scroll-behavior: smooth;
+}
+.serif {
+font-family: 'Cormorant Garamond', serif;
+}
+.glass {
+background: rgba(255, 255, 255, 0.7);
+backdrop-filter: blur(15px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.retreat-section {
+min-height: 100vh;
+display: flex;
+align-items: center;
+padding: 100px 0;
+position: relative;
+overflow: hidden;
+}
+.retreat-image-frame {
+height: 80vh;
+width: 100%;
+object-fit: cover;
+border-radius: 2rem;
+box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+.floating-label {
+writing-mode: vertical-rl;
+text-orientation: mixed;
+transform: rotate(180deg);
+}
+.ink-grain {
+background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC42IiBvY3RhdmVzPSIzIiBzdGlja2VzPSJ0cnVlIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI24pIiBvcGFjaXR5PSIwLjA1Ii8+PC9zdmc+');
+}
+.section-tag {
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 0.4em;
+text-transform: uppercase;
+color: var(--saffron);
+margin-bottom: 1.5rem;
+display: block;
+}
+.reveal {
+opacity: 0;
+transform: translateY(40px);
+transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.reveal.active {
+opacity: 1;
+transform: translateY(0);
+}
+
+
+footer {
+background: #FDFBF7;
+color: var(--ink);
+padding: 100px 0 40px;
+position: relative;
+}
+footer::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--terracotta), transparent);
+}
+.foot-top {
+display: grid;
+grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+gap: 48px;
+margin-bottom: 60px;
+}
+.foot-brand p {
+color: rgba(26, 18, 8, 0.7);
+font-size: 14px;
+margin: 20px 0 24px;
+max-width: 320px;
+line-height: 1.6;
+}
+.socials {
+display: flex;
+gap: 12px;
+}
+.socials a {
+width: 40px;
+height: 40px;
+border: 1px solid rgba(26, 18, 8, 0.15);
+border-radius: 50%;
+display: grid;
+place-items: center;
+color: var(--ink);
+transition: all 0.3s ease;
+}
+.socials a:hover {
+background: var(--terracotta);
+color: white;
+border-color: var(--terracotta);
+transform: translateY(-3px);
+}
+.foot-col h5 {
+font-family: 'Cormorant Garamond', serif;
+font-style: italic;
+font-size: 15px;
+margin-bottom: 24px;
+color: var(--terracotta);
+font-weight: 700;
+letter-spacing: 0.05em;
+}
+.foot-col ul {
+list-style: none;
+padding: 0;
+}
+.foot-col li {
+margin-bottom: 12px;
+}
+.foot-col a {
+font-size: 14px;
+color: rgba(26, 18, 8, 0.75);
+transition: color 0.3s ease;
+text-decoration: none;
+}
+.foot-col a:hover {
+color: var(--terracotta);
+}
+.foot-bot {
+border-top: 1px solid rgba(26, 18, 8, 0.1);
+padding-top: 32px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: rgba(26, 18, 8, 0.5);
+font-size: 13px;
+flex-wrap: wrap;
+gap: 16px;
+}
+@media (max-width: 1024px) {
+.foot-top { grid-template-columns: repeat(3, 1fr); }
+.foot-brand { grid-column: span 3; margin-bottom: 20px; }
+}
+@media (max-width: 768px) {
+.foot-top { grid-template-columns: repeat(2, 1fr); }
+.foot-brand { grid-column: span 2; }
+}
+</style>
+</head>
+<body class="selection:bg-[#D4AF37]/30">
+<div class="ink-grain fixed inset-0 pointer-events-none z-50"></div>
+<app-navbar></app-navbar>
+<header class="pt-48 pb-12 px-6 md:px-12 text-center max-w-5xl mx-auto">
+<span class="section-tag">Bespoke Creative Sanctuaries</span>
+<h1 class="text-6xl md:text-8xl serif italic mb-8">Art Retreats <br><span
+class="not-italic text-[#B5451B]">&</span> Residencies</h1>
+<p class="text-xl text-stone-500 font-sans max-w-2xl mx-auto leading-relaxed italic">
+"Every artist needs a place where the soul can wander without a map."
+</p>
+<div class="mt-12 animate-bounce">
+<span class="material-symbols-outlined text-stone-300 text-4xl">expand_more</span>
+</div>
+</header>
+
+<!-- Hosted Events & Workshops -->
+<section id="past-events" class="py-24 bg-[#F5F0E8] border-y border-[rgba(26,18,8,0.05)] relative z-10 mb-16">
+<div class="container mx-auto px-6 md:px-12">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+<div>
+<span class="section-tag text-[#B5451B]">Curated Experiences</span>
+<h2 class="text-4xl md:text-5xl serif">Events <span class="not-italic">&</span> <br><span class="italic text-[#B5451B]">Workshops</span></h2>
+</div>
+<p class="text-stone-500 max-w-md text-sm md:text-base mt-6 md:mt-0 leading-relaxed">
+Discover upcoming creative gatherings and explore glimpses into our past immersive workshops where artisans and enthusiasts unite.
+</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Event 1 (Available) -->
+<div class="glass p-4 rounded-3xl group hover:-translate-y-2 transition-all duration-500 shadow-lg hover:shadow-2xl reveal border-2 border-[#D4AF37]/30">
+<div class="relative h-64 rounded-2xl overflow-hidden mb-6">
+<img src="https://images.unsplash.com/photo-1578309718420-13e6d18bebc7?auto=format&fit=crop&q=80&w=800" alt="Canvas Masterclass" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="absolute top-4 right-4 bg-[#1A1208] px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest text-[#D4AF37] shadow-lg border border-[#D4AF37]/50 animate-pulse">Open For Booking</div>
+</div>
+<div class="px-3 pb-3">
+<span class="text-[10px] font-bold text-green-700 uppercase tracking-widest block mb-2">Upcoming: Aug 12-15, 2026 • Jaipur</span>
+<h3 class="text-2xl serif mb-3 text-[#1A1208]">Mithila Canvas Masterclass</h3>
+<p class="text-stone-600 text-sm leading-relaxed mb-6">A 4-day intensive workshop exploring the intricate natural dyes and sacred motifs of traditional Madhubani painting alongside master artisans. Includes stay and meals.</p>
+<button onclick="bookEvent(18000, 'Mithila Canvas Masterclass')" class="w-full bg-[#1A1208] text-white py-3 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-[#B5451B] transition-colors flex items-center justify-center gap-2 shadow-md">Book Now — ₹18,000 <span class="material-symbols-outlined text-sm">confirmation_number</span></button>
+</div>
+</div>
+
+<!-- Event 2 -->
+<div class="glass p-4 rounded-3xl group hover:-translate-y-2 transition-all duration-500 shadow-lg hover:shadow-2xl reveal" style="transition-delay: 100ms;">
+<div class="relative h-64 rounded-2xl overflow-hidden mb-6">
+<img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&q=80&w=800" alt="Pottery Retreat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest text-[#B5451B] shadow-sm">Completed</div>
+</div>
+<div class="px-3 pb-3">
+<span class="text-[10px] font-bold text-[#D4AF37] uppercase tracking-widest block mb-2">January 2026 • Dharamshala</span>
+<h3 class="text-2xl serif mb-3 text-[#1A1208]">Himalayan Earth & Clay</h3>
+<p class="text-stone-600 text-sm leading-relaxed mb-6">An immersive week-long pottery and wellness retreat guided by ceramicists in the Dhauladhar foothills, merging mindfulness with craft.</p>
+<a href="#" class="text-[#B5451B] text-[10px] font-bold uppercase tracking-widest hover:text-black transition-colors flex items-center gap-1.5">View Event Gallery <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+
+<!-- Event 3 -->
+<div class="glass p-4 rounded-3xl group hover:-translate-y-2 transition-all duration-500 shadow-lg hover:shadow-2xl reveal" style="transition-delay: 200ms;">
+<div class="relative h-64 rounded-2xl overflow-hidden mb-6">
+<img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&q=80&w=800" alt="Heritage Residency" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest text-[#B5451B] shadow-sm">Completed</div>
+</div>
+<div class="px-3 pb-3">
+<span class="text-[10px] font-bold text-[#D4AF37] uppercase tracking-widest block mb-2">November 2025 • Odisha</span>
+<h3 class="text-2xl serif mb-3 text-[#1A1208]">Pattachitra Heritage Residency</h3>
+<p class="text-stone-600 text-sm leading-relaxed mb-6">Living and learning alongside the generational artists of Raghurajpur heritage village for 14 days of intensive palm-leaf engraving.</p>
+<a href="#" class="text-[#B5451B] text-[10px] font-bold uppercase tracking-widest hover:text-black transition-colors flex items-center gap-1.5">View Event Gallery <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="dharamkot" class="retreat-section">
+<div class="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+<div class="lg:col-span-7 reveal">
+<div class="relative">
+<img src="pics/dharamkot_studio.png" class="retreat-image-frame" alt="Dharamkot Studio">
+<div
+class="absolute -bottom-10 -right-10 glass p-8 rounded-2xl hidden lg:block max-w-xs shadow-2xl">
+<p class="serif italic text-lg text-[#B5451B]">"The clay listens to your heartbeat."</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 reveal">
+<span class="section-tag">Himachal Pradesh</span>
+<h2 class="text-5xl serif mb-6">Dharamkot Studio</h2>
+<p class="text-stone-600 text-lg mb-8 leading-relaxed">
+Set in the clouds of Dharamshala, this 5-day pottery retreat offers a chance to step away from the
+rush of daily life and immerse yourself in the calming rhythm of clay.
+</p>
+<div class="space-y-6 mb-10">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">explore</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">What to Do</h4>
+<p class="text-stone-500 text-sm">Hand-building, wheel throwing, mountain trekking, and
+meditative glazing sessions.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">redeem</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">Current Offers</h4>
+<p class="text-stone-500 text-sm">Early bird 15% discount for July batches. Includes
+heritage farmstay accommodation.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">language</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">Official Website</h4>
+<a href="https://www.dharamkotstudio.com/" target="_blank"
+class="text-[#B5451B] text-sm hover:underline">www.dharamkotstudio.com</a>
+</div>
+</div>
+</div>
+<a href="https://www.dharamkotstudio.com/" target="_blank"
+class="inline-block bg-black text-white px-10 py-5 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#D4AF37] hover:text-black transition-all shadow-xl">Book
+This Retreat →</a>
+</div>
+</div>
+</section>
+<section id="andretta" class="retreat-section bg-[#F5F0E8]">
+<div class="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+<div class="lg:col-span-5 order-2 lg:order-1 reveal">
+<span class="section-tag">Kangra Valley</span>
+<h2 class="text-5xl serif mb-6">Andretta Pottery</h2>
+<p class="text-stone-600 text-lg mb-8 leading-relaxed">
+India's oldest rural pottery studio. A sanctuary for artists where history and craft merge in the
+shadow of the Dhauladhars.
+</p>
+<div class="space-y-6 mb-10">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">explore</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">What to Do</h4>
+<p class="text-stone-500 text-sm">3-month intensive courses, slip designing, glazing
+techniques, and rural art exploration.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">redeem</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">Current Offers</h4>
+<p class="text-stone-500 text-sm">Full residency scholarships available for emerging Indian
+ceramic artists.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">language</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">Official Website</h4>
+<a href="https://www.andrettapottery.in/" target="_blank"
+class="text-[#B5451B] text-sm hover:underline">www.andrettapottery.in</a>
+</div>
+</div>
+</div>
+<a href="https://www.andrettapottery.in/" target="_blank"
+class="inline-block bg-black text-white px-10 py-5 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#D4AF37] hover:text-black transition-all shadow-xl">Secure
+Your Seat →</a>
+</div>
+<div class="lg:col-span-7 order-1 lg:order-2 reveal">
+<div class="relative">
+<img src="pics/andretta_pottery.png" class="retreat-image-frame" alt="Andretta Pottery">
+<div class="absolute -top-10 -left-10 glass p-8 rounded-2xl hidden lg:block max-w-xs shadow-2xl">
+<p class="serif italic text-lg text-[#B5451B]">"Crafting legacy since 1983."</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="art-junction" class="retreat-section">
+<div class="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+<div class="lg:col-span-7 reveal">
+<div class="relative">
+<img src="pics/art_junction_udaipur.png" class="retreat-image-frame" alt="Art Junction">
+</div>
+</div>
+<div class="lg:col-span-5 reveal">
+<span class="section-tag">Udaipur, Rajasthan</span>
+<h2 class="text-5xl serif mb-6">Art Junction</h2>
+<p class="text-stone-600 text-lg mb-8 leading-relaxed">
+An international artist residency nestled in Rural Farm Stay Badanga. A place where silence fuels
+the imagination.
+</p>
+<div class="space-y-6 mb-10">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">explore</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">What to Do</h4>
+<p class="text-stone-500 text-sm">Painting residency, cross-cultural exchange, organic
+farming, and Rajasthani folk art workshops.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">redeem</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">Current Offers</h4>
+<p class="text-stone-500 text-sm">20% off for 4-week residency stays. Includes private
+studio space.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">language</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">Official Website</h4>
+<a href="https://artjunctionudr.wordpress.com/" target="_blank"
+class="text-[#B5451B] text-sm hover:underline">artjunctionudr.wordpress.com</a>
+</div>
+</div>
+</div>
+<a href="https://artjunctionudr.wordpress.com/" target="_blank"
+class="inline-block bg-black text-white px-10 py-5 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#D4AF37] hover:text-black transition-all shadow-xl">Apply
+for Residency →</a>
+</div>
+</div>
+</section>
+<section id="raghurajpur" class="retreat-section bg-[#FDFBF7]">
+<div class="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+<div class="lg:col-span-5 order-2 lg:order-1 reveal">
+<span class="section-tag">Odisha</span>
+<h2 class="text-5xl serif mb-6">Raghurajpur Village</h2>
+<p class="text-stone-600 text-lg mb-8 leading-relaxed">
+A heritage village where every resident is an artist. Live among the masters of Pattachitra and
+palm-leaf engraving.
+</p>
+<div class="space-y-6 mb-10">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">explore</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">What to Do</h4>
+<p class="text-stone-500 text-sm">Pattachitra painting lessons, Gotipua dance viewing, and
+traditional betel nut carving.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">redeem</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">Current Offers</h4>
+<p class="text-stone-500 text-sm">Authentic village homestay packages starting at
+₹1,500/night including meals.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">language</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">Official Website</h4>
+<a href="https://raghurajpur.com/" target="_blank"
+class="text-[#B5451B] text-sm hover:underline">www.raghurajpur.com</a>
+</div>
+</div>
+</div>
+<a href="https://raghurajpur.com/" target="_blank"
+class="inline-block bg-black text-white px-10 py-5 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#D4AF37] hover:text-black transition-all shadow-xl">Visit
+the Heritage Village →</a>
+</div>
+<div class="lg:col-span-7 order-1 lg:order-2 reveal">
+<img src="pics/raghurajpur_village.png" class="retreat-image-frame" alt="Raghurajpur">
+</div>
+</div>
+</section>
+<section id="aura" class="retreat-section">
+<div class="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+<div class="lg:col-span-7 reveal">
+<img src="pics/aura_pottery.png" class="retreat-image-frame" alt="Aura Pottery">
+</div>
+<div class="lg:col-span-5 reveal">
+<span class="section-tag">Chandigarh</span>
+<h2 class="text-5xl serif mb-6">Aura Pottery</h2>
+<p class="text-stone-600 text-lg mb-8 leading-relaxed">
+A boutique ceramic studio on a serene farm. Experience the healing power of earth and creative
+expression.
+</p>
+<div class="space-y-6 mb-10">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">explore</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">What to Do</h4>
+<p class="text-stone-500 text-sm">Pottery wellness retreats (1-12 weeks), wheel throwing,
+and organic farming.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">redeem</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">Current Offers</h4>
+<p class="text-stone-500 text-sm">"Artist Duo" discount: 10% off when booking with a
+partner. Includes pool access.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">language</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">Official Website</h4>
+<a href="https://www.aurapottery.com/" target="_blank"
+class="text-[#B5451B] text-sm hover:underline">www.aurapottery.com</a>
+</div>
+</div>
+</div>
+<a href="https://www.aurapottery.com/" target="_blank"
+class="inline-block bg-black text-white px-10 py-5 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#D4AF37] hover:text-black transition-all shadow-xl">Begin
+Your Retreat →</a>
+</div>
+</div>
+</section>
+<section id="tree-of-life" class="retreat-section bg-[#1A1208] text-white">
+<div class="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+<div class="lg:col-span-5 order-2 lg:order-1 reveal">
+<span class="section-tag" style="color: #D4AF37;">Signature Series</span>
+<h2 class="text-5xl serif mb-6">Tree of Life <br> Artist in You🎨</h2>
+<p class="text-stone-400 text-lg mb-8 leading-relaxed">
+Our heritage hotels transform into canvases. We invite masters and enthusiasts to leave a piece of
+their world behind in our boutique sanctuaries.
+</p>
+<div class="space-y-6 mb-10">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">explore</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">What to Do</h4>
+<p class="text-stone-500 text-sm">Luxury heritage stays, open-air painting, curated artist
+dinners, and legacy creation.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">redeem</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">Current Offers</h4>
+<p class="text-stone-500 text-sm">Complimentary professional art kit provided on arrival for
+all luxury residency suites.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37]">language</span>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-1">Official Website</h4>
+<a href="https://www.treeofliferesorts.com/" target="_blank"
+class="text-[#D4AF37] text-sm hover:underline">www.treeofliferesorts.com</a>
+</div>
+</div>
+</div>
+<a href="https://www.treeofliferesorts.com/" target="_blank"
+class="inline-block bg-[#D4AF37] text-black px-10 py-5 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-xl">Join
+the Waitlist →</a>
+</div>
+<div class="lg:col-span-7 order-1 lg:order-2 reveal">
+<img src="pics/tree_of_life.png" class="retreat-image-frame"
+style="box-shadow: 0 30px 60px rgba(212, 175, 55, 0.1);" alt="Tree of Life">
+</div>
+</div>
+</section>
+<app-footer></app-footer>
+<script>
+function bookEvent(price, eventName) {
+  const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+  if (isLoggedIn) {
+    window.location.href = `/payment?price=${price}&item=${encodeURIComponent(eventName)}`;
+  } else {
+    // Save intended destination
+    localStorage.setItem('redirectAfterLogin', `/payment?price=${price}&item=${encodeURIComponent(eventName)}`);
+    window.location.href = '/user-signin?error=auth';
+  }
+}
+
+const observerOptions = {
+threshold: 0.1
+};
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('active');
+}
+});
+}, observerOptions);
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+<script src="content-loader.js"></script>
+</body>
+</html>

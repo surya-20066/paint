@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Profile Preview | The Painted Muse Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Outfit:wght@400;500;700&amp;display=swap"
+rel="stylesheet" />
+<link
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+rel="stylesheet" />
+<script>
+tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-background": "#241915", outline: "#8b7169", "outline-variant": "#dfc0b6", "on-error": "#ffffff", "surface-bright": "#fff8f6", surface: "#fff8f6", "surface-container-low": "#fff1ed", primary: "#942e02", background: "#fff8f6", "on-surface": "#241915", "surface-container": "#ffe9e3", "on-primary": "#ffffff", secondary: "#795900", "primary-container": "#b5451b", "surface-dim": "#ebd5cf", "surface-variant": "#f4ded7", "on-primary-container": "#ffe4dc", error: "#ba1a1a", "surface-container-highest": "#f4ded7", "secondary-container": "#ffc641", "on-surface-variant": "#58423b", "surface-container-high": "#fae3dd", "surface-container-lowest": "#ffffff", "secondary-fixed": "#ffdfa0", "primary-fixed": "#ffdbd0" }, borderRadius: { DEFAULT: "12px", lg: "16px", xl: "20px", full: "9999px" }, fontFamily: { "label-sm": ["Outfit"], "headline-lg": ["Cormorant Garamond"], "headline-md": ["Cormorant Garamond"], "body-lg": ["Outfit"], "body-md": ["Outfit"] } } } }
+</script>
+<style>
+body {
+background: #fff8f6;
+color: #241915;
+font-family: 'Outfit', sans-serif;
+min-height: max(884px, 100dvh)
+}
+.material-symbols-outlined {
+font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+}
+.paper-grain {
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+opacity: .03;
+pointer-events: none
+}
+</style>
+</head>
+<body class="bg-surface">
+<div class="fixed inset-0 paper-grain z-0"></div>
+<div class="relative flex h-screen w-full flex-row overflow-hidden z-10">
+<aside
+class="hidden lg:flex w-72 flex-col bg-surface-container border-r border-outline-variant h-screen sticky top-0 rounded-r-xl">
+<div class="p-8 cursor-pointer flex items-center gap-3" onclick="window.location.href='/'"><img
+src="pics/logoo.png" alt="The Painted Muse Logo" class="h-24 w-auto object-contain" /><span
+class="font-headline-md text-on-surface text-sm font-bold leading-tight">Artist<br>Dashboard</span>
+</div>
+<nav class="flex-1 px-4">
+<ul class="flex flex-col gap-2">
+<li onclick="window.location.href='/'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">home</span>
+<p class="font-body-md font-medium">Home</p>
+</li>
+<li onclick="window.location.href='/'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="font-body-md font-medium">Gallery</p>
+</li>
+<li onclick="window.location.href='/'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">cloud_upload</span>
+<p class="font-body-md font-medium">Upload Artwork</p>
+</li>
+<li onclick="window.location.href='/'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">account_circle</span>
+<p class="font-body-md font-medium">Portfolio</p>
+</li>
+<li onclick="window.location.href='/'"
+class="flex h-14 items-center gap-4 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<p class="font-body-md font-medium">Settings</p>
+</li>
+</ul>
+</nav>
+<div class="p-8 border-t border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-surface-dim overflow-hidden border border-outline rounded-full"><img
+class="w-full h-full object-cover"
+src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T" />
+</div>
+<div>
+<p class="font-label-sm text-on-surface">AMRITA R.</p>
+<p class="text-[10px] text-on-surface-variant">MASTER ARTIST</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 bg-surface-bright h-screen overflow-y-auto">
+<div class="lg:hidden flex items-center bg-surface p-4 border-b border-outline-variant justify-between">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+<h2 class="text-on-surface font-headline-md text-xl font-bold flex-1 text-center">Portfolio</h2>
+<div class="size-10"></div>
+</div>
+<div class="max-w-6xl mx-auto w-full px-6 md:px-10 py-12">
+<header class="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+<div>
+<p class="font-label-sm text-primary uppercase tracking-widest mb-2">Public Profile Preview</p>
+<h1 class="font-headline-lg text-on-background text-4xl">My Portfolio</h1>
+</div>
+<div class="flex gap-4">
+<button onclick="window.location.href='/'"
+class="h-12 px-6 border border-outline-variant text-on-surface font-body-md font-bold uppercase tracking-widest hover:bg-surface-container-high transition-all rounded-lg flex items-center gap-2"><span
+class="material-symbols-outlined text-lg">edit</span>Edit Portfolio</button>
+<button
+class="h-12 px-8 bg-primary text-on-primary font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg rounded-lg flex items-center gap-2"><span
+class="material-symbols-outlined text-lg">share</span>Share Profile</button>
+</div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+<div class="lg:col-span-1 space-y-8">
+<div class="bg-surface-container-low border border-outline-variant p-8 rounded-xl text-center">
+<div
+class="size-32 mx-auto bg-surface-dim overflow-hidden border-2 border-primary rounded-2xl mb-6">
+<img class="w-full h-full object-cover"
+src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIabFTe2elbqNDvSbk_V1qjKt2ZR36xlywpoooykLRM06Bx4qgQMtA_vAVQSPwwIOlQhilO3I3l8qTaxOXZBaJidGkn3-qDuAE8QgQBclDYLggmIPpiMKuj7j5Voj5SbTZTiMSWc88Ak5_fNVoLePxkKFH1hNiBoN1iOvqCXi62Axu2ey4qr0CWLf9teyZ7OR95gBaPm-V66VskTaOTrceZh2kIT-RxkPEtPC3mzD6-4papLrP5Iwhng3fHAd2r3eIH_F3g5mbM60T" />
+</div>
+<h2 class="font-headline-md text-2xl text-on-surface mb-1">Amrita Raghavan</h2>
+<p class="font-label-sm text-primary uppercase tracking-widest mb-4">Mithila (Madhubani) •
+Verified</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">Award-winning Madhubani artist
+with 15+ years of experience bridging traditional Mithila storytelling with contemporary
+themes.</p>
+<div class="flex justify-center gap-4 mt-8"><button
+class="size-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span
+class="material-symbols-outlined">language</span></button><button
+class="size-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span
+class="material-symbols-outlined">link</span></button><button
+class="size-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span
+class="material-symbols-outlined">mail</span></button></div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-8 rounded-xl">
+<h3 class="font-headline-md text-lg text-on-surface mb-6">Lineage & Stats</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Heritage</p>
+<p class="font-bold text-sm">5th Gen Artisan</p>
+</div>
+<div class="flex justify-between items-center">
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Location</p>
+<p class="font-bold text-sm">Madhubani, Bihar</p>
+</div>
+<div class="flex justify-between items-center">
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Sales</p>
+<p class="font-bold text-sm">120+ Pieces</p>
+</div>
+<div class="flex justify-between items-center">
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Followers</p>
+<p class="font-bold text-sm">2.4K</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-2 space-y-8">
+<h2 class="font-headline-md text-2xl text-on-background mb-6">Exhibition Highlights</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div
+class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-all">
+<div class="aspect-[4/5] bg-surface-variant overflow-hidden"><img
+class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-Xf6Y83-t0_Z9C9K5rXv2V9E-O4C4Z3P5V-W3X_U_fX-O-N-V_N_G-V_L_M_O_P_Q_R_S_T_U_V_W_X_Y_Z" />
+</div>
+<div class="p-4">
+<h4 class="font-headline-md text-lg">Tree of Life</h4>
+<p class="text-xs text-on-surface-variant">Madhubani • ₹45,000</p>
+</div>
+</div>
+<div
+class="bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-all">
+<div class="aspect-[4/5] bg-surface-variant overflow-hidden"><img
+class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtntfX-Ln9Zw1VZ0Hpkb2gPLxVGo-8i2HCOQq8MuDWfMJ2R8rgP_bq6LuBgIgo3JgCiAL1gf7XMnMQnarbhaXApQCbdgiH5J6IEDNWep-L2TYfsPvnDvypEd-aqOQD1Cja_lGLbojN9phmbZ6mwRBP9PEOFZcjvFm_WXH7XdrbwO0pOyT242yuLXNIchrOTtBgei5F4QraRKm3KIVqWxT6AX6MpcVZgTW8r293ODOFXu-5fLVr9dMl3bbcU4vwotycF13aX7JWcw0N" />
+</div>
+<div class="p-4">
+<h4 class="font-headline-md text-lg">Lotus Dreams</h4>
+<p class="text-xs text-on-surface-variant">Madhubani • Sold</p>
+</div>
+</div>
+</div>
+<h2 class="font-headline-md text-2xl text-on-background mb-6">Collector Reviews</h2>
+<div class="space-y-4">
+<div class="bg-surface-container-low border border-outline-variant p-6 rounded-xl">
+<div class="flex items-center gap-4 mb-4">
+<div class="size-10 bg-surface-dim rounded-full overflow-hidden"><img
+class="w-full h-full object-cover"
+src="https://i.pravatar.cc/100?u=sarah" /></div>
+<div>
+<p class="font-bold text-sm">Sarah Jenkins</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Collector from London
+</p>
+</div>
+<div class="ml-auto text-primary text-sm font-bold">★★★★★</div>
+</div>
+<p class="text-sm text-on-surface-variant italic">"The level of detail in Amrita's work
+is astounding. It's not just a painting; it's a conversation with heritage."</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const user = JSON.parse(localStorage.getItem('currentUser'));
+if (!user) {
+window.location.href = '/';
+return;
+}
+const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+const userInDb = usersDb[user.email];
+if (!userInDb || !userInDb.isApproved) {
+window.location.href = '/?error=pending';
+return;
+}
+const profileKey = 'artist_profile_' + user.email;
+const storedProfile = localStorage.getItem(profileKey);
+
+const sbImg = document.querySelector('aside img');
+const sbName = document.querySelector('aside p.font-label-sm') || document.querySelector('aside p');
+const sbRole = document.querySelector('aside p.text-\\[10px\\]') || document.querySelectorAll('aside p')[1];
+
+const previewImg = document.querySelector('main .size-32 img');
+const previewName = document.querySelector('main h2.font-headline-md');
+const previewRole = document.querySelector('main p.font-label-sm');
+const previewBio = document.querySelector('main p.text-sm.text-on-surface-variant');
+
+const linkButtons = document.querySelectorAll('main .flex.justify-center.gap-4 button');
+
+const exhibitionContainer = document.querySelector('main .lg\\:col-span-2 .grid');
+
+let displayName = user.fullName;
+let specialization = user.spec || 'Traditional';
+let bio = "Award-winning artist bridging tradition with contemporary themes.";
+let photoUrl = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100';
+let website = '';
+let instagram = '';
+let behance = '';
+let themeBgColor = '#fff8f6';
+let themePattern = 'pics/warli_pattern_1778230295803.png';
+if (storedProfile) {
+const profile = JSON.parse(storedProfile);
+displayName = profile.displayName || displayName;
+specialization = profile.specialization || specialization;
+bio = profile.bio || bio;
+photoUrl = profile.photoUrl || photoUrl;
+website = profile.website || website;
+instagram = profile.instagram || instagram;
+behance = profile.behance || behance;
+themeBgColor = profile.themeBgColor || themeBgColor;
+themePattern = profile.themePattern || themePattern;
+}
+
+if (sbImg) sbImg.src = photoUrl;
+if (sbName) sbName.textContent = displayName.toUpperCase();
+if (sbRole) sbRole.textContent = specialization.toUpperCase() + ' ARTIST';
+if (previewImg) previewImg.src = photoUrl;
+if (previewName) previewName.textContent = displayName;
+if (previewRole) previewRole.textContent = specialization + ' • Verified';
+if (previewBio) previewBio.textContent = bio;
+
+if (linkButtons[0]) {
+linkButtons[0].onclick = () => {
+if (website) window.open(website, '_blank');
+else alert('No personal website provided.');
+};
+}
+if (linkButtons[1]) {
+linkButtons[1].onclick = () => {
+if (instagram) window.open(instagram, '_blank');
+else alert('No Instagram profile provided.');
+};
+}
+if (linkButtons[2]) {
+linkButtons[2].onclick = () => {
+if (behance) window.open(behance, '_blank');
+else alert('No Behance/Dribbble profile provided.');
+};
+}
+
+document.body.style.backgroundColor = themeBgColor;
+const mainContainer = document.querySelector('main');
+if (mainContainer) mainContainer.style.backgroundColor = themeBgColor;
+const grain = document.querySelector('.paper-grain');
+if (grain) {
+grain.style.backgroundImage = `url('${themePattern}')`;
+grain.style.opacity = '0.04';
+grain.style.backgroundSize = 'cover';
+}
+
+const postsKey = 'artist_posts_' + user.email;
+const storedPosts = localStorage.getItem(postsKey);
+let artistPosts = [];
+if (storedPosts) {
+artistPosts = JSON.parse(storedPosts);
+} else if (!user.isNewUser) {
+
+artistPosts = [
+{ title: 'Tree of Life', price: 45000, imgUrl: 'pics/pattachitra_pattern_1778230348344.png', category: 'Madhubani' },
+{ title: 'Lotus Dreams', price: 32000, imgUrl: 'pics/kalamkari_pattern_1778230370773.png', category: 'Madhubani' }
+];
+}
+if (exhibitionContainer) {
+exhibitionContainer.innerHTML = '';
+if (artistPosts.length === 0) {
+exhibitionContainer.className = "col-span-full text-center py-12 bg-surface-container-low rounded-xl border border-dashed border-outline-variant";
+exhibitionContainer.innerHTML = `
+<div class="py-12">
+<span class="material-symbols-outlined text-4xl text-outline mb-2">folder_open</span>
+<p class="text-sm text-on-surface-variant">No works added to exhibition yet.</p>
+</div>
+`;
+} else {
+exhibitionContainer.className = "grid grid-cols-1 sm:grid-cols-2 gap-6";
+artistPosts.forEach(post => {
+const item = document.createElement('div');
+item.className = "bg-surface-container-lowest border border-outline-variant group cursor-pointer hover:shadow-lg transition-all rounded-xl overflow-hidden";
+item.innerHTML = `
+<div class="aspect-[4/5] bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${post.imgUrl}" onerror="this.src='pics/madhubani_pattern_1778230275283.png'"/>
+</div>
+<div class="p-4">
+<h4 class="font-headline-md text-lg">${post.title}</h4>
+<p class="text-xs text-on-surface-variant">${post.category || 'Artwork'} • ₹${Number(post.price || 0).toLocaleString()}</p>
+</div>
+`;
+exhibitionContainer.appendChild(item);
+});
+}
+}
+
+const menuBtn = document.querySelector('.lg\\:hidden span.material-symbols-outlined');
+if (menuBtn) {
+menuBtn.classList.add('cursor-pointer');
+menuBtn.addEventListener('click', () => {
+const aside = document.querySelector('aside');
+if (aside) {
+aside.classList.toggle('hidden');
+aside.classList.toggle('flex');
+aside.classList.toggle('fixed');
+aside.classList.toggle('inset-y-0');
+aside.classList.toggle('left-0');
+aside.classList.toggle('z-50');
+aside.classList.toggle('w-72');
+}
+});
+}
+});
+</script>
+<script src="content-loader.js"></script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Dashboard | The Painted Muse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&amp;family=Outfit:wght@400;500;700&amp;family=Great+Vibes&amp;display=swap"
+rel="stylesheet" />
+<link
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+rel="stylesheet" />
+<script src="components/Navbar.js" defer></script>
+<script src="components/Sidebar.js" defer></script>
+<script src="components/Footer.js" defer></script>
+<script>
+(function checkUserAuth() {
+  if (localStorage.getItem('userLoggedIn') !== 'true') {
+    window.location.href = '/?error=auth';
+  }
+})();
+</script>
+<style>
+:root {
+--primary: #B5451B;
+--accent: #D4AF37;
+--background: #FDFBF7;
+--text: #1A1208;
+--cream: #F5F0E8;
+--warm: #FFF8F0;
+}
+.material-symbols-outlined {
+font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+}
+body {
+background-color: var(--background);
+color: var(--text);
+font-family: 'Outfit', sans-serif;
+}
+/* Smooth Page Transition */
+@keyframes pageFadeIn {
+from { opacity: 0; transform: translateY(12px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+main .p-8,
+main .max-w-5xl {
+animation: pageFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.font-serif {
+font-family: 'Cormorant Garamond', serif;
+}
+.font-calligraphy {
+font-family: 'Great Vibes', cursive;
+}
+.ink-grain {
+background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCRrEuwmrE10cxB2Oae845GDrP3kU-WyjvkShm1EQbrQg1J8AWwsnfTOa_Yd43-yDsPK-k7jiLPfPtwwOdYsTOwnMBabRznvfeo8h3bqtwD5gH2q4U30MBCCjJNiRgFbchZDN5lhWytQEYI5xTmEfIbnzuDLCKKDPl8_NyfmuWMuR86PhGc-JnOKloK4F3ni1MSTH5prPAgGGKWuf8SBOUfiXyBj35iXGC3XCEi91OQTXGj39Posri3UHGrcYXiOqWISXFGxeYn7Z7y);
+opacity: 0.03;
+pointer-events: none;
+position: fixed;
+inset: 0;
+z-index: 99;
+}
+.warli-border {
+border: 1px solid rgba(212, 175, 55, 0.2);
+position: relative;
+}
+.warli-border::before {
+content: "";
+position: absolute;
+inset: 4px;
+border: 1px solid rgba(212, 175, 55, 0.1);
+pointer-events: none;
+}
+.glass-panel {
+background: rgba(255, 255, 255, 0.7);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(212, 175, 55, 0.1);
+}
+.sidebar-item.active {
+color: var(--primary);
+background: rgba(181, 69, 27, 0.05);
+border-right: 3px solid var(--primary);
+}
+.artist-card:hover .artist-overlay {
+opacity: 1;
+}
+@keyframes float {
+0% {
+transform: translateY(0px);
+}
+50% {
+transform: translateY(-10px);
+}
+100% {
+transform: translateY(0px);
+}
+}
+.animate-float {
+animation: float 4s ease-in-out infinite;
+}
+.custom-scrollbar::-webkit-scrollbar {
+width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+background: rgba(26, 18, 8, 0.05);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+background: var(--accent);
+border-radius: 10px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+display: none;
+}
+.no-scrollbar {
+-ms-overflow-style: none;
+scrollbar-width: none;
+}
+.shimmer {
+background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+background-size: 200% 100%;
+animation: shimmer 2s infinite;
+}
+@keyframes shimmer {
+0% {
+background-position: -200% 0;
+}
+100% {
+background-position: 200% 0;
+}
+}
+
+footer {
+background: #FDFBF7;
+color: var(--text);
+padding: 100px 0 40px;
+position: relative;
+}
+footer::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+.foot-top {
+display: grid;
+grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+gap: 48px;
+margin-bottom: 60px;
+}
+.foot-brand p {
+color: rgba(26, 18, 8, 0.7);
+font-size: 14px;
+margin: 20px 0 24px;
+max-width: 320px;
+line-height: 1.6;
+}
+.socials {
+display: flex;
+gap: 12px;
+}
+.socials a {
+width: 40px;
+height: 40px;
+border: 1px solid rgba(26, 18, 8, 0.15);
+border-radius: 50%;
+display: grid;
+place-items: center;
+color: var(--text);
+transition: all 0.3s ease;
+}
+.socials a:hover {
+background: var(--primary);
+color: white;
+border-color: var(--primary);
+transform: translateY(-3px);
+}
+.foot-col h5 {
+font-family: 'Cormorant Garamond', serif;
+font-style: italic;
+font-size: 15px;
+margin-bottom: 24px;
+color: var(--primary);
+font-weight: 700;
+letter-spacing: 0.05em;
+}
+.foot-col ul {
+list-style: none;
+padding: 0;
+}
+.foot-col li {
+margin-bottom: 12px;
+}
+.foot-col a {
+font-size: 14px;
+color: rgba(26, 18, 8, 0.75);
+transition: color 0.3s ease;
+text-decoration: none;
+}
+.foot-col a:hover {
+color: var(--primary);
+}
+.foot-bot {
+border-top: 1px solid rgba(26, 18, 8, 0.1);
+padding-top: 32px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: rgba(26, 18, 8, 0.5);
+font-size: 13px;
+flex-wrap: wrap;
+gap: 16px;
+}
+@media (max-width: 1024px) {
+.foot-top { grid-template-columns: repeat(3, 1fr); }
+.foot-brand { grid-column: span 3; margin-bottom: 20px; }
+}
+@media (max-width: 768px) {
+.foot-top { grid-template-columns: repeat(2, 1fr); }
+.foot-brand { grid-column: span 2; }
+}
+</style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden pt-[90px] md:pt-[100px]">
+<app-navbar></app-navbar>
+
+<div id="dashboard-layout-wrapper" class="flex flex-1 overflow-hidden">
+<div class="ink-grain"></div>
+<dashboard-sidebar type="user"></dashboard-sidebar>
+<main class="flex-1 flex flex-col h-full overflow-y-auto custom-scrollbar relative">
+<header
+class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-stone-100 px-8 py-4 flex justify-between items-center">
+<div class="flex items-center gap-4 flex-1">
+<button class="mobile-menu-btn-toggle lg:hidden text-stone-900 p-2 flex items-center justify-center mr-2">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<div class="relative max-w-md w-full">
+<span
+class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm">search</span>
+<input type="text" placeholder="Search artists, art retreats, or regions..."
+class="w-full pl-10 pr-4 py-2 bg-stone-100 border-none rounded-lg text-sm focus:ring-1 focus:ring-[#D4AF37]">
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative text-stone-500 hover:text-[#B5451B] transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-[#B5451B] rounded-full"></span>
+</button>
+<button onclick="window.location.href='/'"
+class="font-sans text-[10px] font-bold uppercase tracking-widest bg-[#B5451B] text-white px-4 py-2 rounded shadow-lg hover:bg-[#D4AF37] transition-all">Book
+Artist</button>
+</div>
+</header>
+<div class="p-8 space-y-12">
+<section class="relative overflow-hidden rounded-3xl bg-[#F5F0E8] border border-stone-200 p-12 shadow-lg mb-12">
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
+<img src="pics/aipan_pattern_uttarakhand_1778230515155.png" alt="Pattern" class="w-full h-full object-cover grayscale mix-blend-multiply">
+</div>
+<div class="relative z-10 max-w-2xl">
+<h1 class="text-4xl md:text-5xl font-serif mb-4 text-[#1A1208] leading-tight">Heritage <br><span class="italic text-[#B5451B]">Workshops</span></h1>
+<p class="text-stone-600 text-lg">Learn the sacred geometry, natural dye techniques, and storytelling from the masters directly.</p>
+</div>
+</section>
+<section class="mb-16">
+<h2 class="text-2xl font-serif text-[#1A1208] mb-6 flex items-center gap-3 border-b border-stone-200 pb-2">
+<span class="material-symbols-outlined text-[#B5451B]">event_upcoming</span> Upcoming Featured Sessions
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-white rounded-2xl overflow-hidden border border-stone-100 shadow-lg group flex flex-col">
+<div class="h-56 relative overflow-hidden">
+<img src="pics/phulkari_pattern_1778230389596.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+<div class="absolute top-4 right-4 bg-[#1A1208] text-white px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded">Punjab</div>
+<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white pt-12">
+<h3 class="text-2xl font-serif mb-1">Phulkari Thread Art</h3>
+<p class="text-sm opacity-90 text-[#D4AF37] font-bold">Online Interactive Course</p>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<p class="text-sm text-stone-600 mb-6 flex-1 leading-relaxed">Master the vibrant embroidery techniques of Punjab over a 3-day immersive online course. Learn how to source the right threads, understand the geometric alignments, and create your first piece.</p>
+<div class="grid grid-cols-2 gap-4 mb-6 bg-stone-50 p-4 rounded-xl border border-stone-100">
+<div>
+<p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold">Dates</p>
+<p class="text-sm font-bold text-[#1A1208]">May 20 - May 23</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold">Duration</p>
+<p class="text-sm font-bold text-[#1A1208]">2 Hrs / Day</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold">Instructor</p>
+<p class="text-sm font-bold text-[#1A1208]">Kiran Kaur</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold">Spots Left</p>
+<p class="text-sm font-bold text-[#B5451B]">Only 3 Left!</p>
+</div>
+</div>
+<div class="flex justify-between items-center border-t border-stone-100 pt-6">
+<div class="flex flex-col">
+<span class="text-[10px] text-stone-400 uppercase tracking-widest font-bold line-through">Regular $150</span>
+<span class="text-2xl text-[#1A1208] font-serif font-bold">$120</span>
+</div>
+<button class="px-8 py-3 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors rounded shadow-lg">Book Spot</button>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-2xl overflow-hidden border border-stone-100 shadow-lg group flex flex-col">
+<div class="h-56 relative overflow-hidden">
+<img src="pics/pithora_pattern_1778230468406.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+<div class="absolute top-4 right-4 bg-[#1A1208] text-white px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded">Gujarat</div>
+<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white pt-12">
+<h3 class="text-2xl font-serif mb-1">Pithora Wall Rituals</h3>
+<p class="text-sm opacity-90 text-[#D4AF37] font-bold">Hybrid Workshop (Live + Studio)</p>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<p class="text-sm text-stone-600 mb-6 flex-1 leading-relaxed">Understand the deep spiritual significance of the Rathwa tribe and create your own Pithora ritual painting using traditional horse motifs and bright native colors.</p>
+<div class="grid grid-cols-2 gap-4 mb-6 bg-stone-50 p-4 rounded-xl border border-stone-100">
+<div>
+<p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold">Dates</p>
+<p class="text-sm font-bold text-[#1A1208]">June 05 - June 10</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold">Duration</p>
+<p class="text-sm font-bold text-[#1A1208]">Weekend Intensive</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold">Instructor</p>
+<p class="text-sm font-bold text-[#1A1208]">Paresh Rathwa</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold">Status</p>
+<p class="text-sm font-bold text-green-600">Open</p>
+</div>
+</div>
+<div class="flex justify-between items-center border-t border-stone-100 pt-6">
+<div class="flex flex-col">
+<span class="text-2xl text-[#1A1208] font-serif font-bold">$150</span>
+</div>
+<button class="px-8 py-3 bg-[#1A1208] text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#1A1208] transition-colors rounded shadow-lg">Book Spot</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-stone-900 rounded-3xl p-12 text-center text-white relative overflow-hidden mb-12 shadow-2xl">
+<div class="absolute inset-0 opacity-20"><img src="pics/tanjore_gold_pattern_1778230407842.png" class="w-full h-full object-cover"></div>
+<div class="relative z-10 max-w-2xl mx-auto">
+<span class="material-symbols-outlined text-[#D4AF37] text-4xl mb-4">diamond</span>
+<h2 class="text-3xl font-serif mb-4">Looking for a Private Retreat?</h2>
+<p class="text-stone-300 mb-8 leading-relaxed">Book a 1-on-1 private heritage art retreat hosted in the artisan's own village. Spend a week immersed in local culture, food, and intensive art training.</p>
+<button class="px-8 py-4 bg-[#D4AF37] text-[#1A1208] text-xs font-bold uppercase tracking-widest rounded hover:bg-white transition-colors shadow-lg hover:shadow-xl">Request Custom Retreat</button>
+</div>
+</section>
+</div>
+<app-footer></app-footer>
+</main>
+</div>
+<script>
+  // Auth check is handled in the head section.
+</script>
+<script src="content-loader.js"></script>
+</body>
+</html>

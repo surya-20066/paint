@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Secure Artist Chat | The Painted Muse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="components/Navbar.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --ink: #1A1208;
+  --bg: #FDFBF7;
+  --terracotta: #B5451B;
+  --saffron: #D4AF37;
+}
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: 'Outfit', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+.serif {
+  font-family: 'Cormorant Garamond', serif;
+}
+.chat-container {
+  height: calc(100vh - 80px);
+}
+.glass-panel {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(26, 18, 8, 0.05);
+}
+.message-bubble-artist {
+  background: #ffffff;
+  border: 1px solid rgba(26, 18, 8, 0.1);
+  border-bottom-left-radius: 4px;
+}
+.message-bubble-user {
+  background: var(--ink);
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+}
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(26, 18, 8, 0.2); border-radius: 10px; }
+</style>
+</head>
+<body class="flex flex-col">
+<app-navbar></app-navbar>
+
+<main class="flex-grow pt-20 px-4 md:px-8 pb-6">
+  <div class="chat-container max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
+    
+    <!-- Sidebar: Artist Profile -->
+    <aside class="w-full lg:w-1/3 xl:w-1/4 glass-panel rounded-3xl p-6 flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between mb-8">
+          <span class="text-[10px] font-bold uppercase tracking-widest text-stone-400">Booking Portal</span>
+          <div class="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-1 rounded text-[9px] font-bold uppercase tracking-wider border border-green-200">
+            <span class="material-symbols-outlined text-[12px]">lock</span> Secure
+          </div>
+        </div>
+        
+        <div class="flex flex-col items-center text-center mb-8">
+          <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-[#D4AF37] mb-4 p-1">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200" alt="Artist" class="w-full h-full object-cover rounded-full">
+          </div>
+          <h2 id="artist-name" class="text-3xl serif mb-1">Ramesh Jha</h2>
+          <p id="artist-style" class="text-xs uppercase tracking-widest text-[#B5451B] font-bold mb-3">Madhubani Master</p>
+          <div class="flex items-center gap-1 text-[#D4AF37] mb-4">
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="text-xs text-stone-500 ml-1">(48)</span>
+          </div>
+        </div>
+
+        <div class="space-y-4 mb-8">
+          <div class="bg-white/50 p-4 rounded-xl text-sm border border-stone-200/50">
+            <p class="text-stone-500 text-xs mb-1">Commission Rate</p>
+            <p class="font-bold">₹15,000 / sq ft.</p>
+          </div>
+          <div class="bg-white/50 p-4 rounded-xl text-sm border border-stone-200/50">
+            <p class="text-stone-500 text-xs mb-1">Availability</p>
+            <p class="font-bold text-green-700">Open for April 2026</p>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="bookArtist()" class="w-full bg-[#1A1208] text-white py-4 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-[#B5451B] transition-colors shadow-xl flex items-center justify-center gap-2">
+        Finalize Booking <span class="material-symbols-outlined text-sm">payment</span>
+      </button>
+    </aside>
+
+    <!-- Main Chat Window -->
+    <section class="flex-grow glass-panel rounded-3xl flex flex-col overflow-hidden relative">
+      <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC42IiBvY3RhdmVzPSIzIiBzdGlja2VzPSJ0cnVlIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI24pIiBvcGFjaXR5PSIwLjA1Ii8+PC9zdmc+');"></div>
+      
+      <!-- Chat Header -->
+      <header class="p-6 border-b border-[rgba(26,18,8,0.1)] bg-white/40 flex justify-between items-center z-10">
+        <div>
+          <h3 class="font-bold text-lg flex items-center gap-2">
+            Secure Messages
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+          </h3>
+          <p class="text-xs text-stone-500">End-to-End Encrypted Communication</p>
+        </div>
+        <button class="text-stone-400 hover:text-stone-800 transition-colors">
+          <span class="material-symbols-outlined">more_vert</span>
+        </button>
+      </header>
+
+      <!-- Messages Area -->
+      <div id="messages-container" class="flex-grow p-6 overflow-y-auto flex flex-col gap-6 z-10">
+        <div class="text-center">
+          <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest bg-white/60 px-3 py-1 rounded-full">Today</span>
+        </div>
+
+        <!-- Automated System Message -->
+        <div class="flex justify-center">
+          <div class="bg-yellow-50 border border-yellow-200 text-yellow-800 text-xs px-4 py-2 rounded-xl flex items-center gap-2 max-w-md text-center">
+            <span class="material-symbols-outlined text-sm">shield</span>
+            Never share your bank or card details in the chat. Use the booking button to pay securely.
+          </div>
+        </div>
+
+        <!-- User Message -->
+        <div class="flex justify-end">
+          <div class="message-bubble-user max-w-md p-4 rounded-2xl">
+            <p class="text-sm leading-relaxed">Namaste! I absolutely love your portfolio. I am looking to commission a 3x4 ft canvas for my living room with themes of nature and mythology. Are you available for a project like this?</p>
+            <span class="text-[10px] text-white/50 block mt-2 text-right">10:42 AM</span>
+          </div>
+        </div>
+
+        <!-- Artist Message -->
+        <div class="flex justify-start">
+          <div class="message-bubble-artist max-w-md p-4 rounded-2xl shadow-sm">
+            <p class="text-sm leading-relaxed">Namaste 🙏 Thank you for appreciating my work! Yes, a 3x4 ft canvas is a beautiful size for Madhubani. For nature and mythology, we could do a 'Tree of Life' motif mixed with Krishna-Leela. It usually takes me about 3 weeks to complete such intricate work using natural dyes.</p>
+            <span class="text-[10px] text-stone-400 block mt-2">11:05 AM</span>
+          </div>
+        </div>
+
+        <!-- User Message -->
+        <div class="flex justify-end">
+          <div class="message-bubble-user max-w-md p-4 rounded-2xl">
+            <p class="text-sm leading-relaxed">That sounds perfect! What would be the total cost for this project?</p>
+            <span class="text-[10px] text-white/50 block mt-2 text-right">11:15 AM</span>
+          </div>
+        </div>
+        
+        <!-- Artist Message -->
+        <div class="flex justify-start">
+          <div class="message-bubble-artist max-w-md p-4 rounded-2xl shadow-sm">
+            <p class="text-sm leading-relaxed">For 12 sq ft, the total would be ₹1,80,000. You can initiate the booking through the portal to secure my dates for April!</p>
+            <span class="text-[10px] text-stone-400 block mt-2">11:20 AM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Input -->
+      <footer class="p-4 bg-white/60 border-t border-[rgba(26,18,8,0.1)] z-10 m-4 rounded-2xl flex items-end gap-3 shadow-sm">
+        <button class="p-2 text-stone-400 hover:text-[#B5451B] transition-colors">
+          <span class="material-symbols-outlined">attach_file</span>
+        </button>
+        <textarea id="chat-input" rows="1" class="w-full bg-transparent border-none focus:ring-0 resize-none text-sm p-2 max-h-32" placeholder="Type a message to the artist..."></textarea>
+        <button id="send-btn" class="p-3 bg-[#B5451B] text-white rounded-xl hover:bg-[#1A1208] transition-colors shadow-md flex-shrink-0 flex items-center justify-center">
+          <span class="material-symbols-outlined text-sm">send</span>
+        </button>
+      </footer>
+    </section>
+
+  </div>
+</main>
+
+<script>
+// Parse URL parameters
+document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const artistName = urlParams.get('artist');
+  const style = urlParams.get('style');
+  
+  if (artistName) {
+    document.getElementById('artist-name').textContent = artistName;
+  }
+  if (style) {
+    document.getElementById('artist-style').textContent = style + ' Master';
+  }
+});
+
+// Auto-expand textarea
+const tx = document.getElementById('chat-input');
+tx.addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = (this.scrollHeight) + 'px';
+});
+
+// Mock sending message
+document.getElementById('send-btn').addEventListener('click', sendMessage);
+tx.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+function sendMessage() {
+  const text = tx.value.trim();
+  if (!text) return;
+  
+  const container = document.getElementById('messages-container');
+  
+  const msgHTML = `
+    <div class="flex justify-end animate-fade-in">
+      <div class="message-bubble-user max-w-md p-4 rounded-2xl">
+        <p class="text-sm leading-relaxed">${text.replace(/\\n/g, '<br>')}</p>
+        <span class="text-[10px] text-white/50 block mt-2 text-right">Just now</span>
+      </div>
+    </div>
+  `;
+  
+  container.insertAdjacentHTML('beforeend', msgHTML);
+  tx.value = '';
+  tx.style.height = 'auto';
+  container.scrollTop = container.scrollHeight;
+}
+
+function bookArtist() {
+  const price = 180000;
+  const artistName = document.getElementById('artist-name').textContent;
+  const eventName = `Commission - ${artistName}`;
+  
+  const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+  if (isLoggedIn) {
+    window.location.href = `/?price=${price}&item=${encodeURIComponent(eventName)}`;
+  } else {
+    localStorage.setItem('redirectAfterLogin', `/?price=${price}&item=${encodeURIComponent(eventName)}`);
+    window.location.href = '/?error=auth';
+  }
+}
+</script>
+<script src="content-loader.js"></script>
+</body>
+</html>

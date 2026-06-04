@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Gallery | The Painted Muse Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=Outfit:wght@400;500;700&amp;display=swap"
+rel="stylesheet" />
+<link
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+rel="stylesheet" />
+<script src="components/Navbar.js" defer></script>
+<script src="components/Sidebar.js" defer></script>
+<script src="components/Footer.js" defer></script>
+<script>
+(function checkArtistAuth() {
+if (localStorage.getItem('artistLoggedIn') !== 'true') {
+window.location.href = '/?error=auth';
+}
+})();
+tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-background": "#241915", outline: "#8b7169", "outline-variant": "#dfc0b6", "surface-bright": "#fff8f6", surface: "#fff8f6", "surface-container-low": "#fff1ed", primary: "#942e02", background: "#fff8f6", "on-surface": "#241915", "surface-container": "#ffe9e3", "on-primary": "#ffffff", secondary: "#795900", "primary-container": "#b5451b", "surface-dim": "#ebd5cf", "surface-variant": "#f4ded7", "on-primary-container": "#ffe4dc", "surface-container-highest": "#f4ded7", "secondary-container": "#ffc641", "on-surface-variant": "#58423b", "surface-container-high": "#fae3dd", "surface-container-lowest": "#ffffff", "primary-fixed": "#ffdbd0", error: "#ba1a1a", "on-secondary": "#ffffff" }, borderRadius: { DEFAULT: "12px", lg: "16px", xl: "20px", full: "9999px" }, fontFamily: { "label-sm": ["Outfit"], "headline-lg": ["Cormorant Garamond"], "headline-md": ["Cormorant Garamond"], "body-lg": ["Outfit"], "body-md": ["Outfit"] } } } }
+</script>
+<style>
+body {
+background: #fff8f6;
+color: #241915;
+font-family: 'Outfit', sans-serif;
+min-height: max(884px, 100dvh)
+}
+.material-symbols-outlined {
+font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+}
+.paper-grain {
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+opacity: .03;
+pointer-events: none
+}
+/* Smooth Page Transition */
+@keyframes pageFadeIn {
+from { opacity: 0; transform: translateY(12px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+main > .max-w-5xl,
+main > div:not(.paper-grain) {
+animation: pageFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.media-tab {
+transition: all .3s ease;
+border-bottom: 3px solid transparent
+}
+.media-tab.active {
+border-color: #942e02;
+color: #942e02;
+font-weight: 700
+}
+.media-grid {
+display: none !important;
+animation: fadeUp .4s ease
+}
+.media-grid.active {
+display: grid !important
+}
+@keyframes fadeUp {
+from {
+opacity: 0;
+transform: translateY(8px)
+}
+to {
+opacity: 1;
+transform: translateY(0)
+}
+}
+
+footer {
+background: #FDFBF7;
+color: var(--on-surface);
+padding: 100px 0 40px;
+position: relative;
+width: 100%;
+}
+footer::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+.foot-top {
+display: grid;
+grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+gap: 48px;
+margin-bottom: 60px;
+}
+.foot-brand p {
+color: rgba(26, 18, 8, 0.7);
+font-size: 14px;
+margin: 20px 0 24px;
+max-width: 320px;
+line-height: 1.6;
+}
+.socials {
+display: flex;
+gap: 12px;
+}
+.socials a {
+width: 40px;
+height: 40px;
+border: 1px solid rgba(26, 18, 8, 0.15);
+border-radius: 50%;
+display: grid;
+place-items: center;
+color: var(--on-surface);
+transition: all 0.3s ease;
+}
+.socials a:hover {
+background: var(--primary);
+color: white;
+border-color: var(--primary);
+transform: translateY(-3px);
+}
+.foot-col h5 {
+font-family: 'Cormorant Garamond', serif;
+font-style: italic;
+font-size: 15px;
+margin-bottom: 24px;
+color: var(--primary);
+font-weight: 700;
+letter-spacing: 0.05em;
+}
+.foot-col ul {
+list-style: none;
+padding: 0;
+}
+.foot-col li {
+margin-bottom: 12px;
+}
+.foot-col a {
+font-size: 14px;
+color: rgba(26, 18, 8, 0.75);
+transition: color 0.3s ease;
+text-decoration: none;
+}
+.foot-col a:hover {
+color: var(--primary);
+}
+.foot-bot {
+border-top: 1px solid rgba(26, 18, 8, 0.1);
+padding-top: 32px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: rgba(26, 18, 8, 0.5);
+font-size: 13px;
+flex-wrap: wrap;
+gap: 16px;
+}
+@media (max-width: 1024px) {
+.foot-top {
+grid-template-columns: repeat(3, 1fr);
+}
+.foot-brand {
+grid-column: span 3;
+margin-bottom: 20px;
+}
+}
+@media (max-width: 768px) {
+.foot-top {
+grid-template-columns: repeat(2, 1fr);
+}
+.foot-brand {
+grid-column: span 2;
+}
+}
+</style>
+</head>
+<body class="bg-surface">
+<div class="fixed inset-0 paper-grain z-0"></div>
+<div class="relative flex h-screen w-full flex-row overflow-hidden z-10">
+<dashboard-sidebar type="artist"></dashboard-sidebar>
+<main class="flex-1 flex flex-col min-w-0 bg-surface-bright h-screen overflow-y-auto">
+<div class="lg:hidden flex items-center bg-surface p-4 border-b border-outline-variant justify-between"><span
+class="material-symbols-outlined text-on-surface cursor-pointer mobile-menu-btn-toggle">menu</span>
+<h2 class="text-on-surface font-headline-md text-xl font-bold flex-1 text-center">Gallery</h2>
+<div class="size-10"></div>
+</div>
+<div class="max-w-6xl mx-auto w-full px-6 md:px-10 py-12">
+<header class="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+<div>
+<h1 class="font-headline-lg text-on-background text-4xl mb-2">My Gallery</h1>
+<p class="font-body-lg text-on-surface-variant" id="gallery-count">Loading collection...</p>
+</div>
+<button onclick="window.location.href='/'"
+class="h-12 px-8 bg-primary text-on-primary font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg rounded-lg flex items-center gap-2"><span
+class="material-symbols-outlined text-lg">add</span>Upload</button>
+</header>
+<div class="flex gap-0 border-b border-outline-variant mb-8">
+<button onclick="switchMedia('posts')" id="tab-posts"
+class="media-tab active flex items-center gap-2 px-6 py-4 text-sm font-bold uppercase tracking-widest"><span
+class="material-symbols-outlined text-lg">grid_on</span>Posts</button>
+<button onclick="switchMedia('reels')" id="tab-reels"
+class="media-tab flex items-center gap-2 px-6 py-4 text-sm font-bold uppercase tracking-widest text-on-surface-variant"><span
+class="material-symbols-outlined text-lg">movie</span>Reels</button>
+</div>
+<div id="grid-posts"
+class="media-grid active grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+</div>
+<div id="grid-reels"
+class="media-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+</div>
+</div>
+</main>
+</div>
+<div id="gallery-preview-modal" class="fixed inset-0 z-50 bg-black/85 hidden items-center justify-center p-8"
+onclick="closePreview()">
+<button class="absolute top-6 right-6 text-white hover:text-primary transition-colors"
+onclick="closePreview()"><span class="material-symbols-outlined text-4xl">close</span></button>
+<div class="max-w-4xl max-h-[90vh] w-full flex flex-col items-center justify-center"
+onclick="event.stopPropagation()">
+<h3 id="modal-title" class="text-white font-headline-md text-2xl mb-4">Preview</h3>
+<img id="modal-img" class="max-w-full max-h-[75vh] object-contain hidden rounded-xl shadow-2xl" />
+<video id="modal-vid" class="max-w-full max-h-[75vh] object-contain hidden rounded-xl shadow-2xl" controls
+autoplay></video>
+</div>
+</div>
+<div id="gallery-edit-modal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-6"
+onclick="closeEditModal()">
+<div class="bg-surface-container border border-outline-variant rounded-2xl max-w-md w-full p-8 shadow-2xl relative"
+onclick="event.stopPropagation()">
+<button class="absolute top-4 right-4 text-on-surface-variant hover:text-primary transition-colors"
+onclick="closeEditModal()"><span class="material-symbols-outlined">close</span></button>
+<h3 id="edit-modal-headline" class="font-headline-md text-2xl text-on-background mb-6">Edit Detail</h3>
+<form id="edit-form" class="flex flex-col gap-4" onsubmit="saveEdit(event)">
+<input type="hidden" id="edit-item-type" />
+<input type="hidden" id="edit-item-idx" />
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Title</label>
+<input id="edit-title"
+class="bg-transparent border border-outline text-on-surface p-3 font-body-md rounded-lg focus:border-primary focus:ring-0"
+type="text" required />
+</div>
+<div id="post-edit-fields" class="flex flex-col gap-4">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Category</label>
+<input id="edit-category"
+class="bg-transparent border border-outline text-on-surface p-3 font-body-md rounded-lg focus:border-primary focus:ring-0"
+type="text" />
+</div>
+<div class="flex flex-col gap-1">
+<label
+class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Dimensions</label>
+<input id="edit-dimensions"
+class="bg-transparent border border-outline text-on-surface p-3 font-body-md rounded-lg focus:border-primary focus:ring-0"
+placeholder="e.g. 24×36 in" type="text" />
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Price
+(INR)</label>
+<input id="edit-price"
+class="bg-transparent border border-outline text-on-surface p-3 font-body-md rounded-lg focus:border-primary focus:ring-0"
+type="number" />
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Status</label>
+<select id="edit-status"
+class="bg-transparent border border-outline text-on-surface p-3 font-body-md rounded-lg focus:border-primary focus:ring-0">
+<option value="Available">Available</option>
+<option value="Sold">Sold</option>
+</select>
+</div>
+</div>
+<button type="submit"
+class="h-12 w-full bg-primary text-on-primary font-body-md font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-lg rounded-lg mt-4">Save
+Changes</button>
+</form>
+</div>
+</div>
+<script>
+function switchMedia(type) {
+document.querySelectorAll('.media-tab').forEach(t => t.classList.remove('active'));
+document.querySelectorAll('.media-grid').forEach(g => g.classList.remove('active'));
+document.getElementById('tab-' + type).classList.add('active');
+document.getElementById('grid-' + type).classList.add('active');
+}
+function openPreview(url, type, title) {
+const modal = document.getElementById('gallery-preview-modal');
+const mImg = document.getElementById('modal-img');
+const mVid = document.getElementById('modal-vid');
+document.getElementById('modal-title').textContent = title;
+if (type === 'image') {
+mImg.src = url;
+mImg.classList.remove('hidden');
+mVid.classList.add('hidden');
+mVid.pause();
+} else {
+mVid.src = url;
+mVid.classList.remove('hidden');
+mImg.classList.add('hidden');
+}
+modal.classList.remove('hidden');
+modal.classList.add('flex');
+}
+function closePreview() {
+const modal = document.getElementById('gallery-preview-modal');
+modal.classList.add('hidden');
+modal.classList.remove('flex');
+const mVid = document.getElementById('modal-vid');
+mVid.pause();
+}
+document.addEventListener('keydown', e => {
+if (e.key === 'Escape') {
+closePreview();
+closeEditModal();
+}
+});
+let artistPosts = [];
+let artistReels = [];
+const dbName = "ReelsDB";
+const storeName = "videos";
+let db;
+function initDB() {
+return new Promise((resolve, reject) => {
+const request = indexedDB.open(dbName, 1);
+request.onerror = event => reject(event.target.error);
+request.onsuccess = event => {
+db = event.target.result;
+resolve(db);
+};
+request.onupgradeneeded = event => {
+const db = event.target.result;
+if (!db.objectStoreNames.contains(storeName)) {
+db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
+}
+};
+});
+}
+const defaultPosts = [
+{
+title: 'Eternal Echoes',
+category: 'Madhubani',
+dimensions: '24×36 in',
+price: 18000,
+status: 'Available',
+imgUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDtntfX-Ln9Zw1VZ0Hpkb2gPLxVGo-8i2HCOQq8MuDWfMJ2R8rgP_bq6LuBgIgo3JgCiAL1gf7XMnMQnarbhaXApQCbdgiH5J6IEDNWep-L2TYfsPvnDvypEd-aqOQD1Cja_lGLbojN9phmbZ6mwRBP9PEOFZcjvFm_WXH7XdrbwO0pOyT242yuLXNIchrOTtBgei5F4QraRKm3KIVqWxT6AX6MpcVZgTW8r293ODOFXu-5fLVr9dMl3bbcU4vwotycF13aX7JWcw0N'
+},
+{
+title: 'Tree of Life',
+category: 'Madhubani',
+dimensions: '30×40 in',
+price: 24500,
+status: 'Available',
+imgUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCE85tliyBtatM4Sf9CGMCkZrJLQbMkAvenwVo9STCUkhlAfIfFaU5PR6Y48rZ-4KuIoI4eJK09WtYLHNewz2WrIJDF7vSM-QmXbO-njNqxgped5JbFyOnwVHgsDWZQERAp-dpFK6R30NrvKIMYqnkpxBetfDPqAHpWry3YDm8YSkPQM-KnvLHPRK0yBW8Y4uRF9NOADCjtyLuP8ZjuNSGP2x2zmQmYzZS3FzJ2_Td2xvEs6udYptzb_3IbEQmsQO6uBrO3MZdbXeua'
+},
+{
+title: 'Lotus Dreams',
+category: 'Madhubani',
+dimensions: '18×24 in',
+price: 12000,
+status: 'Sold',
+imgUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDtntfX-Ln9Zw1VZ0Hpkb2gPLxVGo-8i2HCOQq8MuDWfMJ2R8rgP_bq6LuBgIgo3JgCiAL1gf7XMnMQnarbhaXApQCbdgiH5J6IEDNWep-L2TYfsPvnDvypEd-aqOQD1Cja_lGLbojN9phmbZ6mwRBP9PEOFZcjvFm_WXH7XdrbwO0pOyT242yuLXNIchrOTtBgei5F4QraRKm3KIVqWxT6AX6MpcVZgTW8r293ODOFXu-5fLVr9dMl3bbcU4vwotycF13aX7JWcw0N'
+}
+];
+const defaultReels = [
+{
+title: 'Making of Eternal Echoes',
+videoUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDtntfX-Ln9Zw1VZ0Hpkb2gPLxVGo-8i2HCOQq8MuDWfMJ2R8rgP_bq6LuBgIgo3JgCiAL1gf7XMnMQnarbhaXApQCbdgiH5J6IEDNWep-L2TYfsPvnDvypEd-aqOQD1Cja_lGLbojN9phmbZ6mwRBP9PEOFZcjvFm_WXH7XdrbwO0pOyT242yuLXNIchrOTtBgei5F4QraRKm3KIVqWxT6AX6MpcVZgTW8r293ODOFXu-5fLVr9dMl3bbcU4vwotycF13aX7JWcw0N'
+},
+{
+title: 'Madhubani Brush Techniques',
+videoUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCE85tliyBtatM4Sf9CGMCkZrJLQbMkAvenwVo9STCUkhlAfIfFaU5PR6Y48rZ-4KuIoI4eJK09WtYLHNewz2WrIJDF7vSM-QmXbO-njNqxgped5JbFyOnwVHgsDWZQERAp-dpFK6R30NrvKIMYqnkpxBetfDPqAHpWry3YDm8YSkPQM-KnvLHPRK0yBW8Y4uRF9NOADCjtyLuP8ZjuNSGP2x2zmQmYzZS3FzJ2_Td2xvEs6udYptzb_3IbEQmsQO6uBrO3MZdbXeua'
+},
+{
+title: 'Studio Tour',
+videoUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDtntfX-Ln9Zw1VZ0Hpkb2gPLxVGo-8i2HCOQq8MuDWfMJ2R8rgP_bq6LuBgIgo3JgCiAL1gf7XMnMQnarbhaXApQCbdgiH5J6IEDNWep-L2TYfsPvnDvypEd-aqOQD1Cja_lGLbojN9phmbZ6mwRBP9PEOFZcjvFm_WXH7XdrbwO0pOyT242yuLXNIchrOTtBgei5F4QraRKm3KIVqWxT6AX6MpcVZgTW8r293ODOFXu-5fLVr9dMl3bbcU4vwotycF13aX7JWcw0N'
+}
+];
+async function initMedia() {
+const user = JSON.parse(localStorage.getItem('currentUser'));
+if (!user) {
+window.location.href = '/';
+return;
+}
+const usersDb = JSON.parse(localStorage.getItem('users') || '{}');
+const userInDb = usersDb[user.email];
+if (!userInDb || !userInDb.isApproved) {
+window.location.href = '/?error=pending';
+return;
+}
+const postsKey = 'artist_posts_' + user.email;
+const postsStored = localStorage.getItem(postsKey);
+if (postsStored) {
+artistPosts = JSON.parse(postsStored);
+} else {
+if (user.isNewUser) {
+artistPosts = [];
+} else {
+artistPosts = defaultPosts;
+localStorage.setItem(postsKey, JSON.stringify(artistPosts));
+}
+}
+try {
+await initDB();
+const transaction = db.transaction([storeName], "readonly");
+const store = transaction.objectStore(storeName);
+const request = store.getAll();
+request.onsuccess = () => {
+const allReels = request.result || [];
+artistReels = allReels.filter(r => r.userEmail === user.email);
+if (artistReels.length === 0 && !user.isNewUser) {
+artistReels = defaultReels;
+}
+renderGrids();
+};
+} catch (err) {
+console.error("IDB Init failed:", err);
+artistReels = user.isNewUser ? [] : defaultReels;
+renderGrids();
+}
+}
+function renderGrids() {
+const countEl = document.getElementById('gallery-count');
+if (countEl) countEl.textContent = `${artistPosts.length} posts and ${artistReels.length} reels in your collection`;
+const gridPosts = document.getElementById('grid-posts');
+gridPosts.innerHTML = '';
+artistPosts.forEach((post, idx) => {
+const isSold = post.status === 'Sold';
+const postDiv = document.createElement('div');
+postDiv.className = `bg-surface-container-lowest border border-outline-variant rounded-xl group cursor-pointer hover:shadow-lg transition-all overflow-hidden flex flex-col`;
+postDiv.onclick = () => openPreview(post.imgUrl, 'image', post.title);
+postDiv.innerHTML = `
+<div class="aspect-square bg-surface-variant overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${isSold ? 'grayscale-[30%]' : ''}" src="${post.imgUrl}" onerror="this.src='https://placehold.co/600x600/F5F0E8/B5451B?text=Artwork+Preview'"/>
+<span class="absolute top-2 right-2 ${isSold ? 'bg-on-surface text-surface' : 'bg-green-700 text-white'} text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full">${post.status}</span>
+</div>
+<div class="p-3 flex-1 flex flex-col justify-between">
+<div>
+<h4 class="font-headline-md text-sm mb-0.5 truncate">${post.title}</h4>
+<p class="text-[10px] text-on-surface-variant mb-1">${post.category || 'Mithila'} • ${post.dimensions || 'Custom Size'}</p>
+</div>
+<div class="flex justify-between items-center mt-2 pt-2 border-t border-outline-variant/30">
+<span class="${isSold ? 'text-on-surface-variant line-through' : 'text-primary'} font-bold text-xs">₹${Number(post.price).toLocaleString()}</span>
+<div class="flex gap-2 items-center text-[10px]">
+<button onclick="event.stopPropagation(); triggerEdit('post', ${idx})" class="hover:text-primary font-bold flex items-center gap-0.5 transition-colors"><span class="material-symbols-outlined text-xs">edit</span>Edit</button>
+<button onclick="event.stopPropagation(); triggerDelete('post', ${idx})" class="hover:text-error font-bold flex items-center gap-0.5 transition-colors"><span class="material-symbols-outlined text-xs">delete</span>Delete</button>
+</div>
+</div>
+</div>
+`;
+gridPosts.appendChild(postDiv);
+});
+const uploadPostTrigger = document.createElement('div');
+uploadPostTrigger.onclick = () => window.location.href = '/';
+uploadPostTrigger.className = 'bg-surface-container-lowest border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center aspect-square cursor-pointer hover:border-primary transition-colors group';
+uploadPostTrigger.innerHTML = `
+<span class="material-symbols-outlined text-outline-variant text-4xl group-hover:text-primary transition-colors mb-2">add_photo_alternate</span>
+<p class="font-body-md text-on-surface-variant text-xs group-hover:text-primary transition-colors">Upload Art</p>
+`;
+gridPosts.appendChild(uploadPostTrigger);
+const gridReels = document.getElementById('grid-reels');
+gridReels.innerHTML = '';
+artistReels.forEach((reel, idx) => {
+const reelUrl = reel.file ? URL.createObjectURL(reel.file) : reel.videoUrl;
+const reelDiv = document.createElement('div');
+reelDiv.className = 'bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden group cursor-pointer hover:shadow-lg transition-all relative aspect-[9/16]';
+reelDiv.onclick = () => openPreview(reelUrl, 'video', reel.title);
+reelDiv.innerHTML = `
+<div class="w-full h-full relative overflow-hidden">
+${reel.file ? `<video class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="${reelUrl}#t=0.1" muted></video>` : `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${reel.videoUrl}" onerror="this.src='https://placehold.co/400x711/F5F0E8/B5451B?text=Reel+Preview'"/>`}
+<div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent"></div>
+<div class="absolute top-2 left-2 flex gap-1.5 z-10">
+<button onclick="event.stopPropagation(); triggerEdit('reel', ${idx})" class="size-7 bg-black/60 hover:bg-black/80 text-white rounded-full flex items-center justify-center transition-colors shadow-md">
+<span class="material-symbols-outlined text-xs">edit</span>
+</button>
+<button onclick="event.stopPropagation(); triggerDelete('reel', ${idx})" class="size-7 bg-black/60 hover:bg-error text-white rounded-full flex items-center justify-center transition-colors shadow-md">
+<span class="material-symbols-outlined text-xs">delete</span>
+</button>
+</div>
+<div class="absolute bottom-3 left-2 right-2">
+<p class="text-white text-[10px] font-bold truncate">${reel.title}</p>
+</div>
+<span class="absolute top-2 right-2 material-symbols-outlined text-white text-lg">play_circle</span>
+</div>
+`;
+gridReels.appendChild(reelDiv);
+});
+const uploadReelTrigger = document.createElement('div');
+uploadReelTrigger.onclick = () => window.location.href = '/';
+uploadReelTrigger.className = 'bg-surface-container-lowest border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center aspect-[9/16] cursor-pointer hover:border-primary transition-colors group';
+uploadReelTrigger.innerHTML = `
+<span class="material-symbols-outlined text-outline-variant text-4xl group-hover:text-primary transition-colors mb-2">video_call</span>
+<p class="font-body-md text-on-surface-variant group-hover:text-primary transition-colors text-xs">New Reel</p>
+`;
+gridReels.appendChild(uploadReelTrigger);
+}
+function triggerEdit(type, idx) {
+const modal = document.getElementById('gallery-edit-modal');
+document.getElementById('edit-item-type').value = type;
+document.getElementById('edit-item-idx').value = idx;
+if (type === 'post') {
+const item = artistPosts[idx];
+document.getElementById('edit-modal-headline').textContent = 'Edit Artwork Details';
+document.getElementById('edit-title').value = item.title;
+document.getElementById('edit-category').value = item.category || 'Madhubani';
+document.getElementById('edit-dimensions').value = item.dimensions || '24×36 in';
+document.getElementById('edit-price').value = item.price;
+document.getElementById('edit-status').value = item.status || 'Available';
+document.getElementById('post-edit-fields').classList.remove('hidden');
+} else {
+const item = artistReels[idx];
+document.getElementById('edit-modal-headline').textContent = 'Edit Reel Title';
+document.getElementById('edit-title').value = item.title;
+document.getElementById('post-edit-fields').classList.add('hidden');
+}
+modal.classList.remove('hidden');
+modal.classList.add('flex');
+}
+function closeEditModal() {
+const modal = document.getElementById('gallery-edit-modal');
+modal.classList.add('hidden');
+modal.classList.remove('flex');
+}
+function saveEdit(e) {
+e.preventDefault();
+const type = document.getElementById('edit-item-type').value;
+const idx = parseInt(document.getElementById('edit-item-idx').value);
+const user = JSON.parse(localStorage.getItem('currentUser'));
+if (type === 'post') {
+artistPosts[idx].title = document.getElementById('edit-title').value;
+artistPosts[idx].category = document.getElementById('edit-category').value;
+artistPosts[idx].dimensions = document.getElementById('edit-dimensions').value;
+artistPosts[idx].price = parseFloat(document.getElementById('edit-price').value) || 0;
+artistPosts[idx].status = document.getElementById('edit-status').value;
+if (user) {
+localStorage.setItem('artist_posts_' + user.email, JSON.stringify(artistPosts));
+} else {
+localStorage.setItem('artist_posts', JSON.stringify(artistPosts));
+}
+} else {
+artistReels[idx].title = document.getElementById('edit-title').value;
+if (artistReels[idx].id) {
+const transaction = db.transaction([storeName], "readwrite");
+transaction.objectStore(storeName).put(artistReels[idx]);
+} else {
+localStorage.setItem('artist_reels', JSON.stringify(artistReels));
+}
+}
+closeEditModal();
+renderGrids();
+}
+function triggerDelete(type, idx) {
+const confirmed = confirm(`Are you sure you want to delete this ${type === 'post' ? 'artwork post' : 'reel'}?`);
+if (!confirmed) return;
+const user = JSON.parse(localStorage.getItem('currentUser'));
+if (type === 'post') {
+artistPosts.splice(idx, 1);
+if (user) {
+localStorage.setItem('artist_posts_' + user.email, JSON.stringify(artistPosts));
+} else {
+localStorage.setItem('artist_posts', JSON.stringify(artistPosts));
+}
+renderGrids();
+} else {
+const reel = artistReels[idx];
+if (reel.id) {
+const transaction = db.transaction([storeName], "readwrite");
+const request = transaction.objectStore(storeName).delete(reel.id);
+request.onsuccess = () => {
+artistReels.splice(idx, 1);
+renderGrids();
+};
+} else {
+artistReels.splice(idx, 1);
+localStorage.setItem('artist_reels', JSON.stringify(artistReels));
+renderGrids();
+}
+}
+}
+document.addEventListener('DOMContentLoaded', () => {
+  initMedia();
+});
+</script>
+<script src="content-loader.js"></script>
+</body>
+</html>
