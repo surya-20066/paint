@@ -27,7 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Session configuration
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'super_secret_painted_muse_key',
+    secret: process.env.SESSION_SECRET || 'default_fallback_secret',
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: MONGO_URI }),

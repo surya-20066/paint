@@ -376,7 +376,7 @@ function switchTab(tab) {
   }
   if (!users['artist@paintedmuse.com']) {
     users['artist@paintedmuse.com'] = {
-      password: 'Heritage@2025',
+      password: '',
       fullName: 'Demo Artist',
       spec: 'Madhubani',
       state: 'Bihar',
@@ -582,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
     errorEl.innerHTML = `Your profile is pending admin approval.
     Meanwhile, to test the platform use: <br>
     <strong>Email:</strong> artist@paintedmuse.com<br>
-    <strong>Password:</strong> Heritage@2025`;
+    <strong>Password:</strong> (Use your registered password)`;
     errorEl.classList.remove('hidden');
   }
 });
