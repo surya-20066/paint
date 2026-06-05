@@ -1,4 +1,5 @@
 const http = require('http');
+require('dotenv').config();
 
 async function runTest() {
     console.log("Starting Artist Registration Flow Test...");
@@ -28,7 +29,7 @@ async function runTest() {
         const loginRes = await fetch('http://localhost:3000/api/admin/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ password: 'paint' })
+            body: JSON.stringify({ password: process.env.ADMIN_PASSWORD })
         });
         const cookie = loginRes.headers.get('set-cookie');
         const loginData = await loginRes.json();
